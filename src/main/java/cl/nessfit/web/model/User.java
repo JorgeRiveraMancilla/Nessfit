@@ -10,7 +10,9 @@ public class User implements Serializable {
     private static final long serialVersionUID = 7124965512564802080L;
     @Id
     private String rut;
+    @Column (name = "first_name")
     private String firstName;
+    @Column (name = "last_name")
     private String lastName;
     private long phone;
     private String email;
