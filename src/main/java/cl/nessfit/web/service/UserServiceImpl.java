@@ -9,10 +9,10 @@ import cl.nessfit.web.repository.UserRepositoryInterface;
 @Service
 public class UserServiceImpl implements UserServiceInterface {
     @Autowired
-    private UserRepositoryInterface userRepositoryInterface;
+    private UserRepositoryInterface userRepository;
 
     @Override
     public void save(User user) {
-        userRepositoryInterface.save(user);
+        userRepository.save(user);
     }
 }
