@@ -7,10 +7,14 @@
                 rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
                 crossorigin="anonymous">
         <title>NESSFIT</title>
+        <link
+                th:href="@{login-style.css}"
+                rel="stylesheet">
+
     </head>
 
 
-    <body class="login">
+    <body class="login" style="background-color:#fef6cd">
         <div>
             <div class="login_wrapper">
                 <div class="form_login_form">
@@ -29,6 +33,8 @@
                                 <input style="float: none;" class="btn btn-primary btn-lg" type="submit" th:value="${'Entrar'}"></input>
 
                             </div>
+
+
 
                             <div class="clearfix"></div>
                             <div th:if="${param.novalido != null}" class="alert alert-danger" th:text="${'Usuario o contraseña incorrecto'}"></div>
