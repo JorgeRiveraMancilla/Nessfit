@@ -23,19 +23,23 @@
                             <h1>Inicio de sesión</h1>
                             <div>
                                 <label class="form_label">RUT:</label>
-                                <input name="rut" type="text" class="form_control" placeholder="12345678k" required>
+                                <input name="rut" type="text" class="form_control" placeholder="12345678K">
                             </div>
                             <div>
                                 <label class="form_label">Contraseña:</label>
-                                <input name="contrasena" type="password" class="form_control" placeholder="********" required>
+                                <input name="contrasena" type="password" class="form_control" placeholder="********">
                             </div>
                             <label></label>
                             <div>
                                 <input style="float: none;" class="btn btn-primary btn-lg" type="submit" th:value="${'Entrar'}"></input>
                             </div>
                             <div class="clearfix"></div>
-                            <div th:if="${param.novalido != null}" class="alert alert-danger" th:text="${'Usuario o contraseña incorrecto'}"></div>
-                            <div th:if="${param.noautorizado != null}" class="alert alert-danger" th:text="${'Usuario deshabilitado'}" role=""></div>
+                            <label></label>
+                            <div th:if="${param.novalido != null}" class="alert alert-danger"
+                                 th:text="${'Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema'}"></div>
+
+                            <div th:if="${param.noautorizado != null}" class="alert alert-danger"
+                                 th:text="${'Usuario deshabilitado. Contacte al administrador'}" role=""></div>
                         </form>
                     </section>
                 </div>
