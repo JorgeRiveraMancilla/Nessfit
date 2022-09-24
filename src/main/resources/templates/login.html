@@ -1,37 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-            rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-            crossorigin="anonymous">
-    <title>
-        Nessfit
-    </title>
-</head>
-<body>
-<h1>Iniciar Sesión</h1>
-<form>
-    <div class="container">
-        <div class="mb-3">
-            <label for="rut">RUT</label>
-            <input id="rut" type="text" class="form-control" name="rut" placeholder="Ingrese su rut...">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+                rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+                crossorigin="anonymous">
+        <title>NESSFIT</title>
+    </head>
+
+
+    <body class="login">
+        <div>
+            <div class="login_wrapper">
+                <div class="form_login_form">
+                    <section class="login_content">
+                        <form th:action="@{/login}" method="post">
+                            <h1>Inicio de sesión</h1>
+                            <div>
+                                <label class="form_label">RUT:</label>
+                                <input name="rut" type="text" class="form_control" placeholder="12345678k" required>
+                            </div>
+                            <div>
+                                <label class="form_label">Contraseña:</label>
+                                <input name="contrasena" type="password" class="form_control" placeholder="********" required>
+                            </div>
+                            <div>
+                                <input style="float: none;" class="btn btn-primary btn-lg" type="submit" th:value="${'Entrar'}"></input>
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div th:if="${param.novalido != null}" class="alert alert-danger" th:text="${'Usuario o contraseña incorrecto'}"></div>
+                            <div th:if="${param.noautorizado != null}" class="alert alert-danger" th:text="${'Usuario deshabilitado'}" role=""></div>
+
+                            <div class="separator">
+                                <div class="clearfix"></div>
+                                <br/>
+                                <div>
+                                    <h1>NO ENTIENDO AYUDA</h1>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
         </div>
-
-        <div class="mb-3">
-            <label for="password">Contraseña</label>
-            <input id="password" type="password" class="form-control" name="password" placeholder="Ingrese su contraseña...">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-    </div>
-</form>
-
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-        crossorigin="anonymous">
-</script>
-</body>
+    </body>
 </html>
