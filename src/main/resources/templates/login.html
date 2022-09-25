@@ -3,47 +3,35 @@
     <head>
         <meta charset="UTF-8">
         <link
-                href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-                rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-                crossorigin="anonymous">
-        <title>NESSFIT</title>
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+            rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+            crossorigin="anonymous">
         <link
-                th:href="@{login-style.css}"
-                rel="stylesheet">
+            th:href="@{login-style.css}"
+            rel="stylesheet">
 
+        <title>NESSFIT</title>
     </head>
 
 
     <body class="login" style="background-color:#fef6cd">
-        <div>
-            <div class="login_wrapper">
-                <div class="form_login_form">
-                    <section class="login_content">
-                        <form th:action="@{/login}" method="post">
-                            <h1>Inicio de sesión</h1>
-                            <div>
-                                <label class="form_label">RUT:</label>
-                                <input name="rut" type="text" class="form_control" placeholder="12345678K">
-                            </div>
-                            <div>
-                                <label class="form_label">Contraseña:</label>
-                                <input name="contrasena" type="password" class="form_control" placeholder="********">
-                            </div>
-                            <label></label>
-                            <div>
-                                <input style="float: none;" class="btn btn-primary btn-lg" type="submit" th:value="${'Entrar'}"></input>
-                            </div>
-                            <div class="clearfix"></div>
-                            <label></label>
-                            <div th:if="${param.novalido != null}" class="alert alert-danger"
-                                 th:text="${'Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema'}"></div>
+        <div class="login_form" style="background-color:#9dc09d">
 
-                            <div th:if="${param.noautorizado != null}" class="alert alert-danger"
-                                 th:text="${'Usuario deshabilitado. Contacte al administrador'}" role=""></div>
-                        </form>
-                    </section>
-                </div>
+            <div class="login_form_input">
+                <label for="inputRut" class="form-label">RUT</label>
+                <input type="text" id="inputRut" class="form-control">
             </div>
+
+            <div class="login_form_input">
+                <label for="inputPassword" class="form-label">Contraseña</label>
+                <input type="password" id="inputPassword" class="form-control">
+            </div>
+
+            <div class="login_form_button">
+                <button type="button">Iniciar sesión</button>
+            </div>
+
+
         </div>
     </body>
 </html>
