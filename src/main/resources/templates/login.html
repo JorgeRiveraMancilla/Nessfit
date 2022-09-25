@@ -15,23 +15,32 @@
 
 
     <body class="login" style="background-color:#fef6cd">
-        <div class="login_form" style="background-color:#9dc09d">
-
-            <div class="login_form_input">
-                <label for="inputRut" class="form-label">RUT</label>
-                <input type="text" id="inputRut" class="form-control">
+        <form th:action="@{/login}" method="post">
+            <div class="login_form" style="background-color:#9dc09d">
+                <div class="login_form_input">
+                    <label for="inputRut" class="form-label">RUT:</label>
+                    <input type="text" id="inputRut" class="form-control">
+                </div>
+                <div class="login_form_input">
+                    <label for="inputPassword" class="form-label">Contraseña:</label>
+                    <input type="password" id="inputPassword" class="form-control">
+                </div>
+                <div class="login_form_button">
+                    <input class="button_login" type="submit" th:value="${'Iniciar sesión'}">
+                </div>
             </div>
 
-            <div class="login_form_input">
-                <label for="inputPassword" class="form-label">Contraseña</label>
-                <input type="password" id="inputPassword" class="form-control">
+            <div class="login_alert">
+                <div class="clearfix"></div>
+                <label></label>
+                <div th:if="${param.novalido != null}" class="alert alert-danger"
+                     th:text="${'Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema'}"></div>
+
+                <div th:if="${param.noautorizado != null}" class="alert alert-danger"
+                     th:text="${'Usuario deshabilitado. Contacte al administrador'}" role=""></div>
             </div>
 
-            <div class="login_form_button">
-                <button type="button">Iniciar sesión</button>
-            </div>
 
-
-        </div>
+        </form>
     </body>
 </html>
