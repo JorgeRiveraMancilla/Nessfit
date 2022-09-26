@@ -1,5 +1,5 @@
 .login {
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,8 +19,6 @@
 
     margin: auto;
     text-align: center;
-    width: 70%;
-
 }
 
 .login_form_input {
@@ -48,7 +46,9 @@
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 }
 
-
+.alert-danger {
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+}
 
 /*
 style="background-color:#3f8880; text-decoration-color: white;"
