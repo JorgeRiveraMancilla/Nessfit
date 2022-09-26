@@ -3,9 +3,16 @@
     overflow: auto;
     height: 100%;
     width: 100%;
-    display: flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
+}
+
+.display-4 {
+    width: 100%;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .login_form {
@@ -19,7 +26,6 @@
 }
 
 .login_alert {
-
     margin: auto;
     text-align: center;
 }
