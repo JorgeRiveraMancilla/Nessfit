@@ -40,12 +40,11 @@
 
                 <div class="login_alert">
                     <div class="clearfix"></div>
-                    <label></label>
                     <div th:if="${param.novalido != null}" class="alert alert-danger"
-                         th:text="${'Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema'}"></div>
+                         th:text="${'Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema.'}"></div>
 
                     <div th:if="${param.noautorizado != null}" class="alert alert-danger"
-                         th:text="${'Usuario deshabilitado. Contacte al administrador'}" role=""></div>
+                         th:text="${'Usuario deshabilitado. Contacte al administrador.'}" role=""></div>
                 </div>
             </form>
         </div>
