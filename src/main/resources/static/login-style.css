@@ -28,21 +28,25 @@
     margin-bottom: 5px;
     margin-top: 5px;
 }
-/* Regula la posición de el botón */
+
 .login_form_button {
     margin: 30px auto;
     width: 45%;
 }
 
-/* Configuración del botón */
 .button_login {
-    background-color: #3f8880; /* Green */
+    background-color: #3f8880;
     color: white;
     padding: 10px;
     transition-duration: 0.4s;
     cursor: pointer;
     border-radius: 10px;
     border: 1px solid #3f8880;
+}
+
+.navbar-toggler {
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+    background: #9dc09d;
 }
 
 .button_login:hover {
@@ -53,9 +57,12 @@
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
 }
 
-/*
-style="background-color:#3f8880; text-decoration-color: white;"
-border-radius: 5px;
-background-color: #3f8880;
+.navbar-brand {
+    padding-left: 10px;
+    font-weight: bolder;
+}
 
- */
+.navbar-custom {
+    background-color: #3f8880;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+}
