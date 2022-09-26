@@ -1,0 +1,29 @@
+
+.home {
+    position:fixed;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+    padding-top: 3%;
+}
+
+
+
+/* Navbar configuration */
+
+.navbar-brand {
+    padding-left: 10px;
+    font-weight: bolder;
+}
+.navbar-toggler {
+    background: #3f8880;
+}
+.navbar-custom {
+    background-color: #3f8880;
+}
