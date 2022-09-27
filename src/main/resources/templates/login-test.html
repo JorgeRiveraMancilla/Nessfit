@@ -14,22 +14,33 @@
         </header>
 
         <section>
-            <form class="form">
-                <div class="wrapper">
-                    <div class="input-data">
-                        <input type="text" required></input>
-                        <div class="underline"></div>
-                        <label>RUT</label>
+            <form class="form" th:action="@{/login-test}" method="post">
+                <h1 class="login-title">Iniciar Sesión</h1>
+                <div class="login-form">
+                    <div class="wrapper">
+                        <div class="input-data">
+                            <input name="rut" type="text" required></input>
+                            <div class="underline"></div>
+                            <label>RUT</label>
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="input-data">
+                            <input name="password" type="password" required></input>
+                            <div class="underline"></div>
+                            <label>CONTRASEÑA</label>
+                        </div>
                     </div>
                 </div>
-                <div class="wrapper">
-                    <div class="input-data">
-                        <input type="password" required></input>
-                        <div class="underline"></div>
-                        <label>CONTRASEÑA</label>
-                    </div>
+
+                <div class="login-button">
+                    <input class="button-login" type="submit" th:value="${'Iniciar sesión'}">
                 </div>
+
             </form>
+
+
+
         </section>
 
         <footer>

@@ -14,6 +14,8 @@ header {
     height: 80px;
     width: 100%;
     background-color: #3f8880;
+    display: flex;
+    align-items: center;
 }
 
 .logo-header {
@@ -26,6 +28,7 @@ header {
 
 .subtitle-page {
     display: inline-block;
+    padding-left: 20px;
 }
 
 /* ---------------- SECTION ---------------- */
@@ -40,8 +43,34 @@ section {
 
 .form {
     width: 450px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
 }
+
+.login-title {
+    display: block;
+    font-size: 32px;
+    text-align: center;
+    padding-bottom: 5%;
+}
+
+.login-form {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.login-button {
+    display: block;
+    text-align: center;
+    padding-top: 5%;
+
+}
+
+.button-login {
+    background-color: #3f8880;
+    color: white;
+    padding: 10px;
+    transition-duration: 0.4s;
+    border: 1px solid #3f8880;
+}
+
 .wrapper{
     width: 450px;
     background: white;
