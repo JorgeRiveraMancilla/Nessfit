@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Todas las demás URLs de la Aplicación requieren autenticación
 		.anyRequest().authenticated()
 		// El formulario de Login redirecciona a la url /login
-		.and().formLogin().loginPage("/login").usernameParameter("rut").passwordParameter("contrasena")
+		.and().formLogin().loginPage("/login-test").usernameParameter("rut").passwordParameter("password")
 		// Si las credenciales son válidas, utiliza el manejador de autenticación
 		.successHandler(new AuthenticationSuccessHandler() {
 			@Override
@@ -100,12 +100,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Si el fallo es una instancia de la excepción BadCredential agrega el flag
 				// novalido
 				if (exception instanceof BadCredentialsException) {
-					super.setDefaultFailureUrl("/login?novalido");
+					super.setDefaultFailureUrl("login-test?novalido");
 				}
 				// Si el fallo es una instancia de la excepción Disable agrega el flag
 				// noautorizado
 				else if (exception instanceof DisabledException) {
-					super.setDefaultFailureUrl("/login?noautorizado");
+					super.setDefaultFailureUrl("login-test?noautorizado");
 				}
 
 				super.onAuthenticationFailure(request, response, exception);

@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <link th:href="@{css/login-test.css}" rel="stylesheet">
         <title>NESSFIT</title>
     </head>
 
     <body>
         <header>
-            <!-- <img> -->
-            <h1>NESSFIT</h1>
+            <img src="images/logo1.png" alt="logo" width="80"/>
+            <h1 class="title">NESSFIT</h1>
             <h2>Centro de arriendos deportivos</h2>
         </header>
 
         <section>
             <form>
-                <!-- <img> -->
-                <input type="text" placeholder="RUT"></input>
-                <input type="password" placeholder="Contraseña"></input>
-                <label>Mensaje</label>
+                <img src="images/logo1.png" alt="logo" width="150"/>
+                <input type="text" name="rut" placeholder="RUT"></input>
+                <input type="password" name="password" placeholder="Contraseña"></input>
+                <label class="alerta">Mensaje</label>
                 <button type="submit">Iniciar sesión</button>
             </form>
         </section>
