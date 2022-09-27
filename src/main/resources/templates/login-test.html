@@ -8,24 +8,33 @@
 
     <body>
         <header>
-            <img src="images/logo1.png" alt="logo" width="80"/>
-            <h1 class="title">NESSFIT</h1>
-            <h2>Centro de arriendos deportivos</h2>
+            <img class="logo-header" src="images/logo1.png" alt="logo"/>
+            <h1 class="title-page">NESSFIT</h1>
+            <h2 class="subtitle-page">Centro de arriendos deportivos</h2>
         </header>
 
         <section>
-            <form>
-                <img src="images/logo1.png" alt="logo" width="150"/>
-                <input type="text" name="rut" placeholder="RUT"></input>
-                <input type="password" name="password" placeholder="Contraseña"></input>
-                <label class="alerta">Mensaje</label>
-                <button type="submit">Iniciar sesión</button>
+            <form class="form">
+                <div class="wrapper">
+                    <div class="input-data">
+                        <input type="text" required></input>
+                        <div class="underline"></div>
+                        <label>RUT</label>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div class="input-data">
+                        <input type="password" required></input>
+                        <div class="underline"></div>
+                        <label>CONTRASEÑA</label>
+                    </div>
+                </div>
             </form>
         </section>
 
         <footer>
-            <a href="mailto:antonio.barraza.guzman@gmail.com">Contacto con el administrador.</a>
-            <label>© Todos los derechos reservados.</label>
+            <label class="reserved-rights">© Todos los derechos reservados.</label>
+            <a class="mail" href="mailto:antonio.barraza.guzman@gmail.com">Contacto con el administrador.</a>
         </footer>
     </body>
 </html>
