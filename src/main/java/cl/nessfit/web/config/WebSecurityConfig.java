@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Todas las demás URLs de la Aplicación requieren autenticación
 		.anyRequest().authenticated()
 		// El formulario de Login redirecciona a la url /login
-		.and().formLogin().loginPage("/login-test").usernameParameter("rut").passwordParameter("password")
+		.and().formLogin().loginPage("/login").usernameParameter("rut").passwordParameter("password")
 		// Si las credenciales son válidas, utiliza el manejador de autenticación
 		.successHandler(new AuthenticationSuccessHandler() {
 			@Override
