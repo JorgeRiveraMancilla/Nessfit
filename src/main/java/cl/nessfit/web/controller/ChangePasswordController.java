@@ -42,10 +42,19 @@ public class ChangePasswordController {
         // Obtain the user
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        //validar contraseña
-
+        //Validate password
         if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
-            model.addAttribute("msg", "Contraseña incorrecta");
+
+            String msg = null;
+            if (!PasswordValidation.lengthValidation(newPassword)){
+                msg = "El largo de la contraseña debe estar entre 10 y 15 caracteres.";
+            }
+
+            if (!PasswordValidation.areEquals(newPassword, repeatNewPassword)){
+                msg = "Las contraseñas no coinciden.";
+            }
+
+            model.addAttribute("msg", msg);
             model.addAttribute("newPassword", newPassword);
             model.addAttribute("repeatNewPassword", repeatNewPassword);
             return "password";
