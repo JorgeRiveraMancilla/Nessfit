@@ -29,8 +29,8 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private DataSource dataSource;
+	@Autowired
+	private DataSource dataSource;
 
 	/**
 	 * Para encriptar la contraseña
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
-    @Override
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery("SELECT rut, password, status FROM users WHERE rut = ?")
@@ -70,56 +70,56 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		// Los recursos estáticos no requieren autenticación
-		.antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**").permitAll()
-		// Las vistas públicas no requieren autenticación
-		.antMatchers("/login**").anonymous()
-		// Las vistas con el subdominio administrador quedan protegidas al ROL
-		// administrador
-		.antMatchers("/administrador/**").hasAuthority("ADMINISTRADOR")
-		// Todas las demás URLs de la Aplicación requieren autenticación
-		.anyRequest().authenticated()
-		// El formulario de Login redirecciona a la url /login
-		.and().formLogin().loginPage("/login").usernameParameter("rut").passwordParameter("password")
-		// Si las credenciales son válidas, utiliza el manejador de autenticación
-		.successHandler(new AuthenticationSuccessHandler() {
-			@Override
-			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-												Authentication authentication) throws IOException, ServletException {
-				// Tiempo máximo de sesión
-				request.getSession().setMaxInactiveInterval(30);
-				// Si la autenticación fue exitosa redirecciona a /home
-				response.sendRedirect("/home");
-			}
-		})
-		// Si las credenciales son inválidas utiliza el manejador de errores
-		.failureHandler(new SimpleUrlAuthenticationFailureHandler() {
-			@Override
-			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-												AuthenticationException exception) throws IOException, ServletException {
-				// Si el fallo es una instancia de la excepción BadCredential agrega el flag
-				// novalido
-				if (exception instanceof BadCredentialsException) {
-					super.setDefaultFailureUrl("login?novalido");
-				}
-				// Si el fallo es una instancia de la excepción Disable agrega el flag
-				// noautorizado
-				else if (exception instanceof DisabledException) {
-					super.setDefaultFailureUrl("login?noautorizado");
-				}
+				// Los recursos estáticos no requieren autenticación
+				.antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**").permitAll()
+				// Las vistas públicas no requieren autenticación
+				.antMatchers("/login**").anonymous()
+				// Las vistas con el subdominio administrador quedan protegidas al ROL
+				// administrador
+				.antMatchers("/administrador/**").hasAuthority("ADMINISTRADOR")
+				// Todas las demás URLs de la Aplicación requieren autenticación
+				.anyRequest().authenticated()
+				// El formulario de Login redirecciona a la url /login
+				.and().formLogin().loginPage("/login").usernameParameter("rut").passwordParameter("password")
+				// Si las credenciales son válidas, utiliza el manejador de autenticación
+				.successHandler(new AuthenticationSuccessHandler() {
+					@Override
+					public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+														Authentication authentication) throws IOException, ServletException {
+						// Tiempo máximo de sesión
+						request.getSession().setMaxInactiveInterval(30);
+						// Si la autenticación fue exitosa redirecciona a /home
+						response.sendRedirect("/home");
+					}
+				})
+				// Si las credenciales son inválidas utiliza el manejador de errores
+				.failureHandler(new SimpleUrlAuthenticationFailureHandler() {
+					@Override
+					public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+														AuthenticationException exception) throws IOException, ServletException {
+						// Si el fallo es una instancia de la excepción BadCredential agrega el flag
+						// novalido
+						if (exception instanceof BadCredentialsException) {
+							super.setDefaultFailureUrl("/login?notfounduser");
+						}
+						// Si el fallo es una instancia de la excepción Disable agrega el flag
+						// noautorizado
+						else if (exception instanceof DisabledException) {
+							super.setDefaultFailureUrl("/login?disableduser");
+						}
 
-				super.onAuthenticationFailure(request, response, exception);
-			}
-		})
-		// Si algun Match de url falla utiliza el manejador de excepciones
-		.and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
-			@Override
-			public void handle(HttpServletRequest request, HttpServletResponse response,
-							   AccessDeniedException accessDeniedException) throws IOException, ServletException {
-				// Cualquiera sea el fallo redirecciona a /home
-				response.sendRedirect("/home");
+						super.onAuthenticationFailure(request, response, exception);
+					}
+				})
+				// Si algun Match de url falla utiliza el manejador de excepciones
+				.and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
+					@Override
+					public void handle(HttpServletRequest request, HttpServletResponse response,
+									   AccessDeniedException accessDeniedException) throws IOException, ServletException {
+						// Cualquiera sea el fallo redirecciona a /home
+						response.sendRedirect("/home");
 
-			}
-		});
+					}
+				});
 	}
 }
