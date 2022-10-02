@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.repository.UserRepositoryInterface;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserServiceInterface {
     @Autowired
@@ -17,8 +19,12 @@ public class UserServiceImpl implements UserServiceInterface {
     }
 
     @Override
-    public User searchBy(String rut) {
-        User user = userRepository.findByRut(rut);
-        return user;
+    public User searchByRut(String rut) {
+        return userRepository.findByRut(rut);
+    }
+
+    @Override
+    public List<User> getAdministrativos() {
+        return userRepository.findByRoleId(2);
     }
 }
