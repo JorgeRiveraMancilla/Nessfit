@@ -1,65 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>NESSFIT</title>
-
-    <link rel="icon" href="../images/logo.png">
-    <link rel="stylesheet" type="text/css" th:href="@{../css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
-
 <body>
-<header>
-    <img src="../images/logo.png">
-    <h1>NESSFIT</h1>
-    <h2>Centro de arriendos deportivos</h2>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="#" id="login" class="login">Iniciar sesión</a></li>
-    </ul>
-</nav>
-
-<section>
-    <div class="main">
-        <h2>TITLE HEADING</h2>
-    </div>
-
-    <div class="side">
-        <h2>Acerca de mi</h2>
-    </div>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <form>
-                <div class="input-field">
-                    <input type="text" name="rut" id="rut" placeholder=" " required>
-                    <label for="rut" class="border">RUT</label>
-                </div>
-                <div class="input-field">
-                    <input type="password" name="password" id="password" placeholder=" " required>
-                    <label for="password" class="border">Contraseña</label>
-                </div>
-
-                <div id="alert" class="alert">
-                    <span class="alert-close">&times;</span>
-                    <p>MENSAJE DE ERROR</p>
-                </div>
-
-                <div class="button-field">
-                    <button type="reset">Iniciar sesión</button>
-                </div>
-            </form>
+<div>
+    <form th:action="@{/home.html}" method="post">
+        <div class="input-field">
+            <input type="text" name="rut" id="rut" placeholder=" " required>
+            <label for="rut">RUT</label>
         </div>
-    </div>
-</section>
-
-<footer>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam architecto, quidem, tempora voluptatibus, ipsa vel unde nihil optio minus eos deserunt qui aut alias! Nihil non voluptatibus velit veniam hic.</p>
-</footer>
-
-<script type="text/javascript" th:src="@{../js/login.js}"></script>
+        <div class="input-field">
+            <input type="password" name="password" id="password" placeholder=" " required>
+            <label for="password">CONTRASEÑA</label>
+        </div>
+        <div class="button-field">
+            <button class="button" type="submit">Iniciar sesión</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
