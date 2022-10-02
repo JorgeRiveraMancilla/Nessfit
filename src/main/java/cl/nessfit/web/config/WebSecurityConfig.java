@@ -100,12 +100,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Si el fallo es una instancia de la excepción BadCredential agrega el flag
 				// novalido
 				if (exception instanceof BadCredentialsException) {
-					super.setDefaultFailureUrl("login-test?novalido");
+					super.setDefaultFailureUrl("login?novalido");
 				}
 				// Si el fallo es una instancia de la excepción Disable agrega el flag
 				// noautorizado
 				else if (exception instanceof DisabledException) {
-					super.setDefaultFailureUrl("login-test?noautorizado");
+					super.setDefaultFailureUrl("login?noautorizado");
 				}
 
 				super.onAuthenticationFailure(request, response, exception);

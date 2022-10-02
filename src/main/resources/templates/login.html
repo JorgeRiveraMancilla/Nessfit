@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org/">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>NESSFIT</title>
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
-<div>
-    <form th:action="@{/login}" method="post">
-        <div class="input-field">
-            <input type="text" name="rut" id="rut" placeholder=" " required>
-            <label for="rut">RUT</label>
-        </div>
-        <div class="input-field">
-            <input type="password" name="password" id="password" placeholder=" " required>
-            <label for="password">CONTRASEÑA</label>
-        </div>
-        <div class="button-field">
-            <button class="button" type="submit" th:value="${'Entrar'}">Iniciar sesión</button>
-        </div>
-    </form>
-</div>
+<header>
+    <img th:src="@{/images/logo.png}" alt="logo">
+</header>
+<nav>
+    <a class="contact" href="mailto:antonio.barraza.guzman@gmail.com">Contacto</a>
+</nav>
+<section>
+    <main>
+        <form th:action="@{/login}" method="post">
+            <div class="input-field">
+                <input type="text" name="rut" id="rut" placeholder=" " required>
+                <label for="rut">RUT</label>
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" id="password" placeholder=" " required>
+                <label for="password">CONTRASEÑA</label>
+            </div>
+            <div class="button-field">
+                <button class="button" type="submit">Iniciar sesión</button>
+            </div>
+        </form>
+    </main>
+</section>
 </body>
 </html>

@@ -1,19 +1,57 @@
 body {
-    width: 100vw;
     height: 100vh;
 
     box-sizing: border-box;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 
+    background: white;
+}
+
+header {
+    text-align: center;
+    background: #20C67A;
+}
+header img {
+    padding-top: 0.5rem;
+    height: 6.25rem;
+}
+
+nav {
+    height: 2.5rem;
+    width: 100%;
+    background-color: #3F8880;
+    position: sticky;
+    top: 0;
+}
+nav a {
+    min-width: 10rem;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 0.675rem 0.75rem;
+    float: right;
+    text-decoration: none;
+    border-left: 1px solid white;
+}
+nav a:hover {
+    background-color: #FEF6CD;
+    color: black;
+}
+
+section {
+    height: calc(100vh - 9.5rem);
+    width: 100%;
+    background: white;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    background: white;
+    box-sizing: border-box;
 }
 
-body div {
+main {
     background: white;
     border-radius: 1rem;
     border: 1px solid #3F8880;
@@ -39,7 +77,6 @@ body div {
     font-size: 1.5rem;
     border-bottom: 2px solid #CCC;
     padding: 0.75rem 0 0.5rem 0;
-
     text-align: center;
 }
 .input-field input + label {
@@ -60,6 +97,9 @@ body div {
     transition: 0.5s;
     background-color: #FFF;
     color: #3F8880;
+}
+.input-field input:not(:placeholder-shown) {
+    background: #E8F0FE;
 }
 
 .button-field {
@@ -83,4 +123,18 @@ body div {
     transition: 0.5s;
     color: white;
     background-color: #3F8880;
+}
+
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: #9DC09D;
+    color: white;
+}
+footer a {
+    text-decoration: none;
+    color: white
+}
+footer a:hover {
+    color: black;
 }
