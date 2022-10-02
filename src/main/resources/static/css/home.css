@@ -1,5 +1,4 @@
 body {
-    width: 100vw;
     height: 100vh;
 
     box-sizing: border-box;
@@ -10,12 +9,12 @@ body {
 }
 
 header {
-    padding-top: 12px;
     text-align: center;
     background: #20C67A;
 }
 header img {
-    width: 7.5rem;
+    padding-top: 0.5rem;
+    height: 6.25rem;
 }
 
 nav {
@@ -26,7 +25,7 @@ nav {
     top: 0;
 }
 nav a.profile {
-    min-width: calc(8rem + 0.5rem + 0.25rem + 0.125rem + 0.0625rem + 0.00390625rem + 0.000976563rem + 0.000488281rem);
+    min-width: 10rem;
     display: block;
     color: white;
     text-align: center;
@@ -53,6 +52,7 @@ nav a.profile:hover {
     color: white;
     padding: 0.75rem;
     text-decoration: none;
+    width: 10rem;
     display: block;
     border-top: 1px solid white;
 }
@@ -67,38 +67,52 @@ nav a.profile:hover + .dropdown-content {
     display: inline-block;
 }
 
+section {
+    height: calc(100vh - 9.5rem);
+    width: 100%;
+    background: white;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-
-
-
-
-
+    box-sizing: border-box;
+}
 
 .grid-container {
+    width: calc(100% - 25rem);
+    height: 90%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: white;
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 10px;
-    background-color: #2196F3;
-    padding: 10px;
-}
-.grid-container > div {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid black;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
     text-align: center;
-    font-size: 30px;
+    border: 2px solid #3F8880;
+    border-radius: 1rem;
+}
+.grid-container div {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+.grid-container div img {
+    height: 5rem;
 }
 
 .button-field {
     border: none;
-    display: flex;
-    margin: 1.5rem 0;
+    display: inline-block;
+    margin: 0;
     justify-content: center;
 }
 .button {
-    width: 20rem;
+    width: 25rem;
     height: 5rem;
-    padding: 0.75rem;
+    padding: 0;
     appearance: none;
     background: none;
     outline: none;
@@ -112,4 +126,18 @@ nav a.profile:hover + .dropdown-content {
     transition: 0.5s;
     color: white;
     background-color: #3F8880;
+}
+
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: #9DC09D;
+    color: white;
+}
+footer a {
+    text-decoration: none;
+    color: white
+}
+footer a:hover {
+    color: black;
 }

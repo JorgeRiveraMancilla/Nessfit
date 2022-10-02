@@ -7,10 +7,10 @@
 </head>
 <body>
 <header>
-    <img src="/images/logo.png" alt="logo">
+    <img th:src="@{/images/logo.png}" alt="logo">
 </header>
 <nav>
-    <a class="profile">Opciones</a>
+    <a class="profile">Cuenta</a>
     <div class="dropdown-content">
         <a th:href="@{/profile}">Editar perfil</a>
         <a th:href="@{/password}">Cambiar contraseña</a>
@@ -18,52 +18,51 @@
     </div>
 </nav>
 
-<!--
-<div class="grid-container">
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Registrar cliente</button>
+<section>
+    <div class="grid-container">
+        <div>
+            <img th:src="@{/images/manage-administrative.png}" alt="manage-administrative">
+            <div class="button-field">
+                <button class="button" type="submit">Registrar una instalación deportiva</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/manage-request.png}" alt="manage-request">
+            <div class="button-field">
+                <button class="button" type="submit">Administrar solicitudes de arriendo</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/manage-administrative.png}" alt="manage-administrative">
+            <div class="button-field">
+                <button class="button" type="submit">Registrar una instalación deportiva</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/manage-request.png}" alt="manage-request">
+            <div class="button-field">
+                <button class="button" type="submit">Administrar solicitudes de arriendo</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/manage-administrative.png}" alt="manage-administrative">
+            <div class="button-field">
+                <button class="button" type="submit">Registrar una instalación deportiva</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/manage-request.png}" alt="manage-request">
+            <div class="button-field">
+                <button class="button" type="submit">Administrar solicitudes de arriendo</button>
+            </div>
+        </div>
     </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Gestionar administrativos</button>
-    </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Deshabilitar y/o habilitar usuario</button>
-    </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Registrar una instalación deportiva</button>
-    </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Arrendar centro deportivo</button>
-    </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Administrar solicitudes de arriendo</button>
-    </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Visualizar solicitudes</button>
-    </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Desplegar estadísticas</button>
-    </div>
-  </div>
-</div>
--->
-
+</section>
 <footer>
+    <p>Centro de arriendos deportivos
+        <br>
+        <a href="mailto:antonio.barraza.guzman@gmail.com">Contacto</a>
+    </p>
 </footer>
 </body>
 </html>

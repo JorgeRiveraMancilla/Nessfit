@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>NESSFIT</title>
@@ -7,63 +7,45 @@
 </head>
 <body>
 <header>
-  <img src="/images/logo.png" alt="logo">
+  <img th:src="@{/images/logo.png}" alt="logo">
 </header>
 <nav>
   <a class="profile">Opciones</a>
   <div class="dropdown-content">
-    <a th:href="@{/home}">Volver</a>
+    <a th:href="@{/home}">Menú principal</a>
     <a th:href="@{/password}">Cambiar contraseña</a>
     <a th:href="@{/logout}">Cerrar sesión</a>
   </div>
 </nav>
-
-<!--
-<div class="grid-container">
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Registrar cliente</button>
+<section>
+  <form>
+    <div class="input-field large">
+      <input type="text" name="name" id="name" placeholder=" " required>
+      <label for="name">Nombres</label>
     </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Gestionar administrativos</button>
+    <div class="input-field large">
+      <input type="text" name="lastname" id="lastname" placeholder=" " required>
+      <label for="lastname">Apellidos</label>
     </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Deshabilitar y/o habilitar usuario</button>
+    <div class="input-field large">
+      <input type="email" name="email" id="email" placeholder=" " required>
+      <label for="email">Correo electrónico</label>
     </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Registrar una instalación deportiva</button>
+    <div class="input-field">
+      <input type="number" name="phone" id="phone" placeholder=" " required>
+      <label for="phone">Teléfono</label>
     </div>
-  </div>
-  <div>
     <div class="button-field">
-      <button class="button" type="submit">Arrendar centro deportivo</button>
+      <button class="button" type="reset">Cancelar</button>
     </div>
-  </div>
-  <div>
     <div class="button-field">
-      <button class="button" type="submit">Administrar solicitudes de arriendo</button>
+      <button class="button" type="submit">Guardar</button>
     </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Visualizar solicitudes</button>
-    </div>
-  </div>
-  <div>
-    <div class="button-field">
-      <button class="button" type="submit">Desplegar estadísticas</button>
-    </div>
-  </div>
-</div>
--->
-
+  </form>
+</section>
 <footer>
+  <p>Centro de arriendos deportivos<br>
+    <a href="mailto:antonio.barraza.guzman@gmail.com">Contacto</a></p>
 </footer>
 </body>
 </html>
