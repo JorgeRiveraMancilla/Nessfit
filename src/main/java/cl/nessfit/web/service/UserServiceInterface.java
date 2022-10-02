@@ -4,4 +4,5 @@ import cl.nessfit.web.model.User;
 
 public interface UserServiceInterface {
     void save(User user);
+    public User searchBy(String rut);
 }

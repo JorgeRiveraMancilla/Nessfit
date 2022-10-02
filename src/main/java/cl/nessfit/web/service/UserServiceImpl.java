@@ -15,4 +15,10 @@ public class UserServiceImpl implements UserServiceInterface {
     public void save(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public User searchBy(String rut) {
+        User user = userRepository.findByRut(rut);
+        return user;
+    }
 }

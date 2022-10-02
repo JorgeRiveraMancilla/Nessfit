@@ -3,26 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>NESSFIT</title>
-    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
 <header>
-    <img src="../static/images/logo.png" alt="logo">
+    <img src="/images/logo.png" alt="logo">
 </header>
 <nav>
-    <a class="profile">Cuenta</a>
+    <a class="profile">Opciones</a>
     <div class="dropdown-content">
-        <a href="profile.html">Editar perfil</a>
-        <a href="password.html">Cambiar contraseña</a>
-        <a href="#">Cerrar sesión</a>
+        <a th:href="@{/profile}">Editar perfil</a>
+        <a th:href="@{/password}">Cambiar contraseña</a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
     </div>
 </nav>
 
-
-
-
 <!--
-
 <div class="grid-container">
   <div>
     <div class="button-field">
@@ -65,24 +61,9 @@
     </div>
   </div>
 </div>
-
-
 -->
-
 
 <footer>
-
 </footer>
-
 </body>
 </html>
-
-<!--
-<div class="input-field">
-  <input type="text" name="rut" id="rut" placeholder=" " required>
-  <label for="rut">RUT</label>
-</div>
-  <div class="button-field">
-  <button class="button" type="submit">Iniciar sesión</button>
-</div>
--->

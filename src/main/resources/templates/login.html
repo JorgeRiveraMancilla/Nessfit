@@ -7,7 +7,7 @@
 </head>
 <body>
 <div>
-    <form th:action="@{/home.html}" method="post">
+    <form th:action="@{/login}" method="post">
         <div class="input-field">
             <input type="text" name="rut" id="rut" placeholder=" " required>
             <label for="rut">RUT</label>
@@ -17,7 +17,7 @@
             <label for="password">CONTRASEÑA</label>
         </div>
         <div class="button-field">
-            <button class="button" type="submit">Iniciar sesión</button>
+            <button class="button" type="submit" th:value="${'Entrar'}">Iniciar sesión</button>
         </div>
     </form>
 </div>
