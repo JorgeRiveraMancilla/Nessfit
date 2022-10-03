@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -32,7 +31,7 @@ public class ChangePasswordController {
         model.addAttribute("password1", "");
         //Password2 = repeat new password.
         model.addAttribute("password2", "");
-        return "password";
+        return "change-password";
     }
 
     @PostMapping("/change-password")
@@ -55,7 +54,7 @@ public class ChangePasswordController {
 
             model.addAttribute("newPassword", newPassword);
             model.addAttribute("repeatNewPassword", repeatNewPassword);
-            return "password";
+            return "change-password";
 	    }
 
         // Set new password (encrypted)

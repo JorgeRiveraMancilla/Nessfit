@@ -1,0 +1,22 @@
+.button-field {
+    border: none;
+    display: flex;
+    margin: 1rem;
+    justify-content: center;
+}
+.button {
+    padding: 0.5rem 2rem;
+    appearance: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 1rem;
+    color: #3F8880;
+    font-size: 1rem;
+    border: 1px solid #3F8880;
+}
+.button:hover {
+    transition: 0.25s;
+    color: white;
+    background-color: #3F8880;
+}

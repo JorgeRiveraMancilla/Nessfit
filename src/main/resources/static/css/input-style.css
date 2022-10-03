@@ -1,0 +1,42 @@
+.input-field {
+    box-sizing: border-box;
+    border: none;
+    width: 10rem;
+    display: block;
+    position: relative;
+    margin: 1rem;
+}
+.input-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    border-bottom: 0.125rem solid #CCC;
+    padding: 1.25rem 0 0.25rem 0;
+    text-align: center;
+}
+.input-field input + label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: #CCC;
+    font-size: 1rem;
+}
+.input-field input:not(:placeholder-shown) {
+    border-color: #3F8880;
+    transition: 0.5s;
+}
+.input-field input:placeholder-shown {
+    color: #CCC;
+    transition: 0.5s;
+}
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label {
+    top: 0.575rem;
+    transition: 0.5s;
+    color: #3F8880;
+}
+input:-webkit-autofill {
+    background-color: white !important;
+}

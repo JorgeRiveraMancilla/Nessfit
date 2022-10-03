@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>NESSFIT</title>
-    <link rel="stylesheet" th:href="@{/css/login.css}">
-</head>
+<head th:insert="fragments/head-fragment::head"></head>
 <body>
-<header>
-    <img th:src="@{/images/logo.png}" alt="logo">
-</header>
+<header th:insert="fragments/header-fragment::header"></header>
 <nav>
     <a class="contact" href="mailto:antonio.barraza.guzman@gmail.com">Contacto</a>
 </nav>
 <section>
     <main>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/login}" method="post" autocomplete="off">
             <div class="input-field">
                 <input type="text" name="rut" id="rut" placeholder=" " required>
                 <label for="rut">RUT</label>
