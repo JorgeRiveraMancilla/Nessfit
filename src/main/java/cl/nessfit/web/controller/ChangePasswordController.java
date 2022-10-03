@@ -45,16 +45,14 @@ public class ChangePasswordController {
         //Validate password
         if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
 
-            String msg = null;
             if (!PasswordValidation.lengthValidation(newPassword)){
-                msg = "El largo de la contraseña debe estar entre 10 y 15 caracteres.";
+                model.addAttribute("msg", true);
             }
 
             if (!PasswordValidation.areEquals(newPassword, repeatNewPassword)){
-                msg = "Las contraseñas no coinciden.";
+                model.addAttribute("msg", false);
             }
 
-            model.addAttribute("msg", msg);
             model.addAttribute("newPassword", newPassword);
             model.addAttribute("repeatNewPassword", repeatNewPassword);
             return "password";
