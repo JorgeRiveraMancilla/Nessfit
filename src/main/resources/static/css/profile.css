@@ -32,7 +32,7 @@ nav a.profile {
     padding: 0.675rem 0.75rem;
     text-decoration: none;
     float: right;
-    border-left: 1px solid white;
+    border-left: 0.0625rem solid white;
 }
 nav a.profile:hover {
     background-color: #FEF6CD;
@@ -54,7 +54,7 @@ nav a.profile:hover {
     text-decoration: none;
     width: 10rem;
     display: block;
-    border-top: 1px solid white;
+    border-top: 0.0625rem solid white;
 }
 .dropdown-content a:hover {
     background-color: #FEF6CD;
@@ -85,25 +85,22 @@ form {
     border-radius: 1rem;
 }
 .input-field {
+    box-sizing: border-box;
     border: none;
     width: 20rem;
-    height: 3rem;
 
     display: block;
     position: relative;
-    margin: 1.5rem 0;
-}
-.large {
-    width: 40rem;
+    margin: 1.5rem;
 }
 .input-field input {
     width: 100%;
 
     border: none;
     outline: none;
-    font-size: 1.5rem;
-    border-bottom: 2px solid #CCC;
-    padding: 0.75rem 0 0.5rem 0;
+    font-size: 1rem;
+    border-bottom: 0.125rem solid #CCC;
+    padding: 1rem 0 0.0625rem 0;
     text-align: center;
 }
 .input-field input + label {
@@ -120,9 +117,9 @@ form {
 }
 .input-field input:focus + label,
 .input-field input:not(:placeholder-shown) + label {
-    top: 0;
+    top: 0.575rem;
     transition: 0.5s;
-    background-color: #FFF;
+    background-color: rgba(0, 0, 0, 0);;
     color: #3F8880;
 }
 .input-field input:not(:placeholder-shown) {
@@ -136,10 +133,7 @@ form {
     justify-content: center;
 }
 .button {
-    width: 15rem;
-    height: 3rem;
-    margin: 0rem 2.5rem;
-    padding: 0;
+    padding: 0.5rem 2rem;
     appearance: none;
     background: none;
     outline: none;
@@ -147,7 +141,7 @@ form {
     border-radius: 1rem;
     color: #3F8880;
     font-size: 1.5rem;
-    border: 2px solid #3F8880;
+    border: 0.125rem solid #3F8880;
 }
 .button:hover {
     transition: 0.5s;
@@ -157,7 +151,7 @@ form {
 
 footer {
     text-align: center;
-    padding: 3px;
+    padding: 0.5rem;
     background-color: #9DC09D;
     color: white;
 }
