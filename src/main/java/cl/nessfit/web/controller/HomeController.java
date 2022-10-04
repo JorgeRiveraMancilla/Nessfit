@@ -19,11 +19,10 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping ("/profile")
+    @GetMapping ("/edit-profile")
     public String profile(Model model) {
         User user = userServiceInterface.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
-        return "profile";
+        return "edit-profile";
     }
-
 }

@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>NESSFIT</title>
-    <link rel="stylesheet" th:href="@{/css/home.css}">
-</head>
+<head th:insert="fragments/head-fragment::head"></head>
 <body>
-<header>
-    <img th:src="@{/images/logo.png}" alt="logo">
-</header>
+<header th:insert="fragments/header-fragment::header"></header>
 <nav>
     <a class="profile">Cuenta</a>
     <div class="dropdown-content">
-        <a th:href="@{/profile}">Editar perfil</a>
+        <a th:href="@{/edit-profile}">Editar perfil</a>
         <a th:href="@{/change-password}">Cambiar contraseña</a>
         <a th:href="@{/logout}">Cerrar sesión</a>
     </div>
 </nav>
-
 <section>
     <div class="grid-container">
         <div>
@@ -58,11 +51,7 @@
         </div>
     </div>
 </section>
-<footer>
-    <p>Centro de arriendos deportivos
-        <br>
-        <a href="mailto:antonio.barraza.guzman@gmail.com">Contacto</a>
-    </p>
-</footer>
+<footer th:insert="fragments/footer-fragment::footer"></footer>
+<script th:src="@{/js/modal-confirm.js}"></script>
 </body>
 </html>

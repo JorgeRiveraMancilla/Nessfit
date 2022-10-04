@@ -1,0 +1,23 @@
+.grid-container {
+    width: calc(100% - 25rem);
+    height: 90%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: white;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    text-align: center;
+    border: 2px solid #3F8880;
+    border-radius: 1rem;
+}
+.grid-container div {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+.grid-container div img {
+    height: 5rem;
+}

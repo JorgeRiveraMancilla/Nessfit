@@ -4,8 +4,9 @@ nav {
     background-color: #3F8880;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
-nav a {
+.contact {
     min-width: 10rem;
     display: block;
     color: white;
@@ -15,7 +16,48 @@ nav a {
     text-decoration: none;
     border-left: 0.0625rem solid white;
 }
-nav a:hover {
+.contact:hover {
     background-color: #FEF6CD;
     color: black;
+}
+.profile {
+    min-width: 10rem;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 0.675rem 0.75rem;
+    text-decoration: none;
+    float: right;
+    border-left: 0.0625rem solid white;
+}
+.profile:hover {
+    background-color: #FEF6CD;
+    color: black;
+}
+.dropdown-content {
+    position: absolute;
+    display: none;
+    top: 2.5rem;
+    right: 0;
+    background-color: #3F8880;
+    min-width: 10rem;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: white;
+    padding: 0.75rem;
+    text-decoration: none;
+    width: 10rem;
+    display: block;
+    border-top: 0.0625rem solid white;
+}
+.dropdown-content a:hover {
+    background-color: #FEF6CD;
+    color: black;
+}
+.profile:hover + .dropdown-content {
+    display: inline-block;
+}
+.dropdown-content:hover{
+    display: inline-block;
 }
