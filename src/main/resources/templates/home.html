@@ -14,10 +14,12 @@
 <section>
     <div class="grid-container">
         <div>
-            <img th:src="@{/images/manage-administrative.png}" alt="manage-administrative">
-            <div class="button-field">
-                <button class="button" type="submit">Registrar una instalación deportiva</button>
-            </div>
+            <form th:action="@{register-user}">
+                <img th:src="@{/images/manage-administrative.png}" alt="manage-administrative">
+                <div class="button-field">
+                    <button class="button" type="submit">Registrar un administrativo</button>
+                </div>
+            </form>
         </div>
         <div>
             <img th:src="@{/images/manage-request.png}" alt="manage-request">

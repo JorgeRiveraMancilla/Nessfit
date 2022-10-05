@@ -11,7 +11,7 @@
         <a th:href="@{/logout}">Cerrar sesión</a>
     </div>
 </nav>
-<section class="section-overflow">
+<section>
     <main>
         <form autocomplete="off">
             <div class="input-field input-field-large">
@@ -45,6 +45,10 @@
             <div class="input-field phone input-field-large">
                 <input type="number" name="phone" id="phone" placeholder=" ">
                 <label for="phone">Teléfono</label>
+            </div>
+            <div class="alert alert-large">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>¡Error!</strong> Teléfono móvil inválido.
             </div>
             <div class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
