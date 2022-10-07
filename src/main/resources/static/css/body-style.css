@@ -15,7 +15,7 @@ header img {
 }
 section {
     height: auto;
-    min-height: 35rem;
+    min-height: 30rem;
     width: 100%;
     background: white;
     display: flex;

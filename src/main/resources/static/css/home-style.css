@@ -1,7 +1,7 @@
 .grid-container {
     width: calc(100% - 25rem);
     height: 90%;
-    margin: 0 auto;
+    margin: 1rem;
     box-sizing: border-box;
     overflow: hidden;
     background: white;
@@ -14,6 +14,8 @@
 }
 .grid-container div {
     display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
     overflow: hidden;
     align-items: center;
     justify-content: center;

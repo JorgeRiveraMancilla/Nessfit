@@ -17,8 +17,8 @@
     cursor: pointer;
     border-radius: 1rem;
     color: #3F8880;
-    font-size: 1rem;
-    border: 1px solid #3F8880;
+    font-size: 1.5rem;
+    border: 2px solid #3F8880;
 }
 .button:hover {
     transition: 0.25s;

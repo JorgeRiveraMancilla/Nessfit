@@ -9,6 +9,7 @@
 <section>
     <main>
         <form th:action="@{/login}" method="post" autocomplete="off">
+            <h1 class= "title">Iniciar Sesión</h1>
             <div class="input-field">
                 <input type="text" name="rut" id="rut" placeholder=" " required>
                 <label for="rut">RUT</label>
@@ -26,7 +27,7 @@
                 <strong>¡Error!</strong> Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema.
             </div>
             <div class="button-field">
-                <button class="button" type="submit">Iniciar sesión</button>
+                <button class="button" type="submit">Iniciar</button>
             </div>
         </form>
     </main>
