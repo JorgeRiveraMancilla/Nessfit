@@ -8,7 +8,6 @@ main {
 .form {
     padding: 1rem;
     box-sizing: border-box;
-    background-color: none;
     border-radius: 0.8rem;
 }
 .title {
@@ -16,6 +15,5 @@ main {
     font-size: 32px;
     text-align: center;
     padding-bottom: 1rem;
-    background-color: none;
     color: #3F8880
 }

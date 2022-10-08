@@ -5,17 +5,15 @@ main {
     box-sizing: border-box;
     box-shadow: 0 0 6px black;
 }
-.form {
+form {
     padding: 1rem;
     box-sizing: border-box;
-    background-color: none;
     border-radius: 0.8rem;
 }
 .title {
     display: block;
-    font-size: 32px;
+    font-size: 2rem;
     text-align: center;
     padding-bottom: 1rem;
-    background-color: none;
     color: #3F8880
 }
