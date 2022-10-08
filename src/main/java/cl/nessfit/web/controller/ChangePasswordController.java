@@ -10,7 +10,6 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -59,7 +58,6 @@ public class ChangePasswordController {
 
         // Set new password (encrypted)
         user.setPassword(passwordEncoder.encode(newPassword));
-
         userService.save(user);
 
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
@@ -67,8 +65,4 @@ public class ChangePasswordController {
         return "redirect:/";
 
     }
-
-    @ModelAttribute("rutUser")
-    public String auth() { return SecurityContextHolder.getContext().getAuthentication().getName(); }
-
 }

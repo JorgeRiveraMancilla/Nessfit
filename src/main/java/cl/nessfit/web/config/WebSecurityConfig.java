@@ -33,14 +33,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private DataSource dataSource;
 
 	/**
-	 * Para encriptar la contraseña
-	 * BORRAR DESPUES
+	 * Implementation of PasswordEncoder that uses the BCrypt strong hashing function.
 	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 *
+	 * @param auth the {@link AuthenticationManagerBuilder} to use
+	 * @throws Exception Indicates that a problem occurred.
+	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
@@ -63,9 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 *
 	 * @param http the {@link HttpSecurity} to modify
 	 * @throws Exception if an error occurs
-	 */
-	/**
-	 * Configura el filter Chain para acceso a las rutas
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

@@ -6,10 +6,19 @@ import java.util.List;
 
 public class ProfileValidation {
 
+    /**
+     *
+     * @param userService
+     * @param firstName
+     * @param lastName
+     * @param phone
+     * @param email
+     * @return
+     */
     public static boolean[] isValid(UserServiceInterface userService, String firstName, String lastName,
                               String phone, String email){
 
-        // if all errors are true, the system is ok!
+        // if all errors[] are true, the system is ok!
         boolean[] errors = {true, true, true, true, true, true};
 
         if(!validNameLength(firstName)){
@@ -40,32 +49,21 @@ public class ProfileValidation {
         return errors;
     }
 
-
     /**
-     * Method that validates if the user's current name is equal to the new name.
-     * @param user Corresponds to the user to edit.
+     * Method that validates if the new name has a valid length.
      * @param name Corresponds to the new name for the user.
-     * @return "True" if are equals and "False" if not.
+     * @return "True" if is valid and "False" if not.
      */
-    public static boolean areNameEquals(User user, String name){
-        return user.getFirstName().equals(name);
-    }
-
     public static boolean validNameLength(String name){
         if (name.equals("")){ return false; }
         return name.length() >= 3;
     }
 
     /**
-     * Method that validates if the user's current last name is equal to the new last name.
-     * @param user Corresponds to the user to edit.
+     * Method that validates if the new user last name has a valid length.
      * @param lastName Corresponds to the new last name for the user.
-     * @return "True" if are equals and "False" if not.
+     * @return "True" if is valid and "False" if not.
      */
-    public static boolean areLastNameEquals(User user, String lastName){
-        return user.getLastName().equals(lastName);
-    }
-
     public static boolean validLastNameLength(String lastName){
         if (lastName.equals("")){ return false; }
         return lastName.length() >= 3;
@@ -114,6 +112,21 @@ public class ProfileValidation {
         for (User user : userList) {
             // If the email exists in the system, then we return false.
             if (user.getEmail().equals(email)){ return false; }
+        }
+        return true;
+    }
+
+    /**
+     * Method that is responsible for validating if the rut exists in the system.
+     * @param rut New rut for the user.
+     * @return "True" if the rut is valid and "False" if not.
+     */
+    public static boolean existRut(UserServiceInterface userService, String rut){
+        // We check if the rut currently exists in the system.
+        List<User> userList = userService.getUsers();
+        for (User user : userList) {
+            // If the rut exists in the system, then we return false.
+            if (user.getRut().equals(rut)){ return false; }
         }
         return true;
     }
