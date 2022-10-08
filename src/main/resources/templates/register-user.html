@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:insert="fragments/head-fragment::head"></head>
 <body>
 <header th:insert="fragments/header-fragment::header"></header>
@@ -14,61 +14,56 @@
 </nav>
 <section>
   <main>
-    <form autocomplete="off">
-      <h1 class= "title">Registrar administrativo</h1>
+    <form th:action="@{/register-user}" method="post" autocomplete="off">
+      <h1 class= "title" sec:authorize="hasAuthority('ADMINISTRATOR')">Registrar un administrativo</h1>
+      <h1 class= "title" sec:authorize="hasAuthority('ADMINISTRATIVE')">Registrar un cliente</h1>
       <div class="input-field input-field-large">
         <input type="text" name="rut" id="rut" placeholder=" ">
         <label for="rut">RUT</label>
       </div>
-      <div class="alert alert-large">
+      <div th:if="${msgRutValidator == false}" class="alert alert-large">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>¡Error!</strong> RUT inválido.
       </div>
-      <div class="alert alert-large">
+      <div th:if="${msgRutExists == false}" class="alert alert-large">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>¡Error!</strong> RUT repetido.
+        <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
       </div>
       <div class="input-field input-field-large">
         <input type="text" name="name" id="name" placeholder=" ">
         <label for="name">Nombres</label>
       </div>
-      <div class="alert alert-large">
+      <div th:if="${msgName == false}" class="alert alert-large">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>¡Error!</strong> Largo de nombres inválido.
+        <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
       </div>
       <div class="input-field input-field-large">
         <input type="text" name="lastname" id="lastname" placeholder=" ">
         <label for="lastname">Apellidos</label>
       </div>
-      <div class="alert alert-large">
+      <div th:if="${msgLastName == false}" class="alert alert-large">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>¡Error!</strong> Largo de apellidos inválido.
+        <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
       </div>
-
-
       <div class="input-field input-field-large">
-        <input type="email" name="email" id="email" placeholder=" ">
+        <input type="text" name="email" id="email" placeholder=" ">
         <label for="email">Correo electrónico</label>
       </div>
-      <div class="alert alert-large">
+      <div th:if="${msgEmailValidator == false}" class="alert alert-large">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>¡Error!</strong> Correo electrónico inválido.
+        <strong>¡Error!</strong> Su correo electrónico no es válido.
       </div>
-      <div class="alert alert-large">
+      <div th:if="${msgEmailExist == false}" class="alert alert-large">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>¡Error!</strong> Correo electrónico repetido.
+        <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
       </div>
       <div class="input-field phone input-field-large">
-        <input type="number" name="phone" id="phone" placeholder=" ">
+        <input type="text" name="phone" id="phone" placeholder=" ">
         <label for="phone">Teléfono</label>
       </div>
-      <div class="alert alert-large">
+      <div th:if="${msgPhone == false}" class="alert alert-large">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>¡Error!</strong> Teléfono móvil inválido.
-      </div>
-      <div class="alert alert-large">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>¡Error!</strong> Largo de teléfono móvil inválido.
+        <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
       </div>
       <div class="button-group">
         <div class="button-field">
@@ -85,7 +80,7 @@
             <button class="button-confirm" type="submit">Confirmar</button>
           </div>
           <div class="button-field">
-            <button class="button-cancel" type="reset" id="button-cancel">Cancelar</button>
+            <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
           </div>
         </div>
       </div>

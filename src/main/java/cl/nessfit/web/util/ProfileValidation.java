@@ -99,7 +99,7 @@ public class ProfileValidation {
      * @return "True" if the email is valid and "False" if not.
      */
     public static boolean validEmail(String email) {
-        Pattern pat = Pattern.compile("([a-zA-Z]+@+[a-zA-Z])");
+        Pattern pat = Pattern.compile("([a-zA-Z]+@[a-zA-Z]+)");
         Matcher matcher = pat.matcher(email);
         return matcher.matches();
     }

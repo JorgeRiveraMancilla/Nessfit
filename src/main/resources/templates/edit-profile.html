@@ -23,7 +23,6 @@
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
             </div>
-
             <div class="input-field input-field-large">
                 <input type="text" name="lastname" id="lastname" placeholder=" ">
                 <label for="lastname">Apellidos</label>
@@ -32,7 +31,6 @@
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
             </div>
-
             <div class="input-field input-field-large">
                 <input type="text" name="email" id="email" placeholder=" ">
                 <label for="email">Correo electrónico</label>
@@ -43,9 +41,8 @@
             </div>
             <div th:if="${msgEmailExist == false}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>¡Error!</strong> El correo electrónico ya existe.
+                <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
             </div>
-
             <div class="input-field phone input-field-large">
                 <input type="text" name="phone" id="phone" placeholder=" ">
                 <label for="phone">Teléfono</label>
@@ -54,7 +51,6 @@
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
             </div>
-
             <div class="button-group">
                 <div class="button-field">
                     <button class="button" type="reset">Restablecer</button>
