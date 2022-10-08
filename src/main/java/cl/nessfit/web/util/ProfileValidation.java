@@ -3,40 +3,38 @@ package cl.nessfit.web.util;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ProfileValidation {
 
     public static boolean[] isValid(UserServiceInterface userService, String firstName, String lastName,
                               String phone, String email){
 
-        // if all errors are false, the system is ok!
-        boolean[] errors = {false, false, false, false, false, false};
+        // if all errors are true, the system is ok!
+        boolean[] errors = {true, true, true, true, true, true};
 
-        if(!nameLength(firstName)){
-             errors[1] = true;
-             errors[0] = true;
+        if(!validNameLength(firstName)){
+             errors[1] = false;
+             errors[0] = false;
         }
 
-        if (!lastNameLength(lastName)){
-            errors[2] = true;
-            errors[0] = true;
+        if (!validLastNameLength(lastName)){
+            errors[2] = false;
+            errors[0] = false;
         }
 
-        if (!phoneValidator(phone)){
-            errors[3] = true;
-            errors[0] = true;
+        if (!validPhone(phone)){
+            errors[3] = false;
+            errors[0] = false;
         }
 
         if (!existEmail(userService, email)){
-            errors[4] = true;
-            errors[0] = true;
+            errors[4] = false;
+            errors[0] = false;
         }
 
-        if (!emailValidator(email)){
-            errors[5] = true;
-            errors[0] = true;
+        if (!validEmail(email)){
+            errors[5] = false;
+            errors[0] = false;
         }
 
         return errors;
@@ -53,7 +51,7 @@ public class ProfileValidation {
         return user.getFirstName().equals(name);
     }
 
-    public static boolean nameLength(String name){
+    public static boolean validNameLength(String name){
         if (name.equals("")){ return false; }
         return name.length() >= 3;
     }
@@ -68,7 +66,7 @@ public class ProfileValidation {
         return user.getLastName().equals(lastName);
     }
 
-    public static boolean lastNameLength(String lastName){
+    public static boolean validLastNameLength(String lastName){
         if (lastName.equals("")){ return false; }
         return lastName.length() >= 3;
     }
@@ -78,10 +76,10 @@ public class ProfileValidation {
      * @param phone Corresponds to the new phone number.
      * @return "True" if is valid and "False" if not.
      */
-    public static boolean phoneValidator(String phone){
+    public static boolean validPhone(String phone){
         try {
             if (!phone.equals("")){
-                long phoneLong = Long.parseLong(phone);
+                Long.parseLong(phone);
                 return phone.length() <= 16 && phone.length() >= 11;
             }
             return false;
@@ -95,9 +93,8 @@ public class ProfileValidation {
      * @param email New email for the user.
      * @return "True" if the email is valid and "False" if not.
      */
-    public static boolean emailValidator(String email) {
-        // We verify that the email has the correct format.
-        if (email.length() < 2){ return false; }
+    public static boolean validEmail(String email) {
+        // We verify that the email has "@".
         for (int i = 0; i < email.length(); i++) {
             if (email.charAt(i) == '@'){
                 return true;

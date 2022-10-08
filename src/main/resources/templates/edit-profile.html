@@ -19,7 +19,7 @@
                 <input type="text" name="name" id="name" placeholder=" ">
                 <label for="name">Nombres</label>
             </div>
-            <div th:if="${msgName == true}" class="alert alert-large">
+            <div th:if="${msgName == false}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> Largo de nombres inválido.
             </div>
@@ -28,7 +28,7 @@
                 <input type="text" name="lastname" id="lastname" placeholder=" ">
                 <label for="lastname">Apellidos</label>
             </div>
-            <div th:if="${msgLastName == true}" class="alert alert-large">
+            <div th:if="${msgLastName == false}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> Largo de apellidos inválido.
             </div>
@@ -37,11 +37,11 @@
                 <input type="email" name="email" id="email" placeholder=" ">
                 <label for="email">Correo electrónico</label>
             </div>
-            <div th:if="${msgEmailValidator == true}" class="alert alert-large">
+            <div th:if="${msgEmailValidator == false}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> Correo electrónico inválido.
             </div>
-            <div th:if="${msgEmailExist == true}" class="alert alert-large">
+            <div th:if="${msgEmailExist == false}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> Correo electrónico repetido.
             </div>
@@ -50,7 +50,7 @@
                 <input type="number" name="phone" id="phone" placeholder=" ">
                 <label for="phone">Teléfono</label>
             </div>
-            <div th:if="${msgPhone == true}" class="alert alert-large">
+            <div th:if="${msgPhone == false}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> Teléfono móvil inválido.
             </div>
