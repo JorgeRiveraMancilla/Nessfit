@@ -51,12 +51,15 @@ public class ProfileValidation {
 
     /**
      * Method that validates if the new name has a valid length.
-     * @param name Corresponds to the new name for the user.
+     * @param firstName Corresponds to the new name for the user.
      * @return "True" if is valid and "False" if not.
      */
-    public static boolean validNameLength(String name){
-        if (name.equals("")){ return false; }
-        return name.length() >= 3;
+    public static boolean validNameLength(String firstName){
+        String[] nameArray = firstName.split("\\s+");
+        for (String name : nameArray) {
+            if (name.length() < 3) { return false; }
+        }
+        return true;
     }
 
     /**
@@ -65,8 +68,11 @@ public class ProfileValidation {
      * @return "True" if is valid and "False" if not.
      */
     public static boolean validLastNameLength(String lastName){
-        if (lastName.equals("")){ return false; }
-        return lastName.length() >= 3;
+        String[] nameArray = lastName.split("\\s+");
+        for (String name : nameArray) {
+            if (name.length() < 3) { return false; }
+        }
+        return true;
     }
 
     /**
