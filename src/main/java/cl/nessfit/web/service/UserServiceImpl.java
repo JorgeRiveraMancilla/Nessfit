@@ -27,4 +27,7 @@ public class UserServiceImpl implements UserServiceInterface {
     public List<User> getAdministrativos() {
         return userRepository.findByRoleId(2);
     }
+
+    @Override
+    public List<User> getUsers() { return userRepository.findAll(); }
 }

@@ -16,4 +16,10 @@ public interface UserRepositoryInterface extends JpaRepository<User, String> {
     User findByRut(String rut);
 
     List<User> findByRoleId(int id);
+
+    /**
+     * Select *;
+     * @return All users from the database.
+     */
+    List<User> findAll();
 }

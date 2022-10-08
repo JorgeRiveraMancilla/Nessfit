@@ -1,6 +1,7 @@
 package cl.nessfit.web.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -10,13 +11,16 @@ public class User implements Serializable {
     private static final long serialVersionUID = 7124965512564802080L;
     @Id
     private String rut;
+    @Size(min = 3, message = "{validation.firstName.size}")
     @Column (name = "first_name")
     private String firstName;
+    @Size(min = 3, message = "{validation.lastName.size}")
     @Column (name = "last_name")
     private String lastName;
     private long phone;
     private String email;
     private int status;
+    @Size(min = 10, message = "{validation.password.size}")
     private String password;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id")
