@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:insert="fragments/head-fragment::head"></head>
+<body>
+<header th:insert="fragments/header-fragment::header"></header>
+<nav>
+    <a class="profile">Cuenta</a>
+    <div class="dropdown-content">
+        <a th:href="@{/edit-profile}">Editar perfil</a>
+        <a th:href="@{/change-password}">Cambiar contraseña</a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
+    </div>
+</nav>
+<section>
+    <div class="grid-container">
+        <div>
+            <form th:action="@{register-user}">
+                <img th:src="@{/images/add-client.png}" alt="add-client">
+                <div class="button-field">
+                    <button class="button" type="submit">Registrar un administrativo</button>
+                </div>
+            </form>
+        </div>
+        <div>
+            <img th:src="@{/images/manage-administrative.png}" alt="manage-administrative">
+            <div class="button-field">
+                <button class="button" type="submit">Gestionar administrativos</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/status-users.png}" alt="status-users">
+            <div class="button-field">
+                <button class="button" type="submit">Deshabilitar y/o habilitar usuarios</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/add-installation.png}" alt="add-installation">
+            <div class="button-field">
+                <button class="button" type="submit">Registar instalación</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/rent.png}" alt="rent">
+            <div class="button-field">
+                <button class="button" type="submit">Arrendar centro deportivo</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/manage-request.png}" alt="manage-request">
+            <div class="button-field">
+                <button class="button" type="submit">Administrar solicitudes de arriendo</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/view-request.png}" alt="view-request">
+            <div class="button-field">
+                <button class="button" type="submit">Ver solicitudes de arriendo</button>
+            </div>
+        </div>
+        <div>
+            <img th:src="@{/images/statistics.png}" alt="statistics">
+            <div class="button-field">
+                <button class="button" type="submit">Desplegar estadísticas</button>
+            </div>
+        </div>
+        
+    </div>
+</section>
+<footer th:insert="fragments/footer-fragment::footer"></footer>
+<script th:src="@{/js/modal-confirm.js}"></script>
+</body>
+</html>

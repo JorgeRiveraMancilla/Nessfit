@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/head-fragment::head"></head>
+<body>
+<header th:insert="fragments/header-fragment::header"></header>
+<nav>
+    <a class="profile">Opciones</a>
+    <div class="dropdown-content">
+        <a th:href="@{/home}">Menú principal</a>
+        <a th:href="@{/change-password}">Cambiar contraseña</a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
+    </div>
+</nav>
+<section>
+    <main>
+        <form autocomplete="off">
+            <h1 class= "title">Editar mi perfil</h1>
+            <div class="input-field input-field-large">
+                <input type="text" name="name" id="name" placeholder=" ">
+                <label for="name">Nombres</label>
+            </div>
+            <div class="alert alert-large">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>¡Error!</strong> Largo de nombres inválido.
+            </div>
+            <div class="input-field input-field-large">
+                <input type="text" name="lastname" id="lastname" placeholder=" ">
+                <label for="lastname">Apellidos</label>
+            </div>
+            <div class="alert alert-large">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>¡Error!</strong> Largo de apellidos inválido.
+            </div>
+            <div class="input-field input-field-large">
+                <input type="email" name="email" id="email" placeholder=" ">
+                <label for="email">Correo electrónico</label>
+            </div>
+            <div class="alert alert-large">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>¡Error!</strong> Correo electrónico inválido.
+            </div>
+            <div class="alert alert-large">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>¡Error!</strong> Correo electrónico repetido.
+            </div>
+            <div class="input-field phone input-field-large">
+                <input type="number" name="phone" id="phone" placeholder=" ">
+                <label for="phone">Teléfono</label>
+            </div>
+            <div class="alert alert-large">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>¡Error!</strong> Teléfono móvil inválido.
+            </div>
+            <div class="alert alert-large">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>¡Error!</strong> Largo de teléfono móvil inválido.
+            </div>
+            <div class="button-group">
+                <div class="button-field">
+                    <button class="button" type="reset">Restablecer</button>
+                </div>
+                <div class="button-field">
+                    <button class="button" type="button" id="button-confirm">Guardar</button>
+                </div>
+            </div>
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <label>¿Está seguro?</label>
+                    <div class="button-field">
+                        <button class="button-confirm" type="submit">Confirmar</button>
+                    </div>
+                    <div class="button-field">
+                        <button class="button-cancel" type="reset" id="button-cancel">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</section>
+<footer th:insert="fragments/footer-fragment::footer"></footer>
+<script th:src="@{/js/modal-confirm.js}"></script>
+</body>
+</html>
