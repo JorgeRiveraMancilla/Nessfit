@@ -86,15 +86,11 @@ public class ProfileValidation {
         try {
             if (!phone.equals("")){
                 long phoneLong = Long.parseLong(phone);
-                if (phoneLong < 0){
-                    return false;
-                }
+                if (phoneLong < 0){ return false; }
                 return phone.length() <= 16 && phone.length() >= 11;
             }
             return false;
-        }catch (Exception e){
-            return false;
-        }
+        }catch (Exception e){ return false; }
     }
 
     /**
@@ -103,7 +99,7 @@ public class ProfileValidation {
      * @return "True" if the email is valid and "False" if not.
      */
     public static boolean validEmail(String email) {
-        Pattern pat = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@+[a-z0-9]+(\\.?[a-z0-9])*");
+        Pattern pat = Pattern.compile("([a-zA-Z]+@+[a-zA-Z])");
         Matcher matcher = pat.matcher(email);
         return matcher.matches();
     }
