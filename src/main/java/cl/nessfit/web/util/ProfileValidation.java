@@ -3,6 +3,8 @@ package cl.nessfit.web.util;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProfileValidation {
 
@@ -98,13 +100,12 @@ public class ProfileValidation {
      * @return "True" if the email is valid and "False" if not.
      */
     public static boolean validEmail(String email) {
-        // We verify that the email has "@".
-        for (int i = 0; i < email.length(); i++) {
-            if (email.charAt(i) == '@'){
-                return true;
-            }
-        }
-        return false;
+        if (email.length() < 3){ return false; }
+
+        Pattern pat = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@+[a-z0-9]+(\\.?[a-z0-9])*");
+        Matcher matcher = pat.matcher(email);
+
+        return matcher.find();
     }
 
     /**
@@ -139,6 +140,16 @@ public class ProfileValidation {
             if (user.getRut().equals(rut)){ return false; }
         }
         return true;
+    }
+
+    public static String newNamesEdit(String name){
+        String[] array = name.split("\\s+");
+        StringBuilder newName = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            newName.append(array[i]);
+            if (i != array.length - 1){ newName.append(" "); }
+        }
+        return newName.toString();
     }
 
 }

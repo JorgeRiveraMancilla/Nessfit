@@ -54,8 +54,8 @@ public class ProfileController {
         }
 
         // Set new attributes.
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
+        user.setFirstName(ProfileValidation.newNamesEdit(firstName));
+        user.setLastName(ProfileValidation.newNamesEdit(lastName));
         user.setEmail(email);
         user.setPhone(Long.parseLong(phone));
 
