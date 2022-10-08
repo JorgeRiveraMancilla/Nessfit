@@ -1,15 +1,10 @@
 package cl.nessfit.web.util;
 
 import cl.nessfit.web.model.User;
-import cl.nessfit.web.repository.UserRepositoryInterface;
 import cl.nessfit.web.service.UserServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.apache.coyote.http11.Constants.a;
 
 public class ProfileValidation {
 
@@ -19,27 +14,27 @@ public class ProfileValidation {
         // if all errors are false, the system is ok!
         boolean[] errors = {false, false, false, false, false, false};
 
-        if(nameLength(firstName)){
+        if(!nameLength(firstName)){
              errors[1] = true;
              errors[0] = true;
         }
 
-        if (lastNameLength(lastName)){
+        if (!lastNameLength(lastName)){
             errors[2] = true;
             errors[0] = true;
         }
 
-        if (phoneValidator(phone)){
+        if (!phoneValidator(phone)){
             errors[3] = true;
             errors[0] = true;
         }
 
-        if (existEmail(userService, email)){
+        if (!existEmail(userService, email)){
             errors[4] = true;
             errors[0] = true;
         }
 
-        if (emailValidator(email)){
+        if (!emailValidator(email)){
             errors[5] = true;
             errors[0] = true;
         }
@@ -85,8 +80,11 @@ public class ProfileValidation {
      */
     public static boolean phoneValidator(String phone){
         try {
-            Long.parseLong(phone);
-            return phone.length() <= 16 && phone.length() >= 11;
+            if (!phone.equals("")){
+                long phoneLong = Long.parseLong(phone);
+                return phone.length() <= 16 && phone.length() >= 11;
+            }
+            return false;
         }catch (Exception e){
             return false;
         }
@@ -99,11 +97,13 @@ public class ProfileValidation {
      */
     public static boolean emailValidator(String email) {
         // We verify that the email has the correct format.
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z])$");
-        Matcher matcher = pattern.matcher(email);
-
-        return matcher.find();
+        if (email.length() < 2){ return false; }
+        for (int i = 0; i < email.length(); i++) {
+            if (email.charAt(i) == '@'){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -35,20 +35,20 @@ public class ProfileController {
         boolean[] status = ProfileValidation.isValid(userService, firstName, lastName, phone, email);
 
         // Validate profile.
-        if (!status[0]) {
-
+        if (status[0]) {
             // Error messages.
-            model.addAttribute("msgEmail1", status[1]);
-            model.addAttribute("msgEmail2", status[2]);
+            model.addAttribute("msgName", status[1]);
+            model.addAttribute("msgLastName", status[2]);
             model.addAttribute("msgPhone", status[3]);
-            model.addAttribute("msgName", status[4]);
-            model.addAttribute("msgLastName", status[5]);
+            model.addAttribute("msgEmailExist", status[4]);
+            model.addAttribute("msgEmailValidator", status[5]);
 
 
             model.addAttribute("name", firstName);
             model.addAttribute("lastname", lastName);
             model.addAttribute("email", email);
             model.addAttribute("phone", phone);
+
             return "edit-profile";
         }
 
@@ -57,7 +57,6 @@ public class ProfileController {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPhone(Long.parseLong(phone));
-
 
         // Save user.
         userService.save(user);
