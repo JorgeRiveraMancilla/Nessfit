@@ -77,7 +77,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/login**").anonymous()
 				// Las vistas con el subdominio administrador quedan protegidas al ROL
 				// administrador
-				.antMatchers("/administrador/**").hasAuthority("ADMINISTRADOR")
+				.antMatchers("/administrator/**").hasAuthority("ADMINISTRATOR")
+				// Las vistas con el subdominio administrativo quedan protegidas al ROL
+				// administrativo
+				.antMatchers("/administrative/**").hasAuthority("ADMINISTRATIVE")
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				.anyRequest().authenticated()
 				// El formulario de Login redirecciona a la url /login
@@ -88,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 														Authentication authentication) throws IOException, ServletException {
 						// Tiempo máximo de sesión
-						request.getSession().setMaxInactiveInterval(0);
+						request.getSession().setMaxInactiveInterval(10);
 						// Si la autenticación fue exitosa redirecciona a /home
 						response.sendRedirect("/home");
 					}

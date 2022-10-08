@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:insert="fragments/head-fragment::head"></head>
 <body>
 <header th:insert="fragments/header-fragment::header"></header>
@@ -13,57 +13,26 @@
 </nav>
 <section>
     <div class="grid-container">
-        <div>
+        <div sec:authorize="hasAuthority('ADMINISTRATOR')">
             <form th:action="@{register-user}">
-                <img th:src="@{/images/add-client.png}" alt="add-client">
+                <img th:src="@{/images/add-user.png}" alt="add-administrative">
                 <div class="button-field">
                     <button class="button" type="submit">Registrar un administrativo</button>
                 </div>
             </form>
         </div>
-        <div>
-            <img th:src="@{/images/manage-administrative.png}" alt="manage-administrative">
+        <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
+            <img th:src="@{/images/status-users.png}" alt="status-user">
             <div class="button-field">
-                <button class="button" type="submit">Gestionar administrativos</button>
+                <button class="button" type="submit">Deshabilitar un usuario</button>
             </div>
         </div>
-        <div>
-            <img th:src="@{/images/status-users.png}" alt="status-users">
+        <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
+            <img th:src="@{/images/status-users.png}" alt="status-user">
             <div class="button-field">
-                <button class="button" type="submit">Deshabilitar y/o habilitar usuarios</button>
+                <button class="button" type="submit">Habilitar un usuario</button>
             </div>
         </div>
-        <div>
-            <img th:src="@{/images/add-installation.png}" alt="add-installation">
-            <div class="button-field">
-                <button class="button" type="submit">Registar instalación</button>
-            </div>
-        </div>
-        <div>
-            <img th:src="@{/images/rent.png}" alt="rent">
-            <div class="button-field">
-                <button class="button" type="submit">Arrendar centro deportivo</button>
-            </div>
-        </div>
-        <div>
-            <img th:src="@{/images/manage-request.png}" alt="manage-request">
-            <div class="button-field">
-                <button class="button" type="submit">Administrar solicitudes de arriendo</button>
-            </div>
-        </div>
-        <div>
-            <img th:src="@{/images/view-request.png}" alt="view-request">
-            <div class="button-field">
-                <button class="button" type="submit">Ver solicitudes de arriendo</button>
-            </div>
-        </div>
-        <div>
-            <img th:src="@{/images/statistics.png}" alt="statistics">
-            <div class="button-field">
-                <button class="button" type="submit">Desplegar estadísticas</button>
-            </div>
-        </div>
-        
     </div>
 </section>
 <footer th:insert="fragments/footer-fragment::footer"></footer>

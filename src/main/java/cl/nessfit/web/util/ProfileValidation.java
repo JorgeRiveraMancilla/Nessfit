@@ -113,8 +113,7 @@ public class ProfileValidation {
      * @param email New email for the user.
      * @return "True" if the email is valid and "False" if not.
      */
-    public static boolean existEmail(UserServiceInterface userService, User loggedUser, String email){
-
+    public static boolean existEmail(UserServiceInterface userService, User loggedUser, String email) {
         // If the new email is the same that user email.
         if (loggedUser.getEmail().equals(email)){ return true; }
 
@@ -151,5 +150,4 @@ public class ProfileValidation {
         }
         return newName.toString();
     }
-
 }
