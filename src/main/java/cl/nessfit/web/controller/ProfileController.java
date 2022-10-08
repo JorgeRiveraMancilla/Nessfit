@@ -34,11 +34,11 @@ public class ProfileController {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
 
         // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
-        boolean[] status = ProfileValidation.isValid(userService, firstName, lastName, phone, email);
+        boolean[] status = ProfileValidation.isValid(userService, user, firstName, lastName, phone, email);
 
         // Validate profile.
         if (!status[0]) {
-            // Error messages.
+            // Error messages
             model.addAttribute("msgName", status[1]);
             model.addAttribute("msgLastName", status[2]);
             model.addAttribute("msgPhone", status[3]);

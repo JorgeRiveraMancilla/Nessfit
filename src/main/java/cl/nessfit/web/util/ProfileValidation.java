@@ -15,7 +15,7 @@ public class ProfileValidation {
      * @param email
      * @return
      */
-    public static boolean[] isValid(UserServiceInterface userService, String firstName, String lastName,
+    public static boolean[] isValid(UserServiceInterface userService, User user, String firstName, String lastName,
                               String phone, String email){
 
         // if all errors[] are true, the system is ok!
@@ -36,7 +36,7 @@ public class ProfileValidation {
             errors[0] = false;
         }
 
-        if (!existEmail(userService, email)){
+        if (!existEmail(userService, user, email)){
             errors[4] = false;
             errors[0] = false;
         }
@@ -112,7 +112,11 @@ public class ProfileValidation {
      * @param email New email for the user.
      * @return "True" if the email is valid and "False" if not.
      */
-    public static boolean existEmail(UserServiceInterface userService, String email){
+    public static boolean existEmail(UserServiceInterface userService, User loggedUser, String email){
+
+        // If the new email is the same that user email.
+        if (loggedUser.getEmail().equals(email)){ return true; }
+
         // We check if the email currently exists in the system.
         List<User> userList = userService.getUsers();
         for (User user : userList) {
