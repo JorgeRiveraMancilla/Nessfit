@@ -18,14 +18,14 @@ public class ProfileValidation {
      * @return
      */
     public static boolean[] isValid(UserServiceInterface userService, User user, String firstName, String lastName,
-                              String phone, String email){
+                                    String phone, String email){
 
         // if all errors[] are true, the system is ok!
         boolean[] errors = {true, true, true, true, true, true};
 
         if(!validNameLength(firstName)){
-             errors[1] = false;
-             errors[0] = false;
+            errors[1] = false;
+            errors[0] = false;
         }
 
         if (!validLastNameLength(lastName)){
@@ -85,7 +85,10 @@ public class ProfileValidation {
     public static boolean validPhone(String phone){
         try {
             if (!phone.equals("")){
-                Long.parseLong(phone);
+                long phoneLong = Long.parseLong(phone);
+                if (phoneLong < 0){
+                    return false;
+                }
                 return phone.length() <= 16 && phone.length() >= 11;
             }
             return false;
@@ -100,12 +103,9 @@ public class ProfileValidation {
      * @return "True" if the email is valid and "False" if not.
      */
     public static boolean validEmail(String email) {
-        if (email.length() < 3){ return false; }
-
         Pattern pat = Pattern.compile("([a-z0-9]+(\\.?[a-z0-9])*)+@+[a-z0-9]+(\\.?[a-z0-9])*");
         Matcher matcher = pat.matcher(email);
-
-        return matcher.find();
+        return matcher.matches();
     }
 
     /**
