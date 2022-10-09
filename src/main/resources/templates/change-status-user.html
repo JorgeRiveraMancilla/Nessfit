@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:insert="fragments/head-fragment::head"></head>
+<body>
+<header th:insert="fragments/header-fragment::header"></header>
+<nav>
+  <a class="profile">Opciones</a>
+  <div class="dropdown-content">
+    <a th:href="@{/home}">Menú principal</a>
+    <a th:href="@{/edit-profile}">Editar perfil</a>
+    <a th:href="@{/change-password}">Cambiar contraseña</a>
+    <a th:href="@{/logout}">Cerrar sesión</a>
+  </div>
+</nav>
+<section>
+  <main>
+    <form th:action="@{/administrator/change-status-user}" method="post" autocomplete="off">
+      <h2>Cambiar estado</h2>
+      <div th:if="${msgChange == null}">
+        <div class="input-field input-field-large">
+          <input th:value="${rut}" type="text" name="rut" id="rut" placeholder=" ">
+          <label for="rut">RUT</label>
+        </div>
+        <div th:if="${msgRutExist == false}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong> El RUT ingresado no existe en sistema o no es un cliente o administrativo.
+        </div>
+        <div th:if="${msgChangeAdministrator == false}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong> No es posible cambiar de estado a usuarios con el rol de Administrador.
+        </div>
+        <div th:if="${msgChangeAdministrative == false}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong> No es posible cambiar de estado a usuarios con el rol de Administrativo.
+        </div>
+        <div class="button-field">
+          <button class="button" type="submit">Buscar</button>
+        </div>
+      </div>
+      <div th:if="${msgChange != null}">
+        <div class="input-field input-field-large">
+          <input type="text" id="rutUser" th:placeholder="${msgRut}" disabled>
+          <label for="rutUser">RUT</label>
+        </div>
+        <div class="input-field input-field-large">
+          <input type="text" id="nameUser" th:placeholder="${msgName}" disabled>
+          <label for="nameUser">Nombres</label>
+        </div>
+
+        <input type="hidden" name="rut" th:value="${msgRut}">
+        <input type="hidden" name="status" th:value="${msgStatus}">
+
+        <div th:if="${msgStatus == 'Deshabilitado'}" class="button-field">
+          <button class="button" type="button" id="button-confirm">Habilitar</button>
+        </div>
+        <div th:if="${msgStatus == 'Habilitado'}" class="button-field">
+          <button class="button" type="button" id="button-confirm">Deshabilitar</button>
+        </div>
+
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <label>¿Está seguro?</label>
+            <div class="button-field">
+              <button class="button-confirm" type="submit">Confirmar</button>
+            </div>
+            <div class="button-field">
+              <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
+            </div>
+          </div>
+      </div>
+    </form>
+  </main>
+</section>
+<footer th:insert="fragments/footer-fragment::footer"></footer>
+<script th:src="@{/js/modal-confirm.js}"></script>
+</body>
+</html>

@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserServiceInterface {
 
     @Override
     public List<User> getUsers() { return userRepository.findAll(); }
+
+    @Override
+    public User searchByRutAndRoleIdLessThan(String rut, int roleId) {
+        return userRepository.findByRutAndRoleIdLessThan(rut, roleId);
+    }
 }

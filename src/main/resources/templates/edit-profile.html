@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:insert="fragments/head-fragment::head"></head>
 <body>
 <header th:insert="fragments/header-fragment::header"></header>
@@ -14,7 +14,7 @@
 <section>
     <main>
         <form th:action="@{/edit-profile}" method="post" autocomplete="off">
-            <h1 class= "title">Editar mi perfil</h1>
+            <h2 class= "title">Editar mi perfil</h2>
             <div class="input-field input-field-large">
                 <input type="text" name="name" id="name" placeholder=" ">
                 <label for="name">Nombres</label>
@@ -51,13 +51,8 @@
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
             </div>
-            <div class="button-group">
-                <div class="button-field">
-                    <button class="button" type="reset">Restablecer</button>
-                </div>
-                <div class="button-field">
-                    <button class="button" type="button" id="button-confirm">Guardar</button>
-                </div>
+            <div class="button-field">
+                <button class="button" type="button" id="button-confirm">Guardar cambios</button>
             </div>
             <div id="modal" class="modal">
                 <div class="modal-content">

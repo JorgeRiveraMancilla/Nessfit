@@ -14,4 +14,5 @@ public interface UserServiceInterface {
 
     List<User> getUsers();
 
+    User searchByRutAndRoleIdLessThan(String rut, int roleId);
 }

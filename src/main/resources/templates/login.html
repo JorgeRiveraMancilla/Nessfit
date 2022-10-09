@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head th:insert="fragments/head-fragment::head"></head>
 <body>
 <header th:insert="fragments/header-fragment::header"></header>
@@ -9,13 +9,13 @@
 <section>
     <main>
         <form th:action="@{/login}" method="post" autocomplete="off">
-            <h1 class= "title">Iniciar Sesión</h1>
+            <h2>Iniciar sesión</h2>
             <div class="input-field">
-                <input type="text" name="rut" id="rut" placeholder=" " required>
+                <input type="text" name="rut" id="rut" placeholder=" ">
                 <label for="rut">RUT</label>
             </div>
             <div class="input-field">
-                <input type="password" name="password" id="password" placeholder=" " required>
+                <input type="password" name="password" id="password" placeholder=" ">
                 <label for="password">CONTRASEÑA</label>
             </div>
             <div th:if="${param.disableduser != null}" class="alert">

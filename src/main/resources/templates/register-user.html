@@ -15,8 +15,8 @@
 <section>
   <main>
     <form th:action="@{/register-user}" method="post" autocomplete="off">
-      <h1 class= "title" sec:authorize="hasAuthority('ADMINISTRATOR')">Registrar un administrativo</h1>
-      <h1 class= "title" sec:authorize="hasAuthority('ADMINISTRATIVE')">Registrar un cliente</h1>
+      <h2 class= "title" sec:authorize="hasAuthority('ADMINISTRATOR')">Registrar un administrativo</h2>
+      <h2 class= "title" sec:authorize="hasAuthority('ADMINISTRATIVE')">Registrar un cliente</h2>
       <div class="input-field input-field-large">
         <input type="text" name="rut" id="rut" placeholder=" ">
         <label for="rut">RUT</label>
@@ -65,13 +65,8 @@
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
       </div>
-      <div class="button-group">
-        <div class="button-field">
-          <button class="button" type="reset">Restablecer</button>
-        </div>
-        <div class="button-field">
-          <button class="button" type="button" id="button-confirm">Guardar</button>
-        </div>
+      <div class="button-field">
+        <button class="button" type="button" id="button-confirm">Registrar</button>
       </div>
       <div id="modal" class="modal">
         <div class="modal-content">
