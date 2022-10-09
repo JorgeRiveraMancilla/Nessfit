@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.xml.validation.Validator;
-
 @Controller
 public class ProfileController {
 
@@ -34,7 +32,7 @@ public class ProfileController {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
 
         // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
-        boolean[] status = ProfileValidation.isValid(userService, user, firstName, lastName, phone, email);
+        boolean[] status = ProfileValidation.isValidProfile(userService, user, firstName, lastName, phone, email);
 
         // Validate profile.
         if (!status[0]) {

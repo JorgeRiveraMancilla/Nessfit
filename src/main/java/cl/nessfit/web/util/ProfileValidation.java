@@ -17,8 +17,8 @@ public class ProfileValidation {
      * @param email
      * @return
      */
-    public static boolean[] isValid(UserServiceInterface userService, User user, String firstName, String lastName,
-                                    String phone, String email){
+    public static boolean[] isValidProfile(UserServiceInterface userService, User user, String firstName, String lastName,
+                                           String phone, String email){
 
         // if all errors[] are true, the system is ok!
         boolean[] errors = {true, true, true, true, true, true};
@@ -45,6 +45,50 @@ public class ProfileValidation {
 
         if (!validEmail(email)){
             errors[5] = false;
+            errors[0] = false;
+        }
+
+        return errors;
+    }
+
+    public static boolean[] isValidRegister(UserServiceInterface userService, String rut, String firstName, String lastName,
+                                           String phone, String email){
+
+        // if all errors[] are true, the system is ok!
+        boolean[] errors = {true, true, true, true, true, true, true, true};
+
+        if (!existRut(userService, rut)){
+            errors[1] = false;
+            errors[0] = false;
+        }
+
+        if (!validRut(rut)){
+            errors[2] = false;
+            errors[0] = false;
+        }
+
+        if(!validNameLength(firstName)){
+            errors[3] = false;
+            errors[0] = false;
+        }
+
+        if (!validLastNameLength(lastName)){
+            errors[4] = false;
+            errors[0] = false;
+        }
+
+        if (!existEmail(userService, null, email)){
+            errors[5] = false;
+            errors[0] = false;
+        }
+
+        if (!validEmail(email)){
+            errors[6] = false;
+            errors[0] = false;
+        }
+
+        if (!validPhone(phone)){
+            errors[7] = false;
             errors[0] = false;
         }
 
@@ -111,7 +155,7 @@ public class ProfileValidation {
      */
     public static boolean existEmail(UserServiceInterface userService, User loggedUser, String email) {
         // If the new email is the same that user email.
-        if (loggedUser.getEmail().equals(email)){ return true; }
+        if (loggedUser != null){ if (loggedUser.getEmail().equals(email)){ return true; } }
 
         // We check if the email currently exists in the system.
         List<User> userList = userService.getUsers();
@@ -121,6 +165,17 @@ public class ProfileValidation {
         }
         return true;
     }
+
+    public static boolean validRut(String rut){
+        Pattern pattern = Pattern.compile("^[0-9]{7,}[0-9K]$");
+        Matcher matcher = pattern.matcher(rut);
+        if (matcher.matches()){
+            String dv = calculateDV(rut);
+            return rut.charAt(rut.length() - 1) == dv.charAt(0);
+        }
+        return false;
+    }
+
 
     /**
      * Method that is responsible for validating if the rut exists in the system.
@@ -135,6 +190,15 @@ public class ProfileValidation {
             if (user.getRut().equals(rut)){ return false; }
         }
         return true;
+    }
+
+    public static String calculateDV(String rut){
+        String rutNumeric = rut.substring(0, rut.length() - 1);
+
+        int M=0,S=1,T=Integer.parseInt(rutNumeric);
+        for (;T!=0;T=(int) Math.floor(T/=10))
+            S=(S+T%10*(9-M++%6))%11;
+        return ( S > 0 ) ? String.valueOf(S-1) : "K";
     }
 
     public static String newNamesEdit(String name){

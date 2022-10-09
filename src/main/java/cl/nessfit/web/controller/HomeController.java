@@ -19,8 +19,4 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping ("/register-user")
-    public String registerUser(Model model) {
-        return "register-user";
-    }
 }

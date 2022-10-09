@@ -22,4 +22,5 @@ public interface UserRepositoryInterface extends JpaRepository<User, String> {
      * @return All users from the database.
      */
     List<User> findAll();
+
 }
