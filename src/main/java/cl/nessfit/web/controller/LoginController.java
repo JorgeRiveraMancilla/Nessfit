@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
-
     /**
      * Method in charge of mapping the login url.
      * @return Login html functions.

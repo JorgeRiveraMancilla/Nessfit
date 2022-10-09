@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ChangePasswordController {
-
     @Autowired
     private UserServiceInterface userService;
     @Autowired
@@ -35,19 +34,17 @@ public class ChangePasswordController {
 
     @PostMapping("/change-password")
     public String changePassword(@RequestParam("newPassword") String newPassword, @RequestParam("repeatNewPassword")
-        String repeatNewPassword, HttpServletRequest request, RedirectAttributes attributes, Model model){
+        String repeatNewPassword, HttpServletRequest request, RedirectAttributes attributes, Model model) {
 
         // Obtain the user
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
 
         //Validate password
         if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
-
-            if (!PasswordValidation.lengthValidation(newPassword)){
+            if (!PasswordValidation.lengthValidation(newPassword)) {
                 model.addAttribute("msg", true);
             }
-
-            if (!PasswordValidation.areEquals(newPassword, repeatNewPassword)){
+            if (!PasswordValidation.areEquals(newPassword, repeatNewPassword)) {
                 model.addAttribute("msg", false);
             }
 
@@ -55,7 +52,6 @@ public class ChangePasswordController {
             model.addAttribute("repeatNewPassword", repeatNewPassword);
             return "change-password";
 	    }
-
         // Set new password (encrypted)
         user.setPassword(passwordEncoder.encode(newPassword));
         userService.save(user);
@@ -63,6 +59,5 @@ public class ChangePasswordController {
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, null, null);
         return "redirect:/";
-
     }
 }

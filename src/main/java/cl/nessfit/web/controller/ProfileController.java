@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProfileController {
-
     @Autowired
     UserServiceInterface userService;
-
 
     @GetMapping ("/edit-profile")
     public String editProfile(Model model) {
@@ -28,12 +26,9 @@ public class ProfileController {
     @PostMapping("/edit-profile")
     public String editProfile(@RequestParam("name") String firstName, @RequestParam("lastname") String lastName,
         @RequestParam("email") String email, @RequestParam("phone") String phone, Model model){
-
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-
         // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
         boolean[] status = ProfileValidation.isValidProfile(userService, user, firstName, lastName, phone, email);
-
         // Validate profile.
         if (!status[0]) {
             // Error messages
@@ -42,24 +37,19 @@ public class ProfileController {
             model.addAttribute("msgPhone", status[3]);
             model.addAttribute("msgEmailExist", status[4]);
             model.addAttribute("msgEmailValidator", status[5]);
-
             model.addAttribute("name", firstName);
             model.addAttribute("lastname", lastName);
             model.addAttribute("email", email);
             model.addAttribute("phone", phone);
-
             return "edit-profile";
         }
-
         // Set new attributes.
         user.setFirstName(ProfileValidation.newNamesEdit(firstName));
         user.setLastName(ProfileValidation.newNamesEdit(lastName));
         user.setEmail(email);
         user.setPhone(Long.parseLong(phone));
-
         // Save user.
         userService.save(user);
-
         return "redirect:/";
     }
 }

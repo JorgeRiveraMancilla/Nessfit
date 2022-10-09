@@ -22,7 +22,6 @@ public class RegisterController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-
     @GetMapping("/register-user")
     public String registerUser(Model model) {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -32,9 +31,7 @@ public class RegisterController {
 
     @PostMapping("/register-user")
     public String registerNewUser(@RequestParam("rut") String rut, @RequestParam("name") String firstName, @RequestParam("lastname") String lastName,
-                              @RequestParam("email") String email, @RequestParam("phone") String phone, Model model){
-
-
+                              @RequestParam("email") String email, @RequestParam("phone") String phone, Model model) {
         // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
         boolean[] status = ProfileValidation.isValidRegister(userService, rut, firstName, lastName, phone, email);
 
@@ -63,23 +60,19 @@ public class RegisterController {
         newUser.setEmail(email);
         newUser.setStatus(1);
         newUser.setPassword(passwordEncoder.encode(rut));
-        Role role;
+        Role role = new Role();
 
         if (loggedUser.getRole().getId() == 1){
-            role.
+            role.setId(2);
+        } else {
+            role.setId(1);
         }
 
-
-
-
+        newUser.setRole(role);
 
         // Save user.
         userService.save(newUser);
 
         return "redirect:/";
     }
-
-
-
-
 }

@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileValidation {
-
     /**
      *
      * @param userService
@@ -100,7 +99,7 @@ public class ProfileValidation {
      * @param firstName Corresponds to the new name for the user.
      * @return "True" if is valid and "False" if not.
      */
-    public static boolean validNameLength(String firstName){
+    public static boolean validNameLength(String firstName) {
         String[] nameArray = firstName.split("\\s+");
         for (String name : nameArray) {
             if (name.length() < 3) { return false; }
@@ -113,7 +112,7 @@ public class ProfileValidation {
      * @param lastName Corresponds to the new last name for the user.
      * @return "True" if is valid and "False" if not.
      */
-    public static boolean validLastNameLength(String lastName){
+    public static boolean validLastNameLength(String lastName) {
         String[] nameArray = lastName.split("\\s+");
         for (String name : nameArray) {
             if (name.length() < 3) { return false; }
@@ -126,15 +125,15 @@ public class ProfileValidation {
      * @param phone Corresponds to the new phone number.
      * @return "True" if is valid and "False" if not.
      */
-    public static boolean validPhone(String phone){
+    public static boolean validPhone(String phone) {
         try {
-            if (!phone.equals("")){
+            if (!phone.equals("")) {
                 long phoneLong = Long.parseLong(phone);
-                if (phoneLong < 0){ return false; }
+                if (phoneLong < 0) { return false; }
                 return phone.length() <= 16 && phone.length() >= 11;
             }
             return false;
-        }catch (Exception e){ return false; }
+        } catch (Exception e) { return false; }
     }
 
     /**
@@ -155,21 +154,21 @@ public class ProfileValidation {
      */
     public static boolean existEmail(UserServiceInterface userService, User loggedUser, String email) {
         // If the new email is the same that user email.
-        if (loggedUser != null){ if (loggedUser.getEmail().equals(email)){ return true; } }
+        if (loggedUser != null) { if (loggedUser.getEmail().equals(email)) { return true; } }
 
         // We check if the email currently exists in the system.
         List<User> userList = userService.getUsers();
         for (User user : userList) {
             // If the email exists in the system, then we return false.
-            if (user.getEmail().equals(email)){ return false; }
+            if (user.getEmail().equals(email)) { return false; }
         }
         return true;
     }
 
-    public static boolean validRut(String rut){
+    public static boolean validRut(String rut) {
         Pattern pattern = Pattern.compile("^[0-9]{7,}[0-9K]$");
         Matcher matcher = pattern.matcher(rut);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             String dv = calculateDV(rut);
             return rut.charAt(rut.length() - 1) == dv.charAt(0);
         }
@@ -182,31 +181,31 @@ public class ProfileValidation {
      * @param rut New rut for the user.
      * @return "True" if the rut is valid and "False" if not.
      */
-    public static boolean existRut(UserServiceInterface userService, String rut){
+    public static boolean existRut(UserServiceInterface userService, String rut) {
         // We check if the rut currently exists in the system.
         List<User> userList = userService.getUsers();
         for (User user : userList) {
             // If the rut exists in the system, then we return false.
-            if (user.getRut().equals(rut)){ return false; }
+            if (user.getRut().equals(rut)) { return false; }
         }
         return true;
     }
 
-    public static String calculateDV(String rut){
+    public static String calculateDV(String rut) {
         String rutNumeric = rut.substring(0, rut.length() - 1);
 
-        int M=0,S=1,T=Integer.parseInt(rutNumeric);
-        for (;T!=0;T=(int) Math.floor(T/=10))
-            S=(S+T%10*(9-M++%6))%11;
-        return ( S > 0 ) ? String.valueOf(S-1) : "K";
+        int M = 0, S = 1, T = Integer.parseInt(rutNumeric);
+        for (; T != 0; T = (int) Math.floor(T /= 10))
+            S = (S + T % 10 * (9 - M ++ % 6)) % 11;
+        return ( S > 0 ) ? String.valueOf(S - 1) : "K";
     }
 
-    public static String newNamesEdit(String name){
+    public static String newNamesEdit(String name) {
         String[] array = name.split("\\s+");
         StringBuilder newName = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
             newName.append(array[i]);
-            if (i != array.length - 1){ newName.append(" "); }
+            if (i != array.length - 1) { newName.append(" "); }
         }
         return newName.toString();
     }
