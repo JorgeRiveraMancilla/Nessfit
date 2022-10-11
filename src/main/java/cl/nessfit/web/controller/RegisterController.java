@@ -21,14 +21,27 @@ public class RegisterController {
     UserServiceInterface userService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
+    /**
+     * Searches a user and add it to the model
+     * @param model
+     * @return
+     */
     @GetMapping("/register-user")
     public String registerUser(Model model) {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
         return "register-user";
     }
-
+    /**
+     * Registers a new user with the form data
+     * @param rut Rut data of the new user
+     * @param firstName User's first name
+     * @param lastName User's last name
+     * @param email User's email
+     * @param phone User's phone number
+     * @param model project model
+     * @return if profile is not valid, return "register-user", else save new user and redirect to  main page
+     */
     @PostMapping("/register-user")
     public String registerNewUser(@RequestParam("rut") String rut, @RequestParam("name") String firstName, @RequestParam("lastname") String lastName,
                               @RequestParam("email") String email, @RequestParam("phone") String phone, Model model) {

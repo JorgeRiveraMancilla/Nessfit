@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 @Controller
 public class ChangePasswordController {
     @Autowired
@@ -23,6 +24,11 @@ public class ChangePasswordController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    /**
+     * Method that receives a model type variable and implements the new password structure in it.   
+     * @param model The model of the project.
+     * @return returns "change-password" string.
+     */
     @GetMapping("/change-password")
     public String password(Model model){
         //Password1 = new password.
@@ -31,7 +37,15 @@ public class ChangePasswordController {
         model.addAttribute("password2", "");
         return "change-password";
     }
-
+    /**
+     * Method that handles the changing of a password and logs the corresponding data into the user class.
+     * @param newPassword New password entered by the user
+     * @param repeatNewPassword Validation of the new password 
+     * @param request http request data
+     * @param attributes no se usa (preguntar)
+     * @param model The model of the project.
+     * @return "change-password" if the process was unsucessfull otherwise logouts and returns "redirect:/"
+     */
     @PostMapping("/change-password")
     public String changePassword(@RequestParam("newPassword") String newPassword, @RequestParam("repeatNewPassword")
         String repeatNewPassword, HttpServletRequest request, RedirectAttributes attributes, Model model) {

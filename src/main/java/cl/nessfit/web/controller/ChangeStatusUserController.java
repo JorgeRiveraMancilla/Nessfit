@@ -24,7 +24,12 @@ public class ChangeStatusUserController {
     public String changeStatusUser() {
         return "change-status-user";
     }
-
+    /**
+     * 
+     * @param allRequestParams
+     * @param model
+     * @return
+     */
     @PostMapping("/change-status-user")
     public String changeStatusUser(@RequestParam Map<String,String> allRequestParams, Model model) {
         String rut = allRequestParams.get("rut");
