@@ -19,7 +19,7 @@ public class ProfileController {
     /**
      * Check if user is authenticated
      * @param model
-     * @return
+     * @return access to the webpage
      */
     @GetMapping ("/edit-profile")
     public String editProfile(Model model) {
@@ -29,7 +29,7 @@ public class ProfileController {
     }
 
     /**
-     * Allow to edit profile if the requested data is valid. 
+     * receive data from edit profile  html. 
      * @param firstName user's FirstName data
      * @param lastName user's lastName data
      * @param email user's email data 

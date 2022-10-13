@@ -164,7 +164,11 @@ public class ProfileValidation {
         }
         return true;
     }
-
+    /**
+     * Method that checks if the rut is valid
+     * @param rut 
+     * @return true if rut is valid, otherwise false
+     */
     public static boolean validRut(String rut) {
         Pattern pattern = Pattern.compile("^[0-9]{7,}[0-9K]$");
         Matcher matcher = pattern.matcher(rut);
