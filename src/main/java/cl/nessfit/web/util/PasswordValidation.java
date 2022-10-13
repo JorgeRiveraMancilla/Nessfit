@@ -13,11 +13,21 @@ public class PasswordValidation {
         }
         return false;
     }
-
+    /**
+     * Check if both passwords are equal.
+     * @param password1
+     * @param password2
+     * @return true if are equal, false otherwise
+     */
     public static boolean areEquals(String password1, String password2) {
         return password1.equals(password2);
     }
 
+    /**
+     * Check if the password has a valid length
+     * @param password
+     * @return true if length is valid, false otherwise
+     */
     public static boolean lengthValidation(String password) {
         if (password.length() >= 10) {
             return password.length() <= 15;

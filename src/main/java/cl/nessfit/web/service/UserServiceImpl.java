@@ -13,6 +13,9 @@ public class UserServiceImpl implements UserServiceInterface {
     @Autowired
     private UserRepositoryInterface userRepository;
 
+    /**
+     * Saves the user
+     */
     @Override
     public void save(User user) {
         userRepository.save(user);
