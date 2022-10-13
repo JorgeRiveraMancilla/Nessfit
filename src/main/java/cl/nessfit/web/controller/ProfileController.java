@@ -16,6 +16,11 @@ public class ProfileController {
     @Autowired
     UserServiceInterface userService;
 
+    /**
+     * Check if user is authenticated
+     * @param model
+     * @return
+     */
     @GetMapping ("/edit-profile")
     public String editProfile(Model model) {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -23,6 +28,15 @@ public class ProfileController {
         return "edit-profile";
     }
 
+    /**
+     * Allow to edit profile if the requested data is valid. 
+     * @param firstName user's FirstName data
+     * @param lastName user's lastName data
+     * @param email user's email data 
+     * @param phone user's phone number data
+     * @param model project model
+     * @return return user to home page
+     */
     @PostMapping("/edit-profile")
     public String editProfile(@RequestParam("name") String firstName, @RequestParam("lastname") String lastName,
         @RequestParam("email") String email, @RequestParam("phone") String phone, Model model){

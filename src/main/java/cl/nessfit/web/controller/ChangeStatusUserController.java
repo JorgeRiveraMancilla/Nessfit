@@ -25,10 +25,10 @@ public class ChangeStatusUserController {
         return "change-status-user";
     }
     /**
-     * 
-     * @param allRequestParams
-     * @param model
-     * @return
+     * Changes the user status, depending on the form election by the administrator or administrative
+     * @param allRequestParams form data
+     * @param model project model
+     * @return return to "change-status-user" page, or home page
      */
     @PostMapping("/change-status-user")
     public String changeStatusUser(@RequestParam Map<String,String> allRequestParams, Model model) {
