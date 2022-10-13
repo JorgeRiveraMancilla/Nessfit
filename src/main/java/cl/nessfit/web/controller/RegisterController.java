@@ -78,7 +78,7 @@ public class RegisterController {
         if (loggedUser.getRole().getId() == 1){
             role.setId(2);
         } else {
-            role.setId(1);
+            role.setId(3);
         }
 
         newUser.setRole(role);

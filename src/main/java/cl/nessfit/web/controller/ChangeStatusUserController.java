@@ -24,6 +24,7 @@ public class ChangeStatusUserController {
     public String changeStatusUser() {
         return "change-status-user";
     }
+
     /**
      * Changes the user status, depending on the form election by the administrator or administrative
      * @param allRequestParams form data
