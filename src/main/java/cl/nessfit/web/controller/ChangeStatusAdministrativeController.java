@@ -4,6 +4,7 @@ import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -34,13 +36,22 @@ public class ChangeStatusAdministrativeController {
      * @return return to "change-status-user" page, or home page
      */
     @PostMapping("/change-status-user")
-    public String changeStatusUser(@RequestParam Map<String,String> allRequestParams, Model model) {
+    public String changeStatusUser(@RequestParam Map<String,String> allRequestParams, Model model, HttpServletRequest request) {
         String rut = allRequestParams.get("rut");
         String status = allRequestParams.get("status");
         User user = userService.searchByRut(rut);
 
+
         if (status == null) {
             User userLogged = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
+
+            // validate if the userLogged exist. If not logout and redirect to login page.
+            if (userLogged == null){
+                SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+                logoutHandler.logout(request, null, null);
+                return "redirect:/";
+            }
+
             int idUserLogged = userLogged.getRole().getId();
 
             if (user == null) {

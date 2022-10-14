@@ -40,6 +40,7 @@ public class ChangeStatusAdministratorController {
         String status = allRequestParams.get("status");
         User user = userService.searchByRut(rut);
 
+
         if (status == null) {
             User userLogged = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
             int idUserLogged = userLogged.getRole().getId();

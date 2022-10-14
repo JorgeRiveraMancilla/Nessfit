@@ -5,11 +5,14 @@ import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.ProfileValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProfileController {
@@ -39,8 +42,16 @@ public class ProfileController {
      */
     @PostMapping("/edit-profile")
     public String editProfile(@RequestParam("name") String firstName, @RequestParam("lastname") String lastName,
-        @RequestParam("email") String email, @RequestParam("phone") String phone, Model model){
+                              @RequestParam("email") String email, @RequestParam("phone") String phone, Model model, HttpServletRequest request){
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        // validate if the user exist.
+        if (user == null){
+            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+            logoutHandler.logout(request, null, null);
+            return "redirect:/";
+        }
+
         // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
         boolean[] status = ProfileValidation.isValidProfile(userService, user, firstName, lastName, phone, email);
         // Validate profile.

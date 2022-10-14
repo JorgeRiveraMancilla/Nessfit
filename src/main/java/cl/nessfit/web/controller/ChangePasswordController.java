@@ -53,6 +53,12 @@ public class ChangePasswordController {
         // Obtain the user
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
 
+        if (user == null){
+            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+            logoutHandler.logout(request, null, null);
+            return "redirect:/";
+        }
+
         //Validate password
         if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
             if (!PasswordValidation.lengthValidation(newPassword)) {
