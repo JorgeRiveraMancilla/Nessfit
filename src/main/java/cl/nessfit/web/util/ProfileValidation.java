@@ -111,7 +111,7 @@ public class ProfileValidation {
     public static boolean validNameLength(String firstName) {
         String[] nameArray = firstName.split("\\s+");
         for (String name : nameArray) {
-            if (name.length() < 3) { return false; }
+            if (name.length() < 3 || name.length() > 200) { return false; }
         }
         return true;
     }
@@ -124,7 +124,7 @@ public class ProfileValidation {
     public static boolean validLastNameLength(String lastName) {
         String[] nameArray = lastName.split("\\s+");
         for (String name : nameArray) {
-            if (name.length() < 3) { return false; }
+            if (name.length() < 3 || name.length() > 200 ) { return false; }
         }
         return true;
     }
@@ -151,7 +151,7 @@ public class ProfileValidation {
      * @return "True" if the email is valid and "False" if not.
      */
     public static boolean validEmail(String email) {
-        Pattern pat = Pattern.compile("([a-zA-Z]+@[a-zA-Z]+)");
+        Pattern pat = Pattern.compile("([a-zA-Z0-9.]+@[a-zA-Z0-9.]+)");
         Matcher matcher = pat.matcher(email);
         return matcher.matches();
     }

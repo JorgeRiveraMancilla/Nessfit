@@ -18,7 +18,7 @@
       <h2 class= "title" sec:authorize="hasAuthority('ADMINISTRATOR')">Registrar un administrativo</h2>
       <h2 class= "title" sec:authorize="hasAuthority('ADMINISTRATIVE')">Registrar un cliente</h2>
       <div class="input-field input-field-large">
-        <input type="text" name="rut" id="rut" placeholder=" ">
+        <input type="text" name="rut" id="rut" placeholder="12345678K">
         <label for="rut">RUT</label>
       </div>
       <div th:if="${msgRutValidator == false}" class="alert alert-large">
