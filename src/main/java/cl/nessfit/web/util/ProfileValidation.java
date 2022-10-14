@@ -188,7 +188,6 @@ public class ProfileValidation {
         return false;
     }
 
-
     /**
      * Method that is responsible for validating if the rut exists in the system.
      * @param rut New rut for the user.

@@ -59,7 +59,7 @@ public class ChangeStatusAdministrativeController {
             } else {
                 int idUser = user.getRole().getId();
                 if (idUser <= idUserLogged) {
-                    if (userLogged.getRole().getId() == 1) {
+                    if (idUser == 1) {
                         model.addAttribute("msgChangeAdministrator", false);
                     } else {
                         model.addAttribute("msgChangeAdministrative", false);
