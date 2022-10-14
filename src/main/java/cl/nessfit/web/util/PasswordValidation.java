@@ -15,8 +15,8 @@ public class PasswordValidation {
     }
     /**
      * Check if both passwords are equal.
-     * @param password1
-     * @param password2
+     * @param password1 new password
+     * @param password2	repeated new password
      * @return true if are equal, false otherwise
      */
     public static boolean areEquals(String password1, String password2) {
@@ -25,7 +25,7 @@ public class PasswordValidation {
 
     /**
      * Check if the password has a valid length
-     * @param password
+     * @param password new password
      * @return true if length is valid, false otherwise
      */
     public static boolean lengthValidation(String password) {

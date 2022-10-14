@@ -9,7 +9,10 @@ import cl.nessfit.web.service.UserServiceInterface;
 public class HomeController {
     @Autowired
     UserServiceInterface userServiceInterface;
-
+    /**
+     * Method who control the redirection to the home page.  
+     * @return the form from the home page. 
+     */
     @GetMapping ({"/home", "/", ""})
     public String home() {
         return "home";

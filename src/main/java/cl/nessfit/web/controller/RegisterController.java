@@ -23,8 +23,8 @@ public class RegisterController {
     private BCryptPasswordEncoder passwordEncoder;
     /**
      * Searches a user and add it to the model
-     * @param model
-     * @return
+     * @param model is the application's dynamic data structure
+     * @return 
      */
     @GetMapping("/register-user")
     public String registerUser(Model model) {
@@ -39,7 +39,7 @@ public class RegisterController {
      * @param lastName User's last name
      * @param email User's email
      * @param phone User's phone number
-     * @param model project model
+     * @param model is the application's dynamic data structure
      * @return if profile is not valid, return "register-user", else save new user and redirect to  main page
      */
     @PostMapping("/register-user")

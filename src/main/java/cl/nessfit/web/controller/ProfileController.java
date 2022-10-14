@@ -34,7 +34,7 @@ public class ProfileController {
      * @param lastName user's lastName data
      * @param email user's email data 
      * @param phone user's phone number data
-     * @param model project model
+     * @param model is the application's dynamic data structure
      * @return return user to home page
      */
     @PostMapping("/edit-profile")

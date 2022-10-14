@@ -14,23 +14,29 @@ public class UserServiceImpl implements UserServiceInterface {
     private UserRepositoryInterface userRepository;
 
     /**
-     * Saves the user
+     * Saves the user in the database.
      */
     @Override
     public void save(User user) {
         userRepository.save(user);
     }
-
+    /**
+     * Given a rut, returns a user with that rut data.
+     */
     @Override
     public User searchByRut(String rut) {
         return userRepository.findByRut(rut);
     }
-
+    /**
+     * return a list with all users with administrative role from the database.
+     */
     @Override
     public List<User> getAdministrativos() {
         return userRepository.findByRoleId(2);
     }
-
+    /**
+     * Return a list gith all users from the database.
+     */
     @Override
     public List<User> getUsers() { return userRepository.findAll(); }
 

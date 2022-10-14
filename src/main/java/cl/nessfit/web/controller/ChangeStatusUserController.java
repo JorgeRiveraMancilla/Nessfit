@@ -19,7 +19,10 @@ import java.util.Map;
 public class ChangeStatusUserController {
     @Autowired
     UserServiceInterface userService;
-
+    /**
+     * Method that return a form 
+     * @return the "change-status-user" form
+     */
     @GetMapping("/change-status-user")
     public String changeStatusUser() {
         return "change-status-user";
@@ -28,7 +31,7 @@ public class ChangeStatusUserController {
     /**
      * Changes the user status, depending on the form election by the administrator or administrative
      * @param allRequestParams form data
-     * @param model project model
+     * @param model is the application's dynamic data structure
      * @return return to "change-status-user" page, or home page
      */
     @PostMapping("/change-status-user")
