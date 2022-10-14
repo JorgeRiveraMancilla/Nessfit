@@ -8,13 +8,13 @@ import java.util.regex.Pattern;
 
 public class ProfileValidation {
     /**
-     *
-     * @param userService
-     * @param firstName
-     * @param lastName
-     * @param phone
-     * @param email
-     * @return
+     *Method that check if all the data from the profile form is valid       
+     * @param userService the service to obtain the user's data from the database 
+     * @param firstName user's first name
+     * @param lastName user's last name
+     * @param phone user's phone number
+     * @param email user's email
+     * @return a list of boolean values 
      */
     public static boolean[] isValidProfile(UserServiceInterface userService, User user, String firstName, String lastName,
                                            String phone, String email){
@@ -49,7 +49,16 @@ public class ProfileValidation {
 
         return errors;
     }
-
+    /**
+     * Method that checks if the data to register is valid and the user is new.
+     * @param userService the service to obtain the user's data from the database 
+     * @param rut user's rut
+     * @param firstName user's first name
+     * @param lastName user's last name
+     * @param phone user's phone number
+     * @param email user's email
+     * @return list of boolean values, if all errors[] are true, the system is ok!
+     */
     public static boolean[] isValidRegister(UserServiceInterface userService, String rut, String firstName, String lastName,
                                            String phone, String email){
 
@@ -166,7 +175,7 @@ public class ProfileValidation {
     }
     /**
      * Method that checks if the rut is valid
-     * @param rut 
+     * @param rut user's rut
      * @return true if rut is valid, otherwise false
      */
     public static boolean validRut(String rut) {
@@ -194,7 +203,11 @@ public class ProfileValidation {
         }
         return true;
     }
-
+    /**
+     * Calculates the verificator digit given a rut 
+     * @param rut user's rut
+     * @return string of verificator digit  
+     */
     public static String calculateDV(String rut) {
         String rutNumeric = rut.substring(0, rut.length() - 1);
 
@@ -204,6 +217,11 @@ public class ProfileValidation {
         return ( S > 0 ) ? String.valueOf(S - 1) : "K";
     }
 
+    /**
+     * Method that validate the length of the name when it has spaces between words
+     * @param name or last name from the user
+     * @return the name formatted without spaces in a string data type
+     */
     public static String newNamesEdit(String name) {
         String[] array = name.split("\\s+");
         StringBuilder newName = new StringBuilder();
