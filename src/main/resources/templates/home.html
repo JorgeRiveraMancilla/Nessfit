@@ -28,8 +28,15 @@
         <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
             <img th:src="@{/images/status-users.png}" alt="status-user">
         </div>
-        <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
+        <div sec:authorize="hasAuthority('ADMINISTRATOR')">
             <form th:action="@{administrator/change-status-user}">
+                <div class="button-field">
+                    <button class="button" type="submit">Deshabilitar y/o habilitar un usuario</button>
+                </div>
+            </form>
+        </div>
+        <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
+            <form th:action="@{administrative/change-status-user}">
                 <div class="button-field">
                     <button class="button" type="submit">Deshabilitar y/o habilitar un usuario</button>
                 </div>
