@@ -1,7 +1,7 @@
 package cl.nessfit.web.controller;
 
-import cl.nessfit.web.model.User;
-import cl.nessfit.web.service.UserServiceInterface;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-import java.util.Map;
+import cl.nessfit.web.model.User;
+import cl.nessfit.web.service.UserServiceInterface;
 
 @Controller
-@RequestMapping("/administrative")
-public class ChangeStatusAdministrativeUserController {
+@RequestMapping("/administrator")
+public class ChangeStatusAdministratorController {
     @Autowired
     UserServiceInterface userService;
     /**
