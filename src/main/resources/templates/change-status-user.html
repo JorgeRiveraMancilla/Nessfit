@@ -15,10 +15,10 @@
 <section>
   <main>
     <form id="form" sec:authorize="hasAuthority('ADMINISTRATOR')" th:action="@{/administrator/change-status-user}"  method="post" autocomplete="off">
-      <h2>Cambiar estado usuarios</h2>
+      <h2>Cambiar estado de un usuario</h2>
       <div th:if="${msgChange == null}">
         <div class="input-field input-field-large">
-          <input th:value="${rut}" type="text" name="rut" id="rut1" placeholder=" ">
+          <input th:value="${rut}" type="text" name="rut" id="rut1" placeholder="Ej: 12345678K">
           <label for="rut1">RUT</label>
         </div>
         <div th:if="${msgRutExist == false}" class="alert alert-large">
@@ -71,10 +71,10 @@
       </div>
     </form>
     <form id="form" sec:authorize="hasAuthority('ADMINISTRATIVE')" th:action="@{/administrative/change-status-user}" method="post" autocomplete="off">
-      <h2>Cambiar estado clientes</h2>
+      <h2>Cambiar estado de un cliente</h2>
       <div th:if="${msgChange == null}">
         <div class="input-field input-field-large">
-          <input th:value="${rut}" type="text" name="rut" id="rut2" placeholder=" ">
+          <input th:value="${rut}" type="text" name="rut" id="rut2" placeholder="Ej: 12345678K">
           <label for="rut2">RUT</label>
         </div>
         <div th:if="${msgRutExist == false}" class="alert alert-large">

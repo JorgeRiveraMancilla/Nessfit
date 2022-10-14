@@ -151,6 +151,10 @@ public class ProfileValidation {
      * @return "True" if the email is valid and "False" if not.
      */
     public static boolean validEmail(String email) {
+
+        //validate máximo length
+        if (email.length() > 200) { return false; }
+
         Pattern pat = Pattern.compile("([a-zA-Z0-9.]+@[a-zA-Z0-9.]+)");
         Matcher matcher = pat.matcher(email);
         return matcher.matches();
@@ -173,13 +177,14 @@ public class ProfileValidation {
         }
         return true;
     }
+
     /**
      * Method that checks if the rut is valid
      * @param rut user's rut
      * @return true if rut is valid, otherwise false
      */
     public static boolean validRut(String rut) {
-        Pattern pattern = Pattern.compile("^[0-9]{7,}[0-9K]$");
+        Pattern pattern = Pattern.compile("^[0-9]{8}[0-9K]$");
         Matcher matcher = pattern.matcher(rut);
         if (matcher.matches()) {
             String dv = calculateDV(rut);
