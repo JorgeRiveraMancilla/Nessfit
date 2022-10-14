@@ -4,27 +4,34 @@ import cl.nessfit.web.model.Role;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.ProfileValidation;
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
-public class RegisterController {
+@RequestMapping("/administrator")
+public class RegisterAdministrativeController {
 
     @Autowired
     UserServiceInterface userService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
     /**
-     * Searches a user and add it to the model
-     * @param model is the application's dynamic data structure
-     * @return 
+     * Mapping for register user.
+     * @param model is the application's dynamic data structure.
+     * @return Redirect to register-user.html form.
      */
     @GetMapping("/register-user")
     public String registerUser(Model model) {
@@ -32,6 +39,7 @@ public class RegisterController {
         model.addAttribute("user", user);
         return "register-user";
     }
+
     /**
      * Registers a new user with the form data
      * @param rut Rut data of the new user
@@ -40,11 +48,24 @@ public class RegisterController {
      * @param email User's email
      * @param phone User's phone number
      * @param model is the application's dynamic data structure
-     * @return if profile is not valid, return "register-user", else save new user and redirect to  main page
+     * @return if profile is not valid, return "register-user", else save new user and redirect to home page
      */
     @PostMapping("/register-user")
     public String registerNewUser(@RequestParam("rut") String rut, @RequestParam("name") String firstName, @RequestParam("lastname") String lastName,
-                              @RequestParam("email") String email, @RequestParam("phone") String phone, Model model) {
+                              @RequestParam("email") String email, @RequestParam("phone") String phone, Model model, HttpServletRequest request) {
+
+        User loggedUser = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        // if loggedUser is null or not exist, logout.
+        if (loggedUser == null){
+            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+            logoutHandler.logout(request, null, null);
+            return "redirect:/";
+        }
+
+        // if loggedUser is not ADMINISTRATOR, then redirect to home.
+        if (loggedUser.getRole().getId() != 1) { return "redirect:/"; }
+
         // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
         boolean[] status = ProfileValidation.isValidRegister(userService, rut, firstName, lastName, phone, email);
 
@@ -62,7 +83,6 @@ public class RegisterController {
             return "register-user";
         }
 
-        User loggedUser = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         User newUser = new User();
 
         // Set attributes.
@@ -73,13 +93,9 @@ public class RegisterController {
         newUser.setEmail(email);
         newUser.setStatus(1);
         newUser.setPassword(passwordEncoder.encode(rut));
-        Role role = new Role();
 
-        if (loggedUser.getRole().getId() == 1){
-            role.setId(2);
-        } else {
-            role.setId(3);
-        }
+        Role role = new Role();
+        role.setId(2);
 
         newUser.setRole(role);
 

@@ -13,6 +13,7 @@ public class PasswordValidation {
         }
         return false;
     }
+
     /**
      * Check if both passwords are equal.
      * @param password1 new password

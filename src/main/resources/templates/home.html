@@ -13,13 +13,21 @@
 </nav>
 <section>
     <div class="grid-container">
-        <div sec:authorize="hasAuthority('ADMINISTRATOR')">
+        <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
             <img th:src="@{/images/add-user.png}" alt="add-administrative">
         </div>
+
         <div sec:authorize="hasAuthority('ADMINISTRATOR')">
-            <form th:action="@{register-user}">
+            <form th:action="@{administrator/register-user}">
                 <div class="button-field">
                     <button class="button" type="submit">Registrar un administrativo</button>
+                </div>
+            </form>
+        </div>
+        <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
+            <form th:action="@{administrative/register-user}">
+                <div class="button-field">
+                    <button class="button" type="submit">Registrar un cliente</button>
                 </div>
             </form>
         </div>
@@ -42,13 +50,6 @@
                 </div>
             </form>
         </div>
-
-
-
-
-
-
-
 
     </div>
 </section>
