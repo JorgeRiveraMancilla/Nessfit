@@ -15,10 +15,10 @@
 <section>
   <main>
     <div sec:authorize="hasAuthority('ADMINISTRATOR')">
-      <form th:action="@{/administrator/register-user}" method="post" autocomplete="off">
+      <form th:action="@{/administrator/register-user}" method="post" autocomplete="off" >
         <h2 class= "title">Registrar un administrativo</h2>
         <div class="input-field input-field-large">
-          <input type="text" name="rut" id="rut" placeholder="12345678K">
+          <input type="text" name="rut" id="rut" placeholder="12345678K" th:value=${rut}>
           <label for="rut">RUT</label>
         </div>
         <div th:if="${msgRutValidator == false}" class="alert alert-large">
@@ -30,7 +30,7 @@
           <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
         </div>
         <div class="input-field input-field-large">
-          <input type="text" name="name" id="name" placeholder=" ">
+          <input type="text" name="name" id="name" placeholder=" " th:value=${name}>
           <label for="name">Nombres</label>
         </div>
         <div th:if="${msgName == false}" class="alert alert-large">
@@ -38,7 +38,7 @@
           <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
         </div>
         <div class="input-field input-field-large">
-          <input type="text" name="lastname" id="lastname" placeholder=" ">
+          <input type="text" name="lastname" id="lastname" placeholder=" " th:value=${lastname}>
           <label for="lastname">Apellidos</label>
         </div>
         <div th:if="${msgLastName == false}" class="alert alert-large">
@@ -46,7 +46,7 @@
           <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
         </div>
         <div class="input-field input-field-large">
-          <input type="text" name="email" id="email" placeholder="ejemplo@ejemplo">
+          <input type="text" name="email" id="email" placeholder="ejemplo@ejemplo" th:value=${email}>
           <label for="email">Correo electrónico</label>
         </div>
         <div th:if="${msgEmailValidator == false}" class="alert alert-large">
@@ -58,7 +58,7 @@
           <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
         </div>
         <div class="input-field phone input-field-large">
-          <input type="text" name="phone" id="phone" placeholder=" ">
+          <input type="text" name="phone" id="phone" placeholder=" " th:value=${phone}>
           <label for="phone">Teléfono</label>
         </div>
         <div th:if="${msgPhone == false}" class="alert alert-large">

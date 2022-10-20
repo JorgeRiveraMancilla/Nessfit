@@ -80,6 +80,11 @@ public class RegisterAdministrativeController {
             model.addAttribute("msgEmailValidator", status[6]);
             model.addAttribute("msgPhone", status[7]);
             // crear atributos y mostrar en html
+            model.addAttribute("rut", rut);
+            model.addAttribute("name", firstName);
+            model.addAttribute("lastname", lastName);
+            model.addAttribute("email", email);
+            model.addAttribute("phone", phone);
 
             return "register-user";
         }
