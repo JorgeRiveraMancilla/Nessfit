@@ -28,6 +28,10 @@ public class ProfileController {
     public String editProfile(Model model) {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
+        model.addAttribute("name", user.getFirstName());
+        model.addAttribute("lastname", user.getLastName());
+        model.addAttribute("email", user.getEmail());
+        model.addAttribute("phone", user.getPhone());
         return "edit-profile";
     }
 
@@ -51,7 +55,7 @@ public class ProfileController {
             logoutHandler.logout(request, null, null);
             return "redirect:/";
         }
-
+        
         // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
         boolean[] status = ProfileValidation.isValidProfile(userService, user, firstName, lastName, phone, email);
         // Validate profile.
