@@ -32,7 +32,6 @@
             </form>
         </div>
 
-
         <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
             <img th:src="@{/images/status-users.png}" alt="status-user">
         </div>
@@ -47,6 +46,17 @@
             <form th:action="@{administrative/change-status-user}">
                 <div class="button-field">
                     <button class="button" type="submit">Deshabilitar y/o habilitar un usuario</button>
+                </div>
+            </form>
+        </div>
+
+        <div sec:authorize="hasAnyAuthority('ADMINISTRATIVE')">
+            <img th:src="@{/images/add-installation.png}" alt="add-installation">
+        </div>
+        <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
+            <form th:action="@{administrative/register-installation}">
+                <div class="button-field">
+                    <button class="button" type="submit">Registrar una instalación</button>
                 </div>
             </form>
         </div>

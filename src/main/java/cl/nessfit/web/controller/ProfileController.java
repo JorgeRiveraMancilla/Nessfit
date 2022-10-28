@@ -28,6 +28,7 @@ public class ProfileController {
     public String editProfile(Model model) {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
+        model.addAttribute("rut", user.getRut());
         model.addAttribute("name", user.getFirstName());
         model.addAttribute("lastname", user.getLastName());
         model.addAttribute("email", user.getEmail());

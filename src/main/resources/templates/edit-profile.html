@@ -16,6 +16,10 @@
         <form th:action="@{/edit-profile}" method="post" autocomplete="off">
             <h2 class= "title">Editar mi perfil</h2>
             <div class="input-field input-field-large">
+                <input type="disabled" name="rut" id="rut" th:value=${rut} disabled>
+                <label for="rut">RUT</label>
+            </div>
+            <div class="input-field input-field-large">
                 <input type="text" name="name" id="name" th:value=${name}>
                 <label for="name">Nombres</label>
             </div>

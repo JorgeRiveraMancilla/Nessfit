@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:insert="fragments/head-fragment::head"></head>
+<body>
+<header th:insert="fragments/header-fragment::header"></header>
+<nav>
+  <a class="profile">Opciones</a>
+  <div class="dropdown-content">
+    <a th:href="@{/home}">Menú principal</a>
+    <a th:href="@{/edit-profile}">Editar perfil</a>
+    <a th:href="@{/change-password}">Cambiar contraseña</a>
+    <a th:href="@{/logout}">Cerrar sesión</a>
+  </div>
+</nav>
+<section>
+  <main>
+    <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
+      <form th:action="@{/administrative/register-installation}" method="post" autocomplete="off" >
+        <h2 class= "title">Registrar una instalación</h2>
+        <div class="input-field input-field-large">
+          <input type="text" name="name" id="name" th:value=${name}>
+          <label for="name">Nombre de la instalación</label>
+        </div>
+        <div class="input-field input-field-large">
+          <input type="text" name="direction" id="direction" th:value=${direction}>
+          <label for="direction">Dirección</label>
+        </div>
+
+        <div class="custom-select input-field input-field-large">
+          <h3 class="subtitle">Tipo</h3>
+          <select>
+            <option value="0">Tipo:</option>
+            <option value="1">Cancha</option>
+            <option value="2">Gimnacio</option>
+            <option value="3">Piscina</option>
+            <option value="4">Quincho</option>
+            <option value="5">Estadio</option>
+          </select>
+        </div>
+        <div class="input-field phone input-field-large">
+          <input type="text" name="cost" id="cost" th:value=${cost}>
+          <label for="phone">Costo de arriendo por día</label>
+        </div>
+        <div class="input-field phone input-field-large">
+          <h3 class="subtitle">Estado</h3>
+          <label class="container">Inoperativo
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Operativo
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        
+        <div class="button-field">
+          <button class="button" type="button" id="button-confirm">Registrar</button>
+        </div>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <label>¿Está seguro?</label>
+            <div class="button-field">
+              <button class="button-confirm" type="submit">Confirmar</button>
+            </div>
+            <div class="button-field">
+              <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <label>¿Está seguro?</label>
+            <div class="button-field">
+              <button class="button-confirm" type="submit">Confirmar</button>
+            </div>
+            <div class="button-field">
+              <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
+            </div>
+          </div>  
+        </div>
+      </form>
+    </div>
+  </main>
+</section>
+<footer th:insert="fragments/footer-fragment::footer"></footer>
+<script th:src="@{/js/modal-confirm.js}"></script>
+</body>
+</html>
