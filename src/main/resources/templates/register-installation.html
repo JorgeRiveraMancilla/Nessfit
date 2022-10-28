@@ -15,44 +15,54 @@
 <section>
   <main>
     <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
-      <form th:action="@{/administrative/register-installation}" method="post" autocomplete="off" >
-        <h2 class= "title">Registrar una instalación</h2>
+      <form th:action="@{/administrative/register-user}" method="post" autocomplete="off">
+        <h2>Registrar una instalación</h2>
         <div class="input-field input-field-large">
-          <input type="text" name="name" id="name" th:value=${name}>
-          <label for="name">Nombre de la instalación</label>
+          <input type="text" name="name" id="name" placeholder=" ">
+          <label for="name">Nombre</label>
+        </div>
+        <div th:if="${msgName == false}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
         </div>
         <div class="input-field input-field-large">
-          <input type="text" name="direction" id="direction" th:value=${direction}>
-          <label for="direction">Dirección</label>
+          <input type="text" name="adress" id="address" placeholder=" ">
+          <label for="address">Dirección</label>
         </div>
-
-        <div class="custom-select input-field input-field-large">
+        <div th:if="${msgLastName == false}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong> La dirección debe tener más de 2 caracteres.
+        </div>
+        <div class="input-field input-field-large">
           <h3 class="subtitle">Tipo</h3>
-          <select>
-            <option value="0">Tipo:</option>
+          <select class="custom-select">
+            <option value="0">Seleccione</option>
             <option value="1">Cancha</option>
-            <option value="2">Gimnacio</option>
+            <option value="2">Gimnasio</option>
             <option value="3">Piscina</option>
             <option value="4">Quincho</option>
             <option value="5">Estadio</option>
           </select>
         </div>
         <div class="input-field phone input-field-large">
-          <input type="text" name="cost" id="cost" th:value=${cost}>
-          <label for="phone">Costo de arriendo por día</label>
+          <input type="number" name="cost" id="cost" placeholder=" ">
+          <label for="cost">Costo de arriendo</label>
         </div>
-        <div class="input-field phone input-field-large">
+        <div th:if="${msgPhone == false}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong> El costo de arriendo ingresado no es válido.
+        </div>
+        <div class="input-field input-field-large">
           <h3 class="subtitle">Estado</h3>
           <label class="container">Inoperativo
-            <input type="checkbox" checked="checked">
+            <input class="container-input" type="checkbox">
             <span class="checkmark"></span>
           </label>
           <label class="container">Operativo
-            <input type="checkbox">
+            <input class="container-input" type="checkbox">
             <span class="checkmark"></span>
           </label>
         </div>
-        
         <div class="button-field">
           <button class="button" type="button" id="button-confirm">Registrar</button>
         </div>
@@ -67,22 +77,12 @@
             </div>
           </div>
         </div>
-        <div id="modal" class="modal">
-          <div class="modal-content">
-            <label>¿Está seguro?</label>
-            <div class="button-field">
-              <button class="button-confirm" type="submit">Confirmar</button>
-            </div>
-            <div class="button-field">
-              <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
-            </div>
-          </div>  
-        </div>
       </form>
     </div>
   </main>
 </section>
 <footer th:insert="fragments/footer-fragment::footer"></footer>
 <script th:src="@{/js/modal-confirm.js}"></script>
+<script th:src="@{/js/restrict-checkbox.js}"></script>
 </body>
 </html>
