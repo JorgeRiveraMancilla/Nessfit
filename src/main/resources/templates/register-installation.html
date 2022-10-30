@@ -33,33 +33,33 @@
           <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
           <strong>¡Error!</strong> La dirección debe tener más de 2 caracteres.
         </div>
-        <div class="input-field input-field-large">
-          <h3 class="subtitle">Tipo</h3>
-          <select class="custom-select">
-            <option value="0">Seleccione</option>
-            <option value="1">Cancha</option>
-            <option value="2">Gimnasio</option>
-            <option value="3">Piscina</option>
-            <option value="4">Quincho</option>
-            <option value="5">Estadio</option>
+        <div class="select">
+          <label for="type" class="input-select">Tipo</label>
+          <select class="select-option" name="type">
+            <option disabled selected>Seleccione una opción</option>
+            <option value="Cancha">Cancha</option>
+            <option value="Gimnasio">Gimnasio</option>
+            <option value="Piscina">Piscina</option>
+            <option value="Quincho">Quincho</option>
+            <option value="Estadio">Estadio</option>
           </select>
         </div>
         <div class="input-field phone input-field-large">
-          <input type="number" name="cost" id="cost" placeholder=" ">
+          <input type="number" name="cost" id="cost" placeholder="min: $1000">
           <label for="cost">Costo de arriendo</label>
         </div>
         <div th:if="${msgPhone == false}" class="alert alert-large">
           <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
           <strong>¡Error!</strong> El costo de arriendo ingresado no es válido.
         </div>
-        <div class="input-field input-field-large">
-          <h3 class="subtitle">Estado</h3>
+        <div class="radio">
+          <label for="status" class="input-radio">Estado</label>
           <label class="container">Inoperativo
-            <input class="container-input" type="checkbox">
+            <input type="radio" name="status" value="0" checked="">
             <span class="checkmark"></span>
           </label>
           <label class="container">Operativo
-            <input class="container-input" type="checkbox">
+            <input type="radio" name="status" value="1">
             <span class="checkmark"></span>
           </label>
         </div>
