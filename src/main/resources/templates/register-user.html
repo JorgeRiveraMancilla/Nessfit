@@ -16,7 +16,8 @@
   <main>
     <div sec:authorize="hasAuthority('ADMINISTRATOR')">
       <form th:action="@{/administrator/register-user}" method="post" autocomplete="off" >
-        <h2 class= "title">Registrar un administrativo</h2>
+        <h2>Registrar un administrativo</h2>
+        <h3>*Campo requerido</h3>
         <div class="input-field input-field-large">
           <input type="text" name="rut" id="rut" placeholder="12345678K" th:value=${rut}>
           <label for="rut">RUT</label>

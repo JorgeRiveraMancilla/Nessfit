@@ -42,9 +42,12 @@ form > h2 {
     margin: 1rem;
     color: #3F8880;
 }
-
-form > div {
-
+form > h3 {
+    display: block;
+    text-align: left;
+    font-size: 0.7rem;
+    margin: 1rem;
+    color: #f44336;
 }
 footer {
     text-align: center;

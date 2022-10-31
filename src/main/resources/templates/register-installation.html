@@ -15,26 +15,22 @@
 <section>
   <main>
     <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
-      <form th:action="@{/administrative/register-user}" method="post" autocomplete="off">
+      <form action="#" th:action="@{/administrative/register-installation}" th:object="${installation}" method="post" autocomplete="off">
         <h2>Registrar una instalación</h2>
+        <h3>*Campo requerido</h3>
+        <!--Nombre-->
         <div class="input-field input-field-large">
           <input type="text" name="name" id="name" placeholder=" ">
-          <label for="name">Nombre</label>
+          <label for="name">Nombre*</label>
         </div>
-        <div th:if="${msgName == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
-        </div>
+        <!--Address-->
         <div class="input-field input-field-large">
-          <input type="text" name="adress" id="address" placeholder=" ">
-          <label for="address">Dirección</label>
+          <input type="text" name="address" id="address" placeholder=" ">
+          <label for="address">Dirección*</label>
         </div>
-        <div th:if="${msgLastName == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> La dirección debe tener más de 2 caracteres.
-        </div>
+        <!--Type-->
         <div class="select">
-          <label for="type" class="input-select">Tipo</label>
+          <label for="type" class="input-select">Tipo*</label>
           <select class="select-option" name="type">
             <option disabled selected>Seleccione una opción</option>
             <option value="Cancha">Cancha</option>
@@ -44,25 +40,24 @@
             <option value="Estadio">Estadio</option>
           </select>
         </div>
+        <!--RentalCost-->
         <div class="input-field phone input-field-large">
-          <input type="number" name="cost" id="cost" placeholder="min: $1000">
-          <label for="cost">Costo de arriendo</label>
+          <input type="number" name="rentalCost" id="cost" placeholder="min: $1000">
+          <label for="cost">Costo de arriendo*</label>
         </div>
-        <div th:if="${msgPhone == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> El costo de arriendo ingresado no es válido.
-        </div>
+        <!--Status-->
         <div class="radio">
-          <label for="status" class="input-radio">Estado</label>
-          <label class="container">Inoperativo
+          <label for="status" class="input-radio">Estado*</label>
+          <label class="container" value="0">Inoperativo
             <input type="radio" name="status" value="0" checked="">
             <span class="checkmark"></span>
           </label>
-          <label class="container">Operativo
+          <label class="container" value="1">Operativo
             <input type="radio" name="status" value="1">
             <span class="checkmark"></span>
           </label>
         </div>
+
         <div class="button-field">
           <button class="button" type="button" id="button-confirm">Registrar</button>
         </div>
