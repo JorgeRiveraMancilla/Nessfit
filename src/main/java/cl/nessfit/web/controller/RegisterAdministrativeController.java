@@ -40,11 +40,11 @@ public class RegisterAdministrativeController {
     }
 
     /**
-     * Registers a new user with the form data.
+     * Register a new user with the form data.
      * @param modelUser User from the html form.
-     * @param bindingResult Result from User class validations.
+     * @param bindingResult Result from User class validation.
      * @param model Is the application's dynamic data structure.
-     * @return if profile is not valid, return "register-user", else save new user and redirect to home page.
+     * @return If profile is not valid, return "register-user", else save new user and redirect to home page.
      */
     @PostMapping("/register-user")
     public String registerNewUser(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {

@@ -14,9 +14,7 @@ public class LoginController {
      * @return Login html functions.
      */
     @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
+    public String login(){ return "login"; }
 
     /**
      * Method in charge of logging out the user in the system.

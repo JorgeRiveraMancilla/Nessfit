@@ -32,7 +32,7 @@ public class ProfileController {
     }
 
     /**
-     * receive data from edit-profile.html.
+     * Receive data from edit-profile.html.
      * @param modelUser User from the html form.
      * @param bindingResult Result from User class validations.
      * @param model Is the application's dynamic data structure.

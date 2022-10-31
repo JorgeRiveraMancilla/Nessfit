@@ -44,9 +44,9 @@ public class ProfileValidation {
         return true;
     }
     /**
-     * Method that checks if the rut is valid
-     * @param rut user's rut
-     * @return true if rut is valid, otherwise false
+     * Method that checks if the rut is valid.
+     * @param rut user's rut.
+     * @return true if rut is valid, otherwise false.
      */
     public static boolean validRut(String rut) {
         Pattern pattern = Pattern.compile("^([1-9][0-9]{7}[0-9K])$");
@@ -58,9 +58,9 @@ public class ProfileValidation {
         return false;
     }
     /**
-     * Calculates the verificator digit given a rut
-     * @param rut user's rut
-     * @return string of verificator digit
+     * Calculates the verification digit given a rut.
+     * @param rut user's rut.
+     * @return string of verification digit.
      */
     public static String calculateDV(String rut) {
         String rutNumeric = rut.substring(0, rut.length() - 1);
