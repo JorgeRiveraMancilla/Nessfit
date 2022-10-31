@@ -11,12 +11,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 
 @Controller
@@ -30,76 +29,58 @@ public class RegisterAdministrativeController {
 
     /**
      * Mapping for register user.
-     * @param model is the application's dynamic data structure.
+     * @param model Is the application's dynamic data structure.
      * @return Redirect to register-user.html form.
      */
     @GetMapping("/register-user")
     public String registerUser(Model model) {
-        User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = new User();
         model.addAttribute("user", user);
         return "register-user";
     }
 
     /**
-     * Registers a new user with the form data
-     * @param rut Rut data of the new user
-     * @param firstName User's first name
-     * @param lastName User's last name
-     * @param email User's email
-     * @param phone User's phone number
-     * @param model is the application's dynamic data structure
-     * @return if profile is not valid, return "register-user", else save new user and redirect to home page
+     * Registers a new user with the form data.
+     * @param modelUser User from the html form.
+     * @param bindingResult Result from User class validations.
+     * @param model Is the application's dynamic data structure.
+     * @return if profile is not valid, return "register-user", else save new user and redirect to home page.
      */
     @PostMapping("/register-user")
-    public String registerNewUser(@RequestParam("rut") String rut, @RequestParam("name") String firstName, @RequestParam("lastname") String lastName,
-                              @RequestParam("email") String email, @RequestParam("phone") String phone, Model model, HttpServletRequest request) {
+    public String registerNewUser(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
 
+        // if loggedUser is not ADMINISTRATOR, then redirect to home
         User loggedUser = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-
-        // if loggedUser is null or not exist, logout.
-        if (loggedUser == null){
-            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-            logoutHandler.logout(request, null, null);
-            return "redirect:/";
-        }
-
-        // if loggedUser is not ADMINISTRATOR, then redirect to home.
         if (loggedUser.getRole().getId() != 1) { return "redirect:/"; }
 
-        // status[] = {systemStatus, name, lastName, phone, emailExist, emailValidator}
-        boolean[] status = ProfileValidation.isValidRegister(userService, rut, firstName, lastName, phone, email);
+        // Extra verifications
+        boolean existEmail = ProfileValidation.notExistEmail(userService,modelUser.getEmail());
+        boolean existRut = ProfileValidation.notExistRut(userService,modelUser.getRut());
+        boolean validRut = ProfileValidation.validRut(modelUser.getRut());
 
-        // Validate profile.
-        if (!status[0]) {
-            // Error messages
-            model.addAttribute("msgRutExists", status[1]);
-            model.addAttribute("msgRutValidator", status[2]);
-            model.addAttribute("msgName", status[3]);
-            model.addAttribute("msgLastName", status[4]);
-            model.addAttribute("msgEmailExist", status[5]);
-            model.addAttribute("msgEmailValidator", status[6]);
-            model.addAttribute("msgPhone", status[7]);
-
+        // If there is a problem, it is verified
+        if (bindingResult.hasErrors() || !existEmail || !existRut || !validRut) {
+            model.addAttribute("existEmail", existEmail);
+            model.addAttribute("existRut", existRut);
+            model.addAttribute("validRut", validRut);
+            model.addAttribute("rut", modelUser.getRut());
             return "register-user";
         }
-
+        // New User
         User newUser = new User();
-
-        // Set attributes.
-        newUser.setRut(rut);
-        newUser.setFirstName(ProfileValidation.newNamesEdit(firstName));
-        newUser.setLastName(ProfileValidation.newNamesEdit(lastName));
-        newUser.setPhone(Long.parseLong(phone));
-        newUser.setEmail(email);
+        // Set attributes
+        newUser.setRut(modelUser.getRut());
+        newUser.setFirstName(modelUser.getFirstName());
+        newUser.setLastName(modelUser.getLastName());
+        newUser.setPhone(modelUser.getPhone());
+        newUser.setEmail(modelUser.getEmail());
         newUser.setStatus(1);
-        newUser.setPassword(passwordEncoder.encode(rut));
-
+        newUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
+        // Create role
         Role role = new Role();
         role.setId(2);
-
         newUser.setRole(role);
-
-        // Save user.
+        // Save user
         userService.save(newUser);
 
         return "redirect:/";

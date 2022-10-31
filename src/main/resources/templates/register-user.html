@@ -4,152 +4,172 @@
 <body>
 <header th:insert="fragments/header-fragment::header"></header>
 <nav>
-  <a class="profile">Opciones</a>
-  <div class="dropdown-content">
-    <a th:href="@{/home}">Menú principal</a>
-    <a th:href="@{/edit-profile}">Editar perfil</a>
-    <a th:href="@{/change-password}">Cambiar contraseña</a>
-    <a th:href="@{/logout}">Cerrar sesión</a>
-  </div>
+    <a class="profile">Opciones</a>
+    <div class="dropdown-content">
+        <a th:href="@{/home}">Menú principal</a>
+        <a th:href="@{/edit-profile}">Editar perfil</a>
+        <a th:href="@{/change-password}">Cambiar contraseña</a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
+    </div>
 </nav>
 <section>
-  <main>
-    <div sec:authorize="hasAuthority('ADMINISTRATOR')">
-      <form th:action="@{/administrator/register-user}" method="post" autocomplete="off">
-        <h2 class= "title">Registrar un administrativo</h2>
-        <div class="input-field input-field-large">
-          <input type="text" name="rut" id="rut" placeholder="12345678K">
-          <label for="rut">RUT</label>
+    <main>
+        <div sec:authorize="hasAuthority('ADMINISTRATOR')">
+            <form action="#" th:action="@{/administrator/register-user}" th:object="${user}" method="post" autocomplete="off">
+                <h2 class= "title">Registrar un administrativo</h2>
+                <!--RUT-->
+                <div class="input-field input-field-large">
+                    <input type="text" name="rut" id="rut" placeholder="12345678K" th:value="${rut}">
+                    <label for="rut">RUT</label>
+                </div>
+                <div th:if="${validRut == false}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong> RUT inválido.
+                </div>
+                <div th:if="${existRut == false}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
+                </div>
+                <!--FirstName-->
+                <div class="input-field input-field-large">
+                    <input type="text" th:field="*{firstName}" name="first-name" id="first-name" placeholder=" ">
+                    <label for="first-name">Nombres</label>
+                </div>
+                <div th:if="${#fields.hasErrors('firstName')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{firstName}"></label>
+                </div>
+                <!--LastName-->
+                <div class="input-field input-field-large">
+                    <input type="text" th:field="*{lastName}" name="last-name" id="last-name" placeholder=" ">
+                    <label for="last-name">Apellidos</label>
+                </div>
+                <div th:if="${#fields.hasErrors('lastName')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{lastName}"></label>
+                </div>
+                <!--Email-->
+                <div class="input-field input-field-large">
+                    <input type="text" th:field="*{email}" name="email" id="email" placeholder="Ej: ejemplo@ejemplo">
+                    <label for="email">Correo electrónico</label>
+                </div>
+                <div th:if="${#fields.hasErrors('email')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{email}"></label>
+                </div>
+                <div th:if="${existEmail == false}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
+                </div>
+                <!--Phone-->
+                <div class="input-field phone input-field-large">
+                    <input type="text" th:field="*{phone}" name="phone" id="phone" placeholder="12345678910">
+                    <label for="phone">Teléfono</label>
+                </div>
+                <div th:if="${#fields.hasErrors('phone')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{phone}"></label>
+                </div>
+                <!--Button-->
+                <div class="button-field">
+                    <button class="button" type="button" id="button-confirm">Registrar</button>
+                </div>
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <label>¿Está seguro?</label>
+                        <div class="button-field">
+                            <button class="button-confirm" type="submit">Confirmar</button>
+                        </div>
+                        <div class="button-field">
+                            <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div th:if="${msgRutValidator == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> RUT inválido.
+        <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
+            <form action="#" th:action="@{/administrative/register-user}" th:object="${user}" method="post" autocomplete="off">
+                <h2 class= "title">Registrar un administrativo</h2>
+                <!--RUT-->
+                <div class="input-field input-field-large">
+                    <input type="text" name="rut" id="rut" placeholder="12345678K" th:value="${rut}">
+                    <label for="rut">RUT</label>
+                </div>
+                <div th:if="${validRut == false}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong> RUT inválido.
+                </div>
+                <div th:if="${existRut == false}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
+                </div>
+                <!--FirstName-->
+                <div class="input-field input-field-large">
+                    <input type="text" th:field="*{firstName}" name="first-name" id="first-name" placeholder=" ">
+                    <label for="first-name">Nombres</label>
+                </div>
+                <div th:if="${#fields.hasErrors('firstName')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{firstName}"></label>
+                </div>
+                <!--LastName-->
+                <div class="input-field input-field-large">
+                    <input type="text" th:field="*{lastName}" name="last-name" id="last-name" placeholder=" ">
+                    <label for="last-name">Apellidos</label>
+                </div>
+                <div th:if="${#fields.hasErrors('lastName')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{lastName}"></label>
+                </div>
+                <!--Email-->
+                <div class="input-field input-field-large">
+                    <input type="text" th:field="*{email}" name="email" id="email" placeholder="Ej: ejemplo@ejemplo">
+                    <label for="email">Correo electrónico</label>
+                </div>
+                <div th:if="${#fields.hasErrors('email')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{email}"></label>
+                </div>
+                <div th:if="${existEmail == false}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
+                </div>
+                <!--Phone-->
+                <div class="input-field phone input-field-large">
+                    <input type="text" th:field="*{phone}" name="phone" id="phone" placeholder="12345678910">
+                    <label for="phone">Teléfono</label>
+                </div>
+                <div th:if="${#fields.hasErrors('phone')}" class="alert alert-large">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong>¡Error!</strong>
+                    <label th:errors="*{phone}"></label>
+                </div>
+                <!--Button-->
+                <div class="button-field">
+                    <button class="button" type="button" id="button-confirm">Registrar</button>
+                </div>
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <label>¿Está seguro?</label>
+                        <div class="button-field">
+                            <button class="button-confirm" type="submit">Confirmar</button>
+                        </div>
+                        <div class="button-field">
+                            <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div th:if="${msgRutExists == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
-        </div>
-        <div class="input-field input-field-large">
-          <input type="text" name="name" id="name" placeholder=" ">
-          <label for="name">Nombres</label>
-        </div>
-        <div th:if="${msgName == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
-        </div>
-        <div class="input-field input-field-large">
-          <input type="text" name="lastname" id="lastname" placeholder=" ">
-          <label for="lastname">Apellidos</label>
-        </div>
-        <div th:if="${msgLastName == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
-        </div>
-        <div class="input-field input-field-large">
-          <input type="text" name="email" id="email" placeholder="ejemplo@ejemplo">
-          <label for="email">Correo electrónico</label>
-        </div>
-        <div th:if="${msgEmailValidator == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> Su correo electrónico no es válido.
-        </div>
-        <div th:if="${msgEmailExist == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
-        </div>
-        <div class="input-field phone input-field-large">
-          <input type="text" name="phone" id="phone" placeholder=" ">
-          <label for="phone">Teléfono</label>
-        </div>
-        <div th:if="${msgPhone == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
-        </div>
-        <div class="button-field">
-          <button class="button" type="button" id="button-confirm">Registrar</button>
-        </div>
-        <div id="modal" class="modal">
-          <div class="modal-content">
-            <label>¿Está seguro?</label>
-            <div class="button-field">
-              <button class="button-confirm" type="submit">Confirmar</button>
-            </div>
-            <div class="button-field">
-              <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
 
-    <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
-      <form th:action="@{/administrative/register-user}" method="post" autocomplete="off">
-        <h2 class= "title">Registrar un cliente</h2>
-        <div class="input-field input-field-large">
-          <input type="text" name="rut" id="rut" placeholder="12345678K">
-          <label for="rut">RUT</label>
-        </div>
-        <div th:if="${msgRutValidator == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> RUT inválido.
-        </div>
-        <div th:if="${msgRutExists == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
-        </div>
-        <div class="input-field input-field-large">
-          <input type="text" name="name" id="name" placeholder=" ">
-          <label for="name">Nombres</label>
-        </div>
-        <div th:if="${msgName == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
-        </div>
-        <div class="input-field input-field-large">
-          <input type="text" name="lastname" id="lastname" placeholder=" ">
-          <label for="lastname">Apellidos</label>
-        </div>
-        <div th:if="${msgLastName == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
-        </div>
-        <div class="input-field input-field-large">
-          <input type="text" name="email" id="email" placeholder="ejemplo@ejemplo">
-          <label for="email">Correo electrónico</label>
-        </div>
-        <div th:if="${msgEmailValidator == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> Su correo electrónico no es válido.
-        </div>
-        <div th:if="${msgEmailExist == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
-        </div>
-        <div class="input-field phone input-field-large">
-          <input type="text" name="phone" id="phone" placeholder=" ">
-          <label for="phone">Teléfono</label>
-        </div>
-        <div th:if="${msgPhone == false}" class="alert alert-large">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-          <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
-        </div>
-        <div class="button-field">
-          <button class="button" type="button" id="button-confirm">Registrar</button>
-        </div>
-        <div id="modal" class="modal">
-          <div class="modal-content">
-            <label>¿Está seguro?</label>
-            <div class="button-field">
-              <button class="button-confirm" type="submit">Confirmar</button>
-            </div>
-            <div class="button-field">
-              <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </main>
+    </main>
 </section>
 <footer th:insert="fragments/footer-fragment::footer"></footer>
 <script th:src="@{/js/modal-confirm.js}"></script>

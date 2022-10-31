@@ -18,6 +18,11 @@ public class LoginController {
         return "login";
     }
 
+    /**
+     * Method in charge of logging out the user in the system.
+     * @param request Logout request.
+     * @return Login form html.
+     */
     @GetMapping ("/logout")
     public String logout(HttpServletRequest request) {
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();

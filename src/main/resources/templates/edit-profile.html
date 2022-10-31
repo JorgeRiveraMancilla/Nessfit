@@ -13,44 +13,58 @@
 </nav>
 <section>
     <main>
-        <form th:action="@{/edit-profile}" method="post" autocomplete="off">
+        <form action="#" th:action="@{/edit-profile}" th:object="${user}" method="post" autocomplete="off">
             <h2 class= "title">Editar mi perfil</h2>
+            <!--RUT-->
             <div class="input-field input-field-large">
-                <input type="text" name="name" id="name" placeholder=" ">
-                <label for="name">Nombres</label>
+                <input type="text" th:field="*{rut}" name="rut" id="rut" placeholder=" " readonly>
+                <label for="rut">RUT</label>
             </div>
-            <div th:if="${msgName == false}" class="alert alert-large">
+            <!--FirstName-->
+            <div class="input-field input-field-large">
+                <input type="text" th:field="*{firstName}" name="first_name" id="first_name" placeholder=" ">
+                <label for="first_name">Nombres</label>
+            </div>
+            <div th:if="${#fields.hasErrors('firstName')}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
+                <strong>¡Error!</strong>
+                <label th:errors="*{firstName}"></label>
             </div>
+            <!--LastName-->
             <div class="input-field input-field-large">
-                <input type="text" name="lastname" id="lastname" placeholder=" ">
-                <label for="lastname">Apellidos</label>
+                <input type="text" th:field="*{lastName}" name="last_name" id="last_name" placeholder=" ">
+                <label for="last_name">Apellidos</label>
             </div>
-            <div th:if="${msgLastName == false}" class="alert alert-large">
+            <div th:if="${#fields.hasErrors('lastName')}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>¡Error!</strong> Los nombres o apellidos deben tener más de 2 caracteres.
+                <strong>¡Error!</strong>
+                <label th:errors="*{lastName}"></label>
             </div>
+            <!--Email-->
             <div class="input-field input-field-large">
-                <input type="text" name="email" id="email" placeholder="Ej: ejemplo@ejemplo">
+                <input type="text" th:field="*{email}" name="email" id="email" placeholder="Ej: ejemplo@ejemplo">
                 <label for="email">Correo electrónico</label>
             </div>
-            <div th:if="${msgEmailValidator == false}" class="alert alert-large">
+            <div th:if="${#fields.hasErrors('email')}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>¡Error!</strong> Su correo electrónico no es válido.
+                <strong>¡Error!</strong>
+                <label th:errors="*{email}"></label>
             </div>
-            <div th:if="${msgEmailExist == false}" class="alert alert-large">
+            <div th:if="${emailExist == false}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
             </div>
+            <!--Phone-->
             <div class="input-field phone input-field-large">
-                <input type="text" name="phone" id="phone" placeholder=" ">
+                <input type="text" th:field="*{phone}" name="phone" id="phone" placeholder="12345678910">
                 <label for="phone">Teléfono</label>
             </div>
-            <div th:if="${msgPhone == false}" class="alert alert-large">
+            <div th:if="${#fields.hasErrors('phone')}" class="alert alert-large">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
+                <strong>¡Error!</strong>
+                <label th:errors="*{phone}"></label>
             </div>
+            <!--Button-->
             <div class="button-field">
                 <button class="button" type="button" id="button-confirm">Guardar cambios</button>
             </div>
