@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head th:insert="fragments/head-fragment::head"></head>
+<body>
+<header th:insert="fragments/header-fragment::header"></header>
+<nav>
+  <a class="profile">Opciones</a>
+  <div class="dropdown-content">
+    <a th:href="@{/home}">Menú principal</a>
+    <a th:href="@{/edit-profile}">Editar perfil</a>
+    <a th:href="@{/change-password}">Cambiar contraseña</a>
+    <a th:href="@{/logout}">Cerrar sesión</a>
+  </div>
+</nav>
+<section>
+  <main>
+    <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
+      <form action="#" th:action="@{/administrative/register-installation}" th:object="${installation}" method="post" autocomplete="off">
+        <h2>Registrar una instalación</h2>
+        <h3>*Campo requerido</h3>
+        <!--Nombre-->
+        <div class="input-field input-field-large">
+          <input type="text" name="name" id="name" placeholder=" ">
+          <label for="name">Nombre*</label>
+        </div>
+        <!--Address-->
+        <div class="input-field input-field-large">
+          <input type="text" name="address" id="address" placeholder=" ">
+          <label for="address">Dirección*</label>
+        </div>
+        <!--Type-->
+        <div class="select">
+          <label for="type" class="input-select">Tipo*</label>
+          <select class="select-option" name="type">
+            <option disabled selected>Seleccione una opción</option>
+            <option value="Cancha">Cancha</option>
+            <option value="Gimnasio">Gimnasio</option>
+            <option value="Piscina">Piscina</option>
+            <option value="Quincho">Quincho</option>
+            <option value="Estadio">Estadio</option>
+          </select>
+        </div>
+        <!--RentalCost-->
+        <div class="input-field phone input-field-large">
+          <input type="number" name="rentalCost" id="cost" placeholder="min: $1000">
+          <label for="cost">Costo de arriendo*</label>
+        </div>
+        <!--Status-->
+        <div class="radio">
+          <label for="status" class="input-radio">Estado*</label>
+          <label class="container" value="0">Inoperativo
+            <input type="radio" name="status" value="0" checked="">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container" value="1">Operativo
+            <input type="radio" name="status" value="1">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <div class="button-field">
+          <button class="button" type="button" id="button-confirm">Registrar</button>
+        </div>
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <label>¿Está seguro?</label>
+            <div class="button-field">
+              <button class="button-confirm" type="submit">Confirmar</button>
+            </div>
+            <div class="button-field">
+              <button class="button-cancel" type="button" id="button-cancel">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+</section>
+<footer th:insert="fragments/footer-fragment::footer"></footer>
+<script th:src="@{/js/modal-confirm.js}"></script>
+<script th:src="@{/js/restrict-checkbox.js}"></script>
+</body>
+</html>

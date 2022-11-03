@@ -188,8 +188,9 @@ public class ProfileValidation {
         Matcher matcher = pattern.matcher(rut);
         if (matcher.matches()) {
             String dv = calculateDV(rut);
-            return rut.charAt(rut.length() - 1) == dv.charAt(0);
+            return rut.charAt(rut.length() - 1) == dv.charAt(0) &&  rut.length() <= 15 && rut.length() >= 8;
         }
+
         return false;
     }
 
