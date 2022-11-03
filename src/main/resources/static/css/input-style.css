@@ -31,6 +31,7 @@
     color: #CCC;
     text-align: right;
 }
+
 .input-field input:not(:placeholder-shown) {
     border-color: #3F8880;
     transition: 0.5s;
@@ -44,6 +45,9 @@
     top: 0;
     transition: 0.5s;
     color: #3F8880;
+}
+.form input:focus + .input-cost::placeholder{
+    color: #CCC;
 }
 input:-webkit-autofill {
     background-color: white !important;

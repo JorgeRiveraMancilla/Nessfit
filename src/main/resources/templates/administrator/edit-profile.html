@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NESSFIT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link th:href="@{/css/home.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav class="navbar sticky-top bg-white border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand">NESSFIT</a>
+            <div class="btn-group dropstart">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Mi cuenta
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{/edit-profile}">Editar mi perfil</a></li>
+                    <li><a class="dropdown-item" th:href="@{/change-password}">Cambiar contraseña</a></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="d-flex flex-row">
+    <nav class="navbar navbar-expand-lg bg-white border-end">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/home}">Menú</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/administrator/manage-user}">Gestionar usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gestionar centros deportivos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="container-fluid">
+        <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 4rem); max-width: 40rem;">
+            <form class="my-3" th:action="@{/administrator/edit-profile}" method="post" autocomplete="off">
+                <div class="mb-3 row">
+                    <label for="staticRut" class="col-sm-2 col-form-label">RUT</label>
+                    <div class="col-sm-10">
+                        <input name="rut" type="text" readonly class="form-control-plaintext" id="staticRut" th:value="${user.getRut()}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="exampleInputFirstName" class="col-sm-2 col-form-label">Nombres</label>
+                    <div class="col-sm-10">
+                        <input name="name" type="text" class="form-control" id="exampleInputFirstName" aria-describedby="nameHelp" th:value="${user.getFirstName()}">
+                        <div id="nameHelp" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
+                        <div th:if="${msgName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong> Los nombres deben tener más de 2 caracteres.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="exampleInputLastname" class="col-sm-2 col-form-label">Apellidos</label>
+                    <div class="col-sm-10">
+                        <input name="lastname" type="text" class="form-control" id="exampleInputLastname" aria-describedby="lastnameHelp" th:value="${user.getLastName()}">
+                        <div id="lastnameHelp" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
+                        <div th:if="${msgLastName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong> Los apellidos deben tener más de 2 caracteres.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="exampleInputEmail" class="col-sm-2 col-form-label">Correo electrónico</label>
+                    <div class="col-sm-10">
+                        <input name="email" type="text" class="form-control" id="exampleInputEmail" aria-describedby="lastnameHelp" th:value="${user.getEmail()}">
+                        <div id="emailHelp" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
+                        <div th:if="${msgEmailValidator == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong> Su correo electrónico no es válido.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div th:if="${msgEmailExist == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong> El correo electrónico ya existe en el sistema.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="exampleInputPhone" class="col-sm-2 col-form-label">Teléfono</label>
+                    <div class="col-sm-10">
+                        <input name="phone" type="text" class="form-control" id="exampleInputPhone" aria-describedby="lastnamePhone" th:value="${user.getPhone()}">
+                        <div id="phoneHelp" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
+                        <div th:if="${msgPhone == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Editar perfil</button>
+            </form>
+        </div>
+    </section>
+</main>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+    <span class="mx-auto text-muted">© 2022 NESSFIT</span>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

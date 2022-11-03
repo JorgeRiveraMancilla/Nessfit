@@ -24,5 +24,4 @@ public interface UserServiceInterface {
      * Return a list gith all users from the database.
      */
     List<User> getUsers();
-
 }

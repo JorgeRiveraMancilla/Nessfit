@@ -75,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**").permitAll()
 				// Las vistas públicas no requieren autenticación
 				.antMatchers("/login**").anonymous()
+				.antMatchers("/index**").anonymous()
 				// Las vistas con el subdominio administrador quedan protegidas al ROL
 				// administrador
 				.antMatchers("/administrator/**").hasAuthority("ADMINISTRATOR")
@@ -122,7 +123,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 									   AccessDeniedException accessDeniedException) throws IOException, ServletException {
 						// Cualquiera sea el fallo redirecciona a /home
 						response.sendRedirect("/home");
-
 					}
 				});
 	}
