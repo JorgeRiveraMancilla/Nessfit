@@ -62,10 +62,7 @@ public class EditProfileController {
             model.addAttribute("msgPhone", status[3]);
             model.addAttribute("msgEmailExist", status[4]);
             model.addAttribute("msgEmailValidator", status[5]);
-            model.addAttribute("name", firstName);
-            model.addAttribute("lastname", lastName);
-            model.addAttribute("email", email);
-            model.addAttribute("phone", phone);
+            model.addAttribute("user", user);
             return "edit-profile";
         }
         // Set new attributes.

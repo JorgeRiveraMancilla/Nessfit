@@ -15,17 +15,26 @@
     </nav>
 </header>
 <main>
-    <div class="container">
+    <div class="container" style="width: 20rem;">
         <form th:action="@{/login}" method="post" autocomplete="off">
-            <div class="mb-3">
+            <div class="mb-3 w-100">
                 <label for="exampleInputRut1" class="form-label">RUT</label>
                 <input name="rut" type="text" class="form-control" id="exampleInputRut1" aria-describedby="rutHelp">
-                <div id="rutHelp" class="form-text">Ejemplo: 12345678K</div>
+                <div id="rutHelp" class="form-text">Ejemplo: 12345678K.</div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 w-100">
                 <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                 <input name="password" type="password" class="form-control" id="exampleInputPassword1">
             </div>
+            <div th:if="${param.disableduser != null}" class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+                <strong>¡Error!</strong> Usuario deshabilitado. Contacte al administrador.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div th:if="${param.notfounduser != null}" class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+                <strong>¡Error!</strong> Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
             <button type="submit" class="btn btn-primary">Ingresar</button>
         </form>
     </div>
