@@ -37,7 +37,7 @@ public class RegisterAdministrativeController {
     public String registerUser(Model model) {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
-        return "register-user";
+        return "administrator/register-user";
     }
 
     /**

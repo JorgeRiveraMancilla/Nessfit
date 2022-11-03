@@ -13,5 +13,4 @@ public interface UserServiceInterface {
     List<User> getAdministrativos();
 
     List<User> getUsers();
-
 }

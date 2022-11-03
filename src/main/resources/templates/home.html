@@ -1,59 +1,68 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
-<head th:insert="fragments/head-fragment::head"></head>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NESSFIT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link th:href="@{/css/home.css}" rel="stylesheet">
+</head>
 <body>
-<header th:insert="fragments/header-fragment::header"></header>
-<nav>
-    <a class="profile">Cuenta</a>
-    <div class="dropdown-content">
-        <a th:href="@{/edit-profile}">Editar perfil</a>
-        <a th:href="@{/change-password}">Cambiar contraseña</a>
-        <a th:href="@{/logout}">Cerrar sesión</a>
-    </div>
-</nav>
-<section>
-    <div class="grid-container">
-        <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
-            <img th:src="@{/images/add-user.png}" alt="add-administrative">
+<header>
+    <nav class="navbar sticky-top bg-white border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand">NESSFIT</a>
+            <div class="btn-group dropstart">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Mi cuenta
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{/edit-profile}">Editar mi perfil</a></li>
+                    <li><a class="dropdown-item" th:href="@{/change-password}">Cambiar contraseña</a></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+                </ul>
+            </div>
         </div>
+    </nav>
+</header>
+<main class="d-flex flex-row">
+    <nav class="navbar navbar-expand-lg bg-white border-end">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/home}">Menú</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/administrator/manage-user}">Gestionar usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gestionar centros deportivos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section>
+        home
+    </section>
+</main>
 
-        <div sec:authorize="hasAuthority('ADMINISTRATOR')">
-            <form th:action="@{administrator/register-user}">
-                <div class="button-field">
-                    <button class="button" type="submit">Registrar un administrativo</button>
-                </div>
-            </form>
-        </div>
-        <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
-            <form th:action="@{administrative/register-user}">
-                <div class="button-field">
-                    <button class="button" type="submit">Registrar un cliente</button>
-                </div>
-            </form>
-        </div>
 
 
-        <div sec:authorize="hasAnyAuthority('ADMINISTRATOR','ADMINISTRATIVE')">
-            <img th:src="@{/images/status-users.png}" alt="status-user">
-        </div>
-        <div sec:authorize="hasAuthority('ADMINISTRATOR')">
-            <form th:action="@{administrator/change-status-user}">
-                <div class="button-field">
-                    <button class="button" type="submit">Deshabilitar y/o habilitar un usuario</button>
-                </div>
-            </form>
-        </div>
-        <div sec:authorize="hasAuthority('ADMINISTRATIVE')">
-            <form th:action="@{administrative/change-status-user}">
-                <div class="button-field">
-                    <button class="button" type="submit">Deshabilitar y/o habilitar un usuario</button>
-                </div>
-            </form>
-        </div>
 
-    </div>
-</section>
-<footer th:insert="fragments/footer-fragment::footer"></footer>
-<script th:src="@{/js/modal-confirm.js}"></script>
+
+
+
+
+
+
+
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+    <span class="mx-auto text-muted">© 2022 NESSFIT</span>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
