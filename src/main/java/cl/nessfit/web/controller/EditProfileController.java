@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class ProfileController {
+public class EditProfileController {
     @Autowired
     UserServiceInterface userService;
 
@@ -28,10 +28,6 @@ public class ProfileController {
     public String editProfile(Model model) {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
-        model.addAttribute("name", user.getFirstName());
-        model.addAttribute("lastname", user.getLastName());
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("phone", user.getPhone());
         return "edit-profile";
     }
 

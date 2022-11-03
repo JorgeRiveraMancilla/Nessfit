@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>NESSFIT</title>
@@ -25,7 +25,7 @@
         </div>
     </nav>
 </header>
-<main class="d-flex flex-row">
+<main class="container-fluid d-flex flex-row">
     <nav class="navbar navbar-expand-lg bg-white border-end">
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/home}">Menú</a>
@@ -44,22 +44,69 @@
             </div>
         </div>
     </nav>
-    <section>
-        registrar administrativo
+    <section class="container-fluid">
+        <div class="container-fluid d-flex justify-content-center align-items-center" th:if="${client == false}" style="min-height: calc(100vh - 4rem);">
+            <form th:action="@{/administrator/register-administrative}" method="post" autocomplete="off">
+                <div class="mb-3">
+                    <label for="exampleInputRut1" class="form-label">RUT</label>
+                    <input name="rut" type="text" class="form-control" id="exampleInputRut1" aria-describedby="rutHelp1">
+                    <div id="rutHelp1" class="form-text">Sin puntos ni guión, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputName1" class="form-label">Nombres</label>
+                    <input name="name" type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp1">
+                    <div id="nameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputLastname1" class="form-label">Apellidos</label>
+                    <input name="lastname" type="text" class="form-control" id="exampleInputLastname1" aria-describedby="lastnameHelp1">
+                    <div id="lastnameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+                    <input name="email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp1">
+                    <div id="emailHelp1" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPhone1" class="form-label">Teléfono</label>
+                    <input name="phone" type="text" class="form-control" id="exampleInputPhone1" aria-describedby="phoneHelp1">
+                    <div id="phoneHelp1" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar administrativo</button>
+            </form>
+        </div>
+        <div class="container-fluid d-flex justify-content-center align-items-center" th:if="${client == true}" style="min-height: calc(100vh - 4rem);">
+            <form th:action="@{/administrator/register-client}" method="post" autocomplete="off">
+                <div class="mb-3">
+                    <label for="exampleInputRut2" class="form-label">RUT</label>
+                    <input name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2">
+                    <div id="rutHelp2" class="form-text">Sin puntos ni guión, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputName2" class="form-label">Nombres</label>
+                    <input name="name" type="text" class="form-control" id="exampleInputName2" aria-describedby="nameHelp2">
+                    <div id="nameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputLastname2" class="form-label">Apellidos</label>
+                    <input name="lastname" type="text" class="form-control" id="exampleInputLastname2" aria-describedby="lastnameHelp2">
+                    <div id="lastnameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail2" class="form-label">Correo electrónico</label>
+                    <input name="email" type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp2">
+                    <div id="emailHelp2" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPhone2" class="form-label">Teléfono</label>
+                    <input name="phone" type="text" class="form-control" id="exampleInputPhone2" aria-describedby="phoneHelp2">
+                    <div id="phoneHelp2" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar cliente</button>
+            </form>
+        </div>
     </section>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
     <span class="mx-auto text-muted">© 2022 NESSFIT</span>
 </footer>

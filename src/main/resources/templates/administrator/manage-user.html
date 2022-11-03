@@ -42,26 +42,25 @@
             </div>
         </div>
     </nav>
-
     <section class="container-fluid">
         <div class="container-fluid d-flex justify-content-between">
-            <form th:action="@{/administrator/manage-user}">
+            <form th:action="@{/administrator/manage-user/}" method="post" autocomplete="off">
                 <div class="my-3 d-flex flex-row align-items-center">
                     <label for="exampleInputRut1" class="form-label">RUT</label>
                     <input name="rut" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp">
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </form>
-            <div class="my-3 align-items-center">
-                <a type="submit" class="btn btn-primary" th:href="@{/administrator/register-user}">Registrar administrativo</a>
+            <div class="my-3 align-items-center d-flex flex-row">
+                <a type="submit" class="btn btn-primary" th:href="@{/administrator/register-client}">Registrar cliente</a>
+                <a type="submit" class="btn btn-primary ms-3" th:href="@{/administrator/register-administrative}">Registrar administrativo</a>
             </div>
         </div>
-
-
         <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Rol</th>
+                <th scope="col">Estado</th>
                 <th scope="col">RUT</th>
                 <th scope="col">Nombres</th>
                 <th scope="col">Apellidos</th>
@@ -72,35 +71,44 @@
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
-                <td th:text="${user.role.getName()}"></td>
+                <td th:if="${user.role.getId() == 1}">Administrador</td>
+                <td th:if="${user.role.getId() == 2}">Administrativo</td>
+                <td th:if="${user.role.getId() == 3}">Cliente</td>
+                <td th:if="${user.status == 1}">Habilitado</td>
+                <td th:if="${user.status == 0}">Deshabilitado</td>
                 <td th:text="${user.rut}"></td>
                 <td th:text="${user.firstName}"></td>
                 <td th:text="${user.lastName}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.phone}"></td>
-                <td>
-                    <a th:if="${user.status == 1 and currentUser != user.rut}" class="btn btn-outline-primary">Deshabilitar</a>
-                    <a th:if="${user.status == 0 and currentUser != user.rut}" class="btn btn-outline-primary">Habilitar</a>
-
-                    <a class="btn btn-outline-primary">Editar perfil</a>
-                </td>
+                <form>
+                    <td>
+                        <button class="btn btn-outline-primary" type="button" th:if="${user.status == 1 and currentUser != user.rut}" data-bs-toggle="modal" data-bs-target="#exampleModal">Deshabilitar</button>
+                        <button class="btn btn-outline-primary" type="button" th:if="${user.status == 0 and currentUser != user.rut}" data-bs-toggle="modal" data-bs-target="#exampleModal">Habilitar</button>
+                        <a class="btn btn-outline-primary" th:if="${currentUser != user.rut}" th:href="@{/administrator/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
+                        <a class="btn btn-outline-primary" th:if="${currentUser == user.rut}" th:href="@{/edit-profile}">Editar perfil</a>
+                    </td>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header w-100">
+                                    <h1 class="modal-title fs-5">¿Está seguro?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body w-100">Esto no funciona :(</div>
+                                <div class="modal-footer w-100">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary">Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </tr>
             </tbody>
         </table>
     </section>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
     <span class="mx-auto text-muted">© 2022 NESSFIT</span>
 </footer>

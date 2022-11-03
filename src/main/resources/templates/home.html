@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>NESSFIT</title>
@@ -34,6 +34,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" sec:authorize="">
+                        <a class="nav-link" aria-current="page" th:href="@{/administrator/manage-user}">Gestionar usuarios</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" th:href="@{/administrator/manage-user}">Gestionar usuarios</a>
                     </li>
@@ -48,18 +51,6 @@
         home
     </section>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
     <span class="mx-auto text-muted">© 2022 NESSFIT</span>
 </footer>
