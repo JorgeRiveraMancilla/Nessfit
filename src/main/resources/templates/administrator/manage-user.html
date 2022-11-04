@@ -52,8 +52,7 @@
                         <td>
                             <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 1 and user.role.getId() != 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
                             <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 0 and user.role.getId() != 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
-                            <a class="btn btn-outline-primary" th:if="${currentUser != user.rut}" th:href="@{/administrator/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
-                            <a class="btn btn-outline-primary" th:if="${currentUser == user.rut}" th:href="@{/edit-profile}">Editar perfil</a>
+                            <a class="btn btn-outline-primary" th:href="@{/administrator/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
                         </td>
                         <div class="modal fade" th:id="'exampleModal' + ${user.getRut()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

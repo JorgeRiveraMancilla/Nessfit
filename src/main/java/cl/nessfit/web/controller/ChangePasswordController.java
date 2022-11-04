@@ -55,6 +55,7 @@ public class ChangePasswordController {
             }
             model.addAttribute("newPassword", newPassword);
             model.addAttribute("repeatNewPassword", repeatNewPassword);
+            model.addAttribute("rut", SecurityContextHolder.getContext().getAuthentication().getName());
             return "change-password";
 	    }
 
