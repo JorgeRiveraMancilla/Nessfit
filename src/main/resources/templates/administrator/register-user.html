@@ -5,60 +5,128 @@
 <header th:insert="fragments/header-fragment::header"></header>
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
-    <section class="container-fluid m-3 d-flex align-items-center justify-content-center">
+    <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
         <form th:if="${client == false}" th:action="@{/administrator/register-administrative}" method="post" autocomplete="off">
-            <div class="mb-3">
-                <label for="exampleInputRut1" class="form-label">RUT</label>
-                <input name="rut" type="text" class="form-control" id="exampleInputRut1" aria-describedby="rutHelp1">
-                <div id="rutHelp1" class="form-text">Sin puntos ni guión, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputRut1" class="col-sm-3 col-form-label">RUT</label>
+                <div class="col-sm-9">
+                    <input name="rut" type="text" class="form-control" id="exampleInputRut1" aria-describedby="rutHelp1">
+                    <div id="rutHelp1" class="form-text">Sin puntos ni guión, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
+                    <div th:if="${msgName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Los nombres deben tener más de 2 caracteres.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputName1" class="form-label">Nombres</label>
-                <input name="name" type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp1">
-                <div id="nameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputFirstName1" class="col-sm-3 col-form-label">Nombres</label>
+                <div class="col-sm-9">
+                    <input name="name" type="text" class="form-control" id="exampleInputFirstName1" aria-describedby="nameHelp1">
+                    <div id="nameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
+                    <div th:if="${msgName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Los nombres deben tener más de 2 caracteres.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputLastname1" class="form-label">Apellidos</label>
-                <input name="lastname" type="text" class="form-control" id="exampleInputLastname1" aria-describedby="lastnameHelp1">
-                <div id="lastnameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputLastname1" class="col-sm-3 col-form-label">Apellidos</label>
+                <div class="col-sm-9">
+                    <input name="lastname" type="text" class="form-control" id="exampleInputLastname1" aria-describedby="lastnameHelp1">
+                    <div id="lastnameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
+                    <div th:if="${msgLastName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Los apellidos deben tener más de 2 caracteres.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-                <input name="email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp1">
-                <div id="emailHelp1" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Correo electrónico</label>
+                <div class="col-sm-9">
+                    <input name="email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp1">
+                    <div id="emailHelp1" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
+                    <div th:if="${msgEmailValidator == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Su correo electrónico no es válido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div th:if="${msgEmailExist == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> El correo electrónico ya existe en el sistema.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPhone1" class="form-label">Teléfono</label>
-                <input name="phone" type="text" class="form-control" id="exampleInputPhone1" aria-describedby="phoneHelp1">
-                <div id="phoneHelp1" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputPhone1" class="col-sm-3 col-form-label">Teléfono</label>
+                <div class="col-sm-9">
+                    <input name="phone" type="text" class="form-control" id="exampleInputPhone1" aria-describedby="phoneHelp1">
+                    <div id="phoneHelp1" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
+                    <div th:if="${msgPhone == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Registrar administrativo</button>
         </form>
         <form th:if="${client == true}" th:action="@{/administrator/register-client}" method="post" autocomplete="off">
-            <div class="mb-3">
-                <label for="exampleInputRut2" class="form-label">RUT</label>
-                <input name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2">
-                <div id="rutHelp2" class="form-text">Sin puntos ni guión, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputRut2" class="col-sm-3 col-form-label">RUT</label>
+                <div class="col-sm-9">
+                    <input name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2">
+                    <div id="rutHelp2" class="form-text">Sin puntos ni guión, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
+                    <div th:if="${msgName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Los nombres deben tener más de 2 caracteres.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputName2" class="form-label">Nombres</label>
-                <input name="name" type="text" class="form-control" id="exampleInputName2" aria-describedby="nameHelp2">
-                <div id="nameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputFirstName2" class="col-sm-3 col-form-label">Nombres</label>
+                <div class="col-sm-9">
+                    <input name="name" type="text" class="form-control" id="exampleInputFirstName2" aria-describedby="nameHelp2">
+                    <div id="nameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
+                    <div th:if="${msgName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Los nombres deben tener más de 2 caracteres.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputLastname2" class="form-label">Apellidos</label>
-                <input name="lastname" type="text" class="form-control" id="exampleInputLastname2" aria-describedby="lastnameHelp2">
-                <div id="lastnameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputLastname2" class="col-sm-3 col-form-label">Apellidos</label>
+                <div class="col-sm-9">
+                    <input name="lastname" type="text" class="form-control" id="exampleInputLastname2" aria-describedby="lastnameHelp2">
+                    <div id="lastnameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
+                    <div th:if="${msgLastName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Los apellidos deben tener más de 2 caracteres.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail2" class="form-label">Correo electrónico</label>
-                <input name="email" type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp2">
-                <div id="emailHelp2" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Correo electrónico</label>
+                <div class="col-sm-9">
+                    <input name="email" type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp2">
+                    <div id="emailHelp2" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
+                    <div th:if="${msgEmailValidator == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Su correo electrónico no es válido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div th:if="${msgEmailExist == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> El correo electrónico ya existe en el sistema.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleInputPhone2" class="form-label">Teléfono</label>
-                <input name="phone" type="text" class="form-control" id="exampleInputPhone2" aria-describedby="phoneHelp2">
-                <div id="phoneHelp2" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputPhone2" class="col-sm-3 col-form-label">Teléfono</label>
+                <div class="col-sm-9">
+                    <input name="phone" type="text" class="form-control" id="exampleInputPhone2" aria-describedby="phoneHelp2">
+                    <div id="phoneHelp2" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
+                    <div th:if="${msgPhone == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Registrar cliente</button>
         </form>

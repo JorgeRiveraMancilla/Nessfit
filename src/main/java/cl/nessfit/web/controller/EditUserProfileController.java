@@ -25,8 +25,8 @@ public class EditUserProfileController {
         return "administrator/edit-profile";
     }
 
-    @PostMapping("/edit-profile")
-    public String editProfile(@RequestParam("rut") String rut,
+    @PostMapping("/edit-profile/{rut}")
+    public String editProfile(@PathVariable String rut,
                               @RequestParam("name") String firstName,
                               @RequestParam("lastname") String lastName,
                               @RequestParam("email") String email,

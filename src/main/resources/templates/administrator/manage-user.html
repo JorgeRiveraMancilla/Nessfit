@@ -5,7 +5,7 @@
 <header th:insert="fragments/header-fragment::header"></header>
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
-    <section class="container-fluid m-3 d-flex flex-column align-items-start">
+    <section class="container-fluid p-3 d-flex flex-column align-items-start border-start">
         <div class="container-fluid d-flex justify-content-between">
             <form th:action="@{/administrator/manage-user/}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
@@ -27,27 +27,25 @@
                 <th scope="col">RUT</th>
                 <th scope="col">Nombres</th>
                 <th scope="col">Apellidos</th>
-                <th scope="col">Correo electrónico</th>
                 <th scope="col">Teléfono</th>
                 <th scope="col">Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${users}">
-                <td th:if="${user.role.getId() == 1}">Administrador</td>
-                <td th:if="${user.role.getId() == 2}">Administrativo</td>
-                <td th:if="${user.role.getId() == 3}">Cliente</td>
-                <td th:if="${user.status == 1}">Habilitado</td>
-                <td th:if="${user.status == 0}">Deshabilitado</td>
-                <td th:text="${user.rut}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.phone}"></td>
-                <form>
+            <form>
+                <tr th:each="user : ${users}">
+                    <td th:if="${user.role.getId() == 1}">Administrador</td>
+                    <td th:if="${user.role.getId() == 2}">Administrativo</td>
+                    <td th:if="${user.role.getId() == 3}">Cliente</td>
+                    <td th:if="${user.status == 1}">Habilitado</td>
+                    <td th:if="${user.status == 0}">Deshabilitado</td>
+                    <td th:text="${user.rut}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.phone}"></td>
                     <td>
-                        <button class="btn btn-outline-primary" type="button" th:if="${user.status == 1 and currentUser != user.rut}" data-bs-toggle="modal" data-bs-target="#exampleModal">Deshabilitar</button>
-                        <button class="btn btn-outline-primary" type="button" th:if="${user.status == 0 and currentUser != user.rut}" data-bs-toggle="modal" data-bs-target="#exampleModal">Habilitar</button>
+                        <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 1 and currentUser != user.rut}" data-bs-toggle="modal" data-bs-target="#exampleModal">Deshabilitar</button>
+                        <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 0 and currentUser != user.rut}" data-bs-toggle="modal" data-bs-target="#exampleModal">Habilitar</button>
                         <a class="btn btn-outline-primary" th:if="${currentUser != user.rut}" th:href="@{/administrator/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
                         <a class="btn btn-outline-primary" th:if="${currentUser == user.rut}" th:href="@{/edit-profile}">Editar perfil</a>
                     </td>
@@ -66,8 +64,8 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </tr>
+                </tr>
+            </form>
             </tbody>
         </table>
     </section>
