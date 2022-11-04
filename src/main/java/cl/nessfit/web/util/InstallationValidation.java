@@ -5,6 +5,7 @@ import cl.nessfit.web.service.InstallationServiceInterface;
 import java.util.List;
 
 public class InstallationValidation {
+
      /**
      * Method that is responsible for validating if the name exists in the system.
      * @param name New name for the installation.

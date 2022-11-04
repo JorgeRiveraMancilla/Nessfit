@@ -25,15 +25,23 @@ public class UserServiceImpl implements UserServiceInterface {
      */
     @Override
     public User searchByRut(String rut) { return userRepository.findByRut(rut); }
+
     /**
      * Return a list with all users with administrative role from the database.
      */
     @Override
-    public List<User> getAdministrativos() { return userRepository.findByRoleId(2); }
+    public List<User> getAdministrative() { return userRepository.findByRoleId(2); }
+
     /**
      * Return a list gith all users from the database.
      */
     @Override
     public List<User> getUsers() { return userRepository.findAll(); }
+
+    /**
+     * Return a list with administrative and clients.
+     */
+    @Override
+    public List<User> getAdministrativeAndClients() { return userRepository.findUsersByRoleIdOrRoleId(2,3); }
 
 }

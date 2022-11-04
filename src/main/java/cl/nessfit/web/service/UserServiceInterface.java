@@ -19,9 +19,13 @@ public interface UserServiceInterface {
     /**
      * Return a list with all users with administrative role from the database.
      */
-    List<User> getAdministrativos();
+    List<User> getAdministrative();
     /**
-     * Return a list gith all users from the database.
+     * Return a list with all users from the database.
      */
     List<User> getUsers();
+    /**
+     * Return a list with administrative and clients.
+     */
+    List<User> getAdministrativeAndClients();
 }

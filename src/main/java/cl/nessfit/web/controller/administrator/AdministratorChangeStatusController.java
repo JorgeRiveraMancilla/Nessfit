@@ -27,7 +27,7 @@ public class AdministratorChangeStatusController {
 
     /**
      * Changes the user status, depending on the form election by the administrator or administrative.
-     * @param rut
+     * @param rut Rut from user that we change the status.
      * @return return to "change-status-user" page, or home page.
      */
     @PostMapping("/change-status-user/{rut}")

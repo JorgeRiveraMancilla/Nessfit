@@ -7,10 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -20,62 +17,28 @@ import java.util.Map;
 public class AdministrativeChangeStatusController {
     @Autowired
     UserServiceInterface userService;
+
     /**
      * Method that return a form.
      * @return the "change-status-user" form.
      */
     @GetMapping("/change-status-user")
     public String changeStatusUser() {
-        return "change-status-user";
+        return "administrative/manage-user";
     }
 
     /**
      * Changes the user status, depending on the form election by the administrator or administrative.
-     * @param allRequestParams form data.
-     * @param model is the application's dynamic data structure.
+     * @param rut Rut from user that we change the status.
      * @return return to "change-status-user" page, or home page.
      */
-    @PostMapping("/change-status-user")
-    public String changeStatusUser(@RequestParam Map<String,String> allRequestParams, Model model, HttpServletRequest request) {
-        String rut = allRequestParams.get("rut");
-        String status = allRequestParams.get("status");
+    @PostMapping("/change-status-user/{rut}")
+    public String changeStatusUser(@PathVariable String rut) {
+
         User user = userService.searchByRut(rut);
 
-
-        if (status == null) {
-            User userLogged = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-
-            // validate if the userLogged exist. If not logout and redirect to login page.
-            if (userLogged == null){
-                SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-                logoutHandler.logout(request, null, null);
-                return "redirect:/";
-            }
-
-            int idUserLogged = userLogged.getRole().getId();
-
-            if (user == null) {
-                model.addAttribute("msgRutExist", false);
-            } else {
-                int idUser = user.getRole().getId();
-                if (idUser <= idUserLogged) {
-                    if (idUser == 1) {
-                        model.addAttribute("msgChangeAdministrator", false);
-                    } else {
-                        model.addAttribute("msgChangeAdministrative", false);
-                    }
-                } else {
-                    model.addAttribute("msgChange", "");
-                    model.addAttribute("msgRut", rut);
-                    model.addAttribute("msgName", user.getFirstName());
-                    model.addAttribute("msgStatus", user.getStatus() == 0 ? "Deshabilitado" : "Habilitado");
-                }
-            }
-            return "change-status-user";
-        } else {
-            user.setStatus(status.equals("Habilitado") ? 0 : 1);
-            userService.save(user);
-            return "redirect:/";
-        }
+        user.setStatus(user.getStatus() == 1 ? 0 : 1);
+        userService.save(user);
+        return "redirect:/administrative/manage-user";
     }
 }
