@@ -25,37 +25,27 @@ public class ChangePasswordController {
     private BCryptPasswordEncoder passwordEncoder;
 
     /**
-     * Method that receives a model type variable and implements the new password structure in it.   
-     * @param model The model of the project.
+     * Method that receives a model type variable and implements the new password structure in it.
      * @return returns "change-password" string.
      */
     @GetMapping("/change-password")
-    public String password(Model model){
-        //Password1 = new password.
-        model.addAttribute("password1", "");
-        //Password2 = repeat new password.
-        model.addAttribute("password2", "");
+    public String password() {
         return "change-password";
     }
+
     /**
      * Method that handles the changing of a password and logs the corresponding data into the user class.
      * @param newPassword New password entered by the user
      * @param repeatNewPassword Validation of the new password 
      * @param request http request data
-     * @param attributes no se usa (preguntar)
      * @param model The model of the project.
      * @return "change-password" if the process was unsucessfull otherwise logouts and returns "redirect:/"
      */
     @PostMapping("/change-password")
-    public String changePassword(@RequestParam("newPassword") String newPassword, @RequestParam("repeatNewPassword")
-        String repeatNewPassword, HttpServletRequest request, RedirectAttributes attributes, Model model) {
-        // Obtain the user
-        User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (user == null){
-            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-            logoutHandler.logout(request, null, null);
-            return "redirect:/";
-        }
+    public String changePassword(@RequestParam("newPassword") String newPassword,
+                                 @RequestParam("repeatNewPassword") String repeatNewPassword,
+                                 HttpServletRequest request,
+                                 Model model) {
         //Validate password
         if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
             if (!PasswordValidation.lengthValidation(newPassword)) {
@@ -68,11 +58,13 @@ public class ChangePasswordController {
             model.addAttribute("repeatNewPassword", repeatNewPassword);
             return "change-password";
 	    }
+        // Obtain the user
+        User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         // Set new password (encrypted)
         user.setPassword(passwordEncoder.encode(newPassword));
         userService.save(user);
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, null, null);
-        return "redirect:/";
+        return "index";
     }
 }

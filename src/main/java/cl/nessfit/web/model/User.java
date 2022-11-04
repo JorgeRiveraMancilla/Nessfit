@@ -13,19 +13,26 @@ public class User implements Serializable {
     private static final long serialVersionUID = 7124965512564802080L;
     @Id
     private String rut;
+
     @Column (name = "first_name")
-    @Size(min = 3, max = 200, message = "Los nombres o apellidos deben tener más de 2 caracteres.")
+    @Size(max = 200, message = "Largo inválido.")
     @Pattern(regexp = "^((([A-Za-z]){3,}(\s)?)*)$", message = "Los nombres o apellidos deben tener más de 2 caracteres.")
     private String firstName;
+
     @Column (name = "last_name")
-    @Size(min = 3, max = 200, message = "Los nombres o apellidos deben tener más de 2 caracteres.")
+    @Size(max = 200, message = "Largo inválido.")
     @Pattern(regexp = "^((([A-Za-z]){3,}(\s)?)*)$", message = "Los nombres o apellidos deben tener más de 2 caracteres.")
     private String lastName;
+
+
     @Pattern(regexp="^(\\d){11,16}$", message = "El teléfono móvil ingresado no es válido.")
     private String phone;
+
+
     @Email(message = "Su correo electrónico no es valido.")
-    @Size(min = 1, max = 200, message = "Su correo electrónico no es valido.")
     private String email;
+
+
     private int status;
     private String password;
     @ManyToOne(fetch = FetchType.EAGER)

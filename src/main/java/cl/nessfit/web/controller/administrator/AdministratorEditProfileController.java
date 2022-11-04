@@ -4,6 +4,7 @@ import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.ProfileValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,8 +33,9 @@ public class AdministratorEditProfileController {
      * @return Return user to home page.
      */
     @PostMapping("/edit-profile")
-    public String editProfile(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model){
-
+    public String editProfile(@Valid @ModelAttribute("user") User modelUser,
+                              BindingResult bindingResult,
+                              Model model) {
         // Logged user obtained by rut
         User editedUser = userService.searchByRut(modelUser.getRut());
         // "True" if email exist on the system, "False" if not
@@ -52,6 +54,8 @@ public class AdministratorEditProfileController {
         // Save data from actualUser
         userService.save(editedUser);
 
-        return "redirect:/";
+        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
+        return "administrator/manage-user";
     }
 }
