@@ -79,7 +79,22 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar administrativo</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Registrar administrativo</button>
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header w-100">
+                            <h1 class="modal-title fs-5">¿Está seguro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body w-100">Registrar un nuevo usuario de rol Administrativo.</div>
+                        <div class="modal-footer w-100">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
         <form th:if="${client == true}" th:action="@{/administrator/register-client}" th:object="${user}" method="post" autocomplete="off">
             <!--RUT-->
@@ -154,7 +169,22 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Registrar cliente</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Registrar cliente</button>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header w-100">
+                            <h1 class="modal-title fs-5">¿Está seguro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body w-100">Registrar un nuevo usuario de rol Cliente.</div>
+                        <div class="modal-footer w-100">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </section>
 </main>
