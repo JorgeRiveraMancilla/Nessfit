@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,8 +41,12 @@ public class ChangePasswordController {
      * @return "change-password" if the process was unsuccessful otherwise logouts and returns "redirect:/"
      */
     @PostMapping("/change-password")
-    public String changePassword(@RequestParam("newPassword") String newPassword, @RequestParam("repeatNewPassword")
-        String repeatNewPassword, HttpServletRequest request, Model model) {
+    public String changePassword(@RequestParam("newPassword") String newPassword,
+                                 @RequestParam("repeatNewPassword") String repeatNewPassword,
+                                 HttpServletRequest request,
+                                 Model model) {
+        // Obtain the user
+        User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
 
         //Validate password
         if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
@@ -53,18 +56,16 @@ public class ChangePasswordController {
             if (!PasswordValidation.areEquals(newPassword, repeatNewPassword)) {
                 model.addAttribute("msg", false);
             }
+
             model.addAttribute("newPassword", newPassword);
             model.addAttribute("repeatNewPassword", repeatNewPassword);
             model.addAttribute("rut", SecurityContextHolder.getContext().getAuthentication().getName());
             return "change-password";
-	    }
-
-        // Obtain the user
-        User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-
+        }
         // Set new password (encrypted)
         user.setPassword(passwordEncoder.encode(newPassword));
         userService.save(user);
+
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, null, null);
         return "redirect:/login";
