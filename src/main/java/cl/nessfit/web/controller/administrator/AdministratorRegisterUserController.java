@@ -35,7 +35,6 @@ public class AdministratorRegisterUserController {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("client", false);
-        System.out.println("WENAAAAAAAAAAA");
         return "administrator/register-user";
     }
 
@@ -74,7 +73,7 @@ public class AdministratorRegisterUserController {
         // Save user
         userService.save(newUser);
 
-        return "administrator/manage-user";
+        return "redirect:/administrator/manage-user";
     }
 
 
@@ -113,10 +112,6 @@ public class AdministratorRegisterUserController {
         // Save user
         userService.save(newUser);
 
-        model.addAttribute("users", userService.getUsers());
-        model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
-        return "administrator/manage-user";
+        return "redirect:/administrator/manage-user";
     }
-
-
 }

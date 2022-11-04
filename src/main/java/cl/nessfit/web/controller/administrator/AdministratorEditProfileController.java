@@ -54,8 +54,6 @@ public class AdministratorEditProfileController {
         // Save data from actualUser
         userService.save(editedUser);
 
-        model.addAttribute("users", userService.getUsers());
-        model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
-        return "administrator/manage-user";
+        return "redirect:/administrator/manage-user";
     }
 }

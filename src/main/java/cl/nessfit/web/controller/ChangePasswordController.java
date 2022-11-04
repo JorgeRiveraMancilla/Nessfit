@@ -29,7 +29,10 @@ public class ChangePasswordController {
      * @return returns "change-password" string.
      */
     @GetMapping("/change-password")
-    public String password(){ return "change-password"; }
+    public String password(Model model) {
+        model.addAttribute("rut", SecurityContextHolder.getContext().getAuthentication().getName());
+        return "change-password";
+    }
     /**
      * Method that handles the changing of a password and logs the corresponding data into the user class.
      * @param newPassword New password entered by the user.
@@ -63,6 +66,6 @@ public class ChangePasswordController {
         userService.save(user);
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, null, null);
-        return "login";
+        return "redirect:/login";
     }
 }

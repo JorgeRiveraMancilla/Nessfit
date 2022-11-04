@@ -28,6 +28,6 @@ public class LoginController {
     public String logout(HttpServletRequest request) {
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, null, null);
-        return "/index";
+        return "redirect:/index";
     }
 }
