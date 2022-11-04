@@ -4,19 +4,16 @@ import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.ProfileValidation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping ("/administrator")
-public class EditUserProfileController {
+public class AdministratorEditProfileController {
     @Autowired
     UserServiceInterface userService;
 

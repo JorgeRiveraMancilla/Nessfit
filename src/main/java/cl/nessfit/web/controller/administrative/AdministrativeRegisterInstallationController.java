@@ -1,8 +1,7 @@
-package cl.nessfit.web.controller;
+package cl.nessfit.web.controller.administrative;
 
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ import cl.nessfit.web.util.InstallationValidation;
 
 @Controller
 @RequestMapping("/administrative")
-public class RegisterAdministrativeInstallationController {
+public class AdministrativeRegisterInstallationController {
 
     @Autowired
     UserServiceInterface userService;
@@ -29,7 +28,7 @@ public class RegisterAdministrativeInstallationController {
     @Autowired
     InstallationServiceInterface installationService;
 
-    public RegisterAdministrativeInstallationController(InstallationServiceInterface installationService) {
+    public AdministrativeRegisterInstallationController(InstallationServiceInterface installationService) {
         this.installationService = installationService;
     }
 

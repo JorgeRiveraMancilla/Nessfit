@@ -1,4 +1,4 @@
-package cl.nessfit.web.controller;
+package cl.nessfit.web.controller.administrator;
 
 import cl.nessfit.web.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping ("/administrator")
-public class ManageUserController {
+public class AdministratorManageUserController {
     @Autowired
     private UserServiceInterface userService;
 
