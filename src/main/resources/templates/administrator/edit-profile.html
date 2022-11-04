@@ -7,6 +7,7 @@
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
         <form th:action="@{/administrator/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+            <!--RUT-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
                 <div class="col-sm-9">
@@ -14,6 +15,7 @@
                     <input type="hidden" th:field="*{rut}">
                 </div>
             </div>
+            <!--FirstName-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputFirstName" class="col-sm-3 col-form-label">Nombres</label>
                 <div class="col-sm-9">
@@ -26,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            <!--LastName-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputLastname" class="col-sm-3 col-form-label">Apellidos</label>
                 <div class="col-sm-9">
@@ -38,6 +41,7 @@
                     </div>
                 </div>
             </div>
+            <!--Email-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputEmail" class="col-sm-3 col-form-label">Correo electrónico</label>
                 <div class="col-sm-9">
@@ -54,6 +58,7 @@
                     </div>
                 </div>
             </div>
+            <!--Phone-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputPhone" class="col-sm-3 col-form-label">Teléfono</label>
                 <div class="col-sm-9">

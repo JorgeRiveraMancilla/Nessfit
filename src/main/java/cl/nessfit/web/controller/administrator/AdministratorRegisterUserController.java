@@ -5,6 +5,7 @@ import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.ProfileValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -112,6 +113,8 @@ public class AdministratorRegisterUserController {
         // Save user
         userService.save(newUser);
 
+        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
         return "administrator/manage-user";
     }
 

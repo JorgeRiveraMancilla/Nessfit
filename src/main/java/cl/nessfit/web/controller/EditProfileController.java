@@ -59,6 +59,7 @@ public class EditProfileController {
         // Save data from actualUser
         userService.save(actualUser);
 
+        // Redirect to home.
         return "redirect:/";
     }
 }

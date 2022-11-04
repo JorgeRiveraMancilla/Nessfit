@@ -11,6 +11,7 @@
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
                 <div class="col-sm-9">
                     <input type="text" readonly class="form-control" id="staticRut" th:value="${user.rut}" disabled>
+                    <input type="hidden" th:field="*{rut}">
                 </div>
             </div>
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
