@@ -32,46 +32,47 @@
             </tr>
             </thead>
             <tbody>
-            <form>
+
                 <tr th:if="${users == null}">
                     <td colspan="7" class="text-center">
                         Sin registros.
                     </td>
                 </tr>
                 <tr th:unless="${users == null}" th:each="user : ${users}">
-                    <td th:if="${user.role.getId() == 1}">Administrador</td>
-                    <td th:if="${user.role.getId() == 2}">Administrativo</td>
-                    <td th:if="${user.role.getId() == 3}">Cliente</td>
-                    <td th:if="${user.status == 1}">Habilitado</td>
-                    <td th:if="${user.status == 0}">Deshabilitado</td>
-                    <td th:text="${user.rut}"></td>
-                    <td th:text="${user.firstName}"></td>
-                    <td th:text="${user.lastName}"></td>
-                    <td th:text="${user.phone}"></td>
-                    <td>
-                        <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 1 and currentUser != user.rut}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
-                        <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 0 and currentUser != user.rut}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
-                        <a class="btn btn-outline-primary" th:if="${currentUser != user.rut}" th:href="@{/administrator/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
-                        <a class="btn btn-outline-primary" th:if="${currentUser == user.rut}" th:href="@{/edit-profile}">Editar perfil</a>
-                    </td>
-                    <div class="modal fade" th:id="'exampleModal' + ${user.getRut()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header w-100">
-                                    <h1 class="modal-title fs-5">¿Está seguro?</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body w-100" th:if="${user.status == 1}" th:text="'Deshabilitar al usuario de RUT ' + ${user.getRut()} + '.'"></div>
-                                <div class="modal-body w-100" th:if="${user.status == 0}" th:text="'Habilitar al usuario de RUT ' + ${user.getRut()} + '.'"></div>
-                                <div class="modal-footer w-100">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Confirmar</button>
+                    <form th:action="@{/administrator/change-status-user/{rut}(rut=${user.rut})}" method="post" autocomplete="off">
+                        <td th:if="${user.role.getId() == 1}">Administrador</td>
+                        <td th:if="${user.role.getId() == 2}">Administrativo</td>
+                        <td th:if="${user.role.getId() == 3}">Cliente</td>
+                        <td th:if="${user.status == 1}">Habilitado</td>
+                        <td th:if="${user.status == 0}">Deshabilitado</td>
+                        <td th:text="${user.rut}"></td>
+                        <td th:text="${user.firstName}"></td>
+                        <td th:text="${user.lastName}"></td>
+                        <td th:text="${user.phone}"></td>
+                        <td>
+                            <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 1 and currentUser != user.rut}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
+                            <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 0 and currentUser != user.rut}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
+                            <a class="btn btn-outline-primary" th:if="${currentUser != user.rut}" th:href="@{/administrator/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
+                            <a class="btn btn-outline-primary" th:if="${currentUser == user.rut}" th:href="@{/edit-profile}">Editar perfil</a>
+                        </td>
+                        <div class="modal fade" th:id="'exampleModal' + ${user.getRut()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header w-100">
+                                        <h1 class="modal-title fs-5">¿Está seguro?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body w-100" th:if="${user.status == 1}" th:text="'Deshabilitar al usuario de RUT ' + ${user.getRut()} + '.'"></div>
+                                    <div class="modal-body w-100" th:if="${user.status == 0}" th:text="'Habilitar al usuario de RUT ' + ${user.getRut()} + '.'"></div>
+                                    <div class="modal-footer w-100">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </tr>
-            </form>
             </tbody>
         </table>
     </section>
