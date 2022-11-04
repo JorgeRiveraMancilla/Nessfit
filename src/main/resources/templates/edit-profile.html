@@ -45,57 +45,66 @@
     </nav>
     <section class="container-fluid">
         <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 4rem); max-width: 40rem;">
-            <form class="my-3" th:action="@{/edit-profile}" method="post" autocomplete="off">
+            <form class="my-3" th:action="@{/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+                <!--RUT-->
                 <div class="mb-3 row">
                     <label for="staticRut" class="col-sm-2 col-form-label">RUT</label>
                     <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" id="staticRut" th:value="${user.getRut()}">
+                        <input type="text" readonly class="form-control-plaintext" id="staticRut" th:field="*{rut}">
                     </div>
                 </div>
+                <!--FirstName-->
                 <div class="mb-3 row">
                     <label for="exampleInputFirstName" class="col-sm-2 col-form-label">Nombres</label>
                     <div class="col-sm-10">
-                        <input name="name" type="text" class="form-control" id="exampleInputFirstName" aria-describedby="nameHelp" th:value="${user.getFirstName()}">
+                        <input name="name" type="text" class="form-control" id="exampleInputFirstName" aria-describedby="nameHelp" th:field="*{firstName}">
                         <div id="nameHelp" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
-                        <div th:if="${msgName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                            <strong>¡Error!</strong> Los nombres deben tener más de 2 caracteres.
+                        <div th:if="${#fields.hasErrors('firstName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong>
+                            <label th:errors="*{firstName}"></label>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                 </div>
+                <!--LastName-->
                 <div class="mb-3 row">
                     <label for="exampleInputLastname" class="col-sm-2 col-form-label">Apellidos</label>
                     <div class="col-sm-10">
-                        <input name="lastname" type="text" class="form-control" id="exampleInputLastname" aria-describedby="lastnameHelp" th:value="${user.getLastName()}">
+                        <input name="lastname" type="text" class="form-control" id="exampleInputLastname" aria-describedby="lastnameHelp" th:field="*{lastName}">
                         <div id="lastnameHelp" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
-                        <div th:if="${msgLastName == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                            <strong>¡Error!</strong> Los apellidos deben tener más de 2 caracteres.
+                        <div th:if="${#fields.hasErrors('lastName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong>
+                            <label th:errors="*{lastName}"></label>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                 </div>
+                <!--Email-->
                 <div class="mb-3 row">
                     <label for="exampleInputEmail" class="col-sm-2 col-form-label">Correo electrónico</label>
                     <div class="col-sm-10">
-                        <input name="email" type="text" class="form-control" id="exampleInputEmail" aria-describedby="lastnameHelp" th:value="${user.getEmail()}">
+                        <input name="email" type="text" class="form-control" id="exampleInputEmail" aria-describedby="lastnameHelp" th:field="*{email}">
                         <div id="emailHelp" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
-                        <div th:if="${msgEmailValidator == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                            <strong>¡Error!</strong> Su correo electrónico no es válido.
+                        <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong>
+                            <label th:errors="*{email}"></label>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <div th:if="${msgEmailExist == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                            <strong>¡Error!</strong> El correo electrónico ya existe en el sistema.
+                        <div th:if="${emailExist == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong> El RUT y/o correo electrónico ya existen en el sistema. Intente iniciar sesión.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
                 </div>
+                <!--Phone-->
                 <div class="mb-3 row">
                     <label for="exampleInputPhone" class="col-sm-2 col-form-label">Teléfono</label>
                     <div class="col-sm-10">
-                        <input name="phone" type="text" class="form-control" id="exampleInputPhone" aria-describedby="lastnamePhone" th:value="${user.getPhone()}">
+                        <input name="phone" type="text" class="form-control" id="exampleInputPhone" aria-describedby="lastnamePhone" th:field="*{phone}">
                         <div id="phoneHelp" class="form-text">Largo mínimo de 12 dígitos y largo máximo de 15 dígitos.</div>
-                        <div th:if="${msgPhone == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                            <strong>¡Error!</strong> El teléfono móvil ingresado no es válido.
+                        <div th:if="${#fields.hasErrors('phone')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                            <strong>¡Error!</strong>
+                            <label th:errors="*{phone}"></label>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>

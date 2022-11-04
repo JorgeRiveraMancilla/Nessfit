@@ -14,9 +14,11 @@ public class User implements Serializable {
     @Id
     private String rut;
     @Column (name = "first_name")
+    @Size(min = 3, max = 200, message = "Los nombres o apellidos deben tener más de 2 caracteres.")
     @Pattern(regexp = "^((([A-Za-z]){3,}(\s)?)*)$", message = "Los nombres o apellidos deben tener más de 2 caracteres.")
     private String firstName;
     @Column (name = "last_name")
+    @Size(min = 3, max = 200, message = "Los nombres o apellidos deben tener más de 2 caracteres.")
     @Pattern(regexp = "^((([A-Za-z]){3,}(\s)?)*)$", message = "Los nombres o apellidos deben tener más de 2 caracteres.")
     private String lastName;
     @Pattern(regexp="^(\\d){11,16}$", message = "El teléfono móvil ingresado no es válido.")

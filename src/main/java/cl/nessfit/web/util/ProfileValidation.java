@@ -14,12 +14,10 @@ public class ProfileValidation {
      * @param email New email for the user.
      * @return "True" if the email not exist and "False" if exists.
      */
-    public static boolean notExistEmail(UserServiceInterface userService, String email) {
-
-        User loggedUser = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
+    public static boolean notExistEmail(UserServiceInterface userService, User editedUser, String email) {
 
         // If the new email is the same that user email.
-        if (loggedUser != null) { if (loggedUser.getEmail().equals(email)) { return true; } }
+        if (editedUser != null) { if (editedUser.getEmail().equals(email)) { return true; } }
 
         // We check if the email currently exists in the system.
         List<User> userList = userService.getUsers();
