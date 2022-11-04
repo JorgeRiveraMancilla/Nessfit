@@ -27,7 +27,7 @@ public interface UserRepositoryInterface extends JpaRepository<User, String> {
      */
     List<User> findAll();
     /**
-     * Select * form users u where u.id_role = id1 or u.id_role = id2.
+     * Select * from users u where u.id_role = id1 or u.id_role = id2.
      * @param id1 ID Role1.
      * @param id2 ID Role2.
      * @return All user with the same id.
