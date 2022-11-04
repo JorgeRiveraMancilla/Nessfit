@@ -1,6 +1,7 @@
 package cl.nessfit.web.util;
 
 public class PasswordValidation {
+
     /**
      * Method that performs validations corresponding to the password.
      * @param password1 New password.
@@ -13,7 +14,6 @@ public class PasswordValidation {
         }
         return false;
     }
-
     /**
      * Check if both passwords are equal.
      * @param password1 new password
@@ -23,7 +23,6 @@ public class PasswordValidation {
     public static boolean areEquals(String password1, String password2) {
         return password1.equals(password2);
     }
-
     /**
      * Check if the password has a valid length
      * @param password new password
@@ -35,4 +34,5 @@ public class PasswordValidation {
         }
         return false;
     }
+
 }

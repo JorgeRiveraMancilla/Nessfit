@@ -1,34 +1,30 @@
-package cl.nessfit.web.controller;
+package cl.nessfit.web.controller.administrator;
 
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.ProfileValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-public class EditProfileController {
+@RequestMapping ("/administrator")
+public class EditUserProfileController {
     @Autowired
     UserServiceInterface userService;
 
-    /**
-     * Check if user is authenticated.
-     * @param model Is the application's dynamic data structure.
-     * @return access to the webpage.
-     */
-    @GetMapping ("/edit-profile")
-    public String editProfile(Model model) {
-        User actualUser = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-        // The current user of the system is sent
-        model.addAttribute("user", actualUser);
-        return "edit-profile";
+    @GetMapping ("/edit-profile/{rut}")
+    public String editProfile(Model model, @PathVariable String rut) {
+        User user = userService.searchByRut(rut);
+        model.addAttribute("user", user);
+        return "administrator/edit-profile";
     }
 
     /**
@@ -42,22 +38,22 @@ public class EditProfileController {
     public String editProfile(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model){
 
         // Logged user obtained by rut
-        User actualUser = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
+        User editedUser = userService.searchByRut(modelUser.getRut());
         // "True" if email exist on the system, "False" if not
-        boolean existEmail = ProfileValidation.notExistEmail(userService, actualUser, modelUser.getEmail());
+        boolean existEmail = ProfileValidation.notExistEmail(userService, editedUser, modelUser.getEmail());
         // If there is a problem, it is verified
         if (bindingResult.hasErrors() || !existEmail) {
             model.addAttribute("emailExist", existEmail);
-            return "edit-profile";
+            return "administrator/edit-profile";
         }
 
         // Update user values
-        actualUser.setFirstName(modelUser.getFirstName());
-        actualUser.setLastName(modelUser.getLastName());
-        actualUser.setEmail(modelUser.getEmail());
-        actualUser.setPhone(modelUser.getPhone());
+        editedUser.setFirstName(modelUser.getFirstName());
+        editedUser.setLastName(modelUser.getLastName());
+        editedUser.setEmail(modelUser.getEmail());
+        editedUser.setPhone(modelUser.getPhone());
         // Save data from actualUser
-        userService.save(actualUser);
+        userService.save(editedUser);
 
         return "redirect:/";
     }
