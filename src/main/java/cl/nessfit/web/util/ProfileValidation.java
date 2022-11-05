@@ -28,18 +28,12 @@ public class ProfileValidation {
         return true;
     }
     /**
-     * Method that is responsible for validating if the rut exists in the system.
+     * Method that is responsible for validating if the rut not exists in the system.
      * @param rut New rut for the user.
      * @return "True" if the rut not exist and "False" if exists.
      */
     public static boolean notExistRut(UserServiceInterface userService, String rut) {
-        // We check if the rut currently exists in the system.
-        List<User> userList = userService.getUsers();
-        for (User user : userList) {
-            // If the rut exists in the system, then we return false.
-            if (user.getRut().equals(rut)) { return false; }
-        }
-        return true;
+        return userService.searchByRut(rut) == null;
     }
     /**
      * Method that checks if the rut is valid.
@@ -47,7 +41,7 @@ public class ProfileValidation {
      * @return true if rut is valid, otherwise false.
      */
     public static boolean validRut(String rut) {
-        Pattern pattern = Pattern.compile("^([1-9][0-9]{7}[0-9K])$");
+        Pattern pattern = Pattern.compile("^([1-9][0-9]{7,13}[0-9K])$");
         Matcher matcher = pattern.matcher(rut);
         if (matcher.matches()) {
             String dv = calculateDV(rut);

@@ -15,17 +15,15 @@ public class User implements Serializable {
     private String rut;
     @Column (name = "first_name")
     @Size(max = 200, message = "Largo inválido.")
-    @NotEmpty(message = "Campo obligatorio")
-    @Pattern(regexp = "^(((.){3,}(\s)?)*)$", message = "Los nombres deben tener más de 2 caracteres.")
+    @Pattern(regexp = "^([A-zÀ-ú]{3,}\\s)*[A-zÀ-ú]{3,}$", message = "Los nombres deben tener más de 2 caracteres.")
     private String firstName;
     @Column (name = "last_name")
     @Size(max = 200, message = "Largo inválido.")
-    @NotEmpty(message = "Campo obligatorio")
-    @Pattern(regexp = "^(((.){3,}(\s)?)*)$", message = "Los apellidos deben tener más de 2 caracteres.")
+    @Pattern(regexp = "^([A-zÀ-ú]{3,}\\s)*[A-zÀ-ú]{3,}$", message = "Los apellidos deben tener más de 2 caracteres.")
     private String lastName;
     @Pattern(regexp="^(\\d){11,16}$", message = "El teléfono móvil ingresado no es válido.")
     private String phone;
-    @NotEmpty(message = "Campo obligatorio")
+    @NotEmpty(message = "Campo obligatorio.")
     @Email(message = "Su correo electrónico no es valido.")
     private String email;
     private int status;
