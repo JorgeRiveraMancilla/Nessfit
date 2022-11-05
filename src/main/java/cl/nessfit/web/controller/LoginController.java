@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
-    @GetMapping ("index")
+    @GetMapping ("/index")
     public String index() {
         return "index";
     }
@@ -17,7 +17,9 @@ public class LoginController {
      * @return Login html functions.
      */
     @GetMapping("/login")
-    public String login(){ return "login"; }
+    public String login() {
+        return "login";
+    }
 
     /**
      * Method in charge of logging out the user in the system.
