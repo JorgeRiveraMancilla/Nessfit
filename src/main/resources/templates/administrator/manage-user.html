@@ -32,10 +32,9 @@
             </tr>
             </thead>
             <tbody>
-
                 <tr th:if="${users == null}">
                     <td colspan="7" class="text-center">
-                        Sin registros.
+                        No hay usuarios que mostrar.
                     </td>
                 </tr>
                 <tr th:unless="${users == null}" th:each="user : ${users}">
