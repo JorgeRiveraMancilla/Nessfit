@@ -7,8 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -18,17 +17,19 @@ public class Installation implements Serializable {
     @Serial
     private static final long serialVersionUID = 425470456250466110L;
     @Id
-    @Size (min = 1, max = 200, message = "Largo inválido.")
+    @Size (max = 200, message = "Largo inválido.")
+    @NotEmpty (message = "Campo obligatorio.")
     private String name;
-    @Size (min = 1, max = 200, message = "Largo inválido.")
+    @Size (max = 200, message = "Largo inválido.")
+    @NotEmpty (message = "Campo obligatorio.")
     private String address;
     @Column (name = "rental_cost")
-    @Min (value = 1000, message = "El costo mínimo de arriendo debe ser $1000.")
-    private int rentalCost;
+    @Pattern(regexp="^(\\d)+$", message = "Formato inválido.")
+    private String rentalCost;
     private int status;
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "id_type", referencedColumnName = "id")
-    private Type type;
+    @JoinColumn (name = "id_category", referencedColumnName = "id")
+    private Category category;
 
     public String getName() {
         return name;
@@ -46,11 +47,11 @@ public class Installation implements Serializable {
         this.address = address;
     }
 
-    public int getRentalCost() {
+    public String getRentalCost() {
         return rentalCost;
     }
 
-    public void setRentalCost(int rentalCost) {
+    public void setRentalCost(String rentalCost) {
         this.rentalCost = rentalCost;
     }
 
@@ -62,11 +63,11 @@ public class Installation implements Serializable {
         this.status = status;
     }
 
-    public Type getType() {
-        return type;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

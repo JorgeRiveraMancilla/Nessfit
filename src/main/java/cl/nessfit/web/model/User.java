@@ -21,6 +21,7 @@ public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 7124965512564802080L;
     @Id
+    @NotEmpty (message = "Campo obligatorio.")
     private String rut;
     @Column (name = "first_name")
     @Size(max = 200, message = "Largo inválido.")

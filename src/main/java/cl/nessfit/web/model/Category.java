@@ -7,8 +7,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "types")
-public class Type implements Serializable {
+@Table(name = "categories")
+public class Category implements Serializable {
     @Serial
     private static final long serialVersionUID = 3719789859065006975L;
     @Id

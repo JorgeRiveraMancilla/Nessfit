@@ -48,8 +48,10 @@ public class AdministrativeRegisterUserController {
             model.addAttribute("rut", modelUser.getRut());
             return "administrative/register-user";
         }
+
         // New User
         User newUser = new User();
+
         // Set attributes
         newUser.setRut(modelUser.getRut());
         newUser.setFirstName(modelUser.getFirstName());

@@ -10,9 +10,8 @@ import java.time.LocalDate;
 public class DateRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = -8720869883791567541L;
-    @Id
-    private int id;
     private LocalDate date;
+    @Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_request", referencedColumnName = "id")
     private Request request;
