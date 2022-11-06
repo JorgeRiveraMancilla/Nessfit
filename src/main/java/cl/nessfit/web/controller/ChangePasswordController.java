@@ -12,10 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpServletRequest;
-
 
 @Controller
 public class ChangePasswordController {
@@ -25,39 +22,29 @@ public class ChangePasswordController {
     private BCryptPasswordEncoder passwordEncoder;
 
     /**
-     * Method that receives a model type variable and implements the new password structure in it.   
-     * @param model The model of the project.
+     * Method that receives a model type variable and implements the new password structure in it.
      * @return returns "change-password" string.
      */
     @GetMapping("/change-password")
-    public String password(Model model){
-        //Password1 = new password.
-        model.addAttribute("password1", "");
-        //Password2 = repeat new password.
-        model.addAttribute("password2", "");
+    public String password(Model model) {
+        model.addAttribute("rut", SecurityContextHolder.getContext().getAuthentication().getName());
         return "change-password";
     }
     /**
      * Method that handles the changing of a password and logs the corresponding data into the user class.
-     * @param newPassword New password entered by the user
-     * @param repeatNewPassword Validation of the new password 
-     * @param request http request data
-     * @param attributes no se usa (preguntar)
+     * @param newPassword New password entered by the user.
+     * @param repeatNewPassword Validation of the new password.
+     * @param request http request data.
      * @param model The model of the project.
-     * @return "change-password" if the process was unsucessfull otherwise logouts and returns "redirect:/"
+     * @return "change-password" if the process was unsuccessful otherwise logouts and returns "redirect:/"
      */
     @PostMapping("/change-password")
-    public String changePassword(@RequestParam("newPassword") String newPassword, @RequestParam("repeatNewPassword")
-        String repeatNewPassword, HttpServletRequest request, RedirectAttributes attributes, Model model) {
-
+    public String changePassword(@RequestParam("newPassword") String newPassword,
+                                 @RequestParam("repeatNewPassword") String repeatNewPassword,
+                                 HttpServletRequest request,
+                                 Model model) {
         // Obtain the user
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-
-        if (user == null){
-            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-            logoutHandler.logout(request, null, null);
-            return "redirect:/";
-        }
 
         //Validate password
         if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
@@ -70,14 +57,14 @@ public class ChangePasswordController {
 
             model.addAttribute("newPassword", newPassword);
             model.addAttribute("repeatNewPassword", repeatNewPassword);
+            model.addAttribute("rut", SecurityContextHolder.getContext().getAuthentication().getName());
             return "change-password";
-	    }
+        }
         // Set new password (encrypted)
         user.setPassword(passwordEncoder.encode(newPassword));
         userService.save(user);
-
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, null, null);
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

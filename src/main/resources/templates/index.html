@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="fragments/head-fragment::head"></head>
 <body>
-<header th:insert="fragments/header-fragment::header"></header>
-<main class="d-flex flex-row">
-    <nav th:insert="fragments/sidebar-fragment::nav"></nav>
-    <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
+<header>
+    <nav class="navbar sticky-top bg-white border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand">NESSFIT</a>
+            <div class="d-flex">
+                <a th:href="@{/login}" class="btn btn-outline-primary">Iniciar sesión</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="d-flex" style="height: calc(100vh - 4rem)">
+    <section class="container-fluid p-3 d-flex align-items-center justify-content-center">
         <div id="carouselExampleCaptions" class="carousel slide w-75" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

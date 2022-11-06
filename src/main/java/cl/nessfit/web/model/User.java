@@ -1,31 +1,60 @@
 package cl.nessfit.web.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 7124965512564802080L;
     @Id
+    @NotEmpty (message = "Campo obligatorio.")
     private String rut;
-    @Size(min = 3, message = "{validation.firstName.size}")
     @Column (name = "first_name")
+    @Size(max = 200, message = "Largo inválido.")
+    @Pattern(regexp = "^([A-zÀ-ú]{3,}\\s)*[A-zÀ-ú]{3,}$", message = "Los nombres deben tener más de 2 caracteres.")
     private String firstName;
-    @Size(min = 3, message = "{validation.lastName.size}")
     @Column (name = "last_name")
+    @Size(max = 200, message = "Largo inválido.")
+    @Pattern(regexp = "^([A-zÀ-ú]{3,}\\s)*[A-zÀ-ú]{3,}$", message = "Los apellidos deben tener más de 2 caracteres.")
     private String lastName;
-    private long phone;
+    @Pattern(regexp="^(\\d){11,16}$", message = "El teléfono móvil ingresado no es válido.")
+    private String phone;
+    @NotEmpty(message = "Campo obligatorio.")
+    @Email(message = "Su correo electrónico no es valido.")
     private String email;
     private int status;
-    @Size(min = 10, message = "{validation.password.size}")
     private String password;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id")
     private Role role;
 
+    /**
+     * Constructor for the User class.
+     */
+    public User() {
+        this.rut = "";
+        this.firstName = "";
+        this.lastName = "";
+        this.phone = "";
+        this.email = "";
+        this.status = 0;
+        this.password = "";
+        this.role = null;
+    }
     /**
      * Method that gets the rut of a user.
      * @return Rut of a user.
@@ -72,14 +101,14 @@ public class User implements Serializable {
      * Method that gets the phone number of a user.
      * @return Phone number of a user.
      */
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
     /**
      * Method that sets the phone number of a user.
      * @param phone New phone number for the user.
      */
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     /**
