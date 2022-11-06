@@ -19,4 +19,12 @@ public class InstallationValidation {
         }
         return true;
     }
+
+    public static boolean notValidType(InstallationServiceInterface installationService, String type) {
+        // If the type of instalaltion is one of the options, then we return false.
+        if (type=="Cancha" || type=="Gimnasio" || type=="Piscina" || type=="Quincho" || type=="Estadio"){
+            return false;
+        }
+        return true;
+    }
 }

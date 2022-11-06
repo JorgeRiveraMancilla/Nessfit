@@ -15,7 +15,7 @@ select {
     outline:0;
     box-shadow:none;
     border-radius: 0.5rem;
-    background: #CCC;
+    background-image: linear-gradient(to right, #CCC, #3f8880);
     border-color: #CCC;
     flex: 1;
     margin-left: 1rem;
@@ -36,6 +36,9 @@ select {
     overflow: hidden;
     margin: 1rem;
     margin-bottom: 1.5rem;
+ }
+ .select::placeholder{
+    color: #CCC;
  }
  .select::after {
     content: '\25BC';

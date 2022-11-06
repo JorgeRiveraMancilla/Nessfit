@@ -20,19 +20,35 @@
         <h3>*Campo requerido</h3>
         <!--Nombre-->
         <div class="input-field input-field-large">
-          <input type="text" name="name" id="name" placeholder=" ">
-          <label for="name">Nombre*</label>
+          <fieldset>
+            <legend>Nombre</legend>
+              <input type="text" th:field="*{name}" name="name" id="name" placeholder=" ">
+          </fieldset>
+        </div>
+        <div th:if="${#fields.hasErrors('name')}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong>
+          <label th:errors="*{name}"></label>
+        </div>
+        <div th:if="${existName == false}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong> El nombre de la instalación ya existe. Intente con un nuevo nombre.
         </div>
         <!--Address-->
         <div class="input-field input-field-large">
-          <input type="text" name="address" id="address" placeholder=" ">
+          <input type="text" th:field="*{address}" name="address" id="address" placeholder=" ">
           <label for="address">Dirección*</label>
+        </div>
+        <div th:if="${#fields.hasErrors('address')}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong>
+          <label th:errors="*{address}"></label>
         </div>
         <!--Type-->
         <div class="select">
           <label for="type" class="input-select">Tipo*</label>
-          <select class="select-option" name="type">
-            <option disabled selected>Seleccione una opción</option>
+          <select th:value=${type} class="select-option" name="type" id="type">
+            <option value="" selected>Seleccione una opción</option>
             <option value="Cancha">Cancha</option>
             <option value="Gimnasio">Gimnasio</option>
             <option value="Piscina">Piscina</option>
@@ -40,10 +56,20 @@
             <option value="Estadio">Estadio</option>
           </select>
         </div>
+        <div th:if="${#fields.hasErrors('type')}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong>
+          <label th:errors="*{type}"></label>
+        </div>
         <!--RentalCost-->
         <div class="input-field phone input-field-large">
-          <input type="number" name="rentalCost" id="cost" placeholder="min: $1000">
-          <label for="cost">Costo de arriendo*</label>
+          <input type="number" th:field="*{rentalCost}" name="rental-cost" id="rental-cost" placeholder="min: $1.000">
+          <label for="rental-cost">Costo de arriendo*</label>
+        </div>
+        <div th:if="${#fields.hasErrors('rentalCost')}" class="alert alert-large">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          <strong>¡Error!</strong>
+          <label th:errors="*{rentalCost}"></label>
         </div>
         <!--Status-->
         <div class="radio">

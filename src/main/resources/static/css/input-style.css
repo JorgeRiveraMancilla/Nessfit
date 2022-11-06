@@ -2,6 +2,7 @@
     box-sizing: border-box;
     border: none;
     width: 20rem;
+    height: 4rem;
     padding-top: 0.3rem;
     display: block;
     position: relative;
@@ -9,6 +10,7 @@
 }
 .input-field-large {
     width: 30rem;
+    height: 4rem;
 }
 .input-field input {
     width: 100%;

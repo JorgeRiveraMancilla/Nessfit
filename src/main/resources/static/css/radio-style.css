@@ -69,9 +69,3 @@
 .container input:checked ~ .checkmark:after {
     display: block;
 }
-
-/* Style the indicator*/
-.container .checkmark:after {
-    content: '\01F5F8';
-    font-weight: 10rem;
-}

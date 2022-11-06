@@ -61,10 +61,12 @@ public class RegisterAdministrativeInstallationController {
 
         // Extra verifications
         boolean existName = InstallationValidation.notExistName(installationService,modelInstallation.getName());
+        boolean validType = InstallationValidation.notValidType(installationService,modelInstallation.getType());
 
         //If there is a problem, it is verified
-        if (bindingResult.hasErrors() || !existName) {
+        if (bindingResult.hasErrors() || !existName || !validType) {
             model.addAttribute("existName", existName);
+            model.addAttribute("validType", validType);
             return "register-installation";
         }
         
