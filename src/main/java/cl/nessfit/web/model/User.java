@@ -1,14 +1,23 @@
 package cl.nessfit.web.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
 import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 7124965512564802080L;
     @Id

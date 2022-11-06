@@ -1,40 +1,34 @@
 package cl.nessfit.web.model;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "installation")
+@Table (name = "installations")
 public class Installation implements Serializable {
-
     @Serial
-    private static final long serialVersionUID = -8255784159283163739L;
+    private static final long serialVersionUID = 425470456250466110L;
     @Id
-    @Size(min = 1, max = 200, message = "Largo inválido.")
+    @Size (min = 1, max = 200, message = "Largo inválido.")
     private String name;
-    @Size(min = 1, max = 200, message = "Largo inválido.")
+    @Size (min = 1, max = 200, message = "Largo inválido.")
     private String address;
-    // Hablar con rodrigo.
-    private String type;
-    @Column(name = "rental_cost")
-    @Min(value = 1000, message = "El costo mínimo de arriendo debe ser $1000.")
+    @Column (name = "rental_cost")
+    @Min (value = 1000, message = "El costo mínimo de arriendo debe ser $1000.")
     private int rentalCost;
     private int status;
-
-    /**
-     * Constructor for the Installation class.
-     */
-    public Installation() {
-        this.name = "";
-        this.address = "";
-        this.type = "";
-        this.rentalCost = 0;
-        this.status = 0;
-    }
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn (name = "id_type", referencedColumnName = "id")
+    private Type type;
 
     public String getName() {
         return name;
@@ -50,14 +44,6 @@ public class Installation implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public int getRentalCost() {
@@ -76,4 +62,11 @@ public class Installation implements Serializable {
         this.status = status;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
 }
