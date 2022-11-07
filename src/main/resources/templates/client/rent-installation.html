@@ -32,22 +32,34 @@
         </div>
         <div class="row" style="min-width: 50rem; max-width: 50rem;">
             <div class="col-sm-3">
-                <button id="button" type="submit" class="btn btn-primary" style="height: fit-content">Arrendar</button>
+                <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="height: fit-content">Arrendar</button>
             </div>
             <div class="col-sm-9 d-flex align-items-center justify-content-center">
                 <div id="datepicker"></div>
             </div>
         </div>
-
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header w-100">
+                        <h1 class="modal-title fs-5">¿Está seguro?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body w-100">El costo total de arriendo es de $XXX.</div>
+                    <div class="modal-footer w-100">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 <footer th:insert="fragments/footer-fragment::footer"></footer>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.es.min.js}"></script>
-
 <script>
     $('#datepicker').datepicker({
         format: 'dd/mm/yyyy',
@@ -60,7 +72,6 @@
         todayHighlight: true
     });
 </script>
-
 <script>
     var inputs1 = document.getElementById("administrative").getElementsByTagName("input");
     for (i = 0; i < inputs1.length; i++) {
