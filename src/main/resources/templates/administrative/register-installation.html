@@ -40,13 +40,13 @@
                 <label for="exampleInputRentalCost" class="col-sm-3 col-form-label">Costo de arriendo</label>
                 <div class="col-sm-9">
                     <input name="rentalCost" type="text" class="form-control" id="exampleInputRentalCost" aria-describedby="rentalCostHelp2" th:field="*{rentalCost}">
-                    <div id="rentalCostHelp2" class="form-text">Debe ingresar sólo números enteros.</div>
+                    <div id="rentalCostHelp2" class="form-text">El costo mínimo debe ser $1.000</div>
                     <div th:if="${validMinimum == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo mínimo debe ser $1.000.
+                        <strong>¡Error!</strong> El costo mínimo debe ser $1.000
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <div th:if="${validMaximum == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo máximo debe ser $100.000.
+                        <strong>¡Error!</strong> El costo máximo debe ser $100.000
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <div th:each="message : ${#fields.errors('rentalCost')}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
@@ -54,6 +54,7 @@
                         <label th:text="${message}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                    
                 </div>
             </div>
             <!--Type-->

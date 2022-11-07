@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +55,6 @@ public class AdministrativeRegisterInstallationController {
 //            model.addAttribute("validSelect", false);
 //        }
 
-
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.getCategories());
             return "administrative/register-installation";
@@ -70,9 +71,27 @@ public class AdministrativeRegisterInstallationController {
             model.addAttribute("validMinimum", false);
         }
 
-
-
         model.addAttribute("categories", categoryService.getCategories());
         return "administrative/register-installation";
+        
+        /* 
+        // New Installation
+        Installation newInstallation = new Installation();
+
+        // Set attributes
+        newInstallation.setName(modelInstallation.getName());
+        newInstallation.setAddress(modelInstallation.getAddress());
+        newInstallation.setRentalCost(modelInstallation.getRentalCost());
+        newInstallation.setStatus(modelInstallation.getStatus());
+        // Create category
+        Category category = new Category();
+        // convertir modelInstallation.getCategory() en int
+        //category.setId();
+        newInstallation.setCategory(category);
+        // Save user
+        //InstallationService.save(newInstallation);
+
+        return "redirect:/administrative/manage-installation";
+        */
     }
 }
