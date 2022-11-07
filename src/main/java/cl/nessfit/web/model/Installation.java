@@ -17,15 +17,9 @@ public class Installation implements Serializable {
     @Serial
     private static final long serialVersionUID = 425470456250466110L;
     @Id
-    @NotBlank (message = "Campo obligatorio.")
-    @Size (max = 200, message = "Largo inválido.")
     private String name;
-    @NotBlank (message = "Campo obligatorio.")
-    @Size (max = 200, message = "Largo inválido.")
     private String address;
     @Column (name = "rental_cost")
-    @NotBlank (message = "Campo obligatorio.")
-    @Pattern(regexp="^(\\d)+$", message = "El costo deben contener solo números.")
     private String rentalCost;
     private int status;
     @ManyToOne (fetch = FetchType.EAGER)

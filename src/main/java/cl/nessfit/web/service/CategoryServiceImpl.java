@@ -21,4 +21,9 @@ public class CategoryServiceImpl implements CategoryServiceInterface {
     public boolean exists(String name) {
         return categoryRepository.existsByName(name);
     }
+
+    @Override
+    public Category searchByName(String name) {
+        return categoryRepository.searchByName(name);
+    }
 }

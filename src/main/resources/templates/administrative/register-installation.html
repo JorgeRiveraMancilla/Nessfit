@@ -12,13 +12,16 @@
                 <label for="exampleInputName" class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
                     <input name="name" type="text" class="form-control" id="exampleInputName" th:field="*{name}">
-                    <div th:if="${existName == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> El nombre ya existe en el sistema.
+                    <div th:if="${nameIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong> Campo obligatorio.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div th:each="message : ${#fields.errors('name')}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                    <div th:if="${validNameSize == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong> Largo inválido.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div th:if="${nameExists == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong> El nombre ya existe en el sistema.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -28,9 +31,12 @@
                 <label for="exampleInputAddress" class="col-sm-3 col-form-label">Dirección</label>
                 <div class="col-sm-9">
                     <input name="address" type="text" class="form-control" id="exampleInputAddress" th:field="*{address}">
-                    <div th:each="message : ${#fields.errors('address')}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                    <div th:if="${addressIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong> Campo obligatorio.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div th:if="${validAddressSize == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong> Largo inválido.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -41,69 +47,61 @@
                 <div class="col-sm-9">
                     <input name="rentalCost" type="text" class="form-control" id="exampleInputRentalCost" aria-describedby="rentalCostHelp2" th:field="*{rentalCost}">
                     <div id="rentalCostHelp2" class="form-text">El costo mínimo debe ser $1.000</div>
-                    <div th:if="${validMinimum == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo mínimo debe ser $1.000
+                    <div th:if="${rentalCostIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Campo obligatorio
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div th:if="${validMaximum == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo máximo debe ser $100.000
+                    <div th:if="${validRentalCostFormat == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> Formato inválido
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div th:each="message : ${#fields.errors('rentalCost')}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                    <div th:if="${validMinimumRentalCost == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> El costo mínimo de arriendo debe ser $1.000
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    
+                    <div th:if="${validMaximumRentalCost == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong> El costo mínimo de arriendo debe ser $100.000
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </div>
             </div>
             <!--Type-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="typeSelect1" class="col-sm-3 col-form-label">Tipo</label>
                 <div class="col-sm-9">
-                    <select th:if="${category == null}" name="type" id="typeSelect1" class="form-select" aria-label="Default select example">
+                    <select name="category" id="typeSelect1" class="form-select" aria-label="Default select example">
                         <option selected>Seleccione un tipo</option>
-                        <option th:each="category : ${categories}" th:text="${category.getName()}"></option>
-                    </select>
-                    <select th:if="${category != null}" name="type" id="typeSelect2" class="form-select" aria-label="Default select example">
-                        <option>Seleccione un tipo</option>
-                        <div th:each="categoryAux : ${categories}">
-                            <option th:if="${categoryAux.getName() != category}" th:text="${categoryAux.getName()}" ></option>
-                            <option selected th:if="${categoryAux.getName() == category}" th:text="${categoryAux.getName()}"></option>
+                        <div th:each="category : ${categories}">
+                            <div th:if="${nameCategory == null}">
+                                <option th:text="${category.getName()}"></option>
+                            </div>
+                            <div th:if="${nameCategory != null}">
+                                <option th:if="${nameCategory == category.getName()}" th:text="${category.getName()}" selected></option>
+                                <option th:if="${nameCategory != category.getName()}" th:text="${category.getName()}"></option>
+                            </div>
                         </div>
                     </select>
-                    <div th:if="${validType == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Debe seleccionar un tipo.
+                    <div th:if="${selectedOption == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong> Debe seleccionar un tipo
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
             </div>
-
-
-
-
             <!--Status-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="flexRadioDefault1" class="col-sm-3 col-form-label">Estado</label>
                 <div class="col-sm-9">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault1" value="0" checked="">
+                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault1" value="1" checked>
                         <label class="form-check-label" for="flexRadioDefault1">
                             Operativo
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault2" value="1">
+                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault2" value="0">
                         <label class="form-check-label" for="flexRadioDefault2">
                             Inoperativo
                         </label>
-                    </div>
-
-
-
-                    <div th:if="${validSelect == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> Debe seleccionar un estado.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
             </div>
@@ -115,7 +113,7 @@
                             <h1 class="modal-title fs-5">¿Está seguro?</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body w-100">Registrar un nuevo usuario de rol Cliente.</div>
+                        <div class="modal-body w-100">Registrar una nueva instalación.</div>
                         <div class="modal-footer w-100">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Confirmar</button>

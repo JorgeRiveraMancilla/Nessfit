@@ -4,17 +4,15 @@ import cl.nessfit.web.model.Category;
 import cl.nessfit.web.model.Installation;
 import cl.nessfit.web.service.CategoryServiceInterface;
 import cl.nessfit.web.service.InstallationServiceInterface;
+import cl.nessfit.web.util.CategoryValidation;
 import cl.nessfit.web.util.InstallationValidation;
+import cl.nessfit.web.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,59 +37,71 @@ public class AdministrativeRegisterInstallationController {
                                         BindingResult bindingResult,
                                         @RequestParam Map<String, String> allParams,
                                         Model model) {
-        String type = allParams.get("type");
-
-        if (!InstallationValidation.validCategory(categoryService, type)) {
-            model.addAttribute("validType", false);
-        } else {
-            model.addAttribute("category", type);
+        // Name
+        String name = modelInstallation.getName().strip();
+        if (Util.isBlank(name)) {
+            model.addAttribute("nameIsBlank", true);
+        } else if (!Util.validSize(name, 0, 200)) {
+            model.addAttribute("validNameSize", false);
+        } else if (InstallationValidation.exists(installationService, name)) {
+            model.addAttribute("nameExists", true);
         }
 
-//        if (operative != null) {
-//            model.addAttribute("operative", true);
-//        } else if (inoperative != null) {
-//            model.addAttribute("inoperative", true);
-//        } else {
-//            model.addAttribute("validSelect", false);
-//        }
+        // Address
+        String address = modelInstallation.getAddress();
+        if (Util.isBlank(address)) {
+            model.addAttribute("addressIsBlank", true);
+        } else if (!Util.validSize(address, 0, 200)) {
+            model.addAttribute("validAddressSize", false);
+        }
 
-        if (bindingResult.hasErrors()) {
+        // Rental cost
+        String rentalCostStr = modelInstallation.getRentalCost();
+        int rentalCost;
+        if (Util.isBlank(rentalCostStr)) {
+            model.addAttribute("rentalCostIsBlank", true);
+        } else if (!Util.tryParseInt(rentalCostStr)) {
+            model.addAttribute("validRentalCostFormat", false);
+        } else {
+            rentalCost = Integer.parseInt(rentalCostStr);
+            if (!Util.validMin(rentalCost, 1000)) {
+                model.addAttribute("validMinimumRentalCost", false);
+            } else if (!Util.validMax(rentalCost, 100000)) {
+                model.addAttribute("validMaximumRentalCost", false);
+            }
+        }
+
+        // Category
+        String nameCategory = allParams.get("category");
+        if (!CategoryValidation.exists(categoryService, nameCategory)) {
+            model.addAttribute("selectedOption", false);
+        }
+
+        // Status
+        int status = Integer.parseInt(allParams.get("status"));
+
+        if (2 < model.asMap().size()) {
             model.addAttribute("categories", categoryService.getCategories());
+            if (!model.containsAttribute("selectedOption")) {
+                model.addAttribute("nameCategory", nameCategory);
+            }
             return "administrative/register-installation";
         }
 
-        if (InstallationValidation.existName(installationService, modelInstallation.getName())) {
-            model.addAttribute("existName", true);
-        }
+        Installation installation = new Installation();
+        installation.setName(name);
+        installation.setAddress(address);
+        installation.setRentalCost(modelInstallation.getRentalCost());
+        installation.setStatus(status);
 
-        if (!InstallationValidation.validMaximum(modelInstallation.getRentalCost())) {
-            model.addAttribute("validMaximum", false);
-        }
-        else if (!InstallationValidation.validMinimum(modelInstallation.getRentalCost())) {
-            model.addAttribute("validMinimum", false);
-        }
-
-        model.addAttribute("categories", categoryService.getCategories());
-        return "administrative/register-installation";
-        
-        /* 
-        // New Installation
-        Installation newInstallation = new Installation();
-
-        // Set attributes
-        newInstallation.setName(modelInstallation.getName());
-        newInstallation.setAddress(modelInstallation.getAddress());
-        newInstallation.setRentalCost(modelInstallation.getRentalCost());
-        newInstallation.setStatus(modelInstallation.getStatus());
-        // Create category
         Category category = new Category();
-        // convertir modelInstallation.getCategory() en int
-        //category.setId();
-        newInstallation.setCategory(category);
-        // Save user
-        //InstallationService.save(newInstallation);
+        category.setId(categoryService.searchByName(nameCategory).getId());
+        category.setName(nameCategory);
+
+        installation.setCategory(category);
+
+        installationService.save(installation);
 
         return "redirect:/administrative/manage-installation";
-        */
     }
 }
