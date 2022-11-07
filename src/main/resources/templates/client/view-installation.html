@@ -7,16 +7,13 @@
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex flex-column align-items-start border-start">
         <div class="container-fluid d-flex justify-content-between">
-            <form th:action="@{/administrative/manage-installation}" method="post" autocomplete="off">
+            <form th:action="@{/client/view-installation}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
                     <label for="exampleInputRut1" class="form-label">Nombre</label>
                     <input name="name" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp">
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </form>
-            <div class="d-flex align-items-center">
-                <a type="submit" class="btn btn-primary" th:href="@{/administrative/register-installation}">Registrar instalación</a>
-            </div>
         </div>
         <table class="table table-hover">
             <thead>
@@ -25,11 +22,12 @@
                 <th scope="col">Dirección</th>
                 <th scope="col">Costo de arriendo</th>
                 <th scope="col">Tipo</th>
+                <th scope="col">Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr th:if="${installations == null}">
-                <td colspan="4" class="text-center">
+                <td colspan="5" class="text-center">
                     No hay centros deportivos que mostrar.
                 </td>
             </tr>
@@ -38,6 +36,9 @@
                 <td th:text="${installation.getAddress()}"></td>
                 <td th:text="${installation.getRentalCost()}"></td>
                 <td th:text="${installation.getCategory().getName()}"></td>
+                <td>
+                    <a class="btn btn-outline-primary" th:href="@{/client/rent-installation/{name}(name=${installation.getName()})}">Arrendar</a>
+                </td>
             </tr>
             </tbody>
         </table>

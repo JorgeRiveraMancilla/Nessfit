@@ -70,9 +70,20 @@ public class AdministrativeRegisterInstallationController {
             model.addAttribute("validMinimum", false);
         }
 
+        Installation newInstallation = new Installation();
 
+        newInstallation.setName(modelInstallation.getName());
+        newInstallation.setAddress(modelInstallation.getAddress());
+        newInstallation.setRentalCost(modelInstallation.getRentalCost());
+        newInstallation.setStatus(1);
+
+        Category category = new Category();
+        category.setId(1);
+        category.setName("Cancha");
+        newInstallation.setCategory(category);
+        installationService.save(newInstallation);
 
         model.addAttribute("categories", categoryService.getCategories());
-        return "administrative/register-installation";
+        return "administrative/manage-installation";
     }
 }

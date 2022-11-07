@@ -7,6 +7,8 @@
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
         <form th:action="@{/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+
+
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
                 <div class="col-sm-9">
@@ -14,6 +16,8 @@
                     <input type="hidden" th:field="*{rut}">
                 </div>
             </div>
+
+
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputFirstName" class="col-sm-3 col-form-label">Nombres</label>
                 <div class="col-sm-9">
@@ -26,6 +30,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputLastname" class="col-sm-3 col-form-label">Apellidos</label>
                 <div class="col-sm-9">
@@ -38,6 +44,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputEmail" class="col-sm-3 col-form-label">Correo electrónico</label>
                 <div class="col-sm-9">
@@ -54,6 +62,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputPhone" class="col-sm-3 col-form-label">Teléfono</label>
                 <div class="col-sm-9">
@@ -66,7 +76,11 @@
                     </div>
                 </div>
             </div>
+
+
             <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
+
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
