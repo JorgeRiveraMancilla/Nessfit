@@ -11,7 +11,7 @@
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputRut2" class="col-sm-3 col-form-label">RUT</label>
                 <div class="col-sm-9">
-                    <input name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2" th:field="*{rut}">
+                    <input placeholder= "15348789K" name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2" th:field="*{rut}">
                     <div id="rutHelp2" class="form-text">Sin puntos ni guion, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
                     <div th:if="${validRut == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong> RUT inválido.
