@@ -7,7 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.validation.constraints.*;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -101,7 +100,7 @@ public class Installation implements Serializable {
     }
     /**
      * Method that sets the category of a installation.
-     * @param name New category for the installation.
+     * @param category New category for the installation.
      */
     public void setCategory(Category category) {
         this.category = category;

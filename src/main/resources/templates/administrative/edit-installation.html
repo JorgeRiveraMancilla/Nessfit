@@ -6,24 +6,13 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form th:action="@{/administrative/register-installation}" th:object="${installation}" method="post" autocomplete="off">
+        <form th:action="@{/administrative/edit-installation}" th:object="${installation}" method="post" autocomplete="off">
             <!--Name-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-                <label for="exampleInputName" class="col-sm-3 col-form-label">Nombre</label>
+                <label for="staticRut" class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
-                    <input name="name" type="text" class="form-control" id="exampleInputName" th:field="*{name}">
-                    <div th:if="${nameIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Campo obligatorio.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validNameSize == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Largo inválido.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${nameExists == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> El nombre ya existe en el sistema.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                    <input type="text" readonly class="form-control" id="staticRut" th:value="${installation.name}" disabled>
+                    <input type="hidden" th:field="*{name}">
                 </div>
             </div>
             <!--Address-->
@@ -70,7 +59,7 @@
                 <label for="typeSelect1" class="col-sm-3 col-form-label">Tipo</label>
                 <div class="col-sm-9">
                     <select name="category" id="typeSelect1" class="form-select" aria-label="Default select example">
-                        <option selected>Seleccione un tipo</option>
+                        <option>Seleccione un tipo</option>
                         <div th:each="category : ${categories}">
                             <div th:if="${nameCategory == null}">
                                 <option th:text="${category.getName()}"></option>
@@ -87,33 +76,15 @@
                     </div>
                 </div>
             </div>
-            <!--Status-->
-            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-                <label for="flexRadioDefault1" class="col-sm-3 col-form-label">Estado</label>
-                <div class="col-sm-9">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault1" value="1" checked>
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Operativo
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="flexRadioDefault2" value="0">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            Inoperativo
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Registrar instalación</button>
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar instalación</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header w-100">
                             <h1 class="modal-title fs-5">¿Está seguro?</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body w-100">Registrar una nueva instalación.</div>
+                        <div class="modal-body w-100" th:text="'Editar la instalación'"></div>
                         <div class="modal-footer w-100">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Confirmar</button>
