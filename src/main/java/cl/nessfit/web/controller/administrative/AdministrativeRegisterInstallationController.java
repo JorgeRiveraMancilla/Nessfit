@@ -19,10 +19,9 @@ import java.util.Map;
 @RequestMapping("/administrative")
 public class AdministrativeRegisterInstallationController {
     @Autowired
-    CategoryServiceInterface categoryService;
-
+    private CategoryServiceInterface categoryService;
     @Autowired
-    InstallationServiceInterface installationService;
+    private InstallationServiceInterface installationService;
 
     @GetMapping("/register-installation")
     public String registerInstallations(Model model) {

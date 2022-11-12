@@ -20,10 +20,10 @@ import java.util.Map;
 @RequestMapping ("/administrative")
 public class AdministrativeEditInstallationController {
     @Autowired
-    CategoryServiceInterface categoryService;
+    private CategoryServiceInterface categoryService;
 
     @Autowired
-    InstallationServiceInterface installationService;
+    private InstallationServiceInterface installationService;
     
     @GetMapping ("/edit-installation/{name}")
     public String editInstallation(Model model, @PathVariable String name) {

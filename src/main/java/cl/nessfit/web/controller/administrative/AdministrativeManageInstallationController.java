@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/administrative")
 public class AdministrativeManageInstallationController {
     @Autowired
-    InstallationServiceInterface installationService;
+    private InstallationServiceInterface installationService;
 
     @GetMapping ("/manage-installation")
     public String manageInstallations(Model model) {

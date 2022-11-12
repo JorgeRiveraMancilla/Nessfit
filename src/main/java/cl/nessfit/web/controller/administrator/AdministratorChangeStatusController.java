@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping("/administrator")
 public class AdministratorChangeStatusController {
     @Autowired
-    UserServiceInterface userService;
+    private UserServiceInterface userService;
     /**
      * Method that return a form.
      * @return the "change-status-user" form.

@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Controller
 public class EditProfileController {
     @Autowired
-    UserServiceInterface userService;
+    private UserServiceInterface userService;
 
     /**
      * Check if user is authenticated.

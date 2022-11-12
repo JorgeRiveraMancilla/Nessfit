@@ -15,19 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/administrative")
 public class AdministrativeChangeStatusController {
     @Autowired
-    UserServiceInterface userService;
-
+    private UserServiceInterface userService;
     @Autowired
-    InstallationServiceInterface installationService;
+    private InstallationServiceInterface installationService;
+
+    //region CHANGE STATUS USERS
 
     /**
      * Method that return a form.
      * @return the "change-status-user" form.
      */
     @GetMapping("/change-status-user")
-    public String changeStatusUser() {
-        return "administrative/manage-user";
-    }
+    public String changeStatusUser() { return "administrative/manage-user"; }
 
     /**
      * Changes the user status, depending on the form election by the administrator or administrative.
@@ -37,20 +36,21 @@ public class AdministrativeChangeStatusController {
     @PostMapping("/change-status-user/{rut}")
     public String changeStatusUser(@PathVariable String rut) {
         User user = userService.searchByRut(rut);
-
         user.setStatus(user.getStatus() == 1 ? 0 : 1);
         userService.save(user);
         return "redirect:/administrative/manage-user";
     }
-    
+
+    //endregion
+
+    //region CHANGE STATUS INSTALLATIONS
+
     /**
      * Method that return a form.
      * @return the "change-status-installation" form.
      */
     @GetMapping("/change-status-installation")
-    public String changeStatusInstallation() {
-        return "administrative/manage-installation";
-    }
+    public String changeStatusInstallation() { return "administrative/manage-installation"; }
 
     /**
      * Changes the installation status, depending on the form election by the administrative.
@@ -65,4 +65,6 @@ public class AdministrativeChangeStatusController {
         installationService.save(installation);
         return "redirect:/administrative/manage-installation";
     }
+
+    //endregion
 }

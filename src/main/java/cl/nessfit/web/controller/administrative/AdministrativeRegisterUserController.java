@@ -20,10 +20,9 @@ import javax.validation.Valid;
 public class AdministrativeRegisterUserController {
 
     @Autowired
-    UserServiceInterface userService;
+    private UserServiceInterface userService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
 
     @GetMapping("/register-client")
     public String registerClient(Model model) {
@@ -33,7 +32,7 @@ public class AdministrativeRegisterUserController {
     }
 
     @PostMapping("/register-client")
-    public String registerNewClient(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
+    public String registerClient(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
 
         // Extra verifications
         boolean existEmail = ProfileValidation.notExistEmail(userService, null, modelUser.getEmail());
