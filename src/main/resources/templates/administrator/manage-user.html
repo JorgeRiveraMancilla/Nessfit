@@ -7,6 +7,10 @@
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex flex-column align-items-start border-start">
         <div class="container-fluid d-flex justify-content-between">
+        	  <div>
+        	  <button type="button" class="btn btn-secondary">
+              </button>
+              </div>
             <form th:action="@{/administrator/manage-user}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
                     <label for="exampleInputRut1" class="form-label">RUT</label>

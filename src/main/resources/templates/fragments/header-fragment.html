@@ -1,15 +1,23 @@
 <header th:fragment="header">
     <nav class="navbar sticky-top bg-white border-bottom">
+        
         <div class="container-fluid">
-            <a class="navbar-brand">NESSFIT</a>
+            <a href="/home" class="navbar-brand">NESSFIT</a>
             <div class="btn-group dropstart">
+            	<div>
+            	<img src="/images/user.png" class="image1" style="width: 1rem; max-width: 1rem; min-width: 1.7rem; margin-right: 20px; margin-top: 5px">
+            	</div>
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Mi cuenta</button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" th:href="@{/edit-profile}">Editar mi perfil</a></li>
-                    <li><a class="dropdown-item" th:href="@{/change-password}">Cambiar contraseña</a></li>
-                    <li><a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a></li>
+                    <li><a class="dropdown-item" href="/edit-profile">Editar mi perfil</a></li>
+                    <li><a class="dropdown-item" href="/change-password">Cambiar contraseña</a></li>
+                    <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
                 </ul>
             </div>
+            <div class="container-fluid mt-auto">
+        		
+    		</div>
         </div>
+    
     </nav>
 </header>
