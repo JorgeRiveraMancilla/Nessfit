@@ -16,4 +16,9 @@ public class RequestServiceImpl implements RequestServiceInterface {
     public List<Request> getRequestsBy(String installationName) {
         return requestRepository.findRequestsByInstallation_Name(installationName);
     }
+
+    @Override
+    public void save(Request request) {
+        requestRepository.save(request);
+    }
 }

@@ -5,7 +5,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name = "requests")
@@ -13,18 +15,18 @@ public class Request implements Serializable {
     @Serial
     private static final long serialVersionUID = 4819729910502605019L;
     @Id
+    @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private int id;
     private int status;
-    private LocalDate register;
+    private Date register;
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "rut_user", referencedColumnName = "rut")
     private User user;
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "name_installation", referencedColumnName = "name")
     private Installation installation;
-    @OneToMany
-    @JoinColumn (name = "id_date_request", referencedColumnName = "id")
-    private List<DateRequest> dateRequests = new ArrayList<>();
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "request")
+    private Set<DateRequest> dateRequests;
 
     public int getId() {
         return id;
@@ -42,11 +44,11 @@ public class Request implements Serializable {
         this.status = status;
     }
 
-    public LocalDate getRegister() {
+    public Date getRegister() {
         return register;
     }
 
-    public void setRegister(LocalDate register) {
+    public void setRegister(Date register) {
         this.register = register;
     }
 
@@ -66,11 +68,11 @@ public class Request implements Serializable {
         this.installation = installation;
     }
 
-    public List<DateRequest> getDateRequests() {
+    public Set<DateRequest> getDateRequests() {
         return dateRequests;
     }
 
-    public void setDateRequests(List<DateRequest> dateRequests) {
+    public void setDateRequests(Set<DateRequest> dateRequests) {
         this.dateRequests = dateRequests;
     }
 }
