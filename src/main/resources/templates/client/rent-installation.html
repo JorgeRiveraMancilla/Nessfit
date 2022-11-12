@@ -37,13 +37,13 @@
                     <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="height: fit-content">Arrendar</button>
                 </div>
                 <div class="col-sm-9">
+                    <div id="datepicker"></div>
+                    <input id="days" name="days" type="hidden">
                     <div th:if="${daysMessage != null}" class="alert alert-danger alert-dismissible fade show mt-1 mb-0" role="alert">
                         <strong>¡Error!</strong>
                         <label th:text="${daysMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div id="datepicker"></div>
-                    <input id="days" name="days" type="hidden">
                 </div>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

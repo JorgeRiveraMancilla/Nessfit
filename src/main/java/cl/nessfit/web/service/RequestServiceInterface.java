@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface RequestServiceInterface {
     List<Request> getRequestsBy(String installationName);
+
+    void save(Request request);
 }

@@ -11,9 +11,12 @@ public class DateRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = -8720869883791567541L;
     @Id
+    @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private int id;
-
     private Date date;
+    @ManyToOne
+    @JoinColumn (name = "id_request", nullable = false, updatable = false)
+    private Request request;
 
     public int getId() {
         return id;
@@ -29,5 +32,13 @@ public class DateRequest implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
     }
 }
