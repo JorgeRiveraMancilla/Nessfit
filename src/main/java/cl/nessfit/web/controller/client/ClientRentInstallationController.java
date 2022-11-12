@@ -33,11 +33,11 @@ public class ClientRentInstallationController {
 
     @GetMapping ("/view-installation")
     public String viewInstallation(Model model) {
-        List<Installation> installations = installationService.getInstallations();
+        List<Installation> installations = installationService.getInstallationsBy(1);
         if (installations.isEmpty()) {
             model.addAttribute("installations", null);
         } else {
-            model.addAttribute("installations", installationService.getInstallations());
+            model.addAttribute("installations", installations);
         }
         return "client/view-installation";
     }
@@ -52,16 +52,8 @@ public class ClientRentInstallationController {
     public String rentInstallation(Model model, @PathVariable String name) {
         Installation installation = installationService.searchByName(name);
         List<Request> requests = requestService.getRequestsBy(name);
-
-        for (Request request : requests) {
-            for (DateRequest dateRequest : request.getDateRequests()) {
-                System.out.println(dateRequest.getDate());
-            }
-        }
-
         model.addAttribute("installation", installation);
         model.addAttribute("requests", requests);
-
         return "client/rent-installation";
     }
 
@@ -69,39 +61,31 @@ public class ClientRentInstallationController {
     public String rentInstallation(@RequestParam Map<String, String> allParams, Model model) throws ParseException {
         String name = allParams.get("name");
         String days = allParams.get("days");
-
         Installation installation = installationService.searchByName(name);
         RequestValidation requestValidation = new RequestValidation(days);
-
         String daysMessage = requestValidation.getDaysMessage();
-
         if (daysMessage != null) {
             List<Request> requests = requestService.getRequestsBy(name);
-
             model.addAttribute("installation", installation);
             model.addAttribute("requests", requests);
             model.addAttribute("daysMessage", daysMessage);
-
             return "client/rent-installation";
-        } else {
-            Request request = new Request();
-            Set<DateRequest> dateRequests = new HashSet<>();
-            for (Date date : requestValidation.getListDates()) {
-                DateRequest dateRequest = new DateRequest();
-                dateRequest.setRequest(request);
-                dateRequest.setDate(date);
-                dateRequests.add(dateRequest);
-            }
-            request.setStatus(1);
-            request.setRegister(new Date());
-            User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
-            request.setUser(user);
-            request.setInstallation(installation);
-            request.setDateRequests(dateRequests);
-
-            requestService.save(request);
-
-            return "redirect:/client/view-installation";
         }
+        User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
+        Request request = new Request();
+        Set<DateRequest> dateRequests = new HashSet<>();
+        for (Date date : requestValidation.getListDates()) {
+            DateRequest dateRequest = new DateRequest();
+            dateRequest.setRequest(request);
+            dateRequest.setDate(date);
+            dateRequests.add(dateRequest);
+        }
+        request.setStatus(1);
+        request.setRegister(new Date());
+        request.setUser(user);
+        request.setInstallation(installation);
+        request.setDateRequests(dateRequests);
+        requestService.save(request);
+        return "redirect:/client/view-installation";
     }
 }

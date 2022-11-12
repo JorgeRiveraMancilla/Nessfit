@@ -9,4 +9,6 @@ public interface InstallationServiceInterface {
     Installation searchByName(String name);
 
     List<Installation> getInstallations();
+
+    List<Installation> getInstallationsBy(int status);
 }
