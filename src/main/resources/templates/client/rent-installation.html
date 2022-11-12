@@ -36,6 +36,7 @@
             </div>
             <div class="col-sm-9 d-flex align-items-center justify-content-center">
                 <div id="datepicker"></div>
+                <input id="days" type="hidden">
             </div>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,7 +46,7 @@
                         <h1 class="modal-title fs-5">¿Está seguro?</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body w-100">El costo total de arriendo es de $XXX.</div>
+                    <div class="modal-body w-100" id="messageModal"></div>
                     <div class="modal-footer w-100">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Confirmar</button>
@@ -61,40 +62,41 @@
 <script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
 <script th:src="@{/js/bootstrap-datepicker.es.min.js}"></script>
 <script>
+    let daysDisabled = []
+
+    /*<![CDATA[*/
+    /*[# th:each="request : ${requests}}"]*/
+    /*[# th:each="dateRequest : ${request.getDateRequests()}"]*/
+    daysDisabled.push(new Date(/*[${dateRequest.getDate()}]*/))
+    /*[/]*/
+    /*[/]*/
+    /*]]*/
+
     $('#datepicker').datepicker({
-        format: 'dd/mm/yyyy',
-        language: 'es',
-        startDate: '+0d',
-        clearBtn: true,
-        datesDisabled: [],
         multidate: true,
-        title: 'Selecciona los días para el arriendo',
+        format: "dd-mm-yyyy",
+        language: "es",
+        todayBtn: true,
+        clearBtn: true,
+        title: "Selecciona los días para el arriendo",
+        startDate: new Date(Date.now() + 3600 * 1000 * 24),
+        datesDisabled: daysDisabled,
+        autoSize: true,
         todayHighlight: true
     });
-</script>
-<script>
-    var inputs1 = document.getElementById("administrative").getElementsByTagName("input");
-    for (i = 0; i < inputs1.length; i++) {
-        var input1 = inputs1[i];
-        input1.addEventListener("keypress", function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                document.getElementById("modalButton1").click();
-            }
-        })
-    }
-</script>
-<script>
-    var inputs2 = document.getElementById("client").getElementsByTagName("input");
-    for (i = 0; i < inputs2.length; i++) {
-        var input2 = inputs2[i];
-        input2.addEventListener("keypress", function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                document.getElementById("modalButton2").click();
-            }
-        })
-    }
+
+    $('#datepicker').on('changeDate', function() {
+        $('#days').val($('#datepicker').datepicker('getFormattedDate'));
+    });
+
+    $('#modalButton').on('click', function() {
+        if ($('#days').val() === '') {
+            $('#messageModal').text('El costo total de arriendo es $0');
+        } else {
+            let total = $('#exampleInputRentalCost').val() * $('#days').val().split(',').length;
+            $('#messageModal').text('El costo total de arriendo es $' + total);
+        }
+    })
 </script>
 </body>
 </html>

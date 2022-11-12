@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table (name = "requests")
@@ -20,6 +22,9 @@ public class Request implements Serializable {
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "name_installation", referencedColumnName = "name")
     private Installation installation;
+    @OneToMany
+    @JoinColumn (name = "id_date_request", referencedColumnName = "id")
+    private List<DateRequest> dateRequests = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -59,5 +64,13 @@ public class Request implements Serializable {
 
     public void setInstallation(Installation installation) {
         this.installation = installation;
+    }
+
+    public List<DateRequest> getDateRequests() {
+        return dateRequests;
+    }
+
+    public void setDateRequests(List<DateRequest> dateRequests) {
+        this.dateRequests = dateRequests;
     }
 }

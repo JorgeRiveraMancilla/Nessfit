@@ -3,32 +3,31 @@ package cl.nessfit.web.model;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table (name = "date_requests")
 public class DateRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = -8720869883791567541L;
-    private LocalDate date;
     @Id
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_request", referencedColumnName = "id")
-    private Request request;
+    private int id;
 
-    public LocalDate getDate() {
+    private Date date;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
     }
 }

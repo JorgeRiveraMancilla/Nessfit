@@ -1,7 +1,10 @@
 package cl.nessfit.web.controller.client;
 
 import cl.nessfit.web.model.Installation;
+import cl.nessfit.web.model.Request;
+import cl.nessfit.web.repository.RequestRepositoryInterface;
 import cl.nessfit.web.service.InstallationServiceInterface;
+import cl.nessfit.web.service.RequestServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +16,9 @@ import java.util.List;
 @RequestMapping ("/client")
 public class ClientRentInstallationController {
     @Autowired
-    InstallationServiceInterface installationService;
+    private InstallationServiceInterface installationService;
+    @Autowired
+    private RequestServiceInterface requestService;
 
     @GetMapping ("/view-installation")
     public String viewInstallation(Model model) {
@@ -34,7 +39,12 @@ public class ClientRentInstallationController {
 
     @GetMapping ("/rent-installation/{name}")
     public String rentInstallation(Model model, @PathVariable String name) {
-        model.addAttribute("installation", installationService.searchByName(name));
+        Installation installation = installationService.searchByName(name);
+        List<Request> requests = requestService.getRequestsBy(name);
+
+        model.addAttribute("installation", installation);
+        model.addAttribute("requests", requests);
+
         return "client/rent-installation";
     }
 }
