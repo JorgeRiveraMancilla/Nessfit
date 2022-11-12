@@ -18,9 +18,3 @@ INSERT INTO `nessfit`.categories (id, name)
 VALUES (4, 'Quincho');
 INSERT INTO `nessfit`.categories (id, name)
 VALUES (5, 'Estadio');
-
-INSERT INTO installations (name, address, rental_cost, status, id_category)
-VALUES ('Tatio', 'Pedro Aguirre Cerda', 2500, 1, 5);
-
-INSERT INTO `nessfit`.users (rut, email, first_name, last_name, password, phone, status, id_role)
-VALUES ('204166994', 'jiriveramancilla@gmail.com', 'Jorge', 'Rivera', '$2a$10$MXmZl5flcRzwwr7AzOy6Ee0DyfPzjVotemyFwh8.kRQGSkR7cFmO.', 56958157708, 1, 3);
