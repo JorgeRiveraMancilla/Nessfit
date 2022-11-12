@@ -6,54 +6,62 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex flex-column align-items-center justify-content-center border-start">
-        <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-            <label for="exampleInputName" class="col-sm-3 col-form-label">Nombre</label>
-            <div class="col-sm-9">
-                <input id="exampleInputName" class="form-control" type="text" th:value="*{installation.getName()}" aria-label="Disabled input example" disabled readonly>
+        <form th:action="@{/client/rent-installation}" method="post" autocomplete="off">
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputName" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input id="exampleInputName" class="form-control" type="text" th:value="${installation.getName()}" aria-label="Disabled input example" disabled readonly>
+                    <input name="name" type="hidden" th:value="${installation.getName()}">
+                </div>
             </div>
-        </div>
-        <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-            <label for="exampleInputAddress" class="col-sm-3 col-form-label">Dirección</label>
-            <div class="col-sm-9">
-                <input id="exampleInputAddress" class="form-control" type="text" th:value="*{installation.getAddress()}" aria-label="Disabled input example" disabled readonly>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputAddress" class="col-sm-3 col-form-label">Dirección</label>
+                <div class="col-sm-9">
+                    <input id="exampleInputAddress" class="form-control" type="text" th:value="*{installation.getAddress()}" aria-label="Disabled input example" disabled readonly>
+                </div>
             </div>
-        </div>
-        <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-            <label for="exampleInputRentalCost" class="col-sm-3 col-form-label">Costo de arriendo</label>
-            <div class="col-sm-9">
-                <input id="exampleInputRentalCost" class="form-control" type="text" th:value="*{installation.getRentalCost()}" aria-label="Disabled input example" disabled readonly>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputRentalCost" class="col-sm-3 col-form-label">Costo de arriendo</label>
+                <div class="col-sm-9">
+                    <input id="exampleInputRentalCost" class="form-control" type="text" th:value="*{installation.getRentalCost()}" aria-label="Disabled input example" disabled readonly>
+                </div>
             </div>
-        </div>
-        <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-            <label for="exampleInputCategory" class="col-sm-3 col-form-label">Tipo</label>
-            <div class="col-sm-9">
-                <input id="exampleInputCategory" class="form-control" type="text" th:value="*{installation.getCategory().getName()}" aria-label="Disabled input example" disabled readonly>
+            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
+                <label for="exampleInputCategory" class="col-sm-3 col-form-label">Tipo</label>
+                <div class="col-sm-9">
+                    <input id="exampleInputCategory" class="form-control" type="text" th:value="*{installation.getCategory().getName()}" aria-label="Disabled input example" disabled readonly>
+                </div>
             </div>
-        </div>
-        <div class="row" style="min-width: 50rem; max-width: 50rem;">
-            <div class="col-sm-3">
-                <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="height: fit-content">Arrendar</button>
-            </div>
-            <div class="col-sm-9 d-flex align-items-center justify-content-center">
-                <div id="datepicker"></div>
-                <input id="days" type="hidden">
-            </div>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header w-100">
-                        <h1 class="modal-title fs-5">¿Está seguro?</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="row" style="min-width: 50rem; max-width: 50rem;">
+                <div class="col-sm-3">
+                    <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="height: fit-content">Arrendar</button>
+                </div>
+                <div class="col-sm-9">
+                    <div th:if="${daysMessage != null}" class="alert alert-danger alert-dismissible fade show mt-1 mb-0" role="alert">
+                        <strong>¡Error!</strong>
+                        <label th:text="${daysMessage}"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body w-100" id="messageModal"></div>
-                    <div class="modal-footer w-100">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    <div id="datepicker"></div>
+                    <input id="days" name="days" type="hidden">
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header w-100">
+                            <h1 class="modal-title fs-5">¿Está seguro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body w-100" id="messageModal"></div>
+                        <div class="modal-footer w-100">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </section>
 </main>
 <footer th:insert="fragments/footer-fragment::footer"></footer>
