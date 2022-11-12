@@ -54,8 +54,7 @@ public class ClientRentInstallationController {
         List<Request> requests = requestService.getRequestsBy(name);
 
         for (Request request : requests) {
-            Set<DateRequest> dateRequests = request.getDateRequests();
-            for (DateRequest dateRequest : dateRequests) {
+            for (DateRequest dateRequest : request.getDateRequests()) {
                 System.out.println(dateRequest.getDate());
             }
         }
