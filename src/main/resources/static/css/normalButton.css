@@ -1,4 +1,15 @@
 
-button{
-        background-color:red;
+.btnA{   
+	background-color:#3f8880;
 	  }
+.btnA:hover{   
+	background-color:#a0fb0e;
+	  }
+
+.btnCrud{
+	background-color:#fef6cd;
+}
+
+.btnCrud:hover {
+	background-color:#3f8880;
+}
