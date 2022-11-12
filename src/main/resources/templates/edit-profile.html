@@ -4,9 +4,11 @@
 <body>
 <header th:insert="fragments/header-fragment::header"></header>
 <main class="d-flex flex-row">
+	
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
         <form th:action="@{/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+            
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
                 <div class="col-sm-9">
