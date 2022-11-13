@@ -21,6 +21,7 @@ public class AdministratorRegisterUserController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    //region REGISTER CLIENT
 
     @GetMapping("/register-client")
     public String registerClient(Model model) {
@@ -30,16 +31,8 @@ public class AdministratorRegisterUserController {
         return "administrator/register-user";
     }
 
-    @GetMapping("/register-administrative")
-    public String registerAdministrative(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        model.addAttribute("client", false);
-        return "administrator/register-user";
-    }
-
     @PostMapping("/register-client")
-    public String registerNewClient(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
+    public String registerClient(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
 
         // Extra verifications
         boolean existEmail = ProfileValidation.notExistEmail(userService, null, modelUser.getEmail());
@@ -76,9 +69,20 @@ public class AdministratorRegisterUserController {
         return "redirect:/administrator/manage-user";
     }
 
+    //endregion
+
+    //region REGISTER ADMINISTRATIVE
+
+    @GetMapping("/register-administrative")
+    public String registerAdministrative(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        model.addAttribute("client", false);
+        return "administrator/register-user";
+    }
 
     @PostMapping("/register-administrative")
-    public String registerNewAdministrative(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
+    public String registerAdministrative(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
 
         // Extra verifications
         boolean existEmail = ProfileValidation.notExistEmail(userService, null, modelUser.getEmail());
@@ -114,4 +118,6 @@ public class AdministratorRegisterUserController {
 
         return "redirect:/administrator/manage-user";
     }
+
+    //endregion
 }

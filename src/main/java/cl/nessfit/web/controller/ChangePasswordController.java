@@ -39,7 +39,7 @@ public class ChangePasswordController {
      * @return "change-password" if the process was unsuccessful otherwise logouts and returns "redirect:/"
      */
     @PostMapping("/change-password")
-    public String changePassword(@RequestParam("newPassword") String newPassword,
+    public String password(@RequestParam("newPassword") String newPassword,
                                  @RequestParam("repeatNewPassword") String repeatNewPassword,
                                  HttpServletRequest request,
                                  Model model) {

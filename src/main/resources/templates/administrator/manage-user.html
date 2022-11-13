@@ -32,17 +32,14 @@
             </tr>
             </thead>
             <tbody>
-
                 <tr th:if="${users == null}">
                     <td colspan="7" class="text-center">
-                        Sin registros.
+                        No hay usuarios que mostrar.
                     </td>
                 </tr>
                 <tr th:unless="${users == null}" th:each="user : ${users}">
                     <form th:action="@{/administrator/change-status-user/{rut}(rut=${user.rut})}" method="post" autocomplete="off">
-                        <td th:if="${user.role.getId() == 1}">Administrador</td>
-                        <td th:if="${user.role.getId() == 2}">Administrativo</td>
-                        <td th:if="${user.role.getId() == 3}">Cliente</td>
+                        <td th:text="${user.role.getName()}"></td>
                         <td th:if="${user.status == 1}">Habilitado</td>
                         <td th:if="${user.status == 0}">Deshabilitado</td>
                         <td th:text="${user.rut}"></td>

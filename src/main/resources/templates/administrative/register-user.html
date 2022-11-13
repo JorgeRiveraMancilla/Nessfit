@@ -13,6 +13,11 @@
                 <div class="col-sm-9">
                     <input name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2" th:field="*{rut}">
                     <div id="rutHelp2" class="form-text">Sin puntos ni guion, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K.</div>
+                    <div th:each="message :  ${#fields.errors('rut')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong>
+                        <label th:text="${message}"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                     <div th:if="${validRut == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong> RUT inválido.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

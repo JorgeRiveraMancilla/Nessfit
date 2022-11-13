@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RequestMapping ("/administrative")
 public class AdministrativeEditProfileController {
     @Autowired
-    UserServiceInterface userService;
+    private UserServiceInterface userService;
 
     @GetMapping ("/edit-profile/{rut}")
     public String editProfile(Model model, @PathVariable String rut) {

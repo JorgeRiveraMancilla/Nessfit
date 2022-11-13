@@ -33,5 +33,4 @@ public interface UserRepositoryInterface extends JpaRepository<User, String> {
      * @return All user with the same id.
      */
     List<User> findUsersByRoleIdOrRoleId(int id1, int id2);
-
 }

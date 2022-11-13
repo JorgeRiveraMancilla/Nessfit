@@ -17,7 +17,7 @@ public class AdministratorManageUserController {
     private UserServiceInterface userService;
 
     @GetMapping ("/manage-user")
-    public String manageUsers(Model model) {
+    public String manageUser(Model model) {
         model.addAttribute("users", userService.getUsers());
         model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
         return "administrator/manage-user";

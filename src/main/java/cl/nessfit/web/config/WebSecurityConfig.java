@@ -76,12 +76,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Las vistas públicas no requieren autenticación
 				.antMatchers("/login**").anonymous()
 				.antMatchers("/index**").anonymous()
-				// Las vistas con el subdominio administrador quedan protegidas al ROL
+				// Las vistas con el subdominio administrator quedan protegidas al ROL
 				// administrador
-				.antMatchers("/administrator/**").hasAuthority("ADMINISTRATOR")
-				// Las vistas con el subdominio administrativo quedan protegidas al ROL
+				.antMatchers("/administrator/**").hasAuthority("Administrador")
+				// Las vistas con el subdominio administrative quedan protegidas al ROL
 				// administrativo
-				.antMatchers("/administrative/**").hasAuthority("ADMINISTRATIVE")
+				.antMatchers("/administrative/**").hasAuthority("Administrativo")
+                // Las vistas con el subdominio client quedan protegidas al ROL
+                // cliente
+                .antMatchers("/client/**").hasAuthority("Cliente")
 				// Todas las demás URLs de la Aplicación requieren autenticación
 				.anyRequest().authenticated()
 				// El formulario de Login redirecciona a la url /login

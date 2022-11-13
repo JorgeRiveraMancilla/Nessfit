@@ -33,4 +33,9 @@ public class InstallationServiceImpl implements InstallationServiceInterface{
     @Override
     public List<Installation> getInstallations() { return installationRepository.findAll(); }
 
+    @Override
+    public List<Installation> getInstallationsBy(int status) {
+        return installationRepository.findAllByStatus(status);
+    }
+
 }

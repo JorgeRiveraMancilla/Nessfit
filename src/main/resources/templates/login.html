@@ -3,11 +3,11 @@
 <head th:insert="fragments/head-fragment::head"></head>
 <body>
 <header>
-    <nav class="navbar sticky-top bg-white border-bottom">
+    <nav class="navbar sticky-top border-bottom" style="background: #3F8880;">
         <div class="container-fluid">
-            <a class="navbar-brand">NESSFIT</a>
+            <a class="navbar-brand text-light">NESSFIT</a>
             <div class="d-flex">
-                <a th:href="@{/index}" class="btn btn-outline-primary">Volver</a>
+                <a th:href="@{/index}" class="btn btn-light">Volver</a>
             </div>
         </div>
     </nav>
@@ -19,7 +19,7 @@
                 <div class="mb-3" style="width: 20rem;">
                     <label for="exampleInputRut1" class="form-label">RUT</label>
                     <input name="rut" type="text" class="form-control" id="exampleInputRut1" aria-describedby="rutHelp">
-                    <div id="rutHelp" class="form-text">Ejemplo: 12345678K.</div>
+                    <div id="rutHelp" class="form-text">Ejemplo: 12345678K</div>
                 </div>
                 <div class="mb-3" style="width: 20rem;">
                     <label for="exampleInputPassword1" class="form-label">Contraseña</label>

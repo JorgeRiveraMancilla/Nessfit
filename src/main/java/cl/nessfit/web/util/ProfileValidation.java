@@ -62,5 +62,4 @@ public class ProfileValidation {
             S = (S + T % 10 * (9 - M ++ % 6)) % 11;
         return ( S > 0 ) ? String.valueOf(S - 1) : "K";
     }
-
 }

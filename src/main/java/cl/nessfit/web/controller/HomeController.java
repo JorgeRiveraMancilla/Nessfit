@@ -7,8 +7,7 @@ import cl.nessfit.web.service.UserServiceInterface;
 
 @Controller
 public class HomeController {
-    @Autowired
-    UserServiceInterface userServiceInterface;
+
     /**
      * Method who control the redirection to the home page.  
      * @return the form from the home page. 

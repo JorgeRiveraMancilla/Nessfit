@@ -1,7 +1,46 @@
 @startuml
 skin rose
-package cl.nessfit.web{
-    package model #DDDDDD{
+package cl.nessfit.web #DDDDDD{
+    package config #FFFFFF{
+        class WebSecurityConfig{
+            -dataSource: Datasource
+            +passwordEncoder(): BCryptPasswordEncoder
+            +configure(auth:AuthenticationManagerBuilder): void
+            +configure(http:HttpSecurity): void
+        }
+    }
+
+    package controller #F9E79F{
+        package administrative{
+
+        }
+
+        package administrator{
+
+        }
+
+        class ChangePasswordController{
+            -userService: UserServiceInterface
+            -passwordEncoder: BCryptPasswordEncoder
+            +password(model:Model): String
+            +changePassword(newPassword:String, repeatNewPassword:String,
+                            request:HttpServletRequest, model:Model)
+        }
+        class EditProfileController{
+            -userService: UserServiceInterface
+            +editProfile(model:Model): String
+            +editProfile(modelUser:User, bindingResult:BindingResult, model:Model): String
+        }
+        class HomeController{
+        }
+        class LoginController{
+        }
+        WebSecurityConfig *--> HomeController
+
+    }
+
+
+    package model #F1948A{
         class Role{
             -{static} serialVersionUID: long
             -id: int
@@ -21,6 +60,7 @@ package cl.nessfit.web{
             -status: int
             -password: String
             -role: Role
+            +User()
             +getRut(): String
             +getFirstName(): String
             +getLastName(): String
@@ -38,18 +78,47 @@ package cl.nessfit.web{
             +setPassword(password:String): void
             +setRole(role:Role): void
         }
+        class Installation{
+            -{static} serialVersionUID: long
+            -name: String
+            -address: String
+            -type: String
+            -rentalCost: int
+            -status: int
+            +Installation()
+            +getName(): String
+            +getAddress(): String
+            +getType(): String
+            +getRentalCost(): int
+            +getStatus(): int
+            +setName(name:String): void
+            +setAddress(address:String): void
+            +setType(type:String): void
+            +setRentalCost(rentalCost:int): void
+            +setStatus(status:int): void
+        }
         User *--> Role
     }
 
-    package repository #DDDDDD{
+    package repository #58D68D{
+        hide attributes
         interface UserRepositoryInterface <<interface>>{
             +findByRut(rut:String): User
             +findByRoleId(id:int): List
             +findAll(): List
         }
+        interface InstallationRepositoryInterface <<interface>>{
+            +findByName(name:String): Installation
+            +findAll(): List
+        }
     }
 
-    package service #DDDDDD{
+    package service #85C1E9{
+        hide UserServiceInterface attributes
+        hide InstallationServiceInterface attributes
+        hide UserServiceImpl methods
+        hide InstallationServiceImpl methods
+
         interface UserServiceInterface <<interface>>{
             +save(user:User): void
             +searchByRut(rut:String): User
@@ -59,7 +128,40 @@ package cl.nessfit.web{
         class UserServiceImpl implements UserServiceInterface{
             -userRepository: UserRepositoryInterface
         }
-        UserServiceImpl *--> UserRepositoryInterface
+
+        interface InstallationServiceInterface <<interface>>{
+            +save(installation:Installation): void
+            +searchByName(name:String): Installation
+            +getInstallations(): List
+        }
+        class InstallationServiceImpl implements InstallationServiceInterface{
+            -installationRepository: InstallationRepositoryInterface
+        }
+        UserServiceImpl *--> UserRepositoryInterface : uses
+        InstallationServiceImpl *--> InstallationRepositoryInterface : uses
+        ChangePasswordController *--> UserServiceInterface
+        EditProfileController *--> UserServiceInterface
+        LoginController *--> UserServiceInterface
+    }
+
+    package util #F8C471{
+        hide attributes
+        class ProfileValidation{
+            +{static} notExistEmail(userService:UserServiceInterface, editedUser:User, email:String): boolean
+            +{static} notExistRut(userService:userServiceInterface, rut:String): boolean
+            +{static} validRut(rut:String): boolean
+            +{static} calculateDV(rut:String): String
+        }
+        class PasswordValidation{
+            +{static} validatePassoword(password1:String, password2:String): boolean
+            +{static} areEquals(password1:String, password2:String): boolean
+            +{static} lengthValidation(String password): boolean
+        }
+        class InstallationValidation{
+            +{static} notExistName(installationService:InstallationServiceInterface, name:String): boolean
+        }
+        EditProfileController *--> ProfileValidation
+        ChangePasswordController *--> PasswordValidation
     }
 }
 @enduml
