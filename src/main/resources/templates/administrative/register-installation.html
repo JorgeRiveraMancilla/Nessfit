@@ -12,16 +12,9 @@
                 <label for="exampleInputName" class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
                     <input name="name" type="text" class="form-control" id="exampleInputName" th:field="*{name}">
-                    <div th:if="${nameIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Campo obligatorio.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validNameSize == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Largo inválido.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${nameExists == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> El nombre ya existe en el sistema.
+                    <div th:if="${nameMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong>
+                        <label th:text="${nameMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -31,12 +24,9 @@
                 <label for="exampleInputAddress" class="col-sm-3 col-form-label">Dirección</label>
                 <div class="col-sm-9">
                     <input name="address" type="text" class="form-control" id="exampleInputAddress" th:field="*{address}">
-                    <div th:if="${addressIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Campo obligatorio.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validAddressSize == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Largo inválido.
+                    <div th:if="${addressMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong>
+                        <label th:text="${addressMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -47,20 +37,9 @@
                 <div class="col-sm-9">
                     <input name="rentalCost" type="text" class="form-control" id="exampleInputRentalCost" aria-describedby="rentalCostHelp2" th:field="*{rentalCost}">
                     <div id="rentalCostHelp2" class="form-text">El costo mínimo debe ser $1.000</div>
-                    <div th:if="${rentalCostIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> Campo obligatorio
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validRentalCostFormat == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> Formato inválido
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validMinimumRentalCost == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo mínimo de arriendo debe ser $1.000
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validMaximumRentalCost == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo máximo de arriendo debe ser $100.000
+                    <div th:if="${rentalCostMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong>
+                        <label th:text="${rentalCostMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>

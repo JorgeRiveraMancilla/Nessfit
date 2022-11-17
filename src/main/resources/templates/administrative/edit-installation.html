@@ -20,12 +20,9 @@
                 <label for="exampleInputAddress" class="col-sm-3 col-form-label">Dirección</label>
                 <div class="col-sm-9">
                     <input name="address" type="text" class="form-control" id="exampleInputAddress" th:field="*{address}">
-                    <div th:if="${addressIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Campo obligatorio.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validAddressSize == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                        <strong>¡Error!</strong> Largo inválido.
+                    <div th:if="${addressMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                        <strong>¡Error!</strong>
+                        <label th:text="${addressMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -36,22 +33,12 @@
                 <div class="col-sm-9">
                     <input name="rentalCost" type="text" class="form-control" id="exampleInputRentalCost" aria-describedby="rentalCostHelp2" th:field="*{rentalCost}">
                     <div id="rentalCostHelp2" class="form-text">El costo mínimo debe ser $1.000</div>
-                    <div th:if="${rentalCostIsBlank == true}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> Campo obligatorio
+                    <div th:if="${rentalCostMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                        <strong>¡Error!</strong>
+                        <label th:text="${rentalCostMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div th:if="${validRentalCostFormat == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> Formato inválido
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validMinimumRentalCost == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo mínimo de arriendo debe ser $1.000
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validMaximumRentalCost == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El costo máximo de arriendo debe ser $100.000
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+
                 </div>
             </div>
             <!--Type-->
@@ -61,13 +48,8 @@
                     <select name="category" id="typeSelect1" class="form-select" aria-label="Default select example">
                         <option>Seleccione un tipo</option>
                         <div th:each="category : ${categories}">
-                            <div th:if="${nameCategory == null}">
-                                <option th:text="${category.getName()}"></option>
-                            </div>
-                            <div th:if="${nameCategory != null}">
-                                <option th:if="${nameCategory == category.getName()}" th:text="${category.getName()}" selected></option>
-                                <option th:if="${nameCategory != category.getName()}" th:text="${category.getName()}"></option>
-                            </div>
+                            <option th:if="${nameCategory == category.getName()}" th:text="${category.getName()}" selected></option>
+                            <option th:if="${nameCategory != category.getName()}" th:text="${category.getName()}"></option>
                         </div>
                     </select>
                     <div th:if="${selectedOption == false}" class="alert alert-danger alert-dismissible fade show mt-2" role="alert">

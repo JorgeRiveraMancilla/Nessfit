@@ -1,5 +1,7 @@
 package cl.nessfit.web.model;
 
+import cl.nessfit.web.util.Validation;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -7,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.validation.constraints.*;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -17,29 +18,12 @@ public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 7124965512564802080L;
     @Id
-    @NotEmpty (message = "Campo obligatorio.")
-    @Size(max = 15, message = "El RUT debe tener menos de 16 caracteres.")
-    @Size(min = 8, message = "El RUT debe tener más de 7 caracteres.")
     private String rut;
     @Column (name = "first_name")
-    @NotBlank(message = "Campo obligatorio.")
-    @Size(max = 200, message = "Largo inválido.")
-    @Size(min = 3, message = "Los nombres deben tener más de 2 caracteres.")
-    @Pattern(regexp = "^([A-zÀ-ú]{3,}\\s)*[A-zÀ-ú]{3,}$", message = "Los nombres deben contener solo letras.")
     private String firstName;
     @Column (name = "last_name")
-    @NotBlank(message = "Campo obligatorio.")
-    @Size(max = 200, message = "Largo inválido.")
-    @Size(min = 3, message = "Los apellidos deben tener más de 2 caracteres.")
-    @Pattern(regexp = "^([A-zÀ-ú]{3,}\\s)*[A-zÀ-ú]{3,}$", message = "Los apellidos deben contener solo letras.")
     private String lastName;
-    @NotBlank(message = "Campo obligatorio.")
-    @Size(max = 16, message = "El teléfono debe tener menos de 17 caracteres.")
-    @Size(min = 11, message = "El teléfono debe tener más de 10 caracteres.")
-    @Pattern(regexp="^(\\d)+$", message = "El teléfono móvil debe contener solo números.")
     private String phone;
-    @NotBlank(message = "Campo obligatorio.")
-    @Email(message = "Su correo electrónico no es valido.")
     private String email;
     private int status;
     private String password;

@@ -4,6 +4,7 @@ import cl.nessfit.web.model.Role;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.ProfileValidation;
+import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,44 +29,33 @@ public class AdministratorRegisterUserController {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("client", true);
+        model.addAttribute("rutMessage", "");
+        model.addAttribute("firstNameMessage", "");
+        model.addAttribute("lastNameMessage", "");
+        model.addAttribute("emailMessage", "");
+        model.addAttribute("phoneMessage", "");
         return "administrator/register-user";
     }
 
     @PostMapping("/register-client")
-    public String registerClient(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
+    public String registerClient(@ModelAttribute("user") User modelUser, Model model) {
 
-        // Extra verifications
-        boolean existEmail = ProfileValidation.notExistEmail(userService, null, modelUser.getEmail());
-        boolean existRut = ProfileValidation.notExistRut(userService, modelUser.getRut());
-        boolean validRut = ProfileValidation.validRut(modelUser.getRut());
+        String[] errorMessages = Validation.registerUserValidation(userService, modelUser);
 
-        // If there is a problem, it is verified
-        if (bindingResult.hasErrors() || !existEmail || !existRut || !validRut) {
-            model.addAttribute("existEmail", existEmail);
-            model.addAttribute("existRut", existRut);
-            model.addAttribute("validRut", validRut);
-            model.addAttribute("rut", modelUser.getRut());
-            model.addAttribute("client", true);
+        if (errorMessages[0].equals("false")){
+            model.addAttribute("rutMessage", errorMessages[1]);
+            model.addAttribute("firstNameMessage", errorMessages[2]);
+            model.addAttribute("lastNameMessage", errorMessages[3]);
+            model.addAttribute("emailMessage", errorMessages[4]);
+            model.addAttribute("phoneMessage", errorMessages[5]);
             return "administrator/register-user";
         }
-        // New User
-        User newUser = new User();
-        // Set attributes
-        newUser.setRut(modelUser.getRut());
-        newUser.setFirstName(modelUser.getFirstName());
-        newUser.setLastName(modelUser.getLastName());
-        newUser.setPhone(modelUser.getPhone());
-        newUser.setEmail(modelUser.getEmail());
-        newUser.setStatus(1);
-        newUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
-        // Create role
+        modelUser.setStatus(1);
+        modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
         Role role = new Role();
-        // Client
         role.setId(3);
-        newUser.setRole(role);
-        // Save user
-        userService.save(newUser);
-
+        modelUser.setRole(role);
+        userService.save(modelUser);
         return "redirect:/administrator/manage-user";
     }
 
@@ -78,43 +68,34 @@ public class AdministratorRegisterUserController {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("client", false);
+        model.addAttribute("rutMessage", "");
+        model.addAttribute("firstNameMessage", "");
+        model.addAttribute("lastNameMessage", "");
+        model.addAttribute("emailMessage", "");
+        model.addAttribute("phoneMessage", "");
         return "administrator/register-user";
     }
 
     @PostMapping("/register-administrative")
     public String registerAdministrative(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
 
-        // Extra verifications
-        boolean existEmail = ProfileValidation.notExistEmail(userService, null, modelUser.getEmail());
-        boolean existRut = ProfileValidation.notExistRut(userService, modelUser.getRut());
-        boolean validRut = ProfileValidation.validRut(modelUser.getRut());
+        String[] errorMessages = Validation.registerUserValidation(userService, modelUser);
 
-        // If there is a problem, it is verified
-        if (bindingResult.hasErrors() || !existEmail || !existRut || !validRut) {
-            model.addAttribute("existEmail", existEmail);
-            model.addAttribute("existRut", existRut);
-            model.addAttribute("validRut", validRut);
-            model.addAttribute("rut", modelUser.getRut());
-            model.addAttribute("client", false);
+        if (errorMessages[0].equals("false")){
+            model.addAttribute("rutMessage", errorMessages[1]);
+            model.addAttribute("firstNameMessage", errorMessages[2]);
+            model.addAttribute("lastNameMessage", errorMessages[3]);
+            model.addAttribute("emailMessage", errorMessages[4]);
+            model.addAttribute("phoneMessage", errorMessages[5]);
             return "administrator/register-user";
         }
-        // New User
-        User newUser = new User();
-        // Set attributes
-        newUser.setRut(modelUser.getRut());
-        newUser.setFirstName(modelUser.getFirstName());
-        newUser.setLastName(modelUser.getLastName());
-        newUser.setPhone(modelUser.getPhone());
-        newUser.setEmail(modelUser.getEmail());
-        newUser.setStatus(1);
-        newUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
-        // Create role
+
+        modelUser.setStatus(1);
+        modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
         Role role = new Role();
-        // Administrative
         role.setId(2);
-        newUser.setRole(role);
-        // Save user
-        userService.save(newUser);
+        modelUser.setRole(role);
+        userService.save(modelUser);
 
         return "redirect:/administrator/manage-user";
     }

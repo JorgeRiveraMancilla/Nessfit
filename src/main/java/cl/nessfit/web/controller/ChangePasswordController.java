@@ -2,7 +2,7 @@ package cl.nessfit.web.controller;
 
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
-import cl.nessfit.web.util.PasswordValidation;
+import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,8 +28,10 @@ public class ChangePasswordController {
     @GetMapping("/change-password")
     public String password(Model model) {
         model.addAttribute("rut", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("passwordMsg", "");
         return "change-password";
     }
+
     /**
      * Method that handles the changing of a password and logs the corresponding data into the user class.
      * @param newPassword New password entered by the user.
@@ -40,26 +42,23 @@ public class ChangePasswordController {
      */
     @PostMapping("/change-password")
     public String password(@RequestParam("newPassword") String newPassword,
-                                 @RequestParam("repeatNewPassword") String repeatNewPassword,
-                                 HttpServletRequest request,
-                                 Model model) {
+                           @RequestParam("repeatNewPassword") String repeatNewPassword,
+                           HttpServletRequest request,
+                           Model model) {
+
         // Obtain the user
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        //Validate password
-        if (!PasswordValidation.validatePassword(newPassword, repeatNewPassword)) {
-            if (!PasswordValidation.lengthValidation(newPassword)) {
-                model.addAttribute("msg", true);
-            }
-            if (!PasswordValidation.areEquals(newPassword, repeatNewPassword)) {
-                model.addAttribute("msg", false);
-            }
+        String validator = Validation.validPassword(newPassword, repeatNewPassword);
 
+        if (!validator.equals("")){
+            model.addAttribute("passwordMsg", validator);
             model.addAttribute("newPassword", newPassword);
             model.addAttribute("repeatNewPassword", repeatNewPassword);
-            model.addAttribute("rut", SecurityContextHolder.getContext().getAuthentication().getName());
+            model.addAttribute("rut", user.getRut());
             return "change-password";
         }
+
         // Set new password (encrypted)
         user.setPassword(passwordEncoder.encode(newPassword));
         userService.save(user);

@@ -13,19 +13,12 @@
                 <div class="col-sm-9">
                     <input name="rut" type="text" class="form-control" id="exampleInputRut1" aria-describedby="rutHelp1" th:field="*{rut}">
                     <div id="rutHelp1" class="form-text">Sin puntos ni guion, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K</div>
-                    <div th:each="message :  ${#fields.errors('rut')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${rutMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${rutMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div th:if="${validRut == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> RUT inválido.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${existRut == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El RUT ya existe en el sistema. Intente iniciar sesión.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+
                 </div>
             </div>
             <!--FirstName-->
@@ -34,9 +27,9 @@
                 <div class="col-sm-9">
                     <input name="name" type="text" class="form-control" id="exampleInputFirstName1" aria-describedby="nameHelp1" th:field="*{firstName}">
                     <div id="nameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
-                    <div th:each="message :  ${#fields.errors('firstName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${firstNameMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${firstNameMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -47,9 +40,9 @@
                 <div class="col-sm-9">
                     <input name="lastname" type="text" class="form-control" id="exampleInputLastname1" aria-describedby="lastnameHelp1" th:field="*{lastName}">
                     <div id="lastnameHelp1" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
-                    <div th:each="message :  ${#fields.errors('lastName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${lastNameMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${lastNameMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -60,13 +53,9 @@
                 <div class="col-sm-9">
                     <input name="email" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp1" th:field="*{email}">
                     <div id="emailHelp1" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
-                    <div th:each="message :  ${#fields.errors('email')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${emailMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${existEmail == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El correo electrónico ya existe en el sistema.
+                        <label th:text="${emailMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -77,9 +66,9 @@
                 <div class="col-sm-9">
                     <input name="phone" type="text" class="form-control" id="exampleInputPhone1" aria-describedby="phoneHelp1" th:field="*{phone}">
                     <div id="phoneHelp1" class="form-text">El largo del teléfono móvil no puede ser menor a 11 ni mayor a 16 dígitos.</div>
-                    <div th:each="message :  ${#fields.errors('phone')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${rutMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${phoneMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -108,17 +97,9 @@
                 <div class="col-sm-9">
                     <input name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2" th:field="*{rut}">
                     <div id="rutHelp2" class="form-text">Sin puntos ni guion, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K</div>
-                    <div th:each="message :  ${#fields.errors('rut')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${rutMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${validRut == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> RUT inválido.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${existRut == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El RUT ya existe en el sistema. Intente iniciar sesión.
+                        <label th:text="${rutMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -129,9 +110,9 @@
                 <div class="col-sm-9">
                     <input name="name" type="text" class="form-control" id="exampleInputFirstName2" aria-describedby="nameHelp2" th:field="*{firstName}">
                     <div id="nameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
-                    <div th:each="message :  ${#fields.errors('firstName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${firstNameMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${firstNameMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -142,9 +123,9 @@
                 <div class="col-sm-9">
                     <input name="lastname" type="text" class="form-control" id="exampleInputLastname2" aria-describedby="lastnameHelp2" th:field="*{lastName}">
                     <div id="lastnameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
-                    <div th:each="message :  ${#fields.errors('lastName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${lastNameMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${lastNameMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -155,13 +136,9 @@
                 <div class="col-sm-9">
                     <input name="email" type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp2" th:field="*{email}">
                     <div id="emailHelp2" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
-                    <div th:each="message :  ${#fields.errors('email')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${emailMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${existEmail == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El correo electrónico ya existe en el sistema.
+                        <label th:text="${emailMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -172,9 +149,9 @@
                 <div class="col-sm-9">
                     <input name="phone" type="text" class="form-control" id="exampleInputPhone2" aria-describedby="phoneHelp2" th:field="*{phone}">
                     <div id="phoneHelp2" class="form-text">El largo del teléfono móvil no puede ser menor a 11 ni mayor a 16 dígitos.</div>
-                    <div th:each="message :  ${#fields.errors('phone')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if="${phoneMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${phoneMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>

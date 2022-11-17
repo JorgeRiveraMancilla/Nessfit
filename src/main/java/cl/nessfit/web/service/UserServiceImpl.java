@@ -26,6 +26,9 @@ public class UserServiceImpl implements UserServiceInterface {
     @Override
     public User searchByRut(String rut) { return userRepository.findByRut(rut); }
 
+    @Override
+    public User searchByEmail(String email) { return userRepository.findByEmail(email); }
+
     /**
      * Return a list with all users with administrative role from the database.
      */

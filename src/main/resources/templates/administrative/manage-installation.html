@@ -44,11 +44,11 @@
                     <td th:text="${installation.getRentalCost()}"></td>
                     <td th:text="${installation.getCategory().getName()}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName()}">Inoperar</button>
-                        <button class="btn btn-outline-primary me-3" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName()}">Operar</button>
+                        <button class="btn btn-outline-primary me-3" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Inoperar</button>
+                        <button class="btn btn-outline-primary me-3" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Operar</button>
                         <a class="btn btn-outline-primary" th:href="@{/administrative/edit-installation/{name}(name=${installation.name})}">Editar instalación</a>
                     </td>
-                    <div class="modal fade" th:id="'exampleModal' + ${installation.getName()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" th:id="'exampleModal' + ${installation.getName().replace(' ', '_')}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header w-100">

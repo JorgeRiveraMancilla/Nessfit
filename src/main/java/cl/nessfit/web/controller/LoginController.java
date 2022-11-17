@@ -7,11 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
-    @GetMapping ("/index")
-    public String index() {
-        return "index";
-    }
-
     /**
      * Method in charge of mapping the login url.
      * @return Login html functions.
@@ -28,6 +23,6 @@ public class LoginController {
     public String logout(HttpServletRequest request) {
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, null, null);
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

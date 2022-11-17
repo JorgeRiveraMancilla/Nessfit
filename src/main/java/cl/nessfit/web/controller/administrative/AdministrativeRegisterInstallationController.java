@@ -5,8 +5,7 @@ import cl.nessfit.web.model.Installation;
 import cl.nessfit.web.service.CategoryServiceInterface;
 import cl.nessfit.web.service.InstallationServiceInterface;
 import cl.nessfit.web.util.CategoryValidation;
-import cl.nessfit.web.util.InstallationValidation;
-import cl.nessfit.web.util.Util;
+import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +27,9 @@ public class AdministrativeRegisterInstallationController {
         Installation installation = new Installation();
         model.addAttribute("installation", installation);
         model.addAttribute("categories", categoryService.getCategories());
+        model.addAttribute("nameMessage", "");
+        model.addAttribute("addressMessage", "");
+        model.addAttribute("rentalCostMessage", "");
         return "administrative/register-installation";
     }
 
@@ -36,38 +38,12 @@ public class AdministrativeRegisterInstallationController {
                                         BindingResult bindingResult,
                                         @RequestParam Map<String, String> allParams,
                                         Model model) {
-        // Name
-        String name = modelInstallation.getName().strip();
-        if (Util.isBlank(name)) {
-            model.addAttribute("nameIsBlank", true);
-        } else if (!Util.validSize(name, 0, 200)) {
-            model.addAttribute("validNameSize", false);
-        } else if (InstallationValidation.exists(installationService, name)) {
-            model.addAttribute("nameExists", true);
-        }
+        String[] errors = Validation.registerInstallationValidation(installationService, modelInstallation);
 
-        // Address
-        String address = modelInstallation.getAddress();
-        if (Util.isBlank(address)) {
-            model.addAttribute("addressIsBlank", true);
-        } else if (!Util.validSize(address, 0, 200)) {
-            model.addAttribute("validAddressSize", false);
-        }
-
-        // Rental cost
-        String rentalCostStr = modelInstallation.getRentalCost();
-        int rentalCost;
-        if (Util.isBlank(rentalCostStr)) {
-            model.addAttribute("rentalCostIsBlank", true);
-        } else if (!Util.tryParseInt(rentalCostStr)) {
-            model.addAttribute("validRentalCostFormat", false);
-        } else {
-            rentalCost = Integer.parseInt(rentalCostStr);
-            if (!Util.validMin(rentalCost, 1000)) {
-                model.addAttribute("validMinimumRentalCost", false);
-            } else if (!Util.validMax(rentalCost, 100000)) {
-                model.addAttribute("validMaximumRentalCost", false);
-            }
+        if (errors[0].equals("false")){
+            model.addAttribute("nameMessage", errors[1]);
+            model.addAttribute("addressMessage", errors[2]);
+            model.addAttribute("rentalCostMessage", errors[3]);
         }
 
         // Category
@@ -75,9 +51,6 @@ public class AdministrativeRegisterInstallationController {
         if (!CategoryValidation.exists(categoryService, nameCategory)) {
             model.addAttribute("selectedOption", false);
         }
-
-        // Status
-        int status = Integer.parseInt(allParams.get("status"));
 
         if (2 < model.asMap().size()) {
             model.addAttribute("categories", categoryService.getCategories());
@@ -88,10 +61,10 @@ public class AdministrativeRegisterInstallationController {
         }
 
         Installation installation = new Installation();
-        installation.setName(name);
-        installation.setAddress(address);
+        installation.setName(modelInstallation.getName().strip());
+        installation.setAddress(modelInstallation.getAddress().strip());
         installation.setRentalCost(modelInstallation.getRentalCost());
-        installation.setStatus(status);
+        installation.setStatus(Integer.parseInt(allParams.get("status")));
 
         Category category = new Category();
         category.setId(categoryService.searchByName(nameCategory).getId());
