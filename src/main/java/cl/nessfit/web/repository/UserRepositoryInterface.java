@@ -15,6 +15,15 @@ public interface UserRepositoryInterface extends JpaRepository<User, String> {
      * @return User.
      */
     User findByRut(String rut);
+   
+    
+    /**
+     * Select * from users u where u.email = email.
+     * @param email RUT from user.
+     * @return User.
+     */
+    User findByEmail(String email);
+    
     /**
      * Select * form users u where u.id_role = id.
      * @param id ID Role.
@@ -26,6 +35,7 @@ public interface UserRepositoryInterface extends JpaRepository<User, String> {
      * @return All users from the database.
      */
     List<User> findAll();
+    
     /**
      * Select * from users u where u.id_role = id1 or u.id_role = id2.
      * @param id1 ID Role1.

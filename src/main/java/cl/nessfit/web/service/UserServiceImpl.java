@@ -26,6 +26,14 @@ public class UserServiceImpl implements UserServiceInterface {
     @Override
     public User searchByRut(String rut) { return userRepository.findByRut(rut); }
 
+    
+    /**
+     * Return a user by email.
+     */
+    @Override
+	public User searchByEmail(String email) {return userRepository.findByEmail(email);}
+	
+
     /**
      * Return a list with all users with administrative role from the database.
      */
@@ -33,7 +41,7 @@ public class UserServiceImpl implements UserServiceInterface {
     public List<User> getAdministrative() { return userRepository.findByRoleId(2); }
 
     /**
-     * Return a list gith all users from the database.
+     * Return a list with all users from the database.
      */
     @Override
     public List<User> getUsers() { return userRepository.findAll(); }
@@ -43,5 +51,6 @@ public class UserServiceImpl implements UserServiceInterface {
      */
     @Override
     public List<User> getAdministrativeAndClients() { return userRepository.findUsersByRoleIdOrRoleId(2,3); }
-
+	
+    
 }

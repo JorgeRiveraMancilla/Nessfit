@@ -9,13 +9,16 @@
         <div class="container-fluid d-flex justify-content-between">
             <form th:action="@{/administrative/manage-user}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
+                	<a href="/administrative/manage-user" style="scale:1.5; margin-bottom:.7rem; margin-right:2rem ">
+    					<img src ="../../images/arrow-clockwise.svg" />
+					</a>
                     <label for="exampleInputRut1" class="form-label">RUT</label>
                     <input name="rut" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-primary button-page">Buscar</button>
                 </div>
             </form>
             <div class="d-flex align-items-center">
-                <a type="submit" class="btn btn-primary" th:href="@{/administrative/register-client}">Registrar cliente</a>
+                <a type="submit" class="btn btn-primary button-page" th:href="@{/administrative/register-client}">Registrar cliente</a>
             </div>
         </div>
         <table class="table table-hover">
@@ -46,9 +49,9 @@
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.phone}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 1 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
-                        <button class="btn btn-outline-primary me-3" type="button" th:if="${user.status == 0 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
-                        <a class="btn btn-outline-primary" th:href="@{/administrative/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
+                        <button class="button-crud btn btn-outline-primary me-3 button-crud" type="button" th:if="${user.status == 1 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
+                        <button class="button-crud btn btn-outline-primary me-3 button-crud" type="button" th:if="${user.status == 0 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
+                        <a class="button-crud btn btn-outline-primary" th:href="@{/administrative/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
                     </td>
                     <div class="modal fade" th:id="'exampleModal' + ${user.getRut()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

@@ -11,7 +11,7 @@
                 <div class="d-flex align-items-center">
                     <label for="exampleInputRut1" class="form-label">Nombre</label>
                     <input name="name" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-primary button-page">Buscar</button>
                 </div>
             </form>
         </div>
@@ -37,7 +37,7 @@
                 <td th:text="${installation.getRentalCost()}"></td>
                 <td th:text="${installation.getCategory().getName()}"></td>
                 <td>
-                    <a class="btn btn-outline-primary" th:href="@{/client/rent-installation/{name}(name=${installation.getName()})}">Arrendar</a>
+                    <a class="btn btn-outline-primary button-crud" th:href="@{/client/rent-installation/{name}(name=${installation.getName()})}">Arrendar</a>
                 </td>
             </tr>
             </tbody>

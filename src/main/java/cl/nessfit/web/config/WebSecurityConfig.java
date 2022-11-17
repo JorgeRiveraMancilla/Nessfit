@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/build/**", "/css/**", "/images/**", "/js/**", "/vendors/**").permitAll()
 				// Las vistas públicas no requieren autenticación
 				.antMatchers("/login**").anonymous()
-				.antMatchers("/index**").anonymous()
+				//.antMatchers("/index**").anonymous()
 				// Las vistas con el subdominio administrator quedan protegidas al ROL
 				// administrador
 				.antMatchers("/administrator/**").hasAuthority("Administrador")

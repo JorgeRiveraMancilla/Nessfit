@@ -24,3 +24,4 @@ public interface InstallationRepositoryInterface extends JpaRepository<Installat
 
     List<Installation> findAllByStatus(int status);
 }
+

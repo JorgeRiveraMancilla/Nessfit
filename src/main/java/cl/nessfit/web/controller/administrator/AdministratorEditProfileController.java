@@ -2,6 +2,7 @@ package cl.nessfit.web.controller.administrator;
 
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
+import cl.nessfit.web.util.ErrorEditProfile;
 import cl.nessfit.web.util.ProfileValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,6 +41,9 @@ public class AdministratorEditProfileController {
         User editedUser = userService.searchByRut(modelUser.getRut());
         // "True" if email exist on the system, "False" if not
         boolean existEmail = ProfileValidation.notExistEmail(userService, editedUser, modelUser.getEmail());
+        
+        String errores[] = ErrorEditProfile.EditUserError(userService, modelUser, editedUser);
+        
         // If there is a problem, it is verified
         if (bindingResult.hasErrors() || !existEmail) {
             model.addAttribute("emailExist", existEmail);

@@ -16,6 +16,9 @@ public interface UserServiceInterface {
      * @param rut Rut to search for a user.
      */
     User searchByRut(String rut);
+    
+    User searchByEmail(String email);
+    
     /**
      * Return a list with all users with administrative role from the database.
      */

@@ -23,9 +23,9 @@
                 <div class="col-sm-9">
                     <input name="name" type="text" class="form-control" id="exampleInputFirstName" aria-describedby="nameHelp" th:field="*{firstName}">
                     <div id="nameHelp" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
-                    <div th:each="message :  ${#fields.errors('firstName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if=" ${nameError != '' } " class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${nameError}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -37,9 +37,9 @@
                 <div class="col-sm-9">
                     <input name="lastname" type="text" class="form-control" id="exampleInputLastname" aria-describedby="lastnameHelp" th:field="*{lastName}">
                     <div id="lastnameHelp" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
-                    <div th:each="message :  ${#fields.errors('lastName')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if=" ${lastNameError != '' } " class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
+                        <label th:text="${lastNameError}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -51,13 +51,9 @@
                 <div class="col-sm-9">
                     <input name="email" type="text" class="form-control" id="exampleInputEmail" aria-describedby="lastnameHelp" th:field="*{email}">
                     <div id="emailHelp" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
-                    <div th:each="message :  ${#fields.errors('email')}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                    <div th:if=" ${emailError != '' } " class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
                         <strong>¡Error!</strong>
-                        <label th:text="${message}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <div th:if="${emailExist == false}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong> El correo electrónico ya existe en el sistema.
+                        <label th:text="${emailError}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
@@ -78,7 +74,7 @@
             </div>
 
 
-            <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
+            <button id="modalButton" type="button" class="btn btn-primary button-page" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
 
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

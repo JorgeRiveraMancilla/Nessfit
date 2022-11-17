@@ -1,0 +1,27 @@
+
+
+.button-page{   
+	background-color:#3f8880;
+	border-color: #ffffff;
+	
+	  }
+.button-page:hover{
+	background-color:#a0fb0e;
+	color: #000000;
+	border-color: #ffffff;
+}
+
+.button-crud{
+	background-color:#fef6cd;
+	border-color: #ffffff;
+	color: #000000;
+}
+
+.button-crud:hover {
+	background-color:#3f8880;
+	border-color: #ffffff;
+}
+
+.account-button{
+	color:#000000;
+}
