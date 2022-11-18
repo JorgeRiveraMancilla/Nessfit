@@ -47,9 +47,9 @@
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.phone}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit" type="button" th:if="${user.status == 1 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit" type="button" th:if="${user.status == 0 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
-                        <a class="btn btn-outline-primary btn-nessfit" th:href="@{/administrative/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${user.status == 1 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${user.status == 0 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
+                        <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
                     </td>
                     <div class="modal fade" th:id="'exampleModal' + ${user.getRut()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -61,8 +61,8 @@
                                 <div class="modal-body w-100" th:if="${user.status == 1}" th:text="'Deshabilitar al usuario de RUT ' + ${user.getRut()} + '.'"></div>
                                 <div class="modal-body w-100" th:if="${user.status == 0}" th:text="'Habilitar al usuario de RUT ' + ${user.getRut()} + '.'"></div>
                                 <div class="modal-footer w-100">
+                                    <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Confirmar</button>
                                 </div>
                             </div>
                         </div>

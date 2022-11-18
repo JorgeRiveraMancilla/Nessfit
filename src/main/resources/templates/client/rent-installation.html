@@ -6,7 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex flex-column align-items-center justify-content-center border-start">
-        <form class="shadow-lg p-4 bg-body rounded-3 border border-dark border-success border-opacity-25" th:action="@{/client/rent-installation}" method="post" autocomplete="off">
+        <form class="shadow-lg p-4 rounded-3 border border-dark border-success border-opacity-25 form-nessfit" th:action="@{/client/rent-installation}" method="post" autocomplete="off">
             <!--Name-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputName" class="col-sm-3 col-form-label">Nombre</label>
@@ -38,8 +38,8 @@
             </div>
             <!--Days-->
             <div class="row justify-content-center" style="min-width: 50rem; max-width: 50rem;">
-                <div class="col-sm-9 mb-2 border border-dark">
-                    <div id="datepicker"></div>
+                <div class="col-sm-9 mb-2">
+                    <div id="datepicker" class="border border-dark bg-white"></div>
                     <input id="days" name="days" type="hidden">
                     <div th:if="${daysMessage != null}" class="alert alert-danger alert-dismissible fade show mt-1 mb-0" role="alert">
                         <strong>¡Error!</strong>
@@ -62,8 +62,8 @@
                         </div>
                         <div class="modal-body w-100" id="messageModal"></div>
                         <div class="modal-footer w-100">
+                            <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Confirmar</button>
                         </div>
                     </div>
                 </div>

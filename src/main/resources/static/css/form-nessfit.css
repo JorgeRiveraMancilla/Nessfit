@@ -1,35 +1,33 @@
-.btn-nessfit{
+.form-nessfit{
+    background: #fef6cd;
+}
+.btn-nessfit,.btn-nessfit:focus{
     background: #3F8880;
     border-color: #3F8880;
     color: white;
 }
-
-.btn-nessfit:hover{
+.btn-nessfit:hover,.btn-nessfit:active:hover,.btn-nessfit-crud:hover,.btn-nessfit-crud:active:hover{
     background: #a0fb0e;
     border-color: #a0fb0e;
     color: black;
 }
 
-.btn-nessfit-search{
+.btn-nessfit-crud,.btn-nessfit-crud:focus{
+    background: #fef6cd;
+    border-color: #fef6cd;
+    color: black;
+}
+
+.btn-nessfit-search,.btn-nessfit-search:focus{
     background: #3F8880;
     border-color: #3F8880;
     color: white;
     width: 10rem;
 }
 
-.btn-nessfit-search:hover{
+.btn-nessfit-search:hover,.btn-nessfit-search:active:hover{
     background: #a0fb0e;
     border-color: #a0fb0e;
     color: black;
     width: 10rem;
-}
-.btn-nessfit-nav{
-    background: #3F8880;
-    border-color: #3F8880;
-    color: white;
-}
-.btn-nessfit-nav:hover{
-    background: #3F8880;
-    border-color: #3F8880;
-    color: white;
 }

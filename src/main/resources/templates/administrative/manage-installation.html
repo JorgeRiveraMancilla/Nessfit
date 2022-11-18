@@ -45,9 +45,9 @@
                     <td th:text="${installation.getRentalCost()}"></td>
                     <td th:text="${installation.getCategory().getName()}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Inoperar</button>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Operar</button>
-                        <a class="btn btn-outline-primary btn-nessfit" th:href="@{/administrative/edit-installation/{name}(name=${installation.name})}">Editar instalación</a>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Inoperar</button>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Operar</button>
+                        <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/edit-installation/{name}(name=${installation.name})}">Editar instalación</a>
                     </td>
                     <div class="modal fade" th:id="'exampleModal' + ${installation.getName().replace(' ', '_')}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -59,8 +59,8 @@
                                 <div class="modal-body w-100" th:if="${installation.status == 1}" th:text="'Cambiar el estado a inoperativo de la instalación ' + ${installation.getName()} + '.'"></div>
                                 <div class="modal-body w-100" th:if="${installation.status == 0}" th:text="'Cambiar el estado a operativo de la instalación ' + ${installation.getName()} + '.'"></div>
                                 <div class="modal-footer w-100">
+                                    <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Confirmar</button>
                                 </div>
                             </div>
                         </div>
