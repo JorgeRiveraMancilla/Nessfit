@@ -6,7 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form id="administrative" th:if="${client == false}" th:action="@{/administrator/register-administrative}" th:object="${user}" method="post" autocomplete="off">
+        <form class="shadow-lg p-4 bg-body rounded-3 border border-dark border-success border-opacity-25" id="administrative" th:if="${client == false}" th:action="@{/administrator/register-administrative}" th:object="${user}" method="post" autocomplete="off">
             <!--RUT-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputRut1" class="col-sm-3 col-form-label">RUT</label>
@@ -73,7 +73,11 @@
                     </div>
                 </div>
             </div>
-            <button id="modalButton1" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Registrar administrativo</button>
+            <!--Button-->
+            <div class="d-md-flex justify-content-center">
+                <button id="modalButton1" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal1">Registrar administrativo</button>
+            </div>
+            <!--Modal-->
             <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -90,7 +94,7 @@
                 </div>
             </div>
         </form>
-        <form id="client" th:if="${client == true}" th:action="@{/administrator/register-client}" th:object="${user}" method="post" autocomplete="off">
+        <form class="shadow-lg p-4 bg-body rounded-3 border border-dark border-success border-opacity-25" id="client" th:if="${client == true}" th:action="@{/administrator/register-client}" th:object="${user}" method="post" autocomplete="off">
             <!--RUT-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputRut2" class="col-sm-3 col-form-label">RUT</label>
@@ -156,7 +160,11 @@
                     </div>
                 </div>
             </div>
-            <button id="modalButton2" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Registrar cliente</button>
+            <!--Button-->
+            <div class="d-md-flex justify-content-center">
+                <button id="modalButton2" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal2">Registrar cliente</button>
+            </div>
+            <!--Modal-->
             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

@@ -1,0 +1,35 @@
+.btn-nessfit{
+    background: #3F8880;
+    border-color: #3F8880;
+    color: white;
+}
+
+.btn-nessfit:hover{
+    background: #a0fb0e;
+    border-color: #a0fb0e;
+    color: black;
+}
+
+.btn-nessfit-search{
+    background: #3F8880;
+    border-color: #3F8880;
+    color: white;
+    width: 10rem;
+}
+
+.btn-nessfit-search:hover{
+    background: #a0fb0e;
+    border-color: #a0fb0e;
+    color: black;
+    width: 10rem;
+}
+.btn-nessfit-nav{
+    background: #3F8880;
+    border-color: #3F8880;
+    color: white;
+}
+.btn-nessfit-nav:hover{
+    background: #3F8880;
+    border-color: #3F8880;
+    color: white;
+}

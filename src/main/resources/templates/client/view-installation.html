@@ -9,9 +9,10 @@
         <div class="container-fluid d-flex justify-content-between">
             <form th:action="@{/client/view-installation}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
+                    <button class="btn btn-primary btn-nessfit me-3" type="button" name="refresh" aria-label="Refresh" title="Refresh" onclick="location.reload()"><i class="bi bi-arrow-clockwise"></i></button>
                     <label for="exampleInputRut1" class="form-label">Nombre</label>
                     <input name="name" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-primary btn-nessfit-search"><i class="bi bi-search"></i> Buscar</button>
                 </div>
             </form>
         </div>
@@ -37,7 +38,7 @@
                 <td th:text="${installation.getRentalCost()}"></td>
                 <td th:text="${installation.getCategory().getName()}"></td>
                 <td>
-                    <a class="btn btn-outline-primary" th:href="@{/client/rent-installation/{name}(name=${installation.getName()})}">Arrendar</a>
+                    <a class="btn btn-outline-primary btn-nessfit" th:href="@{/client/rent-installation/{name}(name=${installation.getName()})}">Arrendar</a>
                 </td>
             </tr>
             </tbody>
