@@ -4,7 +4,6 @@ import cl.nessfit.web.model.Category;
 import cl.nessfit.web.model.Installation;
 import cl.nessfit.web.service.CategoryServiceInterface;
 import cl.nessfit.web.service.InstallationServiceInterface;
-import cl.nessfit.web.util.CategoryValidation;
 
 import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,13 @@ public class AdministrativeEditInstallationController {
 
     @Autowired
     private InstallationServiceInterface installationService;
-    
+
+    /**
+     * Get data from edit-installation.html.
+     * @param model Is the application's dynamic data structure.
+     * @param name Installation name.
+     * @return Return the edit installation page.
+     */
     @GetMapping ("/edit-installation/{name}")
     public String editInstallation(Model model, @PathVariable String name) {
         Installation installation = installationService.searchByName(name);
@@ -36,7 +41,7 @@ public class AdministrativeEditInstallationController {
     }
 
     /**
-     * Receive data from edit-installation.html.
+     * Receives data from edit-installation.html.
      * @param modelInstallation Installation from the html form.
      * @param model Is the application's dynamic data structure.
      * @return Return Installation to home page.
@@ -55,7 +60,7 @@ public class AdministrativeEditInstallationController {
 
         // Category
         String nameCategory = allParams.get("category");
-        if (!CategoryValidation.exists(categoryService, nameCategory)) {
+        if (!Validation.existsCategory(categoryService, nameCategory)) {
             model.addAttribute("selectedOption", false);
         }
 

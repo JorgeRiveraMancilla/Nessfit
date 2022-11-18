@@ -4,7 +4,6 @@ import cl.nessfit.web.model.Category;
 import cl.nessfit.web.model.Installation;
 import cl.nessfit.web.service.CategoryServiceInterface;
 import cl.nessfit.web.service.InstallationServiceInterface;
-import cl.nessfit.web.util.CategoryValidation;
 import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,11 @@ public class AdministrativeRegisterInstallationController {
     @Autowired
     private InstallationServiceInterface installationService;
 
+    /**
+     * Get and iniciate data from register-installation.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Register installation view.
+     */
     @GetMapping("/register-installation")
     public String registerInstallations(Model model) {
         Installation installation = new Installation();
@@ -33,6 +37,13 @@ public class AdministrativeRegisterInstallationController {
         return "administrative/register-installation";
     }
 
+    /**
+     * Receives data from register-installation.html.
+     * @param modelInstallation Installation from register-installation.html.
+     * @param allParams All other params from register-installation.html.
+     * @param model Is the application's dynamic data structure.
+     * @return If all is ok, redirect to administrative/manage-installation.
+     */
     @PostMapping("/register-installation")
     public String registerInstallations(@Valid @ModelAttribute("installation") Installation modelInstallation,
                                         BindingResult bindingResult,
@@ -48,7 +59,7 @@ public class AdministrativeRegisterInstallationController {
 
         // Category
         String nameCategory = allParams.get("category");
-        if (!CategoryValidation.exists(categoryService, nameCategory)) {
+        if (!Validation.existsCategory(categoryService, nameCategory)) {
             model.addAttribute("selectedOption", false);
         }
 

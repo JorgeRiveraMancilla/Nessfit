@@ -24,6 +24,11 @@ public class AdministratorRegisterUserController {
 
     //region REGISTER CLIENT
 
+    /**
+     * Get and iniciate data from register-user.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Register user view.
+     */
     @GetMapping("/register-client")
     public String registerClient(Model model) {
         User user = new User();
@@ -37,6 +42,12 @@ public class AdministratorRegisterUserController {
         return "administrator/register-user";
     }
 
+    /**
+     * Receives data from register-user.html.
+     * @param modelUser User from register-user.html.
+     * @param model Is the application's dynamic data structure.
+     * @return If all is ok, redirect to administrator/manage-installation.
+     */
     @PostMapping("/register-client")
     public String registerClient(@ModelAttribute("user") User modelUser, Model model) {
 
@@ -63,6 +74,11 @@ public class AdministratorRegisterUserController {
 
     //region REGISTER ADMINISTRATIVE
 
+    /**
+     * Get and iniciate data from register-user.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Register user view.
+     */
     @GetMapping("/register-administrative")
     public String registerAdministrative(Model model) {
         User user = new User();
@@ -76,8 +92,14 @@ public class AdministratorRegisterUserController {
         return "administrator/register-user";
     }
 
+    /**
+     * Receives data from register-user.html.
+     * @param modelUser User from register-user.html.
+     * @param model Is the application's dynamic data structure.
+     * @return If all is ok, redirect to administrator/manage-installation.
+     */
     @PostMapping("/register-administrative")
-    public String registerAdministrative(@Valid @ModelAttribute("user") User modelUser, BindingResult bindingResult, Model model) {
+    public String registerAdministrative(@ModelAttribute("user") User modelUser, Model model) {
 
         String[] errorMessages = Validation.registerUserValidation(userService, modelUser);
 

@@ -19,6 +19,12 @@ public class AdministratorEditProfileController {
     @Autowired
     private UserServiceInterface userService;
 
+    /**
+     * Get data from edit-profile.html.
+     * @param model Is the application's dynamic data structure.
+     * @param rut User rut to edit.
+     * @return Edit page view.
+     */
     @GetMapping ("/edit-profile/{rut}")
     public String editProfile(Model model, @PathVariable String rut) {
         User user = userService.searchByRut(rut);

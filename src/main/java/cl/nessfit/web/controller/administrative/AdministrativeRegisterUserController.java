@@ -25,6 +25,11 @@ public class AdministrativeRegisterUserController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    /**
+     * Get and iniciate data from register-user.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Register user view.
+     */
     @GetMapping("/register-client")
     public String registerClient(Model model) {
         User user = new User();
@@ -37,6 +42,12 @@ public class AdministrativeRegisterUserController {
         return "administrative/register-user";
     }
 
+    /**
+     * Receives data from register-user.html.
+     * @param modelUser User from register-user.html.
+     * @param model Is the application's dynamic data structure.
+     * @return If all is ok, redirect to administrative/manage-installation.
+     */
     @PostMapping("/register-client")
     public String registerClient(@ModelAttribute("user") User modelUser, Model model) {
 

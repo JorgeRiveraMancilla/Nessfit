@@ -16,6 +16,7 @@ import java.util.Map;
 public class AdministratorChangeStatusController {
     @Autowired
     private UserServiceInterface userService;
+
     /**
      * Method that return a form.
      * @return the "change-status-user" form.

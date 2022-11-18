@@ -20,7 +20,7 @@ public class EditProfileController {
     private UserServiceInterface userService;
 
     /**
-     * Check if user is authenticated.
+     * Get data from edit-profile.html.
      * @param model Is the application's dynamic data structure.
      * @return access to the webpage.
      */

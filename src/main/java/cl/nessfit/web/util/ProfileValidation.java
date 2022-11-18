@@ -1,19 +1,27 @@
 package cl.nessfit.web.util;
 
-import cl.nessfit.web.model.User;
-import cl.nessfit.web.service.UserServiceImpl;
 import cl.nessfit.web.service.UserServiceInterface;
-import org.springframework.security.core.context.SecurityContextHolder;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileValidation {
 
+    /**
+     * Method that indicates if a rut exists in the database or not.
+     * @param userService UserService instance.
+     * @param rut User rut to verify.
+     * @return "True" if the rut exist or "False" if not.
+     */
     protected static boolean existRut(UserServiceInterface userService, String rut){
         return userService.searchByRut(rut) != null;
     }
 
+    /**
+     * Method that indicates if an email exists in the database or not.
+     * @param userService UserService instance.
+     * @param email User email to verify.
+     * @return "True" if the email exist or "False" if not.
+     */
     protected static boolean existEmail(UserServiceInterface userService, String email){
         return userService.searchByEmail(email) != null;
     }
@@ -33,6 +41,11 @@ public class ProfileValidation {
         return false;
     }
 
+    /**
+     * Method that checks if the email is valid.
+     * @param email user's email.
+     * @return true if email is valid, otherwise false.
+     */
     protected static boolean validEmail(String email){
         Pattern pattern = Pattern.compile("^(([a-z0-9.]{1,70})@([a-z0-9.]{1,70}))$");
         Matcher matcher = pattern.matcher(email);

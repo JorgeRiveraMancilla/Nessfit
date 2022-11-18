@@ -12,11 +12,20 @@ public class RequestServiceImpl implements RequestServiceInterface {
     @Autowired
     private RequestRepositoryInterface requestRepository;
 
+    /**
+     * Returns a list with all requests that match the installation name in the database.
+     * @param installationName Request installation name.
+     * @return List with all requests that match the installation name.
+     */
     @Override
     public List<Request> getRequestsBy(String installationName) {
         return requestRepository.findRequestsByInstallation_Name(installationName);
     }
 
+    /**
+     * Saves the request in the database.
+     * @param request Request to save.
+     */
     @Override
     public void save(Request request) {
         requestRepository.save(request);

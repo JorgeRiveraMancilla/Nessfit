@@ -5,7 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NessfitApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(NessfitApplication.class, args);
-	}
+
+	/**
+	 * Main method.
+	 * @param args Java command line arguments.
+	 */
+	public static void main(String[] args) { SpringApplication.run(NessfitApplication.class, args); }
 }

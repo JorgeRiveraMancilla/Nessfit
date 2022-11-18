@@ -18,6 +18,11 @@ public class AdministrativeManageInstallationController {
     @Autowired
     private InstallationServiceInterface installationService;
 
+    /**
+     * Get data from manage-installation.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Manage installation view.
+     */
     @GetMapping ("/manage-installation")
     public String manageInstallations(Model model) {
         List<Installation> installations = installationService.getInstallations();
@@ -29,6 +34,12 @@ public class AdministrativeManageInstallationController {
         return "administrative/manage-installation";
     }
 
+    /**
+     * Receives data from manage-installation.html.
+     * @param model Is the application's dynamic data structure.
+     * @param name Installation name.
+     * @return Manage installation page.
+     */
     @PostMapping("/manage-installation")
     public String manageInstallations(Model model, @RequestParam("name") String name) {
         model.addAttribute("installations", installationService.searchByName(name));

@@ -16,6 +16,11 @@ public class AdministratorManageUserController {
     @Autowired
     private UserServiceInterface userService;
 
+    /**
+     * Get data from manage-user.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Manage user view.
+     */
     @GetMapping ("/manage-user")
     public String manageUser(Model model) {
         model.addAttribute("users", userService.getUsers());
@@ -23,6 +28,12 @@ public class AdministratorManageUserController {
         return "administrator/manage-user";
     }
 
+    /**
+     * Receives data from manage-user.html.
+     * @param rut User's rut.
+     * @param model Is the application's dynamic data structure.
+     * @return Manage user page.
+     */
     @PostMapping("/manage-user")
     public String manageUser(@RequestParam("rut") String rut, Model model) {
         model.addAttribute("users", userService.searchByRut(rut));
