@@ -60,7 +60,7 @@ public class EditProfileController {
         // Update user values
         actualUser.setFirstName(modelUser.getFirstName());
         actualUser.setLastName(modelUser.getLastName());
-        actualUser.setEmail(modelUser.getEmail());
+        actualUser.setEmail(modelUser.getEmail().toLowerCase());
         actualUser.setPhone(modelUser.getPhone());
         // Save data from actualUser
         userService.save(actualUser);

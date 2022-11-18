@@ -23,6 +23,7 @@ public class ProfileValidation {
      * @return "True" if the email exist or "False" if not.
      */
     protected static boolean existEmail(UserServiceInterface userService, String email){
+        System.out.println(email);
         return userService.searchByEmail(email) != null;
     }
 

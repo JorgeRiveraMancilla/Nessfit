@@ -61,6 +61,8 @@ public class AdministratorRegisterUserController {
             model.addAttribute("phoneMessage", errorMessages[5]);
             return "administrator/register-user";
         }
+
+        modelUser.setEmail(modelUser.getEmail().toLowerCase());
         modelUser.setStatus(1);
         modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
         Role role = new Role();
@@ -112,6 +114,7 @@ public class AdministratorRegisterUserController {
             return "administrator/register-user";
         }
 
+        modelUser.setEmail(modelUser.getEmail().toLowerCase());
         modelUser.setStatus(1);
         modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
         Role role = new Role();
