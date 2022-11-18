@@ -13,6 +13,11 @@ public class InstallationServiceImpl implements InstallationServiceInterface{
     @Autowired
     private InstallationRepositoryInterface installationRepository;
 
+    /**
+     * Given an id, returns an installation with that id data.
+     * @param id Installation id.
+     * @return Installation with that id data
+     */
     @Override
     public Installation searchById(int id) {
         return installationRepository.findById(id);

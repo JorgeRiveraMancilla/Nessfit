@@ -129,7 +129,6 @@ public class Validation {
      * @return String array with all error messages for the change password controller.
      */
     public static String validPassword(String password1, String password2){
-        // Este es prioridad.
         if (!areEquals(password1, password2)) { return "Las contraseñas no son iguales"; }
         if (!validSize(password1, 10, 15)) {
             return "El largo de la contraseña debe estar entre 10 y 15 caracteres";
@@ -186,9 +185,9 @@ public class Validation {
     private static String validFormatPhone(String phone){
         phone = phone.strip();
         if (phone.equals("")) { return "Campo Obligatorio"; }
-        if (!tryParseLong(phone)) { return "Solo se aceptan valores numéricos"; }
         if (phone.length() > 200) { return "Largo inválido"; }
         if (!validSize(phone, 11, 16)) { return "El teléfono móvil ingresado no es válido"; }
+        if (!tryParseLong(phone)) { return "Solo se aceptan valores numéricos"; }
         return "";
     }
 
@@ -198,10 +197,11 @@ public class Validation {
      * @return Error for the rut.
      */
     private static String validFormatRut(String rut){
-        if (rut.strip().equals("")) { return "Campo Obligatorio"; }
+        rut = rut.strip();
+        if (rut.equals("")) { return "Campo Obligatorio"; }
+        if (!ProfileValidation.validRut(rut)) { return "RUT inválido"; }
         if (rut.length() < 9) { return "No se permiten RUT menores a 10.000.000-0"; }
-        if (ProfileValidation.validRut(rut)) { return ""; }
-        return "RUT inválido";
+        return "";
     }
 
     /**
@@ -210,8 +210,8 @@ public class Validation {
      * @return Error for the email.
      */
     private static String validFormatEmail(String email){
-        email = email.toLowerCase();
-        if (email.strip().equals("")) { return "Campo Obligatorio"; }
+        email = email.toLowerCase().strip();
+        if (email.equals("")) { return "Campo Obligatorio"; }
         if (ProfileValidation.validEmail(email)) { return ""; }
         return "Su correo electrónico no es válido";
     }
@@ -234,8 +234,8 @@ public class Validation {
      * @return Error for the rental cost.
      */
     private static String validFormatRentalCost(String rentalCost){
-        if (!tryParseLong(rentalCost)) { return "Formato inválido"; }
         rentalCost = rentalCost.strip();
+        if (!tryParseLong(rentalCost)) { return "Formato inválido"; }
         if (rentalCost.equals("")) { return "Campo obligatorio"; }
         if (!(1000 <= Integer.parseInt(rentalCost))) {
             return "El costo mínimo de arriendo debe ser $1.000 (1000)";

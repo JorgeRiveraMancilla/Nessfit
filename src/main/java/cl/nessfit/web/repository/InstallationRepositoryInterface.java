@@ -1,5 +1,6 @@
 package cl.nessfit.web.repository;
 
+import org.apache.tomcat.util.descriptor.web.InjectionTarget;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import cl.nessfit.web.model.Installation;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface InstallationRepositoryInterface extends JpaRepository<Installation, String> {
+
 
     Installation findById(int id);
 

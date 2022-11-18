@@ -57,10 +57,10 @@ public class AdministratorEditProfileController {
         }
 
         // Update user values
-        editedUser.setFirstName(modelUser.getFirstName());
-        editedUser.setLastName(modelUser.getLastName());
-        editedUser.setEmail(modelUser.getEmail().toLowerCase());
-        editedUser.setPhone(modelUser.getPhone());
+        editedUser.setFirstName(modelUser.getFirstName().strip());
+        editedUser.setLastName(modelUser.getLastName().strip());
+        editedUser.setEmail(modelUser.getEmail().toLowerCase().strip());
+        editedUser.setPhone(modelUser.getPhone().strip());
         // Save data from actualUser
         userService.save(editedUser);
 

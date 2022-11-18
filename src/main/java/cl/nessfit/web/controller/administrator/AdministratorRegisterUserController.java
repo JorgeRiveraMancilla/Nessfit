@@ -64,7 +64,11 @@ public class AdministratorRegisterUserController {
             return "administrator/register-user";
         }
 
-        modelUser.setEmail(modelUser.getEmail().toLowerCase());
+        modelUser.setRut(modelUser.getRut().strip());
+        modelUser.setFirstName(modelUser.getFirstName().strip());
+        modelUser.setLastName(modelUser.getLastName().strip());
+        modelUser.setEmail(modelUser.getEmail().toLowerCase().strip());
+        modelUser.setPhone(modelUser.getPhone().strip());
         modelUser.setStatus(1);
         modelUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
         Role role = new Role();
@@ -118,7 +122,11 @@ public class AdministratorRegisterUserController {
             return "administrator/register-user";
         }
 
-        modelUser.setEmail(modelUser.getEmail().toLowerCase());
+        modelUser.setRut(modelUser.getRut().strip());
+        modelUser.setFirstName(modelUser.getFirstName().strip());
+        modelUser.setLastName(modelUser.getLastName().strip());
+        modelUser.setEmail(modelUser.getEmail().toLowerCase().strip());
+        modelUser.setPhone(modelUser.getPhone().strip());
         modelUser.setStatus(1);
         modelUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
         Role role = new Role();

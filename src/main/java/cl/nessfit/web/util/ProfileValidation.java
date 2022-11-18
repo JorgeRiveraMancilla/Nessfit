@@ -23,7 +23,6 @@ public class ProfileValidation {
      * @return "True" if the email exist or "False" if not.
      */
     protected static boolean existEmail(UserServiceInterface userService, String email){
-        System.out.println(email);
         return userService.searchByEmail(email) != null;
     }
 
@@ -33,7 +32,7 @@ public class ProfileValidation {
      * @return true if rut is valid, otherwise false.
      */
     protected static boolean validRut(String rut){
-        Pattern pattern = Pattern.compile("^([1-9][0-9]{7,13}[0-9K])$");
+        Pattern pattern = Pattern.compile("^([1-9][0-9]{6,13}[0-9K])$");
         Matcher matcher = pattern.matcher(rut);
         if (matcher.matches()){
             String dv = calculateDV(rut);

@@ -74,7 +74,7 @@ public class AdministrativeRegisterInstallationController {
         Installation installation = new Installation();
         installation.setName(modelInstallation.getName().strip());
         installation.setAddress(modelInstallation.getAddress().strip());
-        installation.setRentalCost(modelInstallation.getRentalCost());
+        installation.setRentalCost(modelInstallation.getRentalCost().strip());
         installation.setStatus(Integer.parseInt(allParams.get("status")));
 
         Category category = new Category();

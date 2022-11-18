@@ -5,6 +5,11 @@ import java.util.List;
 
 public interface InstallationServiceInterface {
 
+    /**
+     * Given an id, returns an installation with that id data.
+     * @param id Installation id.
+     * @return Installation with that id data
+     */
     Installation searchById(int id);
 
     /**

@@ -11,7 +11,7 @@ public class Installation implements Serializable {
     private static final long serialVersionUID = 425470456250466110L;
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
     private String name;
     private String address;
     @Column (name = "rental_cost")
