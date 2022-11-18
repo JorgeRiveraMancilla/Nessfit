@@ -11,13 +11,14 @@
                 <div class="d-flex align-items-center">
                     <label for="exampleInputRut1" class="form-label">Nombre</label>
                     <input name="name" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" class="btn btn-primary btn-nessfit">Buscar</button>
                 </div>
             </form>
         </div>
         <table class="table table-hover">
             <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Dirección</th>
                 <th scope="col">Costo de arriendo</th>
@@ -27,17 +28,18 @@
             </thead>
             <tbody>
             <tr th:if="${installations == null}">
-                <td colspan="5" class="text-center">
+                <td colspan="6" class="text-center">
                     No hay centros deportivos que mostrar.
                 </td>
             </tr>
             <tr th:unless="${installations == null}" th:each="installation : ${installations}">
+                <td th:text="${installation.getId()}"></td>
                 <td th:text="${installation.getName()}"></td>
                 <td th:text="${installation.getAddress()}"></td>
                 <td th:text="${installation.getRentalCost()}"></td>
                 <td th:text="${installation.getCategory().getName()}"></td>
                 <td>
-                    <a class="btn btn-outline-primary" th:href="@{/client/rent-installation/{name}(name=${installation.getName()})}">Arrendar</a>
+                    <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/client/rent-installation/{id}(id=${installation.getId()})}">Arrendar</a>
                 </td>
             </tr>
             </tbody>

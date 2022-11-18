@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface InstallationRepositoryInterface extends JpaRepository<Installation, String> {
 
+    Installation findById(int id);
+
     /**
      * Select * from installations e where e.name = name.
      * @param name name from installation.

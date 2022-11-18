@@ -6,8 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form th:action="@{/administrator/edit-profile}" th:object="${user}" method="post" autocomplete="off">
-            <!--RUT-->
+        <form class="shadow p-3 rounded form-nessfit" th:action="@{/administrator/edit-profile}" th:object="${user}" method="post" autocomplete="off">
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
                 <div class="col-sm-9">
@@ -15,7 +14,6 @@
                     <input type="hidden" th:field="*{rut}">
                 </div>
             </div>
-            <!--FirstName-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputFirstName" class="col-sm-3 col-form-label">Nombres</label>
                 <div class="col-sm-9">
@@ -28,7 +26,6 @@
                     </div>
                 </div>
             </div>
-            <!--LastName-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputLastname" class="col-sm-3 col-form-label">Apellidos</label>
                 <div class="col-sm-9">
@@ -41,7 +38,6 @@
                     </div>
                 </div>
             </div>
-            <!--Email-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputEmail" class="col-sm-3 col-form-label">Correo electrónico</label>
                 <div class="col-sm-9">
@@ -54,7 +50,6 @@
                     </div>
                 </div>
             </div>
-            <!--Phone-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputPhone" class="col-sm-3 col-form-label">Teléfono</label>
                 <div class="col-sm-9">
@@ -67,9 +62,9 @@
                     </div>
                 </div>
             </div>
-            <!--Button-->
-            <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
-            <!--Modal-->
+            <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+                <button id="modalButton" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
+            </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -79,8 +74,8 @@
                         </div>
                         <div class="modal-body w-100" th:text="'Editar el perfil del usuario de RUT ' + ${user.rut} + '.'"></div>
                         <div class="modal-footer w-100">
+                            <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Confirmar</button>
                         </div>
                     </div>
                 </div>

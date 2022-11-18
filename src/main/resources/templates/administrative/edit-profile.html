@@ -6,7 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form th:action="@{/administrative/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+        <form class="shadow p-3 rounded form-nessfit" th:action="@{/administrative/edit-profile}" th:object="${user}" method="post" autocomplete="off">
             <!--RUT-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
@@ -67,7 +67,10 @@
                     </div>
                 </div>
             </div>
-            <button id="modalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
+            <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+                <button id="modalButton" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
+            </div>
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -77,8 +80,8 @@
                         </div>
                         <div class="modal-body w-100" th:text="'Editar el perfil del usuario de RUT ' + ${user.rut} + '.'"></div>
                         <div class="modal-footer w-100">
+                            <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Confirmar</button>
                         </div>
                     </div>
                 </div>

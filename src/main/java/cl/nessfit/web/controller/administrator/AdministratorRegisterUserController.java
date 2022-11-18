@@ -53,7 +53,8 @@ public class AdministratorRegisterUserController {
 
         String[] errorMessages = Validation.registerUserValidation(userService, modelUser);
 
-        if (errorMessages[0].equals("false")){
+        if (errorMessages[0].equals("false")) {
+            model.addAttribute("client", true);
             model.addAttribute("rutMessage", errorMessages[1]);
             model.addAttribute("firstNameMessage", errorMessages[2]);
             model.addAttribute("lastNameMessage", errorMessages[3]);
@@ -64,7 +65,7 @@ public class AdministratorRegisterUserController {
 
         modelUser.setEmail(modelUser.getEmail().toLowerCase());
         modelUser.setStatus(1);
-        modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
+        modelUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
         Role role = new Role();
         role.setId(3);
         modelUser.setRole(role);
@@ -105,7 +106,8 @@ public class AdministratorRegisterUserController {
 
         String[] errorMessages = Validation.registerUserValidation(userService, modelUser);
 
-        if (errorMessages[0].equals("false")){
+        if (errorMessages[0].equals("false")) {
+            model.addAttribute("client", false);
             model.addAttribute("rutMessage", errorMessages[1]);
             model.addAttribute("firstNameMessage", errorMessages[2]);
             model.addAttribute("lastNameMessage", errorMessages[3]);
@@ -116,7 +118,7 @@ public class AdministratorRegisterUserController {
 
         modelUser.setEmail(modelUser.getEmail().toLowerCase());
         modelUser.setStatus(1);
-        modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
+        modelUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
         Role role = new Role();
         role.setId(2);
         modelUser.setRole(role);

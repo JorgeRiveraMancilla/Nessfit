@@ -21,16 +21,14 @@ public class Installation implements Serializable {
     @JoinColumn (name = "id_category", referencedColumnName = "id")
     private Category category;
 
-    /**
-     * Constructor for the User class.
-     */
-    public Installation() {
-        this.name = "";
-        this.address = "";
-        this.rentalCost = "";
-        this.status = 0;
-        this.category = null;
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     /**
      * Method that gets the name of a installation.
      * @return Name of a installation.

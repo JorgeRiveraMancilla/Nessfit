@@ -64,7 +64,7 @@ public class AdministrativeRegisterUserController {
 
         modelUser.setEmail(modelUser.getEmail().toLowerCase());
         modelUser.setStatus(1);
-        modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
+        modelUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
         Role role = new Role();
         role.setId(3);
         modelUser.setRole(role);

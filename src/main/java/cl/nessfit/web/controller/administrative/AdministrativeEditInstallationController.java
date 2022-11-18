@@ -29,9 +29,9 @@ public class AdministrativeEditInstallationController {
      * @param name Installation name.
      * @return Return the edit installation page.
      */
-    @GetMapping ("/edit-installation/{name}")
-    public String editInstallation(Model model, @PathVariable String name) {
-        Installation installation = installationService.searchByName(name);
+    @GetMapping ("/edit-installation/{id}")
+    public String editInstallation(Model model, @PathVariable int id) {
+        Installation installation = installationService.searchById(id);
         model.addAttribute("installation", installation);
         model.addAttribute("categories", categoryService.getCategories());
         model.addAttribute("nameCategory", installation.getCategory().getName());

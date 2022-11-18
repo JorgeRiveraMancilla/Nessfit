@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface InstallationServiceInterface {
 
+    Installation searchById(int id);
+
     /**
      * Saves the installation in the database.
      * @param installation User to save.
