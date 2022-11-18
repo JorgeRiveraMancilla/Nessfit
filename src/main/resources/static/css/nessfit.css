@@ -8,6 +8,12 @@
     color: white;
 }
 
+.btn-nessfit:focus {
+    background: #3F8880;
+    border-color: #3F8880;
+    color: white;
+}
+
 .btn-nessfit:hover {
     background: #A0FB0E;
     border-color: #A0FB0E;
