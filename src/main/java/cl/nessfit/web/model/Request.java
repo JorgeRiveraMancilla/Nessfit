@@ -29,14 +29,20 @@ public class Request implements Serializable {
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "request")
     private Set<DateRequest> dateRequests;
 
+    /**
+     * Method that gets the request price.
+     * @return Request price.
+     */
     public int getPrice() {
         return price;
     }
-
+    /**
+     * Method that set the request price.
+     * @param price New installation price.
+     */
     public void setPrice(int price) {
         this.price = price;
     }
-
     /**
      * Method that gets the id of a request.
      * @return id of a request.
