@@ -1,3 +1,5 @@
+-- noinspection SqlDialectInspectionForFile
+
 INSERT INTO `nessfit`.roles (id, name)
 VALUES (1, 'Administrador');
 INSERT INTO `nessfit`.roles (id, name)

@@ -56,6 +56,7 @@ public class AdministratorRegisterUserController {
         if (errorMessages[0].equals("false")) {
             model.addAttribute("client", true);
             model.addAttribute("rutMessage", errorMessages[1]);
+            model.addAttribute("client", true);
             model.addAttribute("firstNameMessage", errorMessages[2]);
             model.addAttribute("lastNameMessage", errorMessages[3]);
             model.addAttribute("emailMessage", errorMessages[4]);
@@ -109,6 +110,7 @@ public class AdministratorRegisterUserController {
         if (errorMessages[0].equals("false")) {
             model.addAttribute("client", false);
             model.addAttribute("rutMessage", errorMessages[1]);
+            model.addAttribute("client", false);
             model.addAttribute("firstNameMessage", errorMessages[2]);
             model.addAttribute("lastNameMessage", errorMessages[3]);
             model.addAttribute("emailMessage", errorMessages[4]);

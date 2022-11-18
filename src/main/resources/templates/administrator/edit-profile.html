@@ -6,7 +6,8 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form class="shadow p-3 rounded form-nessfit" th:action="@{/administrator/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+        <form class="shadow-lg p-4 rounded-3 border border-dark border-success border-opacity-25 form-nessfit" th:action="@{/administrator/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+            <!--RUT-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
                 <div class="col-sm-9">
@@ -14,6 +15,7 @@
                     <input type="hidden" th:field="*{rut}">
                 </div>
             </div>
+            <!--FirstName-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputFirstName" class="col-sm-3 col-form-label">Nombres</label>
                 <div class="col-sm-9">
@@ -26,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            <!--LastName-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputLastname" class="col-sm-3 col-form-label">Apellidos</label>
                 <div class="col-sm-9">
@@ -38,6 +41,7 @@
                     </div>
                 </div>
             </div>
+            <!--Email-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputEmail" class="col-sm-3 col-form-label">Correo electrónico</label>
                 <div class="col-sm-9">
@@ -50,6 +54,7 @@
                     </div>
                 </div>
             </div>
+            <!--Phone-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputPhone" class="col-sm-3 col-form-label">Teléfono</label>
                 <div class="col-sm-9">
@@ -62,9 +67,11 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+            <!--Button-->
+            <div class="d-md-flex justify-content-center">
                 <button id="modalButton" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
             </div>
+            <!--Modal-->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

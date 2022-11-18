@@ -6,7 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form class="shadow p-3 rounded form-nessfit" th:action="@{/administrative/edit-profile}" th:object="${user}" method="post" autocomplete="off">
+        <form class="shadow-lg p-4 rounded-3 border border-dark border-success border-opacity-25 form-nessfit" th:action="@{/administrative/edit-profile}" th:object="${user}" method="post" autocomplete="off">
             <!--RUT-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">RUT</label>
@@ -67,10 +67,11 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+            <!--Button-->
+            <div class="d-md-flex justify-content-center">
                 <button id="modalButton" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar perfil</button>
             </div>
-
+            <!--Modal-->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">

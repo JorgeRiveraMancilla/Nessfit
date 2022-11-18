@@ -6,8 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form class="shadow p-3 rounded form-nessfit" th:action="@{/administrative/edit-installation}" th:object="${installation}" method="post" autocomplete="off">
-            <input type="hidden" th:field="*{id}">
+        <form class="shadow-lg p-4 rounded-3 border border-dark border-success border-opacity-25 form-nessfit" th:action="@{/administrative/edit-installation}" th:object="${installation}" method="post" autocomplete="off">
             <!--Name-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="staticRut" class="col-sm-3 col-form-label">Nombre</label>
@@ -39,7 +38,6 @@
                         <label th:text="${rentalCostMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-
                 </div>
             </div>
             <!--Type-->
@@ -59,10 +57,11 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid p-0 d-flex align-items-center justify-content-center">
+            <!--Button-->
+            <div class="d-md-flex justify-content-center">
                 <button id="modalButton" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar instalación</button>
             </div>
-
+            <!--Modal-->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -70,7 +69,7 @@
                             <h1 class="modal-title fs-5">¿Está seguro?</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body w-100" th:text="'Editar la instalación'"></div>
+                        <div class="modal-body w-100" th:text="'Editar la instalación de nombre ' + ${installation.name} + '.'"></div>
                         <div class="modal-footer w-100">
                             <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
