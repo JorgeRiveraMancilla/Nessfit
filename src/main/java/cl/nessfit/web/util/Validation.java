@@ -20,6 +20,7 @@ public class Validation {
      * @return String array with all error messages for edited user controllers.
      */
     public static String[] editProfileValidation(UserServiceInterface userService, User actualUser, User editedUser){
+
         String[] errors = new String[5];
         // FirstName
         errors[1] = validFormatName(editedUser.getFirstName());
@@ -28,7 +29,7 @@ public class Validation {
         // Email
         errors[3] = validFormatEmail(editedUser.getEmail());
         if (errors[3].equals("")){
-            errors[3] = actualUser.getEmail().equals(editedUser.getEmail()) ?
+            errors[3] = actualUser.getEmail().equalsIgnoreCase(editedUser.getEmail()) ?
                     "" : existsRutEmail(userService, editedUser.getEmail(), "email");
         }
         // Phone
@@ -209,6 +210,7 @@ public class Validation {
      * @return Error for the email.
      */
     private static String validFormatEmail(String email){
+        email = email.toLowerCase();
         if (email.strip().equals("")) { return "Campo Obligatorio"; }
         if (ProfileValidation.validEmail(email)) { return ""; }
         return "Su correo electrónico no es válido";
@@ -258,7 +260,7 @@ public class Validation {
                     return "Rut ingresado ya existe, intente iniciar sesión";
                 }
             case "email":
-                if (ProfileValidation.existEmail(userService, parameter)){
+                if (ProfileValidation.existEmail(userService, parameter.toLowerCase())){
                     return "El correo electrónico ingresado ya existe";
                 }
             default:

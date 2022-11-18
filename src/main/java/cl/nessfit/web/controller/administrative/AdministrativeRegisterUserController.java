@@ -62,6 +62,7 @@ public class AdministrativeRegisterUserController {
             return "administrative/register-user";
         }
 
+        modelUser.setEmail(modelUser.getEmail().toLowerCase());
         modelUser.setStatus(1);
         modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
         Role role = new Role();
