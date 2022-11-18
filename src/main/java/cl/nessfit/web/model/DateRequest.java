@@ -11,7 +11,7 @@ public class DateRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = -8720869883791567541L;
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private Date date;
     @ManyToOne

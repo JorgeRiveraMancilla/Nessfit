@@ -1,12 +1,6 @@
 package cl.nessfit.web.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -16,6 +10,8 @@ public class Installation implements Serializable {
     @Serial
     private static final long serialVersionUID = 425470456250466110L;
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    int id;
     private String name;
     private String address;
     @Column (name = "rental_cost")

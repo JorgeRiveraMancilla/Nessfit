@@ -15,9 +15,10 @@ public class Request implements Serializable {
     @Serial
     private static final long serialVersionUID = 4819729910502605019L;
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private int status;
+    private int price;
     private Date register;
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "rut_user", referencedColumnName = "rut")
@@ -27,6 +28,14 @@ public class Request implements Serializable {
     private Installation installation;
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "request")
     private Set<DateRequest> dateRequests;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     /**
      * Method that gets the id of a request.
