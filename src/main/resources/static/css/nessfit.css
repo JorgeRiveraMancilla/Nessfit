@@ -20,6 +20,12 @@
     color: black;
 }
 
+.btn-nessfit:active:hover {
+    background: #A0FB0E;
+    border-color: #A0FB0E;
+    color: black;
+}
+
 .btn-nessfit-crud {
     background: #FEF6CD;
     border-color: #FEF6CD;

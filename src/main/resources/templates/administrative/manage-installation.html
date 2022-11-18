@@ -9,7 +9,7 @@
         <div class="container-fluid d-flex justify-content-between">
             <form th:action="@{/administrative/manage-installation}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-primary btn-nessfit me-3" type="button" name="refresh" aria-label="Refresh" title="Refresh" onclick="location.reload()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <a class="btn btn-primary btn-nessfit me-3" aria-current="page" th:href="@{/administrative/manage-installation}"><i class="bi bi-arrow-clockwise"></i></a>
                     <label for="exampleInputName1" class="form-label">Nombre</label>
                     <input name="name" type="text" class="form-control mx-3" id="exampleInputName1">
                     <button type="submit" class="btn btn-primary btn-nessfit-search"><i class="bi bi-search"></i> Buscar</button>
@@ -37,7 +37,7 @@
                 </td>
             </tr>
             <tr th:unless="${installations == null}" th:each="installation : ${installations}">
-                <form th:action="@{/administrative/change-status-installation/{name}(name=${installation.name})}" method="post" autocomplete="off">
+                <form th:action="@{/administrative/change-status-installation/{id}(id=${installation.id})}" method="post" autocomplete="off">
                     <td th:text="${installation.getName()}"></td>
                     <td th:if="${installation.status == 1}">Operativo</td>
                     <td th:if="${installation.status == 0}">Inoperativo</td>
@@ -45,11 +45,11 @@
                     <td th:text="${installation.getRentalCost()}"></td>
                     <td th:text="${installation.getCategory().getName()}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Inoperar</button>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getName().replace(' ', '_')}">Operar</button>
-                        <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/edit-installation/{name}(name=${installation.name})}">Editar instalación</a>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Inoperar</button>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Operar</button>
+                        <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/edit-installation/{id}(id=${installation.id})}">Editar instalación</a>
                     </td>
-                    <div class="modal fade" th:id="'exampleModal' + ${installation.getName().replace(' ', '_')}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" th:id="'exampleModal' + ${installation.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header w-100">
