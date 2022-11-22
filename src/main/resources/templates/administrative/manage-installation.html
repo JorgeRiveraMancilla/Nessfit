@@ -45,8 +45,8 @@
                     <td th:text="${installation.getRentalCost()}"></td>
                     <td th:text="${installation.getCategory().getName()}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Inoperar</button>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Operar</button>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Deshabilitar</button>
+                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Habilitar</button>
                         <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/edit-installation/{id}(id=${installation.id})}">Editar instalación</a>
                     </td>
                     <div class="modal fade" th:id="'exampleModal' + ${installation.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

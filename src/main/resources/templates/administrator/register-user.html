@@ -6,7 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex align-items-center justify-content-center border-start">
-        <form class="shadow-lg p-4 rounded-3 border border-dark border-success border-opacity-25 form-nessfit" id="administrative" th:if="${client == false}" th:action="@{/administrator/register-administrative}" th:object="${user}" method="post" autocomplete="off">
+        <form class="shadow-lg p-4 rounded-3 border border-dark border-success border-opacity-25 form-nessfit" id="administrative" th:action="@{/administrator/register-administrative}" th:object="${user}" method="post" autocomplete="off">
             <!--RUT-->
             <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
                 <label for="exampleInputRut1" class="col-sm-3 col-form-label">RUT</label>
@@ -94,93 +94,6 @@
                 </div>
             </div>
         </form>
-        <form class="shadow-lg p-4 rounded-3 border border-dark border-success border-opacity-25 form-nessfit" id="client" th:if="${client == true}" th:action="@{/administrator/register-client}" th:object="${user}" method="post" autocomplete="off">
-            <!--RUT-->
-            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-                <label for="exampleInputRut2" class="col-sm-3 col-form-label">RUT</label>
-                <div class="col-sm-9">
-                    <input name="rut" type="text" class="form-control" id="exampleInputRut2" aria-describedby="rutHelp2" th:field="*{rut}">
-                    <div id="rutHelp2" class="form-text">Sin puntos ni guion, si termina en K, debe ingresar en mayúsculas. Ejemplo: 123456789K</div>
-                    <div th:if="${rutMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${rutMessage}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-            <!--FirstName-->
-            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-                <label for="exampleInputFirstName2" class="col-sm-3 col-form-label">Nombres</label>
-                <div class="col-sm-9">
-                    <input name="name" type="text" class="form-control" id="exampleInputFirstName2" aria-describedby="nameHelp2" th:field="*{firstName}">
-                    <div id="nameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Luz María.</div>
-                    <div th:if="${firstNameMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${firstNameMessage}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-            <!--LastName-->
-            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-                <label for="exampleInputLastname2" class="col-sm-3 col-form-label">Apellidos</label>
-                <div class="col-sm-9">
-                    <input name="lastname" type="text" class="form-control" id="exampleInputLastname2" aria-describedby="lastnameHelp2" th:field="*{lastName}">
-                    <div id="lastnameHelp2" class="form-text">Largo mínimo de 3 caracteres. Ejemplo: Del Bosque.</div>
-                    <div th:if="${lastNameMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${lastNameMessage}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-            <!--Email-->
-            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Correo electrónico</label>
-                <div class="col-sm-9">
-                    <input name="email" type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp2" th:field="*{email}">
-                    <div id="emailHelp2" class="form-text">Debe contener un “@” antes y después de este. Ejemplo: correo@electronico.</div>
-                    <div th:if="${emailMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${emailMessage}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-            <!--Phone-->
-            <div class="mb-3 row" style="min-width: 50rem; max-width: 50rem;">
-                <label for="exampleInputPhone2" class="col-sm-3 col-form-label">Teléfono</label>
-                <div class="col-sm-9">
-                    <input name="phone" type="text" class="form-control" id="exampleInputPhone2" aria-describedby="phoneHelp2" th:field="*{phone}">
-                    <div id="phoneHelp2" class="form-text">El largo del teléfono móvil no puede ser menor a 11 ni mayor a 16 dígitos.</div>
-                    <div th:if="${phoneMessage != ''}" class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <strong>¡Error!</strong>
-                        <label th:text="${phoneMessage}"></label>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                </div>
-            </div>
-            <!--Button-->
-            <div class="d-md-flex justify-content-center">
-                <button id="modalButton2" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal2">Registrar cliente</button>
-            </div>
-            <!--Modal-->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header w-100">
-                            <h1 class="modal-title fs-5">¿Está seguro?</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body w-100">Registrar un nuevo usuario Cliente.</div>
-                        <div class="modal-footer w-100">
-                            <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
     </section>
 </main>
 <footer th:insert="fragments/footer-fragment::footer"></footer>
@@ -193,18 +106,6 @@
             if (event.key === 'Enter') {
                 event.preventDefault();
                 document.getElementById("modalButton1").click();
-            }
-        })
-    }
-</script>
-<script>
-    var inputs2 = document.getElementById("client").getElementsByTagName("input");
-    for (i = 0; i < inputs2.length; i++) {
-        var input2 = inputs2[i];
-        input2.addEventListener("keypress", function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                document.getElementById("modalButton2").click();
             }
         })
     }
