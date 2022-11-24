@@ -129,8 +129,8 @@ public class Validation {
      * @return String array with all error messages for the change password controller.
      */
     public static String validPassword(String password1, String password2){
-        if (!areEquals(password1, password2)) { return "Las contraseñas no son iguales"; }
-        if (!validSize(password1, 10, 15)) {
+        if (!Util.areEquals(password1, password2)) { return "Las contraseñas no son iguales"; }
+        if (!Util.validSize(password1, 10, 15)) {
             return "El largo de la contraseña debe estar entre 10 y 15 caracteres";
         }
         return "";
@@ -186,8 +186,8 @@ public class Validation {
         phone = phone.strip();
         if (phone.equals("")) { return "Campo Obligatorio"; }
         if (phone.length() > 200) { return "Largo inválido"; }
-        if (!validSize(phone, 11, 16)) { return "El teléfono móvil ingresado no es válido"; }
-        if (!tryParseLong(phone)) { return "Solo se aceptan valores numéricos"; }
+        if (!Util.validSize(phone, 11, 16)) { return "El teléfono móvil ingresado no es válido"; }
+        if (!Util.tryParseLong(phone)) { return "Solo se aceptan valores numéricos"; }
         return "";
     }
 
@@ -235,7 +235,7 @@ public class Validation {
      */
     private static String validFormatRentalCost(String rentalCost){
         rentalCost = rentalCost.strip();
-        if (!tryParseLong(rentalCost)) { return "Formato inválido"; }
+        if (!Util.tryParseLong(rentalCost)) { return "Formato inválido"; }
         if (rentalCost.equals("")) { return "Campo obligatorio"; }
         if (!(1000 <= Integer.parseInt(rentalCost))) {
             return "El costo mínimo de arriendo debe ser $1.000 (1000)";
@@ -268,40 +268,6 @@ public class Validation {
         }
     }
 
-    /**
-     * Validate if a string has a valid length.
-     * @param parameter String to validate.
-     * @param min Min value.
-     * @param max Max value.
-     * @return "True" if is valid, "False" if not.
-     */
-    private static boolean validSize(String parameter, int min, int max) {
-        return min <= parameter.length() && parameter.length() <= max;
-    }
-
-    /**
-     * Compare if the two parameters are equals.
-     * @param parameter1 String one.
-     * @param parameter2 String two.
-     * @return "True" if are equals, and "False" if not.
-     */
-    private static boolean areEquals(String parameter1, String parameter2){
-        return parameter1.equals(parameter2);
-    }
-
-    /**
-     * Validate if the string is a number.
-     * @param parameter String to validate.
-     * @return "True" if is a number or "False" if not.
-     */
-    private static boolean tryParseLong(String parameter) {
-        try {
-            Long.parseLong(parameter);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
 
 }

@@ -41,20 +41,13 @@ public class UserServiceImpl implements UserServiceInterface {
      * @return List with all users with administrative role.
      */
     @Override
-    public List<User> getAdministrative() { return userRepository.findByRoleId(2); }
+    public List<User> getAdministratives() { return userRepository.findByRoleId(2); }
 
     /**
-     * Return a list with all users from the database.
-     * @return List with all users.
+     * Return a list with all users with client role from the database.
+     * @return List with all users with client role.
      */
     @Override
-    public List<User> getUsers() { return userRepository.findAll(); }
-
-    /**
-     * Return a list with administrative and clients.
-     * @return List with administrative and clients.
-     */
-    @Override
-    public List<User> getAdministrativeAndClients() { return userRepository.findUsersByRoleIdOrRoleId(2,3); }
+    public List<User> getClients() { return userRepository.findByRoleId(3); }
 
 }
