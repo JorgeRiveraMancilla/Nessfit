@@ -20,6 +20,7 @@ public class Request implements Serializable {
     private int status;
     private int price;
     private Date register;
+    private int quantity;
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "rut_user", referencedColumnName = "rut")
     private User user;
@@ -85,6 +86,16 @@ public class Request implements Serializable {
     public void setRegister(Date register) {
         this.register = register;
     }
+    /**
+     * Method that gets the quantity of a request.
+     * @return quantity of a request.
+     */
+    public int getQuantity() { return quantity; }
+    /**
+     * Method that sets the quantity for a request.
+     * @param quantity New quantity for the request.
+     */
+    public void setQuantity(int quantity) { this.quantity = quantity; }
     /**
      * Method that gets the user of a request.
      * @return user of a request.

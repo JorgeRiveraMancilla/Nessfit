@@ -240,8 +240,8 @@ public class Validation {
         if (!(1000 <= Integer.parseInt(rentalCost))) {
             return "El costo mínimo de arriendo debe ser $1.000 (1000)";
         }
-        if (!(100000 >= Integer.parseInt(rentalCost))) {
-            return "El costo máximo de arriendo debe ser $100.000 (100000)";
+        if (!(1000000000 >= Integer.parseInt(rentalCost))) {
+            return "El costo máximo de arriendo debe ser $1.000.000.000 (1000000000)";
         }
         return "";
     }

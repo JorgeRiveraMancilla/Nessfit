@@ -81,7 +81,8 @@ public class ClientRentInstallationController {
             dateRequests.add(dateRequest);
         }
         request.setStatus(1);
-        request.setPrice(dateRequests.size() * Integer.parseInt(installation.getRentalCost()));
+        request.setPrice(Integer.parseInt(installation.getRentalCost()));
+        request.setQuantity(dateRequests.size());
         request.setRegister(new Date());
         request.setUser(user);
         request.setInstallation(installation);
