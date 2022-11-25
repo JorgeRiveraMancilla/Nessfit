@@ -237,10 +237,10 @@ public class Validation {
         rentalCost = rentalCost.strip();
         if (!Util.tryParseLong(rentalCost)) { return "Formato inválido"; }
         if (rentalCost.equals("")) { return "Campo obligatorio"; }
-        if (!(1000 <= Integer.parseInt(rentalCost))) {
+        if (!(1000 <= Long.parseLong(rentalCost))) {
             return "El costo mínimo de arriendo debe ser $1.000 (1000)";
         }
-        if (!(1000000000 >= Integer.parseInt(rentalCost))) {
+        if (!(1000000000 >= Long.parseLong(rentalCost))) {
             return "El costo máximo de arriendo debe ser $1.000.000.000 (1000000000)";
         }
         return "";
