@@ -1,6 +1,7 @@
 package cl.nessfit.web.controller.administrator;
 
 import cl.nessfit.web.service.UserServiceInterface;
+import cl.nessfit.web.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class AdministratorManageUserController {
      */
     @GetMapping ("/manage-user")
     public String manageUser(Model model) {
-        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("users", Util.joinList(userService.getAdministratives(), userService.getClients()));
         model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
         return "administrator/manage-user";
     }

@@ -41,7 +41,7 @@
                 <div class="col-sm-9 mb-2">
                     <div id="datepicker" class="border border-dark bg-white"></div>
                     <input id="days" name="days" type="hidden">
-                    <div th:if="${daysMessage != null}" class="alert alert-danger alert-dismissible fade show mt-1 mb-0" role="alert">
+                    <div th:if="${daysMessage != null}" class="alert alert-danger alert-dismissible fade show mt-3 mb-1" role="alert">
                         <strong>¡Error!</strong>
                         <label th:text="${daysMessage}"></label>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -97,7 +97,7 @@
         startDate: new Date(Date.now() + 3600 * 1000 * 24),
         datesDisabled: daysDisabled,
         autoSize: true,
-        todayHighlight: true
+        todayHighlight: false
     });
 
     $('#datepicker').on('changeDate', function() {

@@ -22,60 +22,6 @@ public class AdministratorRegisterUserController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    //region REGISTER CLIENT
-
-    /**
-     * Get and iniciate data from register-user.html.
-     * @param model Is the application's dynamic data structure.
-     * @return Register user view.
-     */
-    @GetMapping("/register-client")
-    public String registerClient(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        model.addAttribute("client", true);
-        model.addAttribute("rutMessage", "");
-        model.addAttribute("firstNameMessage", "");
-        model.addAttribute("lastNameMessage", "");
-        model.addAttribute("emailMessage", "");
-        model.addAttribute("phoneMessage", "");
-        return "administrator/register-user";
-    }
-
-    /**
-     * Receives data from register-user.html.
-     * @param modelUser User from register-user.html.
-     * @param model Is the application's dynamic data structure.
-     * @return If all is ok, redirect to administrator/manage-installation.
-     */
-    @PostMapping("/register-client")
-    public String registerClient(@ModelAttribute("user") User modelUser, Model model) {
-
-        String[] errorMessages = Validation.registerUserValidation(userService, modelUser);
-
-        if (errorMessages[0].equals("false")){
-            model.addAttribute("rutMessage", errorMessages[1]);
-            model.addAttribute("client", true);
-            model.addAttribute("firstNameMessage", errorMessages[2]);
-            model.addAttribute("lastNameMessage", errorMessages[3]);
-            model.addAttribute("emailMessage", errorMessages[4]);
-            model.addAttribute("phoneMessage", errorMessages[5]);
-            return "administrator/register-user";
-        }
-
-        modelUser.setEmail(modelUser.getEmail().toLowerCase());
-        modelUser.setStatus(1);
-        modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
-        Role role = new Role();
-        role.setId(3);
-        modelUser.setRole(role);
-        userService.save(modelUser);
-        return "redirect:/administrator/manage-user";
-    }
-
-    //endregion
-
-    //region REGISTER ADMINISTRATIVE
 
     /**
      * Get and iniciate data from register-user.html.
@@ -86,7 +32,6 @@ public class AdministratorRegisterUserController {
     public String registerAdministrative(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        model.addAttribute("client", false);
         model.addAttribute("rutMessage", "");
         model.addAttribute("firstNameMessage", "");
         model.addAttribute("lastNameMessage", "");
@@ -106,7 +51,8 @@ public class AdministratorRegisterUserController {
 
         String[] errorMessages = Validation.registerUserValidation(userService, modelUser);
 
-        if (errorMessages[0].equals("false")){
+        if (errorMessages[0].equals("false")) {
+            model.addAttribute("client", false);
             model.addAttribute("rutMessage", errorMessages[1]);
             model.addAttribute("client", false);
             model.addAttribute("firstNameMessage", errorMessages[2]);
@@ -116,9 +62,13 @@ public class AdministratorRegisterUserController {
             return "administrator/register-user";
         }
 
-        modelUser.setEmail(modelUser.getEmail().toLowerCase());
+        modelUser.setRut(modelUser.getRut().strip());
+        modelUser.setFirstName(modelUser.getFirstName().strip());
+        modelUser.setLastName(modelUser.getLastName().strip());
+        modelUser.setEmail(modelUser.getEmail().toLowerCase().strip());
+        modelUser.setPhone(modelUser.getPhone().strip());
         modelUser.setStatus(1);
-        modelUser.setPassword(passwordEncoder.encode(modelUser.getPassword()));
+        modelUser.setPassword(passwordEncoder.encode(modelUser.getRut()));
         Role role = new Role();
         role.setId(2);
         modelUser.setRole(role);
@@ -127,5 +77,4 @@ public class AdministratorRegisterUserController {
         return "redirect:/administrator/manage-user";
     }
 
-    //endregion
 }

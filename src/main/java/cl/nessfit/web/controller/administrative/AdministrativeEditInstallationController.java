@@ -26,12 +26,12 @@ public class AdministrativeEditInstallationController {
     /**
      * Get data from edit-installation.html.
      * @param model Is the application's dynamic data structure.
-     * @param name Installation name.
+     * @param id Installation id.
      * @return Return the edit installation page.
      */
-    @GetMapping ("/edit-installation/{name}")
-    public String editInstallation(Model model, @PathVariable String name) {
-        Installation installation = installationService.searchByName(name);
+    @GetMapping ("/edit-installation/{id}")
+    public String editInstallation(Model model, @PathVariable int id) {
+        Installation installation = installationService.searchById(id);
         model.addAttribute("installation", installation);
         model.addAttribute("categories", categoryService.getCategories());
         model.addAttribute("nameCategory", installation.getCategory().getName());
@@ -51,6 +51,9 @@ public class AdministrativeEditInstallationController {
                                    BindingResult bindingResult,
                                    @RequestParam Map<String, String> allParams,
                                    Model model) {
+
+        Installation actualInstallation = installationService.searchByName(modelInstallation.getName());
+
         String[] errors = Validation.editInstallationValidation(modelInstallation);
 
         if (errors[0].equals("false")){
@@ -76,10 +79,11 @@ public class AdministrativeEditInstallationController {
         Category category = new Category();
         category.setId(categoryService.searchByName(nameCategory).getId());
         category.setName(nameCategory);
-        modelInstallation.setCategory(category);
-        modelInstallation.setStatus(installationService.searchByName(modelInstallation.getName()).getStatus());
+        actualInstallation.setAddress(modelInstallation.getAddress().strip());
+        actualInstallation.setRentalCost(modelInstallation.getRentalCost().strip());
+        actualInstallation.setCategory(category);
         // Save data from actualInstallation
-        installationService.save(modelInstallation);
+        installationService.save(actualInstallation);
 
         return "redirect:/administrative/manage-installation";
     }

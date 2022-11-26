@@ -9,9 +9,9 @@
         <div class="container-fluid d-flex justify-content-between">
             <form th:action="@{/administrative/manage-user}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
-                    <button class="btn btn-primary btn-nessfit me-3" type="button" name="refresh" aria-label="Refresh" title="Refresh" onclick="location.reload()"><i class="bi bi-arrow-clockwise"></i></button>
+                    <a class="btn btn-primary btn-nessfit me-3" aria-current="page" th:href="@{/administrative/manage-user}"><i class="bi bi-arrow-clockwise"></i></a>
                     <label for="exampleInputRut1" class="form-label">RUT</label>
-                    <input name="rut" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp">
+                    <input name="rut" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp" placeholder="12345678K">
                     <button type="submit" class="btn btn-primary btn-nessfit-search"><i class="bi bi-search"></i> Buscar</button>
                 </div>
             </form>

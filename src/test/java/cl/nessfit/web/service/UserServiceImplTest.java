@@ -41,18 +41,7 @@ class UserServiceImplTest {
     @Test
     void getAdministrative() {
         when(userRepository.findAll()).thenReturn(Arrays.asList(user));
-        assertNotNull(userService.getAdministrative());
+        assertNotNull(userService.getAdministratives());
     }
 
-    @Test
-    void getUsers() {
-        when(userRepository.findAll()).thenReturn(Arrays.asList(user));
-        assertNotNull(userService.getUsers());
-    }
-
-    @Test
-    void getAdministrativeAndClients() {
-        when(userRepository.findAll()).thenReturn(Arrays.asList(user));
-        assertNotNull(userService.getAdministrativeAndClients());
-    }
 }

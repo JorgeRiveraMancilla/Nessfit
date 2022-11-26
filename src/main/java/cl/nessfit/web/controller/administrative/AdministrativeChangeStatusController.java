@@ -54,12 +54,12 @@ public class AdministrativeChangeStatusController {
 
     /**
      * Changes the installation status, depending on the form election by the administrative.
-     * @param name Name from installation that we change the status.
+     * @param id id from installation that we change the status.
      * @return return to "change-status-installation" page, or home page.
      */
-    @PostMapping("/change-status-installation/{name}")
-    public String changeStatusInstallation(@PathVariable String name) {
-        Installation installation = installationService.searchByName(name);
+    @PostMapping("/change-status-installation/{id}")
+    public String changeStatusInstallation(@PathVariable int id) {
+        Installation installation = installationService.searchById(id);
 
         installation.setStatus(installation.getStatus() == 1 ? 0 : 1);
         installationService.save(installation);

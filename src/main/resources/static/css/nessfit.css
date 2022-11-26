@@ -1,0 +1,39 @@
+.form-nessfit {
+    background: #FEF6CD;
+}
+
+.btn-nessfit {
+    background: #3F8880;
+    border-color: #3F8880;
+    color: white;
+}
+
+.btn-nessfit:focus {
+    background: #3F8880;
+    border-color: #3F8880;
+    color: white;
+}
+
+.btn-nessfit:hover {
+    background: #A0FB0E;
+    border-color: #A0FB0E;
+    color: black;
+}
+
+.btn-nessfit:active:hover {
+    background: #A0FB0E;
+    border-color: #A0FB0E;
+    color: black;
+}
+
+.btn-nessfit-crud {
+    background: #FEF6CD;
+    border-color: #FEF6CD;
+    color: black;
+}
+
+.btn-nessfit-crud:hover {
+    background: #A0FB0E;
+    border-color: #A0FB0E;
+    color: black;
+}

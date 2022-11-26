@@ -48,10 +48,10 @@ public class ClientRentInstallationController {
         return "client/view-installation";
     }
 
-    @GetMapping ("/rent-installation/{name}")
-    public String rentInstallation(Model model, @PathVariable String name) {
-        Installation installation = installationService.searchByName(name);
-        List<Request> requests = requestService.getRequestsBy(name);
+    @GetMapping ("/rent-installation/{id}")
+    public String rentInstallation(Model model, @PathVariable int id) {
+        Installation installation = installationService.searchById(id);
+        List<Request> requests = requestService.getRequestsBy(installation.getName());
         model.addAttribute("installation", installation);
         model.addAttribute("requests", requests);
         return "client/rent-installation";
@@ -81,6 +81,8 @@ public class ClientRentInstallationController {
             dateRequests.add(dateRequest);
         }
         request.setStatus(1);
+        request.setPrice(Integer.parseInt(installation.getRentalCost()));
+        request.setQuantity(dateRequests.size());
         request.setRegister(new Date());
         request.setUser(user);
         request.setInstallation(installation);

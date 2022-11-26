@@ -14,6 +14,16 @@ public class InstallationServiceImpl implements InstallationServiceInterface{
     private InstallationRepositoryInterface installationRepository;
 
     /**
+     * Given an id, returns an installation with that id data.
+     * @param id Installation id.
+     * @return Installation with that id data
+     */
+    @Override
+    public Installation searchById(int id) {
+        return installationRepository.findById(id);
+    }
+
+    /**
      * Saves the installation in the database.
      * @param installation User to save.
      */
