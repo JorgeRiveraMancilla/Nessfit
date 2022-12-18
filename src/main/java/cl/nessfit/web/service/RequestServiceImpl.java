@@ -5,9 +5,6 @@ import cl.nessfit.web.repository.RequestRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +19,7 @@ public class RequestServiceImpl implements RequestServiceInterface {
      */
     @Override
     public List<Request> getRequestsByInstallationNameLike(String installationName) {
-        return requestRepository.findRequestsByInstallationName(installationName);
+        return requestRepository.findRequestsByInstallationNameLike(installationName);
     }
 
     /**
@@ -47,10 +44,5 @@ public class RequestServiceImpl implements RequestServiceInterface {
     @Override
     public List<Request> getRequests() {
         return requestRepository.findAll();
-    }
-
-    @Override
-    public List<Request> searchByDate(LocalDate register) {
-        return requestRepository.findRequestsByDateRequests(register);
     }
 }

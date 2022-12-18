@@ -1,5 +1,6 @@
 package cl.nessfit.web.controller.administrator;
 
+import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping ("/administrator")
@@ -24,7 +27,10 @@ public class AdministratorManageUserController {
      */
     @GetMapping ("/manage-user")
     public String manageUser(Model model) {
-        model.addAttribute("users", Util.joinList(userService.getAdministratives(), userService.getClients()));
+        List<User> users =  Util.joinList(userService.getAdministratives(), userService.getClients());
+        if (!users.isEmpty()) {
+            model.addAttribute("users", users);
+        }
         model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
         return "administrator/manage-user";
     }

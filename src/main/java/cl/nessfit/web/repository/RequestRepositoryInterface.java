@@ -4,9 +4,6 @@ import cl.nessfit.web.model.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public interface RequestRepositoryInterface extends JpaRepository<Request, Integer> {
@@ -17,7 +14,7 @@ public interface RequestRepositoryInterface extends JpaRepository<Request, Integ
      * @return All requests with the same name.
      */
     @Query(value = "SELECT r.id, r.price, r.quantity, r.register, r.status, r.id_installation, r.rut_user FROM requests r, installations i WHERE r.id_installation = i.id AND i.name like ?1%", nativeQuery = true)
-    List<Request> findRequestsByInstallationName(String name);
+    List<Request> findRequestsByInstallationNameLike(String name);
 
     /**
      * Select * from requests r where r.rut_user = rut.

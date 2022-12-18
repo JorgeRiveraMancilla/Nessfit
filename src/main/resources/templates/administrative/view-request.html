@@ -6,16 +6,7 @@
 <main class="d-flex flex-row">
     <nav th:insert="fragments/sidebar-fragment::nav"></nav>
     <section class="container-fluid p-3 d-flex flex-column align-items-start border-start">
-        <div class="container-fluid d-flex justify-content-between">
-            <form th:action="@{/administrative/view-request}" method="post" autocomplete="off">
-                <div class="d-flex align-items-center">
-                    <a class="btn btn-primary btn-nessfit me-3" aria-current="page" th:href="@{/administrative/view-request}"><i class="bi bi-arrow-clockwise"></i></a>
-                    <label for="exampleInputName1" class="form-label">Fecha</label>
-                    <input name="register" type="text" class="form-control mx-3" id="exampleInputName1">
-                    <button type="submit" class="btn btn-primary btn-nessfit-search"><i class="bi bi-search"></i> Buscar</button>
-                </div>
-            </form>
-        </div>
+
         <table class="table table-hover">
             <thead>
             <tr>
