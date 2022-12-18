@@ -4,20 +4,16 @@ import cl.nessfit.web.model.DateRequest;
 import cl.nessfit.web.model.Installation;
 import cl.nessfit.web.model.Request;
 import cl.nessfit.web.model.User;
-import cl.nessfit.web.repository.DateRequestRepositoryInterface;
-import cl.nessfit.web.service.DateRequestServiceInterface;
 import cl.nessfit.web.service.InstallationServiceInterface;
 import cl.nessfit.web.service.RequestServiceInterface;
 import cl.nessfit.web.service.UserServiceInterface;
 import cl.nessfit.web.util.RequestValidation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.*;
@@ -52,7 +48,7 @@ public class ClientRentInstallationController {
     @GetMapping ("/rent-installation/{id}")
     public String rentInstallation(Model model, @PathVariable int id) {
         Installation installation = installationService.searchById(id);
-        List<Request> requests = requestService.getRequestsBy(installation.getName());
+        List<Request> requests = requestService.getRequestsByInstallationNameLike(installation.getName());
         model.addAttribute("installation", installation);
         model.addAttribute("requests", requests);
         return "client/rent-installation";
@@ -66,7 +62,7 @@ public class ClientRentInstallationController {
         RequestValidation requestValidation = new RequestValidation(days);
         String daysMessage = requestValidation.getDaysMessage();
         if (daysMessage != null) {
-            List<Request> requests = requestService.getRequestsBy(name);
+            List<Request> requests = requestService.getRequestsByInstallationNameLike(name);
             model.addAttribute("installation", installation);
             model.addAttribute("requests", requests);
             model.addAttribute("daysMessage", daysMessage);

@@ -11,18 +11,18 @@ import java.util.List;
 
 public interface RequestRepositoryInterface extends JpaRepository<Request, Integer> {
 
-    /**
+    /*
      * Select * form requests r where r.name = name.
      * @param name request name.
      * @return All requests with the same name.
      */
-    List<Request> findRequestsByInstallation_Name(String name);
+    @Query(value = "SELECT r.id, r.price, r.quantity, r.register, r.status, r.id_installation, r.rut_user FROM requests r, installations i WHERE r.id_installation = i.id AND i.name like ?1%", nativeQuery = true)
+    List<Request> findRequestsByInstallationName(String name);
 
     /**
-     * Select *;
-     * @return All request from the database.
+     * Select * from requests r where r.rut_user = rut.
+     * @param rut RUT from user.
+     * @return All requests from user.
      */
-    List<Request> findAll();
-
-    List<Request> findRequestsByDateRequests(LocalDate register);
+    List<Request> findAllByUser_Rut(String rut);
 }

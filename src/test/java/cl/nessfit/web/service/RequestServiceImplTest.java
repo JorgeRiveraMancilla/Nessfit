@@ -4,12 +4,10 @@ import cl.nessfit.web.model.Installation;
 import cl.nessfit.web.model.Request;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.repository.RequestRepositoryInterface;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
@@ -43,7 +41,7 @@ class RequestServiceImplTest {
 
     @Test
     void getRequestsBy() {
-        when(requestRepository.findRequestsByInstallation_Name(this.installation.getName())).thenReturn(Arrays.asList(request));
-        assertNotNull(requestService.getRequestsBy(this.installation.getName()));
+        when(requestRepository.findRequestsByInstallationName(this.installation.getName())).thenReturn(Arrays.asList(request));
+        assertNotNull(requestService.getRequestsByInstallationNameLike(this.installation.getName()));
     }
 }
