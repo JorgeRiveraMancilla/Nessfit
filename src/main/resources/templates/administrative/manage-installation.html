@@ -27,26 +27,29 @@
                 <th scope="col">Dirección</th>
                 <th scope="col">Costo de arriendo</th>
                 <th scope="col">Tipo</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Acción</th>
+                <th scope="col">Editar</th>
             </tr>
             </thead>
             <tbody>
             <tr th:if="${installations == null}">
-                <td colspan="6" class="text-center">
+                <td colspan="7" class="text-center">
                     No hay centros deportivos que mostrar.
                 </td>
             </tr>
             <tr th:unless="${installations == null}" th:each="installation : ${installations}">
                 <form th:action="@{/administrative/change-status-installation/{id}(id=${installation.id})}" method="post" autocomplete="off">
                     <td th:text="${installation.getName()}"></td>
-                    <td th:if="${installation.status == 1}">Operativo</td>
-                    <td th:if="${installation.status == 0}">Inoperativo</td>
+                    <td class="text-primary fw-bold" th:if="${installation.status == 1}">Operativo</td>
+                    <td class="text-danger fw-bold" th:if="${installation.status == 0}">Inoperativo</td>
                     <td th:text="${installation.getAddress()}"></td>
                     <td th:text="${installation.getRentalCost()}"></td>
                     <td th:text="${installation.getCategory().getName()}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Deshabilitar</button>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Habilitar</button>
+                        <button class="btn btn-outline-primary btn-nessfit-crud" type="button" th:if="${installation.status == 1}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Deshabilitar</button>
+                        <button class="btn btn-outline-primary btn-nessfit-crud" type="button" th:if="${installation.status == 0}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${installation.getId()}">Habilitar</button>
+                    </td>
+                    <td>
                         <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/edit-installation/{id}(id=${installation.id})}">Editar instalación</a>
                     </td>
                     <div class="modal fade" th:id="'exampleModal' + ${installation.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

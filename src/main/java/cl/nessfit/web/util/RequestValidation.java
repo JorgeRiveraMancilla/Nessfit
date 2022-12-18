@@ -2,13 +2,15 @@ package cl.nessfit.web.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class RequestValidation {
 
-    private List<Date> listDates;
+    private List<LocalDate> listDates;
     private String days;
 
     /**
@@ -16,7 +18,7 @@ public class RequestValidation {
      * @param days Request days.
      */
     public RequestValidation(String days) {
-        this.listDates = new ArrayList<>();
+        this.listDates = new ArrayList<LocalDate>();
         this.days = days;
     }
 
@@ -32,7 +34,8 @@ public class RequestValidation {
 
         String[] listDays = this.days.split(",");
         for (String day : listDays) {
-            listDates.add(new SimpleDateFormat("dd-MM-yyyy").parse(day));
+            System.out.println(day);
+            listDates.add(LocalDate.parse(day, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         }
         return null;
     }
@@ -41,7 +44,7 @@ public class RequestValidation {
      * Method that get the dates from a request.
      * @return Dates from a request.
      */
-    public List<Date> getListDates() {
+    public List<LocalDate> getListDates() {
         return this.listDates;
     }
 }
