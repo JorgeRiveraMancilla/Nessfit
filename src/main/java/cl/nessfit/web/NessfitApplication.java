@@ -11,4 +11,5 @@ public class NessfitApplication {
 	 * @param args Java command line arguments.
 	 */
 	public static void main(String[] args) { SpringApplication.run(NessfitApplication.class, args); }
+
 }

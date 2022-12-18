@@ -19,7 +19,7 @@ public class Request implements Serializable {
     private int id;
     private int status;
     private int price;
-    private Date register;
+    private LocalDate register;
     private int quantity;
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "rut_user", referencedColumnName = "rut")
@@ -76,14 +76,14 @@ public class Request implements Serializable {
      * Method that gets the register of a request.
      * @return register of a request.
      */
-    public Date getRegister() {
+    public LocalDate getRegister() {
         return register;
     }
     /**
      * Method that sets the register for a request.
      * @param register New register for the request.
      */
-    public void setRegister(Date register) {
+    public void setRegister(LocalDate register) {
         this.register = register;
     }
     /**

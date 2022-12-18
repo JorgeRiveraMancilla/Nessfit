@@ -12,9 +12,13 @@ public interface RequestServiceInterface {
      */
     List<Request> getRequestsBy(String installationName);
 
+    Request getRequestById(int id);
+
     /**
      * Saves the request in the database.
      * @param request Request to save.
      */
     void save(Request request);
+
+    List<Request> getRequests();
 }

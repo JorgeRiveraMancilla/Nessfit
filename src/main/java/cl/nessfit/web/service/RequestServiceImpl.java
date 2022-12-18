@@ -22,6 +22,11 @@ public class RequestServiceImpl implements RequestServiceInterface {
         return requestRepository.findRequestsByInstallation_Name(installationName);
     }
 
+    @Override
+    public Request getRequestById(int id) {
+        return requestRepository.findRequestById(id);
+    }
+
     /**
      * Saves the request in the database.
      * @param request Request to save.
@@ -30,4 +35,7 @@ public class RequestServiceImpl implements RequestServiceInterface {
     public void save(Request request) {
         requestRepository.save(request);
     }
+
+    @Override
+    public List<Request> getRequests() { return requestRepository.findAll(); }
 }

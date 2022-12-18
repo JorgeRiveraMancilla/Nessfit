@@ -13,4 +13,8 @@ public interface RequestRepositoryInterface extends JpaRepository<Request, Integ
      * @return All requests with the same name.
      */
     List<Request> findRequestsByInstallation_Name(String name);
+
+    Request findRequestById(int id);
+
+    List<Request> findAll();
 }
