@@ -28,12 +28,13 @@
                 <th scope="col">Nombres</th>
                 <th scope="col">Apellidos</th>
                 <th scope="col">Teléfono</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Acción</th>
+                <th scope="col">Editar</th>
             </tr>
             </thead>
             <tbody>
             <tr th:if="${users == null}">
-                <td colspan="7" class="text-center">
+                <td colspan="8" class="text-center">
                     No hay usuarios que mostrar.
                 </td>
             </tr>
@@ -47,8 +48,10 @@
                     <td th:text="${user.lastName}"></td>
                     <td th:text="${user.phone}"></td>
                     <td>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${user.status == 1 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
-                        <button class="btn btn-outline-primary me-3 btn-nessfit-crud" type="button" th:if="${user.status == 0 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
+                        <button class="btn btn-outline-primary btn-nessfit-crud" type="button" th:if="${user.status == 1 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Deshabilitar</button>
+                        <button class="btn btn-outline-primary btn-nessfit-crud" type="button" th:if="${user.status == 0 and user.role.getId() != 2}" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${user.getRut()}">Habilitar</button>
+                    </td>
+                    <td>
                         <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/edit-profile/{rut}(rut=${user.rut})}">Editar perfil</a>
                     </td>
                     <div class="modal fade" th:id="'exampleModal' + ${user.getRut()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
