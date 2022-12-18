@@ -48,4 +48,9 @@ public class RequestServiceImpl implements RequestServiceInterface {
 
     @Override
     public List<Request> getRequests() { return requestRepository.findAll(); }
+
+    @Override
+    public List<Request> getRequestsFilter() {
+        return requestRepository.findRequestsFilter();
+    }
 }

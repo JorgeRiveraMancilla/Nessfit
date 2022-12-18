@@ -20,10 +20,8 @@ public class AdministrativeManageRequestsController {
 
     @GetMapping("/manage-request")
     public String manageRequests(Model model) {
-        List<Request> requests = requestService.getRequests();
-        if (requests.isEmpty()) {
-            model.addAttribute("requests", null);
-        } else {
+        List<Request> requests = requestService.getRequestsFilter();
+        if (!requests.isEmpty()) {
             model.addAttribute("requests", requests);
         }
         return "administrative/manage-request";
@@ -32,10 +30,6 @@ public class AdministrativeManageRequestsController {
 
     @PostMapping("/manage-request")
     public String manageRequests(Model model, @RequestParam("name") String name) {
-        model.addAttribute("installations", requestService.getRequestsBy(name));
         return "administrative/manage-request";
     }
-
-
-
 }

@@ -31,7 +31,6 @@
             </tr>
             </thead>
             <tbody>
-            <!--ARREGLAR SI NO FUNCA-->
             <tr th:if="${requests == null or requests.isEmpty()}">
                 <td colspan="9" class="text-center">No hay solicitudes pendientes que mostrar.</td>
             </tr>
@@ -44,7 +43,7 @@
                     <td th:text="${request.getUser().getRut()}"></td>
                     <td th:text="${request.getUser().getFirstName()}"></td>
                     <td th:text="${request.getUser().getLastName()}"></td>
-                    <td th:if="${request.getUser().getStatus() == 1}">Pendiente</td>
+                    <td>Pendiente</td>
                     <td>
                         <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/request-details/{id}(id=${request.getId()})}">Ver detalles</a>
                     </td>

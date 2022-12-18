@@ -24,19 +24,14 @@ public class AdministrativeRequestDetailsController {
         Set<DateRequest> dateRequests = request.getDateRequests();
         model.addAttribute("request", request);
         model.addAttribute("dates", dateRequests);
-        model.addAttribute("result", "");
-        model.addAttribute("message", "");
         return "administrative/request-details";
     }
 
     @PostMapping("/request-details")
-    public String requestDetails(@ModelAttribute("result") String result, @ModelAttribute("id") String id){
+    public String requestDetails(@RequestParam("result") String result, @RequestParam("id") String id){
         Request request = requestService.getRequestById(Integer.parseInt(id));
         request.setStatus(Integer.parseInt(result));
         requestService.save(request);
         return "redirect:/administrative/manage-request";
     }
-
-
-
 }

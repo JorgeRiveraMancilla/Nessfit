@@ -18,8 +18,12 @@ public interface RequestRepositoryInterface extends JpaRepository<Request, Integ
     Request findRequestById(int id);
 
     List<Request> findAll();
+
     @Query(value = "SELECT r.id, r.price, r.quantity, r.register, r.status, r.id_installation, r.rut_user FROM requests r, installations i WHERE r.id_installation = i.id AND i.name like ?1%", nativeQuery = true)
     List<Request> findRequestsByInstallationNameLike(String name);
+
+    @Query(value = "SELECT r.id, r.price, r.quantity, r.register, r.status, r.id_installation, r.rut_user FROM requests r WHERE r.status = 1 ORDER BY r.register ASC", nativeQuery = true)
+    List<Request> findRequestsFilter();
 
     /**
      * Select * from requests r where r.rut_user = rut.

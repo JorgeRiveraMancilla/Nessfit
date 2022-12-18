@@ -39,45 +39,23 @@
                 </tr>
                 </tbody>
             </table>
-
-            <!--Inputs-->
             <input name="id" type="hidden" th:value="${request.getId()}">
             <input id="result" name="result" type="hidden">
-            <input id="message" name="message" type="hidden">
-
-            <!--Buttons Accept and Reject-->
             <div class="container-fluid h-100">
                 <div class="row w-100 align-items-center">
                     <div class="col text-center">
-                        <button class="btn btn-primary btn-nessfit" id="accept" type="button" data-bs-toggle="modal" th:data-bs-target="'#exampleModal1' + ${request.getId()}" onclick="change(0)">Aceptar</button>
-                        <button class="btn btn-danger" id="reject" type="button" data-bs-toggle="modal" th:data-bs-target="'#exampleModal2' + ${request.getId()}" onclick="change(2)">Rechazar</button>
+                        <button id="modalButton1" type="button" class="btn btn-primary btn-nessfit" data-bs-toggle="modal" data-bs-target="#exampleModal">Aceptar</button>
+                        <button id="modalButton2" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Rechazar</button>
                     </div>
-                    <!--Modal-->
-                    <div class="modal fade" th:id="'exampleModal1' + ${request.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header w-100">
                                     <h1 class="modal-title fs-5">¿Está seguro?</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body w-100"></div>
-                                <div class="modal-header w-100" th:text="'Aceptar la solicitud de arriendo'">
-                                    <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade" th:id="'exampleModal2' + ${request.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header w-100">
-                                    <h1 class="modal-title fs-5">¿Está seguro?</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body w-100"></div>
-                                <div class="modal-header w-100" th:text="'Rechazar la solicitud de arriendo'">
+                                <div class="modal-body w-100" id="messageModal"></div>
+                                <div class="modal-footer w-100">
                                     <button type="submit" class="btn btn-primary btn-nessfit">Confirmar</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                                 </div>
@@ -90,11 +68,17 @@
     </section>
 </main>
 <footer th:insert="fragments/footer-fragment::footer"></footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script th:inline="javascript">
-    function change(value){
-        document.getElementById("result").value = value;
-    }
+    $('#modalButton1').on('click', function() {
+        $('#messageModal').text('Aprobar la solicitud');
+        $('#result').val('0')
+    });
+    $('#modalButton2').on('click', function() {
+        $('#messageModal').text('Rechazar la solicitud');
+        $('#result').val('2')
+    });
 </script>
 </body>
 </html>

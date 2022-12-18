@@ -34,4 +34,7 @@ public interface RequestServiceInterface {
      * @return List with all requests.
      */
     List<Request> getRequests();
+
+
+    List<Request> getRequestsFilter();
 }

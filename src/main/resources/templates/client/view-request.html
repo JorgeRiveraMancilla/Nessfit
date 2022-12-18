@@ -41,8 +41,9 @@
                 <td th:text="${#temporals.format(request.getRegister(), 'dd-MM-yyyy')}"></td>
                 <td th:text="${request.getInstallation().getName()}"></td>
                 <td th:text="${request.getPrice()}"></td>
+                <td th:if="${request.getStatus() == 0}">Aprobada</td>
                 <td th:if="${request.getStatus() == 1}">Pendiente</td>
-                <td th:unless="${request.getStatus() == 1}">Rechazada</td>
+                <td th:if="${request.getStatus() == 2}">Rechazada</td>
                 <td>
                     <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/client/view-request/{id}(id=${request.getId()})}">Ver detalle</a>
                 </td>
