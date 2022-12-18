@@ -1,6 +1,7 @@
 package cl.nessfit.web.service;
 
 import cl.nessfit.web.model.Request;
+import cl.nessfit.web.model.User;
 import cl.nessfit.web.repository.RequestRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,18 @@ public class RequestServiceImpl implements RequestServiceInterface {
      * @return List with all requests that match the installation name.
      */
     @Override
-    public List<Request> getRequestsBy(String installationName) {
+    public List<Request> getRequestsByInstallation(String installationName) {
         return requestRepository.findRequestsByInstallation_Name(installationName);
+    }
+
+    /**
+     * Returns a list with all requests from user.
+     * @param rut RUT from user.
+     * @return List with all requests from user.
+     */
+    @Override
+    public List<Request> getRequestsByUser(String rut) {
+        return requestRepository.findAllByUser_Rut(rut);
     }
 
     /**

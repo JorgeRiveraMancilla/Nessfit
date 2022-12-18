@@ -8,6 +8,7 @@
                 <li class="nav-item" sec:authorize="hasAuthority('Administrativo')"><a class="nav-link text-light" aria-current="page" th:href="@{/administrative/manage-user}">Gestionar clientes</a></li>
                 <li class="nav-item" sec:authorize="hasAuthority('Administrativo')"><a class="nav-link text-light" aria-current="page" th:href="@{/administrative/manage-installation}">Gestionar instalaciones</a></li>
                 <li class="nav-item" sec:authorize="hasAuthority('Cliente')"><a class="nav-link" style="color: white;" aria-current="page" th:href="@{/client/view-installation}">Arrendar centro deportivo</a></li>
+                <li class="nav-item" sec:authorize="hasAuthority('Cliente')"><a class="nav-link" style="color: white;" aria-current="page" th:href="@{/client/view-request}">Visualizar solicitudes</a></li>
             </ul>
         </div>
     </div>
