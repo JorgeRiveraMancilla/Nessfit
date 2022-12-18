@@ -18,8 +18,18 @@ public class RequestServiceImpl implements RequestServiceInterface {
      * @return List with all requests that match the installation name.
      */
     @Override
-    public List<Request> getRequestsBy(String installationName) {
-        return requestRepository.findRequestsByInstallation_Name(installationName);
+    public List<Request> getRequestsByInstallationNameLike(String installationName) {
+        return requestRepository.findRequestsByInstallationNameLike(installationName);
+    }
+
+    /**
+     * Returns a list with all requests from user.
+     * @param rut RUT from user.
+     * @return List with all requests from user.
+     */
+    @Override
+    public List<Request> getRequestsByUser(String rut) {
+        return requestRepository.findAllByUser_Rut(rut);
     }
 
     @Override

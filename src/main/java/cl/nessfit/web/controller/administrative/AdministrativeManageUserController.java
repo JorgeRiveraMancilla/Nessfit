@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/administrative")
 public class AdministrativeManageUserController {
@@ -24,7 +26,10 @@ public class AdministrativeManageUserController {
      */
     @GetMapping("/manage-user")
     public String manageUsers(Model model) {
-        model.addAttribute("users", userService.getClients());
+        List<User> users = userService.getClients();
+        if (!users.isEmpty()) {
+            model.addAttribute("users", users);
+        }
         model.addAttribute("currentUser", SecurityContextHolder.getContext().getAuthentication().getName());
         return "administrative/manage-user";
     }

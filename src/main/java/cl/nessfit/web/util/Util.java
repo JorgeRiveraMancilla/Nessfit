@@ -69,5 +69,4 @@ public class Util {
         }
         return newString.toString().strip();
     }
-
 }

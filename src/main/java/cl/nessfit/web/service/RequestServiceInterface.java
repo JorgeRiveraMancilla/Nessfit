@@ -1,6 +1,8 @@
 package cl.nessfit.web.service;
 
 import cl.nessfit.web.model.Request;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RequestServiceInterface {
@@ -10,7 +12,14 @@ public interface RequestServiceInterface {
      * @param installationName Request installation name.
      * @return List with all requests that match the installation name.
      */
-    List<Request> getRequestsBy(String installationName);
+    List<Request> getRequestsByInstallationNameLike(String installationName);
+
+    /**
+     * Returns a list with all requests from user.
+     * @param rut RUT from user.
+     * @return List with all requests from user.
+     */
+    List<Request> getRequestsByUser(String rut);
 
     Request getRequestById(int id);
 
@@ -20,5 +29,9 @@ public interface RequestServiceInterface {
      */
     void save(Request request);
 
+    /**
+     * Return a list with all requests from the database.
+     * @return List with all requests.
+     */
     List<Request> getRequests();
 }

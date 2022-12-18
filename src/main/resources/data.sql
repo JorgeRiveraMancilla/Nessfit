@@ -20,3 +20,4 @@ INSERT INTO `nessfit`.categories (id, name)
 VALUES (4, 'Quincho');
 INSERT INTO `nessfit`.categories (id, name)
 VALUES (5, 'Estadio');
+

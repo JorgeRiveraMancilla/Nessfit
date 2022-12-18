@@ -48,7 +48,7 @@ public class ClientRentInstallationController {
     @GetMapping ("/rent-installation/{id}")
     public String rentInstallation(Model model, @PathVariable int id) {
         Installation installation = installationService.searchById(id);
-        List<Request> requests = requestService.getRequestsBy(installation.getName());
+        List<Request> requests = requestService.getRequestsByInstallationNameLike(installation.getName());
         model.addAttribute("installation", installation);
         model.addAttribute("requests", requests);
         return "client/rent-installation";
@@ -62,7 +62,7 @@ public class ClientRentInstallationController {
         RequestValidation requestValidation = new RequestValidation(days);
         String daysMessage = requestValidation.getDaysMessage();
         if (daysMessage != null) {
-            List<Request> requests = requestService.getRequestsBy(name);
+            List<Request> requests = requestService.getRequestsByInstallationNameLike(name);
             model.addAttribute("installation", installation);
             model.addAttribute("requests", requests);
             model.addAttribute("daysMessage", daysMessage);
@@ -78,7 +78,7 @@ public class ClientRentInstallationController {
             dateRequests.add(dateRequest);
         }
         request.setStatus(1);
-        request.setPrice(Integer.parseInt(installation.getRentalCost()));
+        request.setPrice(Integer.parseInt(installation.getRentalCost()) * dateRequests.size());
         request.setQuantity(dateRequests.size());
         request.setRegister(LocalDate.now());
         request.setUser(user);

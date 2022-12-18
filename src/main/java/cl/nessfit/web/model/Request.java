@@ -1,9 +1,12 @@
 package cl.nessfit.web.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,11 +28,10 @@ public class Request implements Serializable {
     @JoinColumn (name = "rut_user", referencedColumnName = "rut")
     private User user;
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "name_installation", referencedColumnName = "name")
+    @JoinColumn (name = "id_installation", referencedColumnName = "id")
     private Installation installation;
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "request")
     private Set<DateRequest> dateRequests;
-
     /**
      * Method that gets the request price.
      * @return Request price.
