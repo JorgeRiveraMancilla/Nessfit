@@ -25,4 +25,17 @@ public interface RequestServiceInterface {
      * @param request Request to save.
      */
     void save(Request request);
+
+    /**
+     * Return a list with all requests from the database.
+     * @return List with all requests.
+     */
+    List<Request> getRequests();
+
+    /**
+     * Given a date, returns all requests with that date data.
+     * @param register Date to search in requests.
+     * @return Request with that date data.
+     */
+    List<Request> searchByDate(LocalDate register);
 }

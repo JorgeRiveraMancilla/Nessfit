@@ -4,6 +4,9 @@ import cl.nessfit.web.model.Request;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface RequestRepositoryInterface extends JpaRepository<Request, Integer> {
