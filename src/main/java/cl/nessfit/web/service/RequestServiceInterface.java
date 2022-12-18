@@ -21,6 +21,8 @@ public interface RequestServiceInterface {
      */
     List<Request> getRequestsByUser(String rut);
 
+    Request getRequestById(int id);
+
     /**
      * Saves the request in the database.
      * @param request Request to save.

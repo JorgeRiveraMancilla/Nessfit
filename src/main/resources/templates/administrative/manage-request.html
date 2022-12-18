@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/head-fragment::head"></head>
+<body>
+<header th:insert="fragments/header-fragment::header"></header>
+<main class="d-flex flex-row">
+    <nav th:insert="fragments/sidebar-fragment::nav"></nav>
+    <section class="container-fluid p-3 d-flex flex-column align-items-start border-start">
+        <div class="container-fluid d-flex justify-content-between">
+            <form th:action="@{/administrative/manage-request}" method="post" autocomplete="off">
+                <div class="d-flex align-items-center">
+                    <a class="btn btn-primary btn-nessfit me-3" aria-current="page" th:href="@{/administrative/manage-request}"><i class="bi bi-arrow-clockwise"></i></a>
+                    <label for="exampleInputName1" class="form-label">Nombre</label>
+                    <input name="name" type="text" class="form-control mx-3" id="exampleInputName1">
+                    <button type="submit" class="btn btn-primary btn-nessfit-search"><i class="bi bi-search"></i> Buscar</button>
+                </div>
+            </form>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Costo total</th>
+                <th scope="col">RUT cliente</th>
+                <th scope="col">Nombre(s)</th>
+                <th scope="col">Apellido(s)</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acción</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--ARREGLAR SI NO FUNCA-->
+            <tr th:if="${requests == null or requests.isEmpty()}">
+                <td colspan="9" class="text-center">No hay solicitudes pendientes que mostrar.</td>
+            </tr>
+            <tr th:unless="${requests == null}" th:each="request : ${requests}">
+                <form th:action="@{/administrative/change-status-request/{id}(id=${request.id})}" method="post" autocomplete="off">
+                    <td th:text="${request.getRegister()}"></td>
+                    <td th:text="${request.getId()}"></td>
+                    <td th:text="${request.getInstallation().getName()}"></td>
+                    <td th:text="${request.getPrice()}"></td>
+                    <td th:text="${request.getUser().getRut()}"></td>
+                    <td th:text="${request.getUser().getFirstName()}"></td>
+                    <td th:text="${request.getUser().getLastName()}"></td>
+                    <td th:if="${request.getUser().getStatus() == 1}">Pendiente</td>
+                    <td>
+                        <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/request-details/{id}(id=${request.getId()})}">Ver detalles</a>
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<footer th:insert="fragments/footer-fragment::footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>

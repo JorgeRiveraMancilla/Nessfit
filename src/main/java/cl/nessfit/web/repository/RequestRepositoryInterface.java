@@ -13,6 +13,11 @@ public interface RequestRepositoryInterface extends JpaRepository<Request, Integ
      * @param name request name.
      * @return All requests with the same name.
      */
+    List<Request> findRequestsByInstallation_Name(String name);
+
+    Request findRequestById(int id);
+
+    List<Request> findAll();
     @Query(value = "SELECT r.id, r.price, r.quantity, r.register, r.status, r.id_installation, r.rut_user FROM requests r, installations i WHERE r.id_installation = i.id AND i.name like ?1%", nativeQuery = true)
     List<Request> findRequestsByInstallationNameLike(String name);
 
