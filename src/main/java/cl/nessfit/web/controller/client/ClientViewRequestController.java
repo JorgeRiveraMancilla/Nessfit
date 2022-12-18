@@ -7,7 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,9 +20,18 @@ public class ClientViewRequestController {
     private RequestServiceInterface requestService;
 
     @GetMapping("/view-request")
-    public String viewInstallation(Model model) {
+    public String viewRequest(Model model) {
         String rut = SecurityContextHolder.getContext().getAuthentication().getName();
         List<Request> requests = requestService.getRequestsByUser(rut);
+        if (!requests.isEmpty()) {
+            model.addAttribute("requests", requests);
+        }
+        return "client/view-request";
+    }
+
+    @PostMapping("view-request")
+    public String viewRequest(Model model, @RequestParam("name") String name) {
+        List<Request> requests = requestService.getRequestsByInstallationNameLike(name);
         if (!requests.isEmpty()) {
             model.addAttribute("requests", requests);
         }

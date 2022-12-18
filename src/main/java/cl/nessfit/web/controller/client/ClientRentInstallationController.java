@@ -48,7 +48,7 @@ public class ClientRentInstallationController {
     @GetMapping ("/rent-installation/{id}")
     public String rentInstallation(Model model, @PathVariable int id) {
         Installation installation = installationService.searchById(id);
-        List<Request> requests = requestService.getRequestsByInstallation(installation.getName());
+        List<Request> requests = requestService.getRequestsByInstallationNameLike(installation.getName());
         model.addAttribute("installation", installation);
         model.addAttribute("requests", requests);
         return "client/rent-installation";
@@ -62,7 +62,7 @@ public class ClientRentInstallationController {
         RequestValidation requestValidation = new RequestValidation(days);
         String daysMessage = requestValidation.getDaysMessage();
         if (daysMessage != null) {
-            List<Request> requests = requestService.getRequestsByInstallation(name);
+            List<Request> requests = requestService.getRequestsByInstallationNameLike(name);
             model.addAttribute("installation", installation);
             model.addAttribute("requests", requests);
             model.addAttribute("daysMessage", daysMessage);
@@ -71,7 +71,7 @@ public class ClientRentInstallationController {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         Request request = new Request();
         Set<DateRequest> dateRequests = new HashSet<>();
-        for (Date date : requestValidation.getListDates()) {
+        for (LocalDate date : requestValidation.getListDates()) {
             DateRequest dateRequest = new DateRequest();
             dateRequest.setRequest(request);
             dateRequest.setDate(date);

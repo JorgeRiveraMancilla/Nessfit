@@ -41,7 +41,7 @@ class RequestServiceImplTest {
 
     @Test
     void getRequestsBy() {
-        when(requestRepository.findRequestsByInstallation_Name(this.installation.getName())).thenReturn(Arrays.asList(request));
-        assertNotNull(requestService.getRequestsByInstallation(this.installation.getName()));
+        when(requestRepository.findRequestsByInstallationName(this.installation.getName())).thenReturn(Arrays.asList(request));
+        assertNotNull(requestService.getRequestsByInstallationNameLike(this.installation.getName()));
     }
 }

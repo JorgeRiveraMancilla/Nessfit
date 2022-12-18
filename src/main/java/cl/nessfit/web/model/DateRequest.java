@@ -3,6 +3,7 @@ package cl.nessfit.web.model;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -13,7 +14,7 @@ public class DateRequest implements Serializable {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
-    private Date date;
+    private LocalDate date;
     @ManyToOne
     @JoinColumn (name = "id_request", nullable = false, updatable = false)
     private Request request;
@@ -36,14 +37,14 @@ public class DateRequest implements Serializable {
      * Method that gets the date of a date request.
      * @return date of a date request.
      */
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
     /**
      * Method that sets the date for a date request.
      * @param date New date for the date request.
      */
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
     /**

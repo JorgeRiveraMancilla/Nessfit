@@ -28,7 +28,7 @@ public class Request implements Serializable {
     @JoinColumn (name = "rut_user", referencedColumnName = "rut")
     private User user;
     @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "name_installation", referencedColumnName = "name")
+    @JoinColumn (name = "id_installation", referencedColumnName = "id")
     private Installation installation;
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "request")
     private Set<DateRequest> dateRequests;

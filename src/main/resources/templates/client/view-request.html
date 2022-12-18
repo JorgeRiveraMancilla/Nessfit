@@ -10,13 +10,10 @@
           CAMBIAR EL FORM Y EL REDIRECCIONAMIENTO DE LOS BOTONES
         -->
         <div class="container-fluid d-flex justify-content-between">
-            <form>
+            <form th:action="@{/client/view-request}" method="post" autocomplete="off">
                 <div class="d-flex align-items-center">
-                    <a class="btn btn-primary btn-nessfit me-3" aria-current="page" href="#"><i
-                            class="bi bi-arrow-clockwise"></i></a>
                     <label for="exampleInputRut1" class="form-label">Nombre</label>
-                    <input name="name" type="text" class="form-control mx-3" id="exampleInputRut1"
-                           aria-describedby="emailHelp">
+                    <input name="name" type="text" class="form-control mx-3" id="exampleInputRut1" aria-describedby="emailHelp" placeholder="Instalación">
                     <button type="submit" class="btn btn-primary btn-nessfit-search"><i class="bi bi-search"></i> Buscar
                     </button>
                 </div>
@@ -50,7 +47,7 @@
                 <td th:if="${request.getStatus() == 1}">Pendiente</td>
                 <td th:unless="${request.getStatus() == 1}">Rechazada</td>
                 <td>
-                    <a class="btn btn-outline-primary btn-nessfit-crud" href="#">Ver detalle</a>
+                    <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/client/view-request/{id}(id=${request.getId()})}">Ver detalle</a>
                 </td>
             </tr>
             </tbody>

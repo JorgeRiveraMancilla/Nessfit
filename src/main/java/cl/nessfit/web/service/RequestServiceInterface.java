@@ -11,7 +11,7 @@ public interface RequestServiceInterface {
      * @param installationName Request installation name.
      * @return List with all requests that match the installation name.
      */
-    List<Request> getRequestsByInstallation(String installationName);
+    List<Request> getRequestsByInstallationNameLike(String installationName);
 
     /**
      * Returns a list with all requests from user.
