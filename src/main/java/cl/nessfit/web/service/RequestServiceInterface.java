@@ -21,6 +21,11 @@ public interface RequestServiceInterface {
      */
     List<Request> getRequestsByUser(String rut);
 
+    /**
+     * Returns a request with the same id.
+     * @param id id to search.
+     * @return Request with the same id.
+     */
     Request getRequestById(int id);
 
     /**
@@ -35,6 +40,9 @@ public interface RequestServiceInterface {
      */
     List<Request> getRequests();
 
-
+    /**
+     * Return a list with all requests from the database based on a filter.
+     * @return List with all requests.
+     */
     List<Request> getRequestsFilter();
 }

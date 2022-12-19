@@ -21,7 +21,7 @@ public class Request implements Serializable {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private int status;
-    private int price;
+    private long price;
     private LocalDate register;
     private int quantity;
     @ManyToOne (fetch = FetchType.EAGER)
@@ -36,14 +36,14 @@ public class Request implements Serializable {
      * Method that gets the request price.
      * @return Request price.
      */
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
     /**
      * Method that set the request price.
      * @param price New installation price.
      */
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
     /**

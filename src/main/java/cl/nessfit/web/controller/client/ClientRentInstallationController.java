@@ -7,7 +7,7 @@ import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.InstallationServiceInterface;
 import cl.nessfit.web.service.RequestServiceInterface;
 import cl.nessfit.web.service.UserServiceInterface;
-import cl.nessfit.web.util.RequestValidation;
+import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -59,8 +59,8 @@ public class ClientRentInstallationController {
         String name = allParams.get("name");
         String days = allParams.get("days");
         Installation installation = installationService.searchByName(name);
-        RequestValidation requestValidation = new RequestValidation(days);
-        String daysMessage = requestValidation.getDaysMessage();
+
+        String daysMessage = Validation.getDaysMessage(days);
         if (daysMessage != null) {
             List<Request> requests = requestService.getRequestsByInstallationNameLike(name);
             model.addAttribute("installation", installation);
@@ -71,14 +71,14 @@ public class ClientRentInstallationController {
         User user = userService.searchByRut(SecurityContextHolder.getContext().getAuthentication().getName());
         Request request = new Request();
         Set<DateRequest> dateRequests = new HashSet<>();
-        for (LocalDate date : requestValidation.getListDates()) {
+        for (LocalDate date : Validation.getListDates()) {
             DateRequest dateRequest = new DateRequest();
             dateRequest.setRequest(request);
             dateRequest.setDate(date);
             dateRequests.add(dateRequest);
         }
         request.setStatus(1);
-        request.setPrice(Integer.parseInt(installation.getRentalCost()) * dateRequests.size());
+        request.setPrice(Long.parseLong(installation.getRentalCost()) * dateRequests.size());
         request.setQuantity(dateRequests.size());
         request.setRegister(LocalDate.now());
         request.setUser(user);

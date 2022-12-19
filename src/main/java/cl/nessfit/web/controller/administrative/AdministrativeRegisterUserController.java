@@ -3,18 +3,15 @@ package cl.nessfit.web.controller.administrative;
 import cl.nessfit.web.model.Role;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
-import cl.nessfit.web.util.ProfileValidation;
 import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/administrative")

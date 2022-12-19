@@ -32,6 +32,11 @@ public class RequestServiceImpl implements RequestServiceInterface {
         return requestRepository.findAllByUser_Rut(rut);
     }
 
+    /**
+     * Returns a request with the same id.
+     * @param id id to search.
+     * @return Request with the same id.
+     */
     @Override
     public Request getRequestById(int id) {
         return requestRepository.findRequestById(id);
@@ -46,9 +51,17 @@ public class RequestServiceImpl implements RequestServiceInterface {
         requestRepository.save(request);
     }
 
+    /**
+     * Return a list with all requests from the database.
+     * @return List with all requests.
+     */
     @Override
     public List<Request> getRequests() { return requestRepository.findAll(); }
 
+    /**
+     * Return a list with all requests from the database based on a filter.
+     * @return List with all requests.
+     */
     @Override
     public List<Request> getRequestsFilter() {
         return requestRepository.findRequestsFilter();
