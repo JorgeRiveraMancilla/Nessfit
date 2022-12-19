@@ -18,6 +18,12 @@ public class AdministrativeRequestDetailsController {
     @Autowired
     private RequestServiceInterface requestService;
 
+    /**
+     * Get data from request-details.html.
+     * @param model Is the application's dynamic data structure.
+     * @param id Request id.
+     * @return Request details page view.
+     */
     @GetMapping("/request-details/{id}")
     public String requestDetails(Model model, @PathVariable int id){
         Request request = requestService.getRequestById(id);
@@ -27,6 +33,12 @@ public class AdministrativeRequestDetailsController {
         return "administrative/request-details";
     }
 
+    /**
+     * Receives data request-details.html.
+     * @param result Result valid.
+     * @param id Request id.
+     * @return Return user to manage-request page.
+     */
     @PostMapping("/request-details")
     public String requestDetails(@RequestParam("result") String result, @RequestParam("id") String id){
         Request request = requestService.getRequestById(Integer.parseInt(id));

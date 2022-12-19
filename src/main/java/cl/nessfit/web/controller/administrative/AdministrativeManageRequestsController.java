@@ -17,7 +17,11 @@ public class AdministrativeManageRequestsController {
 
     @Autowired
     private RequestServiceInterface requestService;
-
+    /**
+     * Get data from manage-request.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Manage requests view.
+     */
     @GetMapping("/manage-request")
     public String manageRequests(Model model) {
         List<Request> requests = requestService.getRequestsFilter();
@@ -27,7 +31,12 @@ public class AdministrativeManageRequestsController {
         return "administrative/manage-request";
     }
 
-
+    /**
+     * Receives data from manage-request.html.
+     * @param model Is the application's dynamic data structure.
+     * @param name Request name.
+     * @return Manage requests page.
+     */
     @PostMapping("/manage-request")
     public String manageRequests(Model model, @RequestParam("name") String name) {
         return "administrative/manage-request";
