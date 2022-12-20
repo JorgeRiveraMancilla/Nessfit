@@ -1,7 +1,5 @@
 package cl.nessfit.web.model;
 
-import cl.nessfit.web.util.Validation;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -30,20 +28,6 @@ public class User implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id")
     private Role role;
-
-    /**
-     * Constructor for the User class.
-     */
-    public User() {
-        this.rut = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.phone = "";
-        this.email = "";
-        this.status = 0;
-        this.password = "";
-        this.role = null;
-    }
     /**
      * Method that gets the rut of a user.
      * @return Rut of a user.

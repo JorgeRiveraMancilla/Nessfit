@@ -14,7 +14,6 @@ public class Role implements Serializable {
     @Id
     private int id;
     private String name;
-
     /**
      * Method that gets the id of a role.
      * @return Id of a role.

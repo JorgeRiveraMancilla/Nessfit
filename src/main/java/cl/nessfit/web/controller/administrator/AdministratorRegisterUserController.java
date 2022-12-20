@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/administrator")
 public class AdministratorRegisterUserController {
     @Autowired
-    UserServiceInterface userService;
+    private UserServiceInterface userService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
 
     /**
      * Get and iniciate data from register-user.html.

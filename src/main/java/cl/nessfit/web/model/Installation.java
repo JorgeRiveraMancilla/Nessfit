@@ -20,7 +20,6 @@ public class Installation implements Serializable {
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "id_category", referencedColumnName = "id")
     private Category category;
-
     /**
      * Method that gets the if of an installation.
      * @return Installation id.

@@ -14,7 +14,6 @@ public class Category implements Serializable {
     @Id
     private int id;
     private String name;
-
     /**
      * Method that gets the id of a category.
      * @return id of a category.

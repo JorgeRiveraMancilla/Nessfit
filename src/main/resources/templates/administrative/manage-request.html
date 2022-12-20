@@ -45,7 +45,7 @@
                     <td th:text="${request.getUser().getLastName()}"></td>
                     <td>Pendiente</td>
                     <td>
-                        <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/request-details/{id}(id=${request.getId()})}">Ver detalles</a>
+                        <a class="btn btn-outline-primary btn-nessfit-crud" th:href="@{/administrative/view-details-request/{id}(id=${request.getId()})}">Ver detalles</a>
                     </td>
                 </form>
             </tr>

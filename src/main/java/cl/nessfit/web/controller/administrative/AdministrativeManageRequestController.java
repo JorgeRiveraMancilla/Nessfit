@@ -6,15 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
 @RequestMapping("/administrative")
-public class AdministrativeManageRequestsController {
-
+public class AdministrativeManageRequestController {
     @Autowired
     private RequestServiceInterface requestService;
     /**
@@ -28,17 +25,6 @@ public class AdministrativeManageRequestsController {
         if (!requests.isEmpty()) {
             model.addAttribute("requests", requests);
         }
-        return "administrative/manage-request";
-    }
-
-    /**
-     * Receives data from manage-request.html.
-     * @param model Is the application's dynamic data structure.
-     * @param name Request name.
-     * @return Manage requests page.
-     */
-    @PostMapping("/manage-request")
-    public String manageRequests(Model model, @RequestParam("name") String name) {
         return "administrative/manage-request";
     }
 }
