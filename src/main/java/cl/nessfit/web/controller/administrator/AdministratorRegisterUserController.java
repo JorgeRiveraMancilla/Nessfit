@@ -3,25 +3,21 @@ package cl.nessfit.web.controller.administrator;
 import cl.nessfit.web.model.Role;
 import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.UserServiceInterface;
-import cl.nessfit.web.util.ProfileValidation;
 import cl.nessfit.web.util.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/administrator")
 public class AdministratorRegisterUserController {
     @Autowired
-    UserServiceInterface userService;
+    private UserServiceInterface userService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
 
     /**
      * Get and iniciate data from register-user.html.

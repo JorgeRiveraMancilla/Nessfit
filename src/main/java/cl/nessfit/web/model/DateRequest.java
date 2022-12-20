@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table (name = "date_requests")
@@ -18,7 +17,6 @@ public class DateRequest implements Serializable {
     @ManyToOne
     @JoinColumn (name = "id_request", nullable = false, updatable = false)
     private Request request;
-
     /**
      * Method that gets the id of a date request.
      * @return id of a date request.
