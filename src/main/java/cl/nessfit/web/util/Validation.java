@@ -5,6 +5,13 @@ import cl.nessfit.web.model.User;
 import cl.nessfit.web.service.CategoryServiceInterface;
 import cl.nessfit.web.service.InstallationServiceInterface;
 import cl.nessfit.web.service.UserServiceInterface;
+import net.bytebuddy.asm.Advice;
+
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -129,8 +136,8 @@ public class Validation {
      * @return String array with all error messages for the change password controller.
      */
     public static String validPassword(String password1, String password2){
-        if (!Util.areEquals(password1, password2)) { return "Las contraseñas no son iguales"; }
-        if (!Util.validSize(password1, 10, 15)) {
+        if (!areEquals(password1, password2)) { return "Las contraseñas no son iguales"; }
+        if (!validSize(password1, 10, 15)) {
             return "El largo de la contraseña debe estar entre 10 y 15 caracteres";
         }
         return "";
@@ -169,7 +176,7 @@ public class Validation {
      */
     private static String validFormatName(String name){
         name = name.strip();
-        if (name.equals("")) { return "Campo Obligatorio"; }
+        if (name.equals("")) { return "Campo obligatorio"; }
         if (name.length() > 200) { return "Largo inválido"; }
         Pattern pattern = Pattern.compile("^([A-zÀ-ú]{3,}\\s)*[A-zÀ-ú]{3,}$");
         Matcher matcher = pattern.matcher(name);
@@ -184,10 +191,10 @@ public class Validation {
      */
     private static String validFormatPhone(String phone){
         phone = phone.strip();
-        if (phone.equals("")) { return "Campo Obligatorio"; }
+        if (phone.equals("")) { return "Campo obligatorio"; }
         if (phone.length() > 200) { return "Largo inválido"; }
-        if (!Util.validSize(phone, 11, 16)) { return "El teléfono móvil ingresado no es válido"; }
-        if (!Util.tryParseLong(phone)) { return "Solo se aceptan valores numéricos"; }
+        if (!validSize(phone, 11, 16)) { return "El teléfono móvil ingresado no es válido"; }
+        if (!tryParseLong(phone)) { return "Solo se aceptan valores numéricos"; }
         return "";
     }
 
@@ -198,8 +205,8 @@ public class Validation {
      */
     private static String validFormatRut(String rut){
         rut = rut.strip();
-        if (rut.equals("")) { return "Campo Obligatorio"; }
-        if (!ProfileValidation.validRut(rut)) { return "RUT inválido"; }
+        if (rut.equals("")) { return "Campo obligatorio"; }
+        if (!validRut(rut)) { return "RUT inválido"; }
         if (rut.length() < 9) { return "No se permiten RUT menores a 10.000.000-0"; }
         return "";
     }
@@ -211,8 +218,8 @@ public class Validation {
      */
     private static String validFormatEmail(String email){
         email = email.toLowerCase().strip();
-        if (email.equals("")) { return "Campo Obligatorio"; }
-        if (ProfileValidation.validEmail(email)) { return ""; }
+        if (email.equals("")) { return "Campo obligatorio"; }
+        if (validEmail(email)) { return ""; }
         return "Su correo electrónico no es válido";
     }
 
@@ -235,7 +242,7 @@ public class Validation {
      */
     private static String validFormatRentalCost(String rentalCost){
         rentalCost = rentalCost.strip();
-        if (!Util.tryParseLong(rentalCost)) { return "Formato inválido"; }
+        if (!tryParseLong(rentalCost)) { return "Formato inválido"; }
         if (rentalCost.equals("")) { return "Campo obligatorio"; }
         if (!(1000 <= Long.parseLong(rentalCost))) {
             return "El costo mínimo de arriendo debe ser $1.000 (1000)";
@@ -256,11 +263,11 @@ public class Validation {
     private static String existsRutEmail(UserServiceInterface userService, String parameter, String type){
         switch (type){
             case "rut":
-                if (ProfileValidation.existRut(userService, parameter)){
+                if (existRut(userService, parameter)){
                     return "Rut ingresado ya existe, intente iniciar sesión";
                 }
             case "email":
-                if (ProfileValidation.existEmail(userService, parameter.toLowerCase())){
+                if (existEmail(userService, parameter.toLowerCase())){
                     return "El correo electrónico ingresado ya existe";
                 }
             default:
@@ -268,6 +275,170 @@ public class Validation {
         }
     }
 
+    /**
+     * Validate if a string has a valid length.
+     * @param parameter String to validate.
+     * @param min Min value.
+     * @param max Max value.
+     * @return "True" if is valid, "False" if not.
+     */
+    private static boolean validSize(String parameter, int min, int max) {
+        return min <= parameter.length() && parameter.length() <= max;
+    }
+
+    /**
+     * Compare if the two parameters are equals.
+     * @param parameter1 String one.
+     * @param parameter2 String two.
+     * @return "True" if are equals, and "False" if not.
+     */
+    private static boolean areEquals(String parameter1, String parameter2){
+        return parameter1.equals(parameter2);
+    }
+
+    /**
+     * Validate if the string is a number.
+     * @param parameter String to validate.
+     * @return "True" if is a number or "False" if not.
+     */
+    private static boolean tryParseLong(String parameter) {
+        try {
+            Long.parseLong(parameter);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Performs a merge of two lists.
+     * @param list1 User list1.
+     * @param list2 User list2.
+     * @return Combined lists.
+     */
+    public static List<User> joinList(List<User> list1, List<User> list2){
+        list1.addAll(list2);
+        return list1;
+    }
+
+    /**
+     * Converts the first letter to uppercase.
+     * @param inputString String to capitalize.
+     * @return String capitalized.
+     */
+    public static String capitalize(String inputString) {
+        inputString = inputString.toLowerCase();
+        StringBuilder newString = new StringBuilder();
+        String[] words = inputString.split(" ");
+
+        // for each word in words
+        for (String word : words) {
+            //if word are equals to "", we ignore it
+            if (!word.equals("")){
+                // if the value of j are equal to 0, then the character is now to uppercase
+                for (int j = 0; j < word.length(); j++) {
+                    if (j == 0) {
+                        newString.append(Character.toUpperCase(word.charAt(j)));
+                    }else{
+                        newString.append(word.charAt(j));
+                    }
+                }
+                // Space character
+                newString.append(" ");
+            }
+        }
+        return newString.toString().strip();
+    }
+
+    /**
+     * Method that indicates if a rut exists in the database or not.
+     * @param userService UserService instance.
+     * @param rut User rut to verify.
+     * @return "True" if the rut exist or "False" if not.
+     */
+    private static boolean existRut(UserServiceInterface userService, String rut){
+        return userService.searchByRut(rut) != null;
+    }
+
+    /**
+     * Method that indicates if an email exists in the database or not.
+     * @param userService UserService instance.
+     * @param email User email to verify.
+     * @return "True" if the email exist or "False" if not.
+     */
+    private static boolean existEmail(UserServiceInterface userService, String email){
+        return userService.searchByEmail(email) != null;
+    }
+
+    /**
+     * Method that checks if the rut is valid.
+     * @param rut user's rut.
+     * @return true if rut is valid, otherwise false.
+     */
+    private static boolean validRut(String rut){
+        Pattern pattern = Pattern.compile("^([1-9][0-9]{6,13}[0-9K])$");
+        Matcher matcher = pattern.matcher(rut);
+        if (matcher.matches()){
+            String dv = calculateDV(rut);
+            return rut.charAt(rut.length() - 1) == dv.charAt(0);
+        }
+        return false;
+    }
+
+    /**
+     * Method that checks if the email is valid.
+     * @param email user's email.
+     * @return true if email is valid, otherwise false.
+     */
+    private static boolean validEmail(String email){
+        Pattern pattern = Pattern.compile("^(([a-z0-9.]{1,70})@([a-z0-9.]{1,70}))$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    /**
+     * Calculates the verification digit given a rut.
+     * @param rut user's rut.
+     * @return string of verification digit.
+     */
+    private static String calculateDV(String rut) {
+        String rutNumeric = rut.substring(0, rut.length() - 1);
+
+        int M = 0, S = 1, T = Integer.parseInt(rutNumeric);
+        for (; T != 0; T = (int) Math.floor(T /= 10))
+            S = (S + T % 10 * (9 - M ++ % 6)) % 11;
+        return ( S > 0 ) ? String.valueOf(S - 1) : "K";
+    }
+
+    /**
+     * List dates.
+     */
+    private static final List<LocalDate> listDates = new ArrayList<LocalDate>();
+
+    /**
+     * Method that get an error message from requests.
+     * @return Days error message.
+     * @throws ParseException Signals that an error has been reached unexpectedly while parsing.
+     */
+    public static String getDaysMessage(String days) throws ParseException {
+        if (days.equals("")) {
+            return " Debe seleccionar al menos un día";
+        }
+
+        String[] listDays = days.split(",");
+        for (String day : listDays) {
+            listDates.add(LocalDate.parse(day, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        }
+        return null;
+    }
+
+    /**
+     * Method that get the dates from a request.
+     * @return Dates from a request.
+     */
+    public static List<LocalDate> getListDates() {
+        return listDates;
+    }
 
 
 }

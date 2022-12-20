@@ -14,7 +14,11 @@ import java.util.List;
 public class AdministrativeManageRequestController {
     @Autowired
     private RequestServiceInterface requestService;
-
+    /**
+     * Get data from manage-request.html.
+     * @param model Is the application's dynamic data structure.
+     * @return Manage requests view.
+     */
     @GetMapping("/manage-request")
     public String manageRequests(Model model) {
         List<Request> requests = requestService.getRequestsFilter();
