@@ -12,6 +12,11 @@ public class DateRequestServiceImpl implements DateRequestServiceInterface {
     @Autowired
     private DateRequestRepositoryInterface dateRequestRepository;
 
+    @Override
+    public List<DateRequest> findDateRequestsByRequestId(int id) {
+        return dateRequestRepository.findDateRequestsByRequestId(id);
+    }
+
     /**
      * Saves the dateRequest in the database.
      * @param dateRequest DateRequest to save.

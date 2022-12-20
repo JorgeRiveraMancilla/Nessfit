@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/client")
-public class ClientViewDetailRequestController {
+public class ClientViewDetailsRequestController {
     @Autowired
     private DateRequestServiceInterface dateRequestService;
 
