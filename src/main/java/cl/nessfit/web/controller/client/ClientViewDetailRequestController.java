@@ -16,6 +16,12 @@ public class ClientViewDetailRequestController {
     @Autowired
     private DateRequestServiceInterface dateRequestService;
 
+    /**
+     * Get data from view-request.html.
+     * @param model Is the application's dynamic data structure.
+     * @param id Request id to view.
+     * @return View detail request page.
+     */
     @GetMapping("/view-request/{id}")
     public String viewDetailRequest(Model model, @PathVariable int id) {
         List<DateRequest> dateRequests = dateRequestService.findDateRequestsByRequestId(id);

@@ -28,6 +28,11 @@ public class ClientRentInstallationController {
     @Autowired
     private UserServiceInterface userService;
 
+    /**
+     * Get data from view-installation.html.
+     * @param model Is the application's dynamic data structure.
+     * @return View installation view.
+     */
     @GetMapping ("/view-installation")
     public String viewInstallation(Model model) {
         List<Installation> installations = installationService.getInstallationsBy(1);
@@ -39,12 +44,24 @@ public class ClientRentInstallationController {
         return "client/view-installation";
     }
 
+    /**
+     * Receives data from view-installation.html.
+     * @param name Installation's name.
+     * @param model Is the application's dynamic data structure.
+     * @return View installation page.
+     */
     @PostMapping("/view-installation")
     public String viewInstallation(Model model, @RequestParam ("name") String name) {
         model.addAttribute("installations", installationService.searchByName(name));
         return "client/view-installation";
     }
 
+    /**
+     * Get data from rent-installation.html.
+     * @param model Is the application's dynamic data structure.
+     * @param id Installation id to rent.
+     * @return Rent installation view.
+     */
     @GetMapping ("/rent-installation/{id}")
     public String rentInstallation(Model model, @PathVariable int id) {
         Installation installation = installationService.searchById(id);
@@ -54,6 +71,13 @@ public class ClientRentInstallationController {
         return "client/rent-installation";
     }
 
+    /**
+     * Receives data from edit-profile.html.
+     * @param allParams Return all params from the model.
+     * @param model Is the application's dynamic data structure.
+     * @return Redirect to view installation page.
+     * @throws ParseException Signals that an error has been reached unexpectedly while parsing.
+     */
     @PostMapping ("/rent-installation")
     public String rentInstallation(@RequestParam Map<String, String> allParams, Model model) throws ParseException {
         String name = allParams.get("name");

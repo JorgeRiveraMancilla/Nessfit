@@ -18,6 +18,11 @@ public class ClientViewRequestController {
     @Autowired
     private RequestServiceInterface requestService;
 
+    /**
+     * Get data from view-request.html.
+     * @param model Is the application's dynamic data structure.
+     * @return View request view.
+     */
     @GetMapping("/view-request")
     public String viewRequest(Model model) {
         String rut = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -28,6 +33,12 @@ public class ClientViewRequestController {
         return "client/view-request";
     }
 
+    /**
+     * Receives data from view-request.html.
+     * @param model Is the application's dynamic data structure.
+     * @param name Request name.
+     * @return View request page.
+     */
     @PostMapping("view-request")
     public String viewRequest(Model model, @RequestParam("name") String name) {
         List<Request> requests = requestService.getRequestsByInstallationNameLike(name);
